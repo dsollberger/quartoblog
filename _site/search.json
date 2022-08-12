@@ -4,7 +4,7 @@
     "href": "blog.html",
     "title": "quartoblog",
     "section": "",
-    "text": "news\n\n\n\n\n\n\n\n\n\n\n\nAug 9, 2022\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+    "text": "news\n\n\n\n\n\n\n\n\n\n\n\nAug 12, 2022\n\n\nDerek Sollberger\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/post-with-code/index.html",
@@ -18,7 +18,7 @@
     "href": "posts/welcome/index.html",
     "title": "Welcome To My Blog",
     "section": "",
-    "text": "Today I followed Albert Rapp’s guide to creating a Quarto blog.\nFor me, it was a matter of making\n\na GitHub repository, called it quartoblog, and cloned it to my computer\ndeleted the quartoblog folder on my computer\nstarted a new project in RStudio to select Quarto web site (note that Quarto is already bundled in newer versions of the RStudio IDE)"
+    "text": "Today I followed Albert Rapp’s guide to creating a Quarto blog.\nFor me, it was a matter of making\n\na GitHub repository, called it quartoblog, and cloned it to my computer\ndeleted the quartoblog folder on my computer\nstarted a new project in RStudio to select Quarto web site (note that Quarto is already bundled in newer versions of the RStudio IDE)\ngot Netlify and GitHub to play nicely with each other and share the quartoblog repository\nupdated my domain redirect to the Netlify site"
   },
   {
     "objectID": "index.html",
