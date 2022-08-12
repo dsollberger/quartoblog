@@ -1,0 +1,18 @@
+---
+title: "Welcome To My Blog"
+author: "Tristan O'Malley"
+date: "2022-08-09"
+categories: [news]
+---
+
+This is the first post in a Quarto blog. Welcome!
+
+![](thumbnail.jpg)
+
+Today I followed Albert Rapp's [guide](https://albert-rapp.de/posts/13_quarto_blog_writing_guide/13_quarto_blog_writing_guide.html) to creating a Quarto blog.
+
+For me, it was a matter of making
+
+-   a GitHub repository, called it `quartoblog`, and cloned it to my computer
+-   deleted the `quartoblog` folder on my computer
+-   started a *new* `project` in RStudio to select `Quarto web site` (note that Quarto is already bundled in newer versions of the RStudio IDE)

@@ -1,0 +1,20 @@
+project:
+  type: website
+
+website:
+  title: "The Median Data Scientist"
+  navbar:
+    right:
+      - text: Blog
+        href: blog.qmd
+      - icon: github
+        href: https://github.com/
+      - icon: twitter
+        href: https://twitter.com
+format:
+  html:
+    theme: cerulean
+    css: styles.css
+
+editor: source
+

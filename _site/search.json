@@ -1,0 +1,30 @@
+[
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "quartoblog",
+    "section": "",
+    "text": "news\n\n\n\n\n\n\n\n\n\n\n\nAug 9, 2022\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html",
+    "href": "posts/post-with-code/index.html",
+    "title": "Post With Code",
+    "section": "",
+    "text": "1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "Today I followed Albert Rapp’s guide to creating a Quarto blog.\nFor me, it was a matter of making\n\na GitHub repository, called it quartoblog, and cloned it to my computer\ndeleted the quartoblog folder on my computer\nstarted a new project in RStudio to select Quarto web site (note that Quarto is already bundled in newer versions of the RStudio IDE)"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "About",
+    "section": "",
+    "text": "About this blog"
+  }
+]
