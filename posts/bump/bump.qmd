@@ -1,0 +1,64 @@
+---
+title: "Bump"
+author: "Derek Sollberger"
+date: "2022-08-12"
+categories: [sports]
+---
+
+Today I want to try to make a `bump` plot while practicing with sports data.  The `Lahman` data set has a lot of historical data about Major League Baseball.  Data scientists have been using bump plots for a few years now, but currently I wish to credit [this code](https://github.com/AlbertRapp/PublicTidyTuesday/blob/main/2022_w28_euroflights/2022_w28_euroflights.qmd) by Albert Rapp.
+
+```{r}
+#| message: false
+#| warning: false
+library("ggbump")
+library("Lahman")
+library("tidyverse")
+```
+
+For today's easy foray, let us seek out the wins and losses of teams in the `Teams` data frame (I tend to call my data frames `df` for typing ease).
+
+```{r}
+df <- Teams
+```
+
+There are about 3000 observations and 48 variables.  I will need some of the column names.
+
+```{r}
+colnames(df)
+```
+
+To make a quick exploration, let us `filter` for the past 10 seasons of baseball (2012 to 2021) and `select` the columns I will use later.
+
+```{r}
+df <- Teams |>
+  filter(yearID >= 2012) |>
+  select(yearID, lgID, franchID, divID, Rank)
+head(df)
+```
+
+To be honest, I thought I was going to have to code up some function to rank team wins within the MLB divisions, but the `Lahman` database already has that!
+
+```{r}
+df_left <- df |> filter(yearID == 2012 & lgID == "NL")
+df_right <- df |> filter(yearID == 2021 & lgID == "NL")
+```
+
+
+```{r}
+df |>
+  filter(lgID == "NL") |>
+  ggplot(aes(x = yearID, y = -Rank, color = franchID)) +
+  geom_bump(size = 2) +
+  geom_point(aes(x = yearID, y = -Rank, color = franchID),
+             size = 5) +
+  geom_label(aes(x = yearID, y = -Rank, label = franchID), data = df_left) +
+  geom_label(aes(x = yearID, y = -Rank, label = franchID), data = df_right) +
+  facet_wrap(. ~ divID, ncol = 1) +
+  labs(title = "National League Standings",
+       subtitle = "early draft of bump plot",
+       caption = "Derek Sollberger") +
+  theme(legend.position = "none",
+        panel.background = element_blank())
+```
+
+![bump plot](bump.png)
