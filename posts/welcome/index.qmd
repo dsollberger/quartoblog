@@ -2,7 +2,7 @@
 title: "Welcome To My Blog"
 author: "Derek Sollberger"
 date: "2022-08-12"
-categories: [news]
+categories: [quarto]
 ---
 
 This is the first post in a Quarto blog. Welcome!

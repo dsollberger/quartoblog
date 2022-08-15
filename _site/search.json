@@ -4,7 +4,7 @@
     "href": "blog.html",
     "title": "quartoblog",
     "section": "",
-    "text": "sports\n\n\n\n\n\n\n\n\n\n\n\nAug 12, 2022\n\n\nDerek Sollberger\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nAug 12, 2022\n\n\nDerek Sollberger\n\n\n\n\n\n\nNo matching items"
+    "text": "visualization\n\n\n\n\n\n\n\n\n\n\n\nAug 14, 2022\n\n\nDerek Sollberger\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nsports\n\n\n\n\n\n\n\n\n\n\n\nAug 12, 2022\n\n\nDerek Sollberger\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nexploratory data analysis\n\n\n\n\n\n\n\n\n\n\n\nAug 12, 2022\n\n\nDerek Sollberger\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nquarto\n\n\n\n\n\n\n\n\n\n\n\nAug 12, 2022\n\n\nDerek Sollberger\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/post-with-code/index.html",
@@ -33,5 +33,19 @@
     "title": "Bump",
     "section": "",
     "text": "library(\"ggbump\")\nlibrary(\"Lahman\")\nlibrary(\"tidyverse\")\n\nFor today’s easy foray, let us seek out the wins and losses of teams in the Teams data frame (I tend to call my data frames df for typing ease).\n\ndf <- Teams\n\nThere are about 3000 observations and 48 variables. I will need some of the column names.\n\ncolnames(df)\n\n [1] \"yearID\"         \"lgID\"           \"teamID\"         \"franchID\"      \n [5] \"divID\"          \"Rank\"           \"G\"              \"Ghome\"         \n [9] \"W\"              \"L\"              \"DivWin\"         \"WCWin\"         \n[13] \"LgWin\"          \"WSWin\"          \"R\"              \"AB\"            \n[17] \"H\"              \"X2B\"            \"X3B\"            \"HR\"            \n[21] \"BB\"             \"SO\"             \"SB\"             \"CS\"            \n[25] \"HBP\"            \"SF\"             \"RA\"             \"ER\"            \n[29] \"ERA\"            \"CG\"             \"SHO\"            \"SV\"            \n[33] \"IPouts\"         \"HA\"             \"HRA\"            \"BBA\"           \n[37] \"SOA\"            \"E\"              \"DP\"             \"FP\"            \n[41] \"name\"           \"park\"           \"attendance\"     \"BPF\"           \n[45] \"PPF\"            \"teamIDBR\"       \"teamIDlahman45\" \"teamIDretro\"   \n\n\nTo make a quick exploration, let us filter for the past 10 seasons of baseball (2012 to 2021) and select the columns I will use later.\n\ndf <- Teams |>\n  filter(yearID >= 2012) |>\n  select(yearID, lgID, franchID, divID, Rank)\nhead(df)\n\n  yearID lgID franchID divID Rank\n1   2012   NL      ARI     W    3\n2   2012   NL      ATL     E    2\n3   2012   AL      BAL     E    2\n4   2012   AL      BOS     E    5\n5   2012   AL      CHW     C    2\n6   2012   NL      CHC     C    5\n\n\nTo be honest, I thought I was going to have to code up some function to rank team wins within the MLB divisions, but the Lahman database already has that!\n\ndf_left <- df |> filter(yearID == 2012 & lgID == \"NL\")\ndf_right <- df |> filter(yearID == 2021 & lgID == \"NL\")\n\n\ndf |>\n  filter(lgID == \"NL\") |>\n  ggplot(aes(x = yearID, y = -Rank, color = franchID)) +\n  geom_bump(size = 2) +\n  geom_point(aes(x = yearID, y = -Rank, color = franchID),\n             size = 5) +\n  geom_label(aes(x = yearID, y = -Rank, label = franchID), data = df_left) +\n  geom_label(aes(x = yearID, y = -Rank, label = franchID), data = df_right) +\n  facet_wrap(. ~ divID, ncol = 1) +\n  labs(title = \"National League Standings\",\n       subtitle = \"early draft of bump plot\",\n       caption = \"Derek Sollberger\") +\n  theme(legend.position = \"none\",\n        panel.background = element_blank())\n\nWarning in f(...): 'StatBump' needs at least two observations per group\n\n\n\n\n\n\n\n\nbump plot"
+  },
+  {
+    "objectID": "posts/typewriter/typewriter.html",
+    "href": "posts/typewriter/typewriter.html",
+    "title": "Typewriter",
+    "section": "",
+    "text": "library(\"gt\")\n\n\ndf <- data.frame(\n  Period = c(\"0\", \"1\", \"2\", \"3\", \"4\", \"5\", \"6\"),\n  Course = c(\"Academic Decathlon\", \"Spanish 4 AP\", \"Calculus AP BC\", \"English 3 Honors\", \"Computer Applications\", \"Physics AP\", \"US History\")\n)\n\n\n# https://gt.rstudio.com/reference/cell_borders.html\ndf |>\n  gt() |>\n  tab_options(\n    # table.background.color = \"#E8EBE6\",\n    table.font.names = \"Courier New\"\n  ) |>\n  tab_style(\n    locations = cells_body(\n      columns = everything(),\n      rows = everything()\n    ),\n    style = list(\n      cell_borders(\n        sides = c(\"top\", \"bottom\"),\n        color = \"cyan\",\n        style = \"solid\"\n      ),\n      cell_fill(color = \"#E8EBE6\") #https://www.crispedge.com/color/e8ebe6/\n    )\n  ) |>\n  tab_style(\n    locations = cells_body(\n      columns = \"Course\",\n      rows = everything()\n    ),\n    style = list(\n      cell_borders(\n        sides = c(\"left\"),\n        color = \"red\",\n        style = \"solid\"\n      ),\n      cell_fill(color = \"#E8EBE6\")\n    )\n  )\n\n\n\n\n\n  \n  \n    \n      Period\n      Course\n    \n  \n  \n    0\nAcademic Decathlon\n    1\nSpanish 4 AP\n    2\nCalculus AP BC\n    3\nEnglish 3 Honors\n    4\nComputer Applications\n    5\nPhysics AP\n    6\nUS History\n  \n  \n  \n\n\n\n\n\n\n\nhigh school junior year schedule"
+  },
+  {
+    "objectID": "posts/overviewR/overviewR.html",
+    "href": "posts/overviewR/overviewR.html",
+    "title": "overviewR",
+    "section": "",
+    "text": "cheat sheet: https://github.com/cosimameyer/overviewR/blob/master/man/figures/CheatSheet_overviewR.pdf\n\n\nlibrary(\"overviewR\")\nlibrary(\"palmerpenguins\")\n\nAt this moment, I misread what overviewR does (I thought it would summarize everything). Instead, I will just try out one tool for now.\n\npenguins_raw |>\n  overview_na()"
   }
 ]

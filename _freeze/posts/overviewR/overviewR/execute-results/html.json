@@ -1,0 +1,16 @@
+{
+  "hash": "a89c3248a790619424c91afeee34d371",
+  "result": {
+    "markdown": "---\ntitle: \"overviewR\"\nauthor: \"Derek Sollberger\"\ndate: \"2022-08-12\"\ncategories: [exploratory data analysis]\n---\n\n\nToday I wanted to try out the `overviewR` package.\n\n* cheat sheet: [https://github.com/cosimameyer/overviewR/blob/master/man/figures/CheatSheet_overviewR.pdf](https://github.com/cosimameyer/overviewR/blob/master/man/figures/CheatSheet_overviewR.pdf)\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(\"overviewR\")\nlibrary(\"palmerpenguins\")\n```\n:::\n\nAt this moment, I misread what `overviewR` does (I thought it would summarize everything).  Instead, I will just try out one tool for now.\n\n\n::: {.cell}\n\n```{.r .cell-code}\npenguins_raw |>\n  overview_na()\n```\n\n::: {.cell-output-display}\n![](overviewR_files/figure-html/unnamed-chunk-2-1.png){width=672}\n:::\n:::\n",
+    "supporting": [
+      "overviewR_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

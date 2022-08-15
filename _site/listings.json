@@ -2,7 +2,9 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/typewriter/typewriter.html",
       "/posts/bump/bump.html",
+      "/posts/overviewR/overviewR.html",
       "/posts/welcome/index.html"
     ]
   }

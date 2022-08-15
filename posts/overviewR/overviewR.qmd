@@ -1,0 +1,23 @@
+---
+title: "overviewR"
+author: "Derek Sollberger"
+date: "2022-08-12"
+categories: [exploratory data analysis]
+---
+
+Today I wanted to try out the `overviewR` package.
+
+* cheat sheet: [https://github.com/cosimameyer/overviewR/blob/master/man/figures/CheatSheet_overviewR.pdf](https://github.com/cosimameyer/overviewR/blob/master/man/figures/CheatSheet_overviewR.pdf)
+
+
+```{r}
+library("overviewR")
+library("palmerpenguins")
+```
+At this moment, I misread what `overviewR` does (I thought it would summarize everything).  Instead, I will just try out one tool for now.
+
+```{r}
+penguins_raw |>
+  overview_na()
+```
+
