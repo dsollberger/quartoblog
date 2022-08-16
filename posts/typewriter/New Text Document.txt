@@ -1,0 +1,11 @@
+Tonight's random coding practice was making this recreation of a high school schedule with the #gt package in R with some nostalgia for a typewriter
+
+My junior-year schedule included
+
+zero period: Academic Decathlon
+first period: Spanish 4 AP
+second period: Calculus AP BC
+third period: English 3 Honors
+fourth period: Computer Applications
+fifth period: Physics AP
+sixth period: US History

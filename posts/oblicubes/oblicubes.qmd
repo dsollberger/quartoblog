@@ -1,0 +1,94 @@
+---
+title: "Oblicubes"
+author: "Derek Sollberger"
+date: "2022-08-15"
+categories: [fonts]
+---
+
+I always like to have something silly for the `course image` in the `Canvas` LMS for each of the classes that I teach.  Today, I want to see if the `oblicubes` package by trevorld will continue the silly.
+
+* [https://github.com/trevorld/oblicubes](https://github.com/trevorld/oblicubes)
+
+
+
+```{r}
+library("bittermelon")
+library("grid")
+library("oblicubes")
+```
+
+```{r}
+# example from
+# https://github.com/trevorld/oblicubes
+font_file <- system.file("fonts/spleen/spleen-8x16.hex.gz", package = "bittermelon")
+font <- read_hex(font_file)
+bml <- as_bm_list("RSTATS", font = font)
+# Add a shadow effect and border
+bm <- (3 * bml) |>
+  bm_pad(sides = 2L) |>
+  bm_shadow(value = 2L) |>
+  bm_call(cbind) |>
+  bm_extend(sides = 1L, value = 1L)
+col <- apply(bm + 1L, c(1, 2), function(i) {
+  switch(i, "white", "grey20", "lightblue", "darkblue")
+})
+coords <- xyz_heightmap(bm, col = col, flipy=FALSE)
+grid.oblicubes(coords, width=unit(2.2, "mm"))
+```
+
+```{r}
+# Bio 18
+bml <- as_bm_list("BIO 18", font = font)
+
+bm <- (3 * bml) |>
+  bm_pad(sides = 2L) |>
+  bm_shadow(value = 2L) |>
+  bm_call(cbind) |>
+  bm_extend(sides = 1L, value = 1L)
+col <- apply(bm + 1L, c(1, 2), function(i) {
+  switch(i, "white", "#5b5b5b", "#DAA900", "#002856")
+  # switch(i, "#DAA900", "#5b5b5b", "#0091b3", "#002856")
+})
+coords <- xyz_heightmap(bm, col = col, flipy=FALSE)
+grid.oblicubes(coords, width=unit(2.2, "mm"))
+```
+
+```{r}
+# Math 32
+bml <- as_bm_list("MATH32", font = font)
+
+bm <- (3 * bml) |>
+  bm_pad(sides = 2L) |>
+  bm_shadow(value = 2L) |>
+  bm_call(cbind) |>
+  bm_extend(sides = 1L, value = 1L)
+col <- apply(bm + 1L, c(1, 2), function(i) {
+  switch(i, "white", "#5b5b5b", "#DAA900", "#002856")
+  # switch(i, "#DAA900", "#5b5b5b", "#0091b3", "#002856")
+})
+coords <- xyz_heightmap(bm, col = col, flipy=FALSE)
+grid.oblicubes(coords, width=unit(2.2, "mm"))
+```
+
+```{r}
+# Spark
+bml <- as_bm_list("SPORTS", font = font)
+
+bm <- (3 * bml) |>
+  bm_pad(sides = 2L) |>
+  bm_shadow(value = 2L) |>
+  bm_call(cbind) |>
+  bm_extend(sides = 1L, value = 1L)
+col <- apply(bm + 1L, c(1, 2), function(i) {
+  switch(i, "white", "#5b5b5b", "#DAA900", "#002856")
+  # switch(i, "#DAA900", "#5b5b5b", "#0091b3", "#002856")
+})
+coords <- xyz_heightmap(bm, col = col, flipy=FALSE)
+grid.oblicubes(coords, width=unit(2.2, "mm"))
+```
+
+and then I cropped an resized each image to 262 by 146 pixels
+
+* https://unomaha.instructure.com/courses/33506/pages/create-a-canvas-dashboard-image-for-your-course
+
+![](Fall_schedule.png)
