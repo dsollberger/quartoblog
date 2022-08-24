@@ -1,0 +1,7 @@
+---
+title: "template file"
+author: "Derek Sollberger"
+date: '`r format(Sys.time(),"%a %b %d %Y %H:%M:%S BST")`'
+categories: [news]
+---
+
