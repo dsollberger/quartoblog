@@ -2,9 +2,10 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/bump/bump.html",
+      "/posts/intentional_walks/ibb.html",
       "/posts/oblicubes/oblicubes.html",
       "/posts/typewriter/typewriter.html",
-      "/posts/bump/bump.html",
       "/posts/overviewR/overviewR.html",
       "/posts/welcome/index.html"
     ]
