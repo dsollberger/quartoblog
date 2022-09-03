@@ -1,0 +1,202 @@
+---
+title: "Coefficient of Variation"
+author: "Derek Sollberger"
+date: "2022-09-02"
+format: 
+  html:
+    toc: true
+---
+
+For a future lecture in my *Sports Analytics* course, I want an example of a baseball statistic where the averages for two players are similar, but their variances in that same statistic are quite different.  It is still early in the semester, so I am looking for an easy-to-understand statistic.  Therefore, I will explore home runs per season.
+
+## A Walk Through the Data
+
+The `Lahman` database contains a lot of baseball statistics, and today I will focus on the `Batting` data frame.
+
+```{r}
+#| message: false
+#| warning: false
+library("Lahman")
+library("tidyverse")
+```
+
+For interest, I will `filter` the observations to retain the players from the past 18 seasons (since my students are about 18 years old, haha) and  player-seasons that included at least 100 at-bats.
+
+```{r}
+df <- Batting |>
+  filter(yearID >= (2021 - 18)) |>
+  filter(AB >= 100)
+```
+
+To be illustrative, permit me to `select` mainly the seasons and home run columns.
+
+```{r}
+df <- df |>
+  select(playerID, yearID, AB, HR)
+```
+
+At the moment, here is what our data looks like.
+
+```{r}
+head(df)
+```
+
+Since I am concerned with season averages, I am going to `group_by` the player name.  From there, let us then compute the averages and standard deviations for home runs.
+
+```{r}
+df <- df |>
+  group_by(playerID) |>
+  mutate(xbar = mean(HR, na.rm = TRUE),
+         s    = sd(HR, na.rm = TRUE)) |>
+  ungroup()
+head(df)
+```
+
+For various reasons, some players only appear once in this subset of data, so their variance is effectively zero (missing in the computation).  To answer my original inquiry mathematically, I will now compute the **coefficient of variation** (and avoid a divide-by-zero error from those players who hit zero home runs).
+
+$$CoV = \frac{s}{\bar{x}}$$
+
+```{r}
+df <- df |>
+  # filter(!is.na(s)) |>
+  filter(xbar > 0) |>
+  mutate(CoV = s/xbar) |>
+  arrange(desc(CoV))
+```
+
+In this metric, the top scores are
+
+```{r}
+head(df)
+```
+
+and the bottom scores are
+
+```{r}
+tail(df)
+```
+
+## Heavy Hitters
+
+So far, these results seem to be fine mathematically, but they might be uninteresting to the casual baseball fan.  To further prune down to recognizable players, let me further filter the data down to players with at least 5 of these 100+ at-bat seasons in the past 18 seasons---and had an average of over 10 home runs per season.
+
+```{r}
+df <- df |>
+  group_by(playerID) |>
+  mutate(seasons = n()) |>
+  ungroup() |>
+  filter(seasons >= 5) |>
+  filter(xbar >= 15) |>
+  arrange(desc(CoV))
+```
+
+Now, the top scores in using the coefficient of variation as my metric are
+
+```{r}
+head(df)
+```
+
+and the lowest $Cov$ are
+
+```{r}
+tail(df)
+```
+
+Well, I do recognize more of the player names, but I realize that the $Cov$ alone does not completely solve my question since I still wanted similar averages between two players.
+
+## A Metric on top of a Metric
+
+Now, hear me out.  If there are two players $A$ and $B$, then what I am looking for is a rate of change of the form
+
+$$Y = \bigg|\frac{s_{A} - s_{B}}{\bar{x}_{A} - \bar{x}_{B}}\bigg|$$
+
+First, let me simplify the data frame down to just the player names, home run averages, and their standard deviations.
+
+```{r}
+df2 <- df |>
+  select(playerID, xbar, s) |>
+  distinct()
+head(df2)
+```
+
+Presently, I have about `r nrow(df2)` observations, so a pair-wise calculations would be computed over about `r nrow(df2)^2` pairs (hopefully manageable by a computer).
+
+```{r}
+N <- nrow(df2)
+df3 <- data.frame(player1 = rep(NA, N^2),
+                  player2 = rep(NA, N^2),
+                  Y       = rep(NA, N^2))
+
+for(i in 1:N){
+  for(j in 1:N){
+    row_number = j*(i-1) + j
+    df3$player1[row_number] <- df2$playerID[i]
+    df3$player2[row_number] <- df2$playerID[j]
+    
+    if(i == j){
+      this_Y_value <- 0
+    } else {
+      denominator <- df2$xbar[i] - df2$xbar[j]
+      if(denominator == 0){ denominator <- 0.1 }
+      
+      this_Y_value <- abs((df2$s[i] - df2$s[j]) / denominator)
+    }
+    
+    df3$Y[row_number] <- this_Y_value
+  }
+  
+  # if((row_number %% 10000) == 0){
+  #   print(paste("Currently computing row number", row_number))
+  # }
+}
+```
+
+In this improvised metric, the top 10 scores were
+
+```{r}
+df3 |>
+  arrange(desc(Y)) |>
+  top_n(10)
+```
+
+Using the `playerInfo()` helper function in the `Lahman` package, we can verify the names of the players.
+
+```{r}
+playerInfo("mccutan01")
+playerInfo("ramirjo01")
+```
+
+## Data Visualization
+
+This whole time, I was hoping for a neat boxplot.
+
+```{r}
+df |>
+  filter(playerID == "mccutan01" | playerID == "ramirjo01") |>
+  ggplot(aes(x = playerID, y = HR)) +
+  geom_boxplot(color = c("#27251F", "#00385D"),
+               fill = c("#FDB827", "#E50022")) +
+  stat_summary(fun=mean, geom="point", shape=20, size=14, color="blue", fill="blue") +
+  scale_x_discrete(labels = c("Andrew McCutchen", "Jose Ramirez")) +
+  labs(title = "Similar Means, Different Variances",
+       subtitle = stringr::str_wrap("Andrew McCutchen and Jose Ramirez have averaged about 20.4 home runs per season, but in different ways (Qualifiers: after 2002 season, 100+ AB seasons, at least 5 100+ AB seasons, home run average over 15 HR/season)"),
+       caption = "Derek Sollberger, 2022-09-02",
+       x = "MLB Player",
+       y = "home runs in a season") +
+  theme(axis.text.x = element_text(size = 15),
+        legend.position = "none",
+        panel.background = element_blank(),
+        plot.background = element_rect(
+            fill = "#FFFFFF", 
+            color = "#27251F"
+        ),
+        plot.title = element_text(color = "#E50022", size = 20, hjust = 0.5),
+        plot.title.position = "plot",
+        plot.subtitle = element_text(color = "blue", size = 12, hjust = 0.0),
+        plot.caption = element_text(color = "#092C5C", size = 10, hjust = 1.0),
+        plot.caption.position = "plot",
+        plot.margin = margin(20, 20, 20, 20))
+
+```
+
+![](Rplot.png)

@@ -2,10 +2,11 @@
   {
     "listing": "/blog.html",
     "items": [
-      "/posts/bump/bump.html",
+      "/posts/cofficient_of_variation/coefficient_of_variation.html",
       "/posts/intentional_walks/ibb.html",
       "/posts/oblicubes/oblicubes.html",
       "/posts/typewriter/typewriter.html",
+      "/posts/bump/bump.html",
       "/posts/overviewR/overviewR.html",
       "/posts/welcome/index.html"
     ]
