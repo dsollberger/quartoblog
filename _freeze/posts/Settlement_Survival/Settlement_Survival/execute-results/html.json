@@ -1,0 +1,18 @@
+{
+  "hash": "7150e229b310bb360b7b0ae0f658ce2a",
+  "result": {
+    "markdown": "---\ntitle: \"Settlement Survival Start\"\nauthor: \"Derek Sollberger\"\ndate: \"2022-09-03\"\nformat: html\n---\n\n\nOne of my silly side-projects is to organize the dependency chart in the Settlement Survival video game into a `mermaid` diagram (or a similar flow chart).  Today, I will start with the beginning of the game---that is, what tends to be built in the first \"year\".\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(\"DiagrammeR\")\n```\n:::\n\n\nI am going to take some liberties and actually *add* more prerequisites in the beginning (otherwise, the graph simply starts with about 12 unlinked nodes).\n\n\n::: {.cell}\n\n```{.r .cell-code}\nmy_plot <- DiagrammeR::mermaid(\"\n  graph TD\n  start[Select Location]\n  \n  house1[1 House]\n  farms[2 Standard Fields]\n  water[Big Well]\n  forest_hut[Forester's Hut]\n  gather_hut[Gatherer's Hut]\n  hunter_hut[Hunter's Hut]\n  chopping_house[Chopping House]\n  house7[7 Houses]\n  repair_shop[Repair Shop]\n  church[Church]\n  clinic[Clinic]\n  distillery[Distillery]\n  \n  start --> house1\n  start --> farms\n  start --> water\n  start --> gather_hut\n  \n  house1 --> house7\n  farms --> clinic\n  gather_hut --> forest_hut\n  gather_hut --> hunter_hut\n  water --> repair_shop\n  \n  forest_hut --> chopping_house\n  \n  house7 --> church\n  repair_shop --> distillery\n\")\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\n# print\nmy_plot\n```\n\n::: {.cell-output-display}\n```{=html}\n<div id=\"htmlwidget-22ac5bd6f6de8001eb49\" style=\"width:100%;height:464px;\" class=\"DiagrammeR html-widget\"></div>\n<script type=\"application/json\" data-for=\"htmlwidget-22ac5bd6f6de8001eb49\">{\"x\":{\"diagram\":\"\\n  graph TD\\n  start[Select Location]\\n  \\n  house1[1 House]\\n  farms[2 Standard Fields]\\n  water[Big Well]\\n  forest_hut[Forester's Hut]\\n  gather_hut[Gatherer's Hut]\\n  hunter_hut[Hunter's Hut]\\n  chopping_house[Chopping House]\\n  house7[7 Houses]\\n  repair_shop[Repair Shop]\\n  church[Church]\\n  clinic[Clinic]\\n  distillery[Distillery]\\n  \\n  start --> house1\\n  start --> farms\\n  start --> water\\n  start --> gather_hut\\n  \\n  house1 --> house7\\n  farms --> clinic\\n  gather_hut --> forest_hut\\n  gather_hut --> hunter_hut\\n  water --> repair_shop\\n  \\n  forest_hut --> chopping_house\\n  \\n  house7 --> church\\n  repair_shop --> distillery\\n\"},\"evals\":[],\"jsHooks\":[]}</script>\n```\n:::\n:::\n\n\n![](Rplot.png)",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<script src=\"../../site_libs/htmlwidgets-1.5.4/htmlwidgets.js\"></script>\r\n<script src=\"../../site_libs/d3-3.3.8/d3.min.js\"></script>\r\n<script src=\"../../site_libs/dagre-0.4.0/dagre-d3.min.js\"></script>\r\n<link href=\"../../site_libs/mermaid-0.3.0/dist/mermaid.css\" rel=\"stylesheet\" />\r\n<script src=\"../../site_libs/mermaid-0.3.0/dist/mermaid.slim.min.js\"></script>\r\n<link href=\"../../site_libs/DiagrammeR-styles-0.2/styles.css\" rel=\"stylesheet\" />\r\n<script src=\"../../site_libs/chromatography-0.1/chromatography.js\"></script>\r\n<script src=\"../../site_libs/DiagrammeR-binding-1.0.9/DiagrammeR.js\"></script>\r\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

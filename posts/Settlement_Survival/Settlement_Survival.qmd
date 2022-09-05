@@ -1,0 +1,283 @@
+---
+title: "Settlement Survival Start"
+author: "Derek Sollberger"
+date: "2022-09-03"
+format: html
+---
+
+One of my silly side-projects is to organize the dependency chart in the Settlement Survival video game into a `mermaid` diagram (or a similar flow chart).  
+
+# Game Start
+
+Today, I will start with the beginning of the game---that is, what tends to be built in the first "year".  I am going to take some liberties and actually *add* more prerequisites in the beginning (otherwise, the graph simply starts with about 12 unlinked nodes).
+
+```{r}
+library("DiagrammeR")
+```
+
+```{r}
+my_plot <- DiagrammeR::mermaid("
+  graph TD
+  start[Select Location]
+  
+  house1[1 House]
+  farms[2 Standard Fields]
+  water[Big Well]
+  forest_hut[Forester's Hut]
+  gather_hut[Gatherer's Hut]
+  hunter_hut[Hunter's Hut]
+  chopping_house[Chopping House]
+  house7[7 Houses]
+  repair_shop[Repair Shop]
+  church[Church]
+  clinic[Clinic]
+  distillery[Distillery]
+  
+  start --> house1
+  start --> farms
+  start --> water
+  start --> gather_hut
+  
+  house1 --> house7
+  farms --> clinic
+  gather_hut --> forest_hut
+  gather_hut --> hunter_hut
+  water --> repair_shop
+  
+  forest_hut --> chopping_house
+  
+  house7 --> church
+  repair_shop --> distillery
+")
+```
+
+```{r}
+# print
+my_plot
+```
+
+## Welcoming New Settlers
+
+Next, our goal is to build a city hall and support the new residents.  At first, I wanted to get the branches to align with the 8 categories of tech trees, but the features in the Processing and Agriculture trees will have to come a bit later (for example: the apiaries needed clay from the sand mining, while processing needs farm and animal products in general.)
+
+```{r}
+my_plot2 <- DiagrammeR::mermaid("
+  graph TD
+  start[Select Location]
+  
+  house1[1 House]
+  farms[2 Standard Fields]
+  water[Big Well]
+  forest_hut[Forester's Hut]
+  gather_hut[Gatherer's Hut]
+  hunter_hut[Hunter's Hut]
+  chopping_house[Chopping House]
+  house7[7 Houses]
+  repair_shop[Repair Shop]
+  church[Church]
+  clinic[Clinic]
+  distillery[Distillery]
+  town_hall[Town Hall]
+  police[Police Station]
+  school[School]
+  sandpit[Sand Mining]
+  recycling[Materials Recycling]
+  apiary[Apiary]
+  warehouse[Warehouse]
+  
+  start --> house1
+  start --> farms
+  start --> water
+  start --> gather_hut
+  
+  house1 --> house7
+  farms --> clinic
+  start --> forest_hut
+  gather_hut --> hunter_hut
+  water --> repair_shop
+  
+  forest_hut --> chopping_house
+  house7 --> church
+  repair_shop --> distillery
+  
+  church --> police
+  church --> school
+  church --> town_hall
+  hunter_hut --> sandpit
+  distillery --> recycling
+  clinic --> warehouse
+  
+  sandpit --> apiary
+")
+```
+
+```{r}
+#print
+my_plot2
+```
+
+## Trading
+
+Going into Year 3, I like to build toward making my settlement into a trading post.  It might take a few years to get the population to support caravans.
+
+```{r}
+my_plot3 <- DiagrammeR::mermaid("
+  graph TD
+  start[Select Location]
+  
+  house1[1 House]
+  farms[2 Standard Fields]
+  water[Big Well]
+  forest_hut[Forester's Hut]
+  gather_hut[Gatherer's Hut]
+  hunter_hut[Hunter's Hut]
+  chopping_house[Chopping House]
+  house7[7 Houses]
+  repair_shop[Repair Shop]
+  church[Church]
+  clinic[Clinic]
+  distillery[Distillery]
+  town_hall[Town Hall]
+  police[Police Station]
+  school[School]
+  sandpit[Sand Mining]
+  recycling[Materials Recycling]
+  apiary[Apiary]
+  warehouse[Warehouse]
+  
+  church_upgrade[Church Upgrades]
+  medical_research[Medical Research]
+  insurance[Insurance]
+  mining[Mining]
+  sawmill[Sawmill]
+  reed[Reed]
+  delivery[Delivery]
+  
+  start --> house1
+  start --> farms
+  start --> water
+  start --> gather_hut
+  
+  house1 --> house7
+  farms --> clinic
+  start --> forest_hut
+  gather_hut --> hunter_hut
+  water --> repair_shop
+  
+  forest_hut --> chopping_house
+  house7 --> church
+  repair_shop --> distillery
+  
+  church --> police
+  church --> school
+  church --> town_hall
+  hunter_hut --> sandpit
+  distillery --> recycling
+  clinic --> warehouse
+  
+  sandpit --> apiary
+  
+  police --> church_upgrade
+  school --> medical_research
+  town_hall --> insurance
+  sandpit --> mining
+  recycling --> sawmill
+  apiary --> reed
+  warehouse --> delivery
+")
+```
+
+```{r}
+#print
+my_plot3
+```
+
+## Gem Mining
+
+Around Year 10 (and having an at least level 3 diplomatic relationship with Rania), I start building the gem mines.  Since it is still early in the settlement development, I gather the building kits, steel, and lanterns from trades.
+
+```{r}
+my_plot4 <- DiagrammeR::mermaid("
+  graph TD
+  start[Select Location]
+  
+  house1[1 House]
+  farms[2 Standard Fields]
+  water[Big Well]
+  forest_hut[Forester's Hut]
+  gather_hut[Gatherer's Hut]
+  hunter_hut[Hunter's Hut]
+  chopping_house[Chopping House]
+  house7[7 Houses]
+  repair_shop[Repair Shop]
+  church[Church]
+  clinic[Clinic]
+  distillery[Distillery]
+  town_hall[Town Hall]
+  police[Police Station]
+  school[School]
+  sandpit[Sand Mining]
+  recycling[Materials Recycling]
+  apiary[Apiary]
+  warehouse[Warehouse]
+  church_upgrade[Church Upgrades]
+  medical_research[Medical Research]
+  insurance[Insurance]
+  mining[Mining]
+  sawmill[Sawmill]
+  reed[Reed]
+  delivery[Delivery]
+  
+  theater[Theater]
+  research[Research Institute]
+  overloader[Overloader]
+  mining2[Exploration Technology]
+  medical_research2[Skin Disease]
+  
+  start --> house1
+  start --> farms
+  start --> water
+  start --> gather_hut
+  
+  house1 --> house7
+  farms --> clinic
+  start --> forest_hut
+  gather_hut --> hunter_hut
+  water --> repair_shop
+  
+  forest_hut --> chopping_house
+  house7 --> church
+  repair_shop --> distillery
+  
+  church --> police
+  church --> school
+  church --> town_hall
+  hunter_hut --> sandpit
+  distillery --> recycling
+  clinic --> warehouse
+  
+  sandpit --> apiary
+  
+  police --> church_upgrade
+  school --> medical_research
+  town_hall --> insurance
+  sandpit --> mining
+  recycling --> sawmill
+  apiary --> reed
+  warehouse --> delivery
+  
+  church_upgrade --> theater
+  school --> research
+  insurance --> overloader
+  mining --> mining2
+  medical_research --> medical_research2
+")
+```
+
+```{r}
+#print
+my_plot4
+```
+
+
+![](Rplot.png)
