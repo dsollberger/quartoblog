@@ -1,0 +1,41 @@
+---
+title: "Folder Tree"
+author: "Derek Sollberger"
+format: html
+---
+
+I saw some tweet where R programmers were asking about how to visualize folders and subfolders among their work files, so I thought I would try it out too.  One of the answers was these Stack Overflow threads:
+
+* [https://stackoverflow.com/questions/67357402/how-to-i-see-visual-of-my-folder-structure-in-rstudio](https://stackoverflow.com/questions/67357402/how-to-i-see-visual-of-my-folder-structure-in-rstudio)
+* [https://stackoverflow.com/questions/36094183/how-to-build-a-dendrogram-from-a-directory-tree](https://stackoverflow.com/questions/36094183/how-to-build-a-dendrogram-from-a-directory-tree)
+
+```{r}
+library("data.tree")
+library("dplyr")
+```
+
+
+First, I set the working directory to where I have most of my GitHub-linked files.  Next, we collect the paths (along with subdirectories)
+
+```{r}
+paths = unique(c(list.dirs(full.names = T),list.files(full.names = T)))
+```
+
+It appears that the information is collected into a data frame.
+
+```{r}
+x <- lapply(strsplit(paths, "/"), function(z) as.data.frame(t(z)))
+x <- plyr::rbind.fill(x) #plyr??
+```
+
+Now, we can build the tree.
+
+```{r}
+mytree <- data.tree::as.Node(x)
+```
+
+Do we dare `print` the tree?
+
+```{r}
+plot(mytree)
+```
