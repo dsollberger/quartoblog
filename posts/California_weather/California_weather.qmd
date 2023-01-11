@@ -1,0 +1,32 @@
+---
+title: "California Weather"
+author: "Derek Sollberger"
+date: "2022-12-23"
+format: html
+---
+
+```{r}
+#| message: false
+#| warning: false
+library("tidyverse")
+```
+
+I want to create and visualize a simple data set for my Data Science courses (that I teach in California).
+
+# Data Source
+
+* University of California
+* Agriculture and Natural Resources
+* Statewide Integrated Pest Management Program
+* https://ipm.ucanr.edu/WEATHER/wxactstnames.html
+
+# Fixed-Width Files
+
+Today I learned how to read `fixed-width files` in the [Tidyverse](https://readr.tidyverse.org/).  From there, I simply need to give the columns easy-to-use names.
+
+```{r}
+SF_df <- readr::read_fwf("SF_2021.txt")
+colnames(SF_df) <- c("date", "time", "precipitation",
+                     "check1", "high", "low", "check2")
+```
+

@@ -1,0 +1,106 @@
+---
+title: "Canvas_Roster"
+author: "Derek Sollberger"
+date: "2023-01-11"
+format: html
+---
+
+With the goal of learning my students' names faster, I wrote an R script that will convert a roster ("People" in a Canvas course) to a `gt` table for later offline use.
+
+```{r}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+
+# Setup
+
+In your Canvas course, go to `People`, right-click on the roster, and click "Save Page As"
+
+* be sure to save the "complete" web page (this creates a folder with all of the students' pictures)
+* place the also downloaded HTML file into the folder
+* place this code script into the folder
+
+```{r}
+# change this file name as needed
+HTML_file_name <- "Course Roster S23-BIO 018 01.htm"
+
+library("gt")
+library("gtExtras")
+library("rvest")
+library("tidyverse")
+```
+
+# Roster table
+
+https://www.r-bloggers.com/2020/04/scrape-html-table-using-rvest/
+
+```{r}
+content <- read_html(HTML_file_name)
+tables <- content |> html_table(fill = TRUE)
+roster_table <- tables[[1]]
+
+roster_df <- roster_table |>
+  select(Name, Section) |>
+  mutate(discussion_tag = str_extract(Section, "Discussion-\\d\\dD")) |>
+  separate(discussion_tag, sep = "-", into = c("disregard", "discussion_section")) |>
+  select(Name, discussion_section) |>
+  
+  # remove instructor of record
+  filter(!is.na(discussion_section))
+```
+
+# Images
+
+https://community.rstudio.com/t/scraping-images-from-the-web/133239
+
+```{r}
+image_urls <- content |> html_elements("img")
+num_images <- length(image_urls)
+
+image_df_raw <- data.frame(html_raw = rep(NA, num_images))
+for(img in 1:num_images){
+  image_df_raw$html_raw[img] <- as.character(image_urls[[img]])
+}
+
+image_df <- image_df_raw |>
+  
+  # skip first two images?
+  slice(3:n()) |>
+  
+  # roundabout because some people's names have more than 2 words
+  separate(col = "html_raw", sep = "alt=", 
+           into = c("part1", "part2")) |>
+  
+  separate(col = "part1", sep = " ", into = c("tag1", "src")) |>
+  separate(col = "src", sep = "/", into = c("stem", "profile_picture")) |>
+  separate(col = "part2", sep = " aria", into = c("student_name", "tag2")) |>
+  
+  select(profile_picture, student_name)
+
+# remove quotation marks
+image_df$profile_picture <- str_replace_all(image_df$profile_picture, "\"", "")
+image_df$student_name <- str_replace_all(image_df$student_name, "\"", "")
+```
+
+# Merge
+
+```{r}
+roster_df <- roster_df |>
+  left_join(image_df, by = c("Name" = "student_name")) |>
+  select(profile_picture, Name, discussion_section)
+```
+
+# gt
+
+https://jthomasmock.github.io/gtExtras/reference/gt_img_rows.html
+
+```{r}
+roster_gt <- roster_df |>
+  gt() |>
+  gt_img_rows(columns = profile_picture, img_source = "local")
+```
+
+```{r}
+gtsave(roster_gt, "roster.png")
+```
+
