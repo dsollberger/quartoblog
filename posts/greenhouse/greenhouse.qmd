@@ -1,0 +1,76 @@
+---
+title: "Stardew Valley Crops"
+author: "Derek Sollberger"
+date: "2023-01-13"
+format: html
+---
+
+Here is some quick code to help me plan a crop layout in Stardew Valley.
+
+```{r}
+library("figpatch") #https://bradyajohnston.github.io/figpatch/
+library("patchwork")
+```
+
+```{r}
+# load images
+# https://stardewvalleywiki.com/Crops
+ancient_fruit <- figpatch::fig("Ancient_Fruit.png")
+blueberry <- figpatch::fig("Blueberry.png")
+cactus_fruit <- figpatch::fig("Cactus_Fruit.png")
+coffee_bean <- figpatch::fig("Coffee_Bean.png")
+corn <- figpatch::fig("Corn.png")
+cranberries <- figpatch::fig("Cranberries.png")
+grape <- figpatch::fig("Grape.png")
+green_bean <- figpatch::fig("Green_Bean.png")
+hops <- figpatch::fig("Hops.png")
+hot_pepper <- figpatch::fig("Hot_Pepper.png")
+pineapple <- figpatch::fig("Pineapple.png")
+strawberry <- figpatch::fig("Strawberry.png")
+tea_leaves <- figpatch::fig("Tea_Leaves.png")
+tomato <- figpatch::fig("Tomato.png")
+```
+
+```{r}
+greenhouse_plot <- patchwork::wrap_plots(
+  
+  # row 1
+  grape, hops, hot_pepper, hot_pepper, hot_pepper, hot_pepper, hot_pepper, hot_pepper, hot_pepper, hot_pepper, hot_pepper, hot_pepper,
+  
+  # row 2
+  grape, hops, tomato, tomato, tomato, tomato, tomato, tomato, tomato, tomato, tomato, tomato, 
+  
+  # row 3
+  grape, tea_leaves, cranberries, cranberries, cranberries, cranberries, cranberries, cranberries, cranberries, cranberries, cranberries, cranberries, 
+  
+  # row 4
+  grape, tea_leaves, strawberry, strawberry, strawberry, strawberry, strawberry, strawberry, strawberry, strawberry, strawberry, strawberry, 
+  
+  # row 5
+  grape, tea_leaves, cactus_fruit, cactus_fruit, cactus_fruit, cactus_fruit, cactus_fruit, cactus_fruit, cactus_fruit, cactus_fruit, cactus_fruit, cactus_fruit, 
+  
+  # row 6
+  green_bean, tea_leaves, corn, corn, corn, corn, corn, corn, corn, corn, corn, corn, 
+  
+  # row 7
+  green_bean, tea_leaves, ancient_fruit, ancient_fruit, ancient_fruit, ancient_fruit, ancient_fruit, ancient_fruit, ancient_fruit, ancient_fruit, ancient_fruit, ancient_fruit, 
+  
+  # row 8
+  green_bean, tea_leaves, blueberry, blueberry, blueberry, blueberry, blueberry, blueberry, blueberry, blueberry, blueberry, blueberry, 
+  
+  # row 9
+  green_bean, hops, pineapple, pineapple, pineapple, pineapple, pineapple, pineapple, pineapple, pineapple, pineapple, pineapple, 
+  
+  # row 10
+  green_bean, hops, coffee_bean, coffee_bean, coffee_bean, coffee_bean, coffee_bean, coffee_bean, coffee_bean, coffee_bean, coffee_bean, coffee_bean, 
+  
+  ncol = 12
+)
+```
+
+```{r}
+greenhouse_plot +
+  patchwork::plot_annotation(title = "Stardew Valley",
+                  subtitle = "crops that continue to produce")
+```
+

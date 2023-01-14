@@ -1,0 +1,16 @@
+{
+  "hash": "47f63b387545ec275ae64c6fe5d41b3a",
+  "result": {
+    "markdown": "---\ntitle: \"Stardew Valley Crops\"\nauthor: \"Derek Sollberger\"\ndate: \"2023-01-13\"\nformat: html\n---\n\n\nHere is some quick code to help me plan a crop layout in Stardew Valley.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(\"figpatch\") #https://bradyajohnston.github.io/figpatch/\nlibrary(\"patchwork\")\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\n# load images\n# https://stardewvalleywiki.com/Crops\nancient_fruit <- figpatch::fig(\"Ancient_Fruit.png\")\nblueberry <- figpatch::fig(\"Blueberry.png\")\ncactus_fruit <- figpatch::fig(\"Cactus_Fruit.png\")\ncoffee_bean <- figpatch::fig(\"Coffee_Bean.png\")\ncorn <- figpatch::fig(\"Corn.png\")\ncranberries <- figpatch::fig(\"Cranberries.png\")\ngrape <- figpatch::fig(\"Grape.png\")\ngreen_bean <- figpatch::fig(\"Green_Bean.png\")\nhops <- figpatch::fig(\"Hops.png\")\nhot_pepper <- figpatch::fig(\"Hot_Pepper.png\")\npineapple <- figpatch::fig(\"Pineapple.png\")\nstrawberry <- figpatch::fig(\"Strawberry.png\")\ntea_leaves <- figpatch::fig(\"Tea_Leaves.png\")\ntomato <- figpatch::fig(\"Tomato.png\")\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\ngreenhouse_plot <- patchwork::wrap_plots(\n  \n  # row 1\n  grape, hops, hot_pepper, hot_pepper, hot_pepper, hot_pepper, hot_pepper, hot_pepper, hot_pepper, hot_pepper, hot_pepper, hot_pepper,\n  \n  # row 2\n  grape, hops, tomato, tomato, tomato, tomato, tomato, tomato, tomato, tomato, tomato, tomato, \n  \n  # row 3\n  grape, tea_leaves, cranberries, cranberries, cranberries, cranberries, cranberries, cranberries, cranberries, cranberries, cranberries, cranberries, \n  \n  # row 4\n  grape, tea_leaves, strawberry, strawberry, strawberry, strawberry, strawberry, strawberry, strawberry, strawberry, strawberry, strawberry, \n  \n  # row 5\n  grape, tea_leaves, cactus_fruit, cactus_fruit, cactus_fruit, cactus_fruit, cactus_fruit, cactus_fruit, cactus_fruit, cactus_fruit, cactus_fruit, cactus_fruit, \n  \n  # row 6\n  green_bean, tea_leaves, corn, corn, corn, corn, corn, corn, corn, corn, corn, corn, \n  \n  # row 7\n  green_bean, tea_leaves, ancient_fruit, ancient_fruit, ancient_fruit, ancient_fruit, ancient_fruit, ancient_fruit, ancient_fruit, ancient_fruit, ancient_fruit, ancient_fruit, \n  \n  # row 8\n  green_bean, tea_leaves, blueberry, blueberry, blueberry, blueberry, blueberry, blueberry, blueberry, blueberry, blueberry, blueberry, \n  \n  # row 9\n  green_bean, hops, pineapple, pineapple, pineapple, pineapple, pineapple, pineapple, pineapple, pineapple, pineapple, pineapple, \n  \n  # row 10\n  green_bean, hops, coffee_bean, coffee_bean, coffee_bean, coffee_bean, coffee_bean, coffee_bean, coffee_bean, coffee_bean, coffee_bean, coffee_bean, \n  \n  ncol = 12\n)\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\ngreenhouse_plot +\n  patchwork::plot_annotation(title = \"Stardew Valley\",\n                  subtitle = \"crops that continue to produce\")\n```\n\n::: {.cell-output-display}\n![](greenhouse_files/figure-html/unnamed-chunk-4-1.png){width=672}\n:::\n:::\n",
+    "supporting": [
+      "greenhouse_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

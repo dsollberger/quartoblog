@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Derek Sollberger">
-<meta name="dcterms.date" content="2022-08-12">
+<meta name="dcterms.date" content="2023-01-13">
 
-<title>The Median Data Scientist - overviewR</title>
+<title>The Median Data Scientist - Stardew Valley Crops</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -168,11 +168,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">overviewR</h1>
-                                <div class="quarto-categories">
-                <div class="quarto-category">exploratory data analysis</div>
-              </div>
-                  </div>
+      <h1 class="title">Stardew Valley Crops</h1>
+                      </div>
   </div>
     
   
@@ -188,7 +185,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 12, 2022</p>
+        <p class="date">January 13, 2023</p>
       </div>
     </div>
     
@@ -208,20 +205,71 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<p>Today I wanted to try out the <code>overviewR</code> package.</p>
-<ul>
-<li>cheat sheet: <a href="https://github.com/cosimameyer/overviewR/blob/master/man/figures/CheatSheet_overviewR.pdf">https://github.com/cosimameyer/overviewR/blob/master/man/figures/CheatSheet_overviewR.pdf</a></li>
-</ul>
+<p>Here is some quick code to help me plan a crop layout in Stardew Valley.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"overviewR"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"palmerpenguins"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"figpatch"</span>) <span class="co">#https://bradyajohnston.github.io/figpatch/</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"patchwork"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>At this moment, I misread what <code>overviewR</code> does (I thought it would summarize everything). Instead, I will just try out one tool for now.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>penguins_raw <span class="sc">|&gt;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">overview_na</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load images</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># https://stardewvalleywiki.com/Crops</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>ancient_fruit <span class="ot">&lt;-</span> figpatch<span class="sc">::</span><span class="fu">fig</span>(<span class="st">"Ancient_Fruit.png"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>blueberry <span class="ot">&lt;-</span> figpatch<span class="sc">::</span><span class="fu">fig</span>(<span class="st">"Blueberry.png"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>cactus_fruit <span class="ot">&lt;-</span> figpatch<span class="sc">::</span><span class="fu">fig</span>(<span class="st">"Cactus_Fruit.png"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>coffee_bean <span class="ot">&lt;-</span> figpatch<span class="sc">::</span><span class="fu">fig</span>(<span class="st">"Coffee_Bean.png"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>corn <span class="ot">&lt;-</span> figpatch<span class="sc">::</span><span class="fu">fig</span>(<span class="st">"Corn.png"</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>cranberries <span class="ot">&lt;-</span> figpatch<span class="sc">::</span><span class="fu">fig</span>(<span class="st">"Cranberries.png"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>grape <span class="ot">&lt;-</span> figpatch<span class="sc">::</span><span class="fu">fig</span>(<span class="st">"Grape.png"</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>green_bean <span class="ot">&lt;-</span> figpatch<span class="sc">::</span><span class="fu">fig</span>(<span class="st">"Green_Bean.png"</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>hops <span class="ot">&lt;-</span> figpatch<span class="sc">::</span><span class="fu">fig</span>(<span class="st">"Hops.png"</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>hot_pepper <span class="ot">&lt;-</span> figpatch<span class="sc">::</span><span class="fu">fig</span>(<span class="st">"Hot_Pepper.png"</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>pineapple <span class="ot">&lt;-</span> figpatch<span class="sc">::</span><span class="fu">fig</span>(<span class="st">"Pineapple.png"</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>strawberry <span class="ot">&lt;-</span> figpatch<span class="sc">::</span><span class="fu">fig</span>(<span class="st">"Strawberry.png"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>tea_leaves <span class="ot">&lt;-</span> figpatch<span class="sc">::</span><span class="fu">fig</span>(<span class="st">"Tea_Leaves.png"</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>tomato <span class="ot">&lt;-</span> figpatch<span class="sc">::</span><span class="fu">fig</span>(<span class="st">"Tomato.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>greenhouse_plot <span class="ot">&lt;-</span> patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># row 1</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  grape, hops, hot_pepper, hot_pepper, hot_pepper, hot_pepper, hot_pepper, hot_pepper, hot_pepper, hot_pepper, hot_pepper, hot_pepper,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># row 2</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  grape, hops, tomato, tomato, tomato, tomato, tomato, tomato, tomato, tomato, tomato, tomato, </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># row 3</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  grape, tea_leaves, cranberries, cranberries, cranberries, cranberries, cranberries, cranberries, cranberries, cranberries, cranberries, cranberries, </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># row 4</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  grape, tea_leaves, strawberry, strawberry, strawberry, strawberry, strawberry, strawberry, strawberry, strawberry, strawberry, strawberry, </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># row 5</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  grape, tea_leaves, cactus_fruit, cactus_fruit, cactus_fruit, cactus_fruit, cactus_fruit, cactus_fruit, cactus_fruit, cactus_fruit, cactus_fruit, cactus_fruit, </span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># row 6</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  green_bean, tea_leaves, corn, corn, corn, corn, corn, corn, corn, corn, corn, corn, </span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># row 7</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  green_bean, tea_leaves, ancient_fruit, ancient_fruit, ancient_fruit, ancient_fruit, ancient_fruit, ancient_fruit, ancient_fruit, ancient_fruit, ancient_fruit, ancient_fruit, </span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># row 8</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  green_bean, tea_leaves, blueberry, blueberry, blueberry, blueberry, blueberry, blueberry, blueberry, blueberry, blueberry, blueberry, </span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># row 9</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  green_bean, hops, pineapple, pineapple, pineapple, pineapple, pineapple, pineapple, pineapple, pineapple, pineapple, pineapple, </span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># row 10</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  green_bean, hops, coffee_bean, coffee_bean, coffee_bean, coffee_bean, coffee_bean, coffee_bean, coffee_bean, coffee_bean, coffee_bean, coffee_bean, </span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">12</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>greenhouse_plot <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  patchwork<span class="sc">::</span><span class="fu">plot_annotation</span>(<span class="at">title =</span> <span class="st">"Stardew Valley"</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">subtitle =</span> <span class="st">"crops that continue to produce"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="overviewR_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+<p><img src="greenhouse_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 
