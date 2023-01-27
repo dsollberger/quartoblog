@@ -1,0 +1,39 @@
+---
+title: "curly operator"
+author: "Derek Sollberger"
+date: "2023-01-15"
+format: html
+---
+
+The "curly operator" was added in `rlang` a few years ago, and I have yet to really use it much.  It came in handy during a data analyst consulting gig I had during the summer of 2021, and I should use it more.
+
+```{r}
+library("palmerpenguins")
+library("tidyverse")
+```
+
+
+For instance, can I make a helper function to reduce typing out the same few lines of code that I use often?
+
+```{r}
+# https://twitter.com/rappa753/status/1606681132082245633
+summary_stats <- function(data_frame, grouping_variable, numerical_variable){
+  data_frame |>
+    filter(!is.na({{grouping_variable}})) |>
+    group_by({{grouping_variable}}) |>
+    summarize(min = min({{numerical_variable}}, na.rm = TRUE),
+            xbar = mean({{numerical_variable}}, na.rm = TRUE),
+            med = median({{numerical_variable}}, na.rm = TRUE),
+            s = sd({{numerical_variable}}, na.rm = TRUE),
+            max = max({{numerical_variable}}, na.rm = TRUE))
+}
+```
+
+```{r}
+summary_stats(penguins, species, bill_length_mm)
+```
+
+```{r}
+summary_stats(penguins, island, body_mass_g)
+```
+

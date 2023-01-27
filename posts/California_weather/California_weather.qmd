@@ -1,7 +1,7 @@
 ---
 title: "California Weather"
 author: "Derek Sollberger"
-date: "2022-12-23"
+date: "2022-01-25"
 format: html
 ---
 
@@ -25,8 +25,76 @@ I want to create and visualize a simple data set for my Data Science courses (th
 Today I learned how to read `fixed-width files` in the [Tidyverse](https://readr.tidyverse.org/).  From there, I simply need to give the columns easy-to-use names.
 
 ```{r}
-SF_df <- readr::read_fwf("SF_2021.txt")
+LA_df <- readr::read_fwf("LA_2022.txt")
+colnames(LA_df) <- c("date", "time", "precipitation",
+                     "check1", "high", "low", "check2", "solar", "check3")
+LA_df$city <- "Los Angeles"
+```
+
+```{r}
+Merced_df <- readr::read_fwf("Merced_2022.txt")
+colnames(Merced_df) <- c("date", "time", "precipitation",
+                         "check1", "high", "low", "check2")
+Merced_df$city <- "Merced"
+```
+
+```{r}
+SF_df <- readr::read_fwf("SF_2022.txt")
 colnames(SF_df) <- c("date", "time", "precipitation",
                      "check1", "high", "low", "check2")
+SF_df$city <- "San Francisco"
+```
+
+# Merge
+
+Some of the weather stations had collected more information than others.  That is, if the weather station was newer, then it had more instruments.
+
+For today's quick exploration, I actually do want to perform a quick `rbind`, and that requires that each of the 3 data frames have the same number of columns (and should be the same types of information too).
+
+```{r}
+LA_df <- LA_df |>
+  select(city, date, time, high, low, precipitation)
+Merced_df <- Merced_df |>
+  select(city, date, time, high, low, precipitation)
+SF_df <- SF_df |>
+  select(city, date, time, high, low, precipitation)
+
+CA_weather_data <- rbind(LA_df, Merced_df, SF_df)
+```
+
+```{r}
+# write_csv(CA_weather_data, "CA_weather_data.csv")
+```
+
+
+# Data Viz
+
+Now, boxplots are easy to make.
+
+```{r}
+CA_weather_data |>
+  ggplot(aes(y = high)) +
+  geom_boxplot() +
+  labs(title = "California Weather, High Temperatures",
+       subtitle = "(all together)",
+       caption = "Source: UC\nAgriculture and Natural Resources\nStatewide Integrated Pest Management Program")
+```
+
+```{r}
+CA_weather_data |>
+  ggplot(aes(x = city, y = high, fill = city)) +
+  geom_boxplot() +
+  labs(title = "California Weather, High Temperatures",
+       subtitle = "(separate groups)",
+       caption = "Source: UC\nAgriculture and Natural Resources\nStatewide Integrated Pest Management Program")
+```
+
+# Sample
+
+For the creation of a classroom example, I want to randomly select 43 observations from the Merced data.
+
+```{r}
+Merced_sample <- sort(sample(Merced_df$high, 43, replace = FALSE))
+dput(Merced_sample)
 ```
 
