@@ -2,7 +2,9 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/Dartmouth_Atlas_data/Dartmouth_Atlas_data.html",
       "/posts/JupyterHub_showcase/HW1.html",
+      "/posts/xDBER/Sollberger_X_DBER_slides.html",
       "/posts/JupyterHub_showcase/JupyterHub_showcase.html",
       "/posts/curly_operator/curly_operator.html",
       "/posts/greenhouse/greenhouse.html",

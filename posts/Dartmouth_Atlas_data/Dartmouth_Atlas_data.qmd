@@ -1,0 +1,21 @@
+---
+title: "hospital_data"
+author: "Derek Sollberger"
+format: html
+---
+
+https://data.dartmouthatlas.org/
+
+```{r}
+library("sf")
+library("tidyverse")
+```
+
+```{r}
+map_data <- sf::read_sf("HRR_Bdry__AK_HI_unmodified/hrr-shapefile/Hrr98Bdry_AK_HI_unmodified.shp")
+
+map_data |>
+  ggplot() +
+  geom_sf()
+```
+

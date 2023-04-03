@@ -1,0 +1,866 @@
+---
+title: "Math Biology Video Project"
+author: "Derek Sollberger, Emily Weigel"
+date: "2023-04-03"
+# format:
+#   revealjs:
+#     scrollable: true
+format:
+  html:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+#| message: false
+#| warning: false
+knitr::opts_chunk$set(echo = FALSE)
+library("ggsignif")
+library("ggtext") #for element_markdown()
+library("gt") #grammar of tables
+library("patchwork")
+library("tidyverse")
+
+M <- 24 #number of videos
+N <- 85 #number of students
+
+# Georgia Tech colors
+# https://brand.gatech.edu/our-look/colors
+GT_color_tech_gold <- "#B3A369"
+GT_color_navy_blue <- "#003057"
+# third color is white, "#FFFFFF"
+```
+
+# Math Biology Video Project
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+Derek Sollberger
+
+* Data Analyst
+* UC Merced
+
+:::
+
+::: {.column width="50%"}
+
+Dr Emily Weigel
+
+* Course Instructor
+* Georgia Tech
+
+:::
+
+::::
+
+## Math Biology Video Project
+
+:::: {.columns}
+
+::: {.column width="70%"}
+
+
+* Ecology course (prereq: Intro Bio)
+
+* Fall 2018 semester
+* 91 students (85 students in study)
+
+* 24 videos
+
+    - about 10 minutes per video
+
+:::
+
+::: {.column width="30%"}
+![image credit: Shutterstock](intro_image.png)
+:::
+
+::::
+
+
+## Learner Profile
+
+:::: {.columns}
+
+::: {.column width="50%"}
+![math background](math_background.png)
+:::
+
+::: {.column width="50%"}
+
+* mostly sophomores
+* prior experience in flipped classrooms
+* mostly White and Asian students
+* 77 percent female
+
+:::
+
+::::
+
+## Literature
+
+::::: {.panel-tabset}
+
+### Values
+
+![Andrews 2017](andrews2017.png)
+
+### Values 2
+
+![Math Biology Values Instrument](MBVI_prompts.png)
+
+### Emotions
+
+![Wachsmuth 2017](wachsmuth2017.png)
+
+### Emotions 2
+
+![Math Emotions Instrument](emotions_prompts.png)
+
+
+:::::
+
+## Fall 2018 Semester
+
+```{r}
+#| message: false
+#| warning: false
+df_raw <- readr::read_csv("../hidden_data/combine_master_rowtodelete_IDkey_notedTA_v22_20200326 (02-03-23).csv") |>
+  janitor::clean_names()
+```
+
+```{r}
+df2_raw <- readxl::read_xlsx("../hidden_data/Datasheet_video per minute_collection.xlsx",
+                             sheet = "Categories") |>
+  janitor::clean_names()
+
+colnames(df2_raw) <- c("video_title", "date", "julian_date", 
+                       "video_number", "video_length", "repeated", "pct_variable",
+                       "pct_equation", "pct_graph", "pct_ecology",
+                       "pct_summary", "pct_logistics", "pct_off_topic")
+```
+
+```{r}
+df_raw <- df_raw |>
+  left_join(df2_raw, by = "video_number")
+```
+
+```{r}
+# tag on "pre" and "post", but remove question number too
+janitor_names <- colnames(df_raw)
+easier_names <- colnames(df_raw)
+for(i in 25:65){
+  this_var_raw <- easier_names[i]
+  n <- str_length(this_var_raw)
+  this_var_new <- paste0(str_sub(this_var_raw,1,n-2), "pre")
+  easier_names[i] <- this_var_new
+}
+
+easier_names[27] <- "section_start" #avoid duplicate later
+easier_names[49] <- "integrate_v1" #avoid duplicate later
+easier_names[51] <- "appeals_pre"
+easier_names[60] <- "career_goals_pre"
+easier_names[61] <- "math_background_pre"
+
+for(i in 66:99){
+  this_var_raw <- easier_names[i]
+  n <- str_length(this_var_raw)
+  this_var_new <- paste0(str_sub(this_var_raw,1,n-2), "post")
+  easier_names[i] <- this_var_new
+}
+
+easier_names[68] <- "section_after" #avoid duplicate later
+easier_names[91] <- "appeals_post"
+easier_names[116] <- "career_goals_post"
+easier_names[117] <- "math_background_post"
+easier_names[123] <- "current_major"
+easier_names[124] <- "intend_remain_major"
+easier_names[125] <- "intend_non_req_courses"
+easier_names[126] <- "GPA"
+easier_names[127] <- "age"
+easier_names[128] <- "gender"
+easier_names[130] <- "other_categories"
+
+# download variable names (after already using janitor package)
+# N <- length(easier_names)
+# temp_df <- data.frame(
+#   q_num = 1:N,
+#   easier_names,
+#   desc = rep(" ", N),
+#   janitor_names
+# )
+# write_csv(temp_df, "data_dict_raw.csv")
+```
+
+```{r}
+# main data frame
+df <- df_raw
+colnames(df) <- easier_names
+
+# convert letter grades to numerical labels
+df <- df |>
+  mutate(grade_num = case_when(
+    final_grade == "A" ~ 4,
+    final_grade == "B" ~ 3,
+    final_grade == "C" ~ 2,
+    final_grade == "D" ~ 1,
+    TRUE ~ 0
+  ))
+```
+
+```{r}
+# compute differences in pre and post answers
+df <- df |>
+  mutate(intrigue_diff = integrate_post - integrate_v1,
+         fun_diff = fun_post - fun_pre,
+         appeals_diff = appeals_post - appeals_pre,
+         interesting_diff = interesting_post - interesting_pre,
+         valuable_diff = valuable_post - valuable_pre,
+         important_diff = important_post - important_pre,
+         essential_diff = essential_post - essential_pre,
+         useful_diff = useful_post - useful_pre,
+         work_harder_diff = work_harder_post - work_harder_pre,
+         worry_diff = worry_post - worry_pre,
+         intimidate_diff = intimidate_post - intimidate_pre) |>
+  mutate(intrigue_cat = case_when(
+    intrigue_diff < -1 ~ "increase",
+    intrigue_diff > 1  ~ "decrease",
+    TRUE ~ "unchanged"
+  ),fun_cat = case_when(
+    fun_diff < -1 ~ "increase",
+    fun_diff > 1  ~ "decrease",
+    TRUE ~ "unchanged"
+  ),
+  appeals_cat = case_when(
+    appeals_diff < -1 ~ "increase",
+    appeals_diff > 1  ~ "decrease",
+    TRUE ~ "unchanged"
+  ),
+  interesting_cat = case_when(
+    interesting_diff < -1 ~ "increase",
+    interesting_diff > 1  ~ "decrease",
+    TRUE ~ "unchanged"
+  ),
+  valuable_cat = case_when(
+    valuable_diff < -1 ~ "increase",
+    valuable_diff > 1  ~ "decrease",
+    TRUE ~ "unchanged"
+  ),
+  important_cat = case_when(
+    important_diff < -1 ~ "increase",
+    important_diff > 1  ~ "decrease",
+    TRUE ~ "unchanged"
+  ),
+  essential_cat = case_when(
+    essential_diff < -1 ~ "increase",
+    essential_diff > 1  ~ "decrease",
+    TRUE ~ "unchanged"
+  ),
+  useful_cat = case_when(
+    useful_diff < -1 ~ "increase",
+    useful_diff > 1  ~ "decrease",
+    TRUE ~ "unchanged"
+  ),
+  work_harder_cat = case_when(
+    work_harder_diff < -1 ~ "increase",
+    work_harder_diff > 1  ~ "decrease",
+    TRUE ~ "unchanged"
+  ),
+  worry_cat = case_when(
+    worry_diff < -1 ~ "increase",
+    worry_diff > 1  ~ "decrease",
+    TRUE ~ "unchanged"
+  ),
+  intimidate_cat = case_when(
+    intimidate_diff < -1 ~ "increase",
+    intimidate_diff > 1  ~ "decrease",
+    TRUE ~ "unchanged"
+  ))
+
+# reorder categorical variable factors (so that "unchanged" is the default)
+df$intrigue_cat = factor(df$intrigue_cat,
+                     levels = c("unchanged", "increase", "decrease"))
+df$fun_cat = factor(df$fun_cat,
+                     levels = c("unchanged", "increase", "decrease"))
+df$appeals_cat = factor(df$appeals_cat,
+                     levels = c("unchanged", "increase", "decrease"))
+df$interesting_cat = factor(df$interesting_cat,
+                     levels = c("unchanged", "increase", "decrease"))
+df$valuable_cat = factor(df$valuable_cat,
+                     levels = c("unchanged", "increase", "decrease"))
+df$important_cat = factor(df$important_cat,
+                     levels = c("unchanged", "increase", "decrease"))
+df$essential_cat = factor(df$essential_cat,
+                     levels = c("unchanged", "increase", "decrease"))
+df$useful_cat = factor(df$useful_cat,
+                     levels = c("unchanged", "increase", "decrease"))
+df$work_harder_cat = factor(df$work_harder_cat,
+                     levels = c("unchanged", "increase", "decrease"))
+df$worry_cat = factor(df$worry_cat,
+                     levels = c("unchanged", "increase", "decrease"))
+df$intimidate_cat = factor(df$intimidate_cat,
+                     levels = c("unchanged", "increase", "decrease"))
+```
+
+```{r}
+df <- df |>
+  mutate(play_view_ratio = ifelse(plays > 0, visits/plays, NA),
+         multiple_plays = ifelse(play_view_ratio > 1, TRUE, FALSE))
+```
+
+```{r}
+df <- df |>
+  mutate(pct_math = pct_variable + pct_equation + pct_graph)
+```
+
+```{r}
+make_long_df <- function(data_frame, 
+                         var_pre, var_post, var_name){
+  df_pre <- data_frame |>
+    select({{var_pre}}) |>
+    mutate(stage = "pre")
+  
+  df_post <- data_frame |>
+    select({{var_post}}) |>
+    mutate(stage = "post")
+  
+  colnames(df_pre) <- c(var_name, "stage")
+  colnames(df_post) <- c(var_name, "stage")
+  df_combined <- rbind(df_pre, df_post)
+  
+  df_combined$stage <- factor(df_combined$stage,
+                     levels = c("pre", "post"))
+  
+  #return
+  df_combined
+}
+```
+
+```{r}
+make_one_boxplot <- function(data_frame,
+                             var_pre, var_post, var_name){
+  df_long <- make_long_df(data_frame, 
+                          {{var_pre}}, {{var_post}}, var_name)
+  new_names <- colnames(df_long)
+  
+  df_long |>
+    ggplot(aes(.data[[new_names[2]]], 
+               .data[[new_names[1]]])) +
+    geom_boxplot(aes(fill = stage)) +
+    ggsignif::geom_signif(
+      comparisons = list(c("pre", "post")),
+      map_signif_level = TRUE,
+      y_position = 6
+    ) +
+    labs(title = var_name) +
+    theme_minimal() +
+    theme(legend.position = "none")
+}
+```
+
+```{r}
+# it turned out that the pre and post surveys were only administered once
+# i.e. not per video
+make_ten_boxplots <- function(data_frame, video_num){
+  
+  df_subset <- data_frame |>
+    filter(video_number == video_num)
+  
+  # print(paste("number of observations", nrow(df_subset)))
+  
+  p1 <- make_one_boxplot(df_subset, appeals_pre, appeals_post, "appeals")
+  p2 <- make_one_boxplot(df_subset, essential_pre, essential_post, "essential")
+  p3 <- make_one_boxplot(df_subset, fun_pre, fun_post, "fun")
+  p4 <- make_one_boxplot(df_subset, important_pre, important_post, "important")
+  p5 <- make_one_boxplot(df_subset, interesting_pre, interesting_post, "interesting")
+  p6 <- make_one_boxplot(df_subset, intimidate_pre, intimidate_post, "intimidate")
+  p7 <- make_one_boxplot(df_subset, useful_pre, useful_post, "useful")
+  p8 <- make_one_boxplot(df_subset, valuable_pre, valuable_post, "valuable")
+  p9 <- make_one_boxplot(df_subset, work_harder_pre, work_harder_post, "work_harder")
+  p10 <- make_one_boxplot(df_subset, worry_pre, worry_post, "worry")
+  
+  #patchwork
+  (p1 + p2 + p3) / (p4 + p5 + p6) / (p7 + p8) / (p9 + p10) +
+    plot_annotation(title = paste("Video Number", video_num))
+}
+```
+
+```{r}
+#| message: false
+#| warning: false
+make_ten_boxplots(df, 1)
+```
+
+Our first glance at the survey data showed no significant results between the pre and post surveys.
+
+## Discretize
+
+We grouped students into "unchanged", "increase", or "decrease" groups based on their pre- and post-semester survey results for the MBVI queries---where "unchanged" was a difference of -1, 0, or 1 on the 7-point Likert scales
+
+```{r}
+df_cats <- df |>
+  select(id, ends_with("cat")) |>
+  distinct() |>
+  select(-id) |>
+  pivot_longer(cols = everything(),
+               names_to = "MBVI_value",
+               values_to = "our_cat")
+```
+
+```{r}
+#| eval: false
+#| message: false
+#| warning: false
+data.frame(table(df_cats)) |> gt()
+```
+
+
+```{r}
+# df_duration <- readxl::read_xlsx("duration.xlsx", sheet = "for_duration")
+# 
+# df_duration$Avg_View_Time <- as.Date(df_duration$Avg_View_Time,
+#                                         format = "%H:%M:%OS")
+# df_duration$Avg_View_Time_When_Played <- as.Date(df_duration$Avg_View_Time_When_Played,
+#                                                     format = "%H:%M:%OS")
+```
+
+```{r}
+# df_duration |>
+#   gt() |>
+#   cols_align(
+#     align = "center",
+#     columns = everything()
+#   ) |>
+#   fmt_time(
+#   columns = everything(),
+#   rows = everything(),
+#   time_style = "iso",
+#   pattern = "{x}",
+#   locale = NULL
+# )
+```
+
+## Math Content
+
+```{r}
+df_math_content <- df |>
+  select(video_number, starts_with("pct")) |>
+  select(-pct_math) |>
+  distinct() |>
+  mutate_if(is.character, as.numeric) |>
+  pivot_longer(cols = -video_number,
+               names_to = "math_content",
+               values_to = "percent")
+```
+
+::::: {.panel-tabset}
+
+### One Video
+
+```{r}
+df_math_content |>
+  filter(video_number == 12) |>
+  ggplot(aes(x = math_content, y = percent, 
+             fill = math_content)) + 
+  geom_bar(color = "black", stat = "identity") +
+  labs(title = "<b><span style='color:#003057'>Math Content of Videos</span></b>",
+       subtitle = "Math content: percentage of video about equations, graphs, or variables",
+       caption = "Video 12",
+       x = "code",
+       y = "percent") +
+  scale_fill_manual(values = c("red", "yellow", "orange", "green",
+                               "gray50", "blue", "purple")) +
+  theme_minimal() +
+  theme(legend.position = "none",
+        plot.title = element_markdown(face = "bold",
+                                      hjust = 0.5),
+        plot.subtitle = element_markdown(hjust = 0.5),
+        plot.caption = element_markdown(hjust = 1.0))
+```
+
+### All Videos
+
+```{r}
+df_math_content |>
+  ggplot(aes(x = video_number, y = percent, fill = math_content)) + 
+  geom_bar(position = "stack", stat = "identity") +
+  guides(fill=guide_legend(title="math content")) + 
+  labs(title = "<b><span style='color:#003057'>Math Content of Videos</span></b>",
+       subtitle = "Math content: percentage of video about equations, graphs, or variables",
+       x = "video number",
+       y = "percent") +
+  scale_fill_manual(values = c("red", "yellow", "orange", "green",
+                               "gray50", "blue", "purple")) +
+  theme_minimal() +
+  theme(plot.title = element_markdown(face = "bold",
+                                      hjust = 0.5),
+        plot.subtitle = element_markdown(hjust = 0.5),
+        plot.caption = element_markdown(hjust = 1.0))
+```
+
+:::::
+
+
+## Math Emotion
+
+```{r}
+#| message: false
+#| warning: false
+df_math_feeling <- df |>
+  select(seq(101, 115, 2)) |>
+  mutate_if(is.character, as.numeric) |>
+  pivot_longer(cols = everything(),
+               names_to = "math_feeling",
+               values_to = "Likert_score") |>
+  filter(!is.na(Likert_score))
+
+df_math_feeling_labels <- df_math_feeling |>
+  mutate(lab_left = case_when(
+    math_feeling == "chaotic_organized" ~ "chaotic",
+    math_feeling == "comfortable_uncomfortable" ~ "comfortable",
+    math_feeling == "complicated_simple" ~ "complicated",
+    math_feeling == "confusing_clear" ~ "confusing",
+    math_feeling == "easy_hard" ~ "easy",
+    math_feeling == "pleasant_unpleasant" ~ "pleasant",
+    math_feeling == "satisfying_frustrating" ~ "satisfying",
+    TRUE ~ "challenging"
+  )) |>
+  mutate(lab_right = case_when(
+    math_feeling == "chaotic_organized" ~ "organized",
+    math_feeling == "comfortable_uncomfortable" ~ "uncomfortable",
+    math_feeling == "complicated_simple" ~ "simple",
+    math_feeling == "confusing_clear" ~ "clear",
+    math_feeling == "easy_hard" ~ "hard",
+    math_feeling == "pleasant_unpleasant" ~ "unpleasant",
+    math_feeling == "satisfying_frustrating" ~ "frustrating",
+    TRUE ~ "not challenging"
+  )) |>
+  filter(Likert_score == 1 | Likert_score == 7) |>
+  distinct()
+```
+
+```{r}
+#| message: false
+#| warning: false
+df_math_feeling |>
+  ggplot(aes(x = Likert_score, y = math_feeling)) + 
+  geom_boxplot(color = GT_color_navy_blue, fill = GT_color_tech_gold) +
+  geom_label(aes(x = 1, y = math_feeling, label = lab_left), 
+             data = df_math_feeling_labels) +
+  geom_label(aes(x = 7, y = math_feeling, label = lab_right), 
+             data = df_math_feeling_labels)  +
+  labs(title = "Students Emotions about Math",
+       x = "Likert scale (4 = neutral)",
+       y = "") +
+  xlim(0,8) +
+  scale_x_discrete(name = "Likert scale (4 = neutral)",
+                   breaks = 1:7,
+                   labels = c("1", "2", "3", "4", "5", "6", "7"),
+                   limits = c("1", "2", "3", "4", "5", "6", "7")) +
+  theme_minimal() +
+  theme(axis.text.y = element_blank(),
+        legend.position = "none",
+        plot.title = element_markdown(face = "bold",
+                                      hjust = 0.5),
+        plot.subtitle = element_markdown(hjust = 0.5),
+        plot.caption = element_markdown(hjust = 1.0))
+```
+
+## MBVI
+
+Math Biology Values Instrument
+
+```{r}
+#| message: false
+#| warning: false
+df_MBVI <- df |>
+  select(seq(49,59)) |>
+  mutate_if(is.character, as.numeric) |>
+  pivot_longer(cols = everything(),
+               names_to = "MBVI",
+               values_to = "Likert_score") |>
+  filter(!is.na(Likert_score))
+
+df_MBVI$MBVI <- stringr::str_remove_all(df_MBVI$MBVI, "_pre")
+df_MBVI$MBVI <- stringr::str_remove_all(df_MBVI$MBVI, "_v1")
+```
+
+```{r}
+#| message: false
+#| warning: false
+df_MBVI |>
+  ggplot(aes(x = Likert_score, y = reorder(MBVI, desc(MBVI)))) + 
+  geom_boxplot(color = GT_color_navy_blue, fill = GT_color_tech_gold) +
+  labs(title = "Math Biology Values Instrument",
+       x = "",
+       y = "") +
+  scale_x_discrete(name = "",
+                   breaks = c(1,4,7),
+                   labels = c("strongly agree", "neutral", "strongly disagree"),
+                   limits = c(1,4,7)) +
+  theme_minimal() +
+  theme(legend.position = "none",
+        plot.title = element_markdown(face = "bold",
+                                      hjust = 0.5),
+        plot.subtitle = element_markdown(hjust = 0.5),
+        plot.caption = element_markdown(hjust = 1.0))
+```
+
+
+## Video Stats
+
+::::: {.panel-tabset}
+
+### Plays
+
+```{r}
+# https://statisticsglobe.com/r-error-continuous-value-supplied-to-discrete-scale
+df |>
+  select(video_number, plays) |>
+  mutate(parity = video_number %% 2) |>
+  distinct() |>
+  ggplot() +
+  geom_text(aes(x = video_number, y = plays, 
+                color = factor(parity), 
+                fontface = "bold",
+                label = plays)) +
+  labs(title = "Number of Times the Video was Played",
+       subtitle = paste0("Number of videos: ", M, ", Number of students: ", N),
+       x = "video number",
+       y = "plays") +
+  scale_color_manual(values = c("#B3A369", "#003057")) +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+### Visits
+
+```{r}
+df |>
+  select(video_number, visits) |>
+  mutate(parity = video_number %% 2) |>
+  distinct() |>
+  ggplot() +
+  geom_text(aes(x = video_number, y = visits, 
+                color = factor(parity), 
+                fontface = "bold",
+                label = visits)) +
+  labs(title = "Number of Times the Video was Visited",
+       subtitle = paste0("Number of videos: ", M, ", Number of students: ", N),
+       x = "video number",
+       y = "visits") +
+  scale_color_manual(values = c("#B3A369", "#003057")) +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+### Persistence
+
+Do some students stop watching videos across term?
+
+```{r}
+df_future <- df |>
+  select(id, video_number, plays) |>
+  group_by(id) |>
+  mutate(future_views = cumsum(plays),
+         future_max = max(future_views),
+         future_remaining = future_max - future_views,
+         stopped_early = ifelse(sum(future_remaining == 0) > 1,
+                                TRUE, FALSE)) |>
+  ungroup()
+
+# to count number of students
+# df_stopped_early <- df_future |>
+#   select(id, stopped_early) |>
+#   distinct()
+```
+
+```{r}
+title_string <- "Do some students <b><span style='color:#FF0000'>stop watching</span></b> videos before the end of the semester?"
+
+df_future |>
+  ggplot() +
+  geom_line(aes(x = video_number, y = future_remaining,
+                color = stopped_early, group = id)) +
+  labs(title = title_string,
+       subtitle = paste0("Number of videos: ", M, ", Number of students: ", N),
+       caption = "15/85 students stopped viewing videos early in the study",
+       x = "video number",
+       y = "remaining video views") +
+  scale_color_manual(values = c("gray40", "red")) +
+  theme_minimal() +
+  theme(legend.position = "none",
+        plot.title = element_markdown()) 
+```
+
+:::::
+
+
+# Models
+
+## Multiple Views
+
+::::: {.panel-tabset}
+
+### Query
+
+What influences students to view students multiple times?
+
+### R
+
+```{r}
+# categorical response variable --> binomial kernel
+glm_model <- glm(multiple_plays ~ 
+                   intrigue_cat + fun_cat + appeals_cat + interesting_cat +
+                   valuable_cat + important_cat + essential_cat + useful_cat + 
+                   work_harder_cat + worry_cat + intimidate_cat +
+                   
+                   easy_hard + complicated_simple + confusing_clear +
+                   comfortable_uncomfortable + satisfying_frustrating +
+                   challenging_not_challenging + pleasant_unpleasant +
+                   chaotic_organized +
+                   
+                   GPA + pct_math + video_length + video_number,
+                 family = "binomial",
+                 data = df)
+
+summary(glm_model)
+```
+
+### Pos Coeff
+
+Viewing multiple times is encouraged by
+
+* It is **fun** (decrease) to use math to understand biology
+* Using math to understand biology is **interesting** (increase)
+* I **worry** (decrease) about getting worse grades in a biology course that incorporates math than one that does not
+* pleasant versus **unpleasant**
+* chaotic versus **organized**
+
+
+### Neg Coeff
+
+Viewing multiple times is discouraged by
+
+* Using math to understand biology **appeals** (decrease) to me
+* Using math to understand biology is **interesting** (decrease)
+* It is **important** (increase) for me to be able to do math for my career in the life sciences
+* Taking a biology course that incorporates math **intimidates** (*both*) me
+* **complicated** versus simple
+* **comfortable** versus uncomfortable
+* **satisfying** versus frustrating
+* time in semester (video number)
+
+:::::
+
+
+## Viewing Time
+
+::::: {.panel-tabset}
+
+### Query
+
+What influences students to spend more time watching the videos?
+
+### R
+
+```{r}
+# numerical response variable --> gaussian kernel
+glm_model2 <- glm(as.numeric(avg_view_time_when_played) ~ 
+                   intrigue_cat + fun_cat + appeals_cat + interesting_cat +
+                   valuable_cat + important_cat + essential_cat + useful_cat + 
+                   work_harder_cat + worry_cat + intimidate_cat +
+                   
+                   easy_hard + complicated_simple + confusing_clear +
+                   comfortable_uncomfortable + satisfying_frustrating +
+                   challenging_not_challenging + pleasant_unpleasant +
+                   chaotic_organized +
+                   
+                   GPA + pct_math + video_length + video_number,
+                 family = "gaussian",
+                 data = df)
+
+summary(glm_model2)
+```
+
+### Pos Coeff
+
+Viewing time is encouraged by
+
+
+* Using math to understand biology **intrigues** (decrease) me
+* comfortable versus **uncomfortable**
+* time in semester (video number)
+
+
+### Neg Coeff
+
+Viewing time is discouraged by
+
+* Math is **valuable** (*both*) for me for my life science career
+* It is **important** (decrease) for me to be able to do math for my career in the life sciences
+
+:::::
+
+
+
+## Take Home Messages
+
+Students who viewed videos multiple times and/or for longer duration were
+
+* more pessimistic about math emotions
+* worried less about their course grade
+* not affected by the proportion of math content
+
+## Thank You
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+Derek Sollberger
+
+* Data Analyst
+* UC Merced
+* dsollberger@ucmerced.edu
+
+:::
+
+::: {.column width="50%"}
+
+Dr Emily Weigel
+
+* Course Instructor
+* Georgia Tech
+* emily.weigel@biosci.gatech.edu
+
+:::
+
+::::
+
+
+
+
+
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+	
+:::
+
+::: {.column width="50%"}
+
+:::
+
+::::
+
+
+
+::::: {.panel-tabset}
+
+
+
+:::::

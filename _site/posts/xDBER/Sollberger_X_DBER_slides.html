@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Derek Sollberger, Emily Weigel">
+<meta name="dcterms.date" content="2023-04-03">
+
+<title>The Median Data Scientist - Math Biology Video Project</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">The Median Data Scientist</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html">
+ <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com"><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Math Biology Video Project</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Derek Sollberger, Emily Weigel </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">April 3, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#math-biology-video-project" id="toc-math-biology-video-project" class="nav-link active" data-scroll-target="#math-biology-video-project">Math Biology Video Project</a>
+  <ul class="collapse">
+  <li><a href="#math-biology-video-project-1" id="toc-math-biology-video-project-1" class="nav-link" data-scroll-target="#math-biology-video-project-1">Math Biology Video Project</a></li>
+  <li><a href="#learner-profile" id="toc-learner-profile" class="nav-link" data-scroll-target="#learner-profile">Learner Profile</a></li>
+  <li><a href="#literature" id="toc-literature" class="nav-link" data-scroll-target="#literature">Literature</a></li>
+  <li><a href="#fall-2018-semester" id="toc-fall-2018-semester" class="nav-link" data-scroll-target="#fall-2018-semester">Fall 2018 Semester</a></li>
+  <li><a href="#discretize" id="toc-discretize" class="nav-link" data-scroll-target="#discretize">Discretize</a></li>
+  <li><a href="#math-content" id="toc-math-content" class="nav-link" data-scroll-target="#math-content">Math Content</a></li>
+  <li><a href="#math-emotion" id="toc-math-emotion" class="nav-link" data-scroll-target="#math-emotion">Math Emotion</a></li>
+  <li><a href="#mbvi" id="toc-mbvi" class="nav-link" data-scroll-target="#mbvi">MBVI</a></li>
+  <li><a href="#video-stats" id="toc-video-stats" class="nav-link" data-scroll-target="#video-stats">Video Stats</a></li>
+  </ul></li>
+  <li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models">Models</a>
+  <ul class="collapse">
+  <li><a href="#multiple-views" id="toc-multiple-views" class="nav-link" data-scroll-target="#multiple-views">Multiple Views</a></li>
+  <li><a href="#viewing-time" id="toc-viewing-time" class="nav-link" data-scroll-target="#viewing-time">Viewing Time</a></li>
+  <li><a href="#take-home-messages" id="toc-take-home-messages" class="nav-link" data-scroll-target="#take-home-messages">Take Home Messages</a></li>
+  <li><a href="#thank-you" id="toc-thank-you" class="nav-link" data-scroll-target="#thank-you">Thank You</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="math-biology-video-project" class="level1">
+<h1>Math Biology Video Project</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Derek Sollberger</p>
+<ul>
+<li>Data Analyst</li>
+<li>UC Merced</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p>Dr Emily Weigel</p>
+<ul>
+<li>Course Instructor</li>
+<li>Georgia Tech</li>
+</ul>
+</div>
+</div>
+<section id="math-biology-video-project-1" class="level2">
+<h2 class="anchored" data-anchor-id="math-biology-video-project-1">Math Biology Video Project</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<ul>
+<li><p>Ecology course (prereq: Intro Bio)</p></li>
+<li><p>Fall 2018 semester</p></li>
+<li><p>91 students (85 students in study)</p></li>
+<li><p>24 videos</p>
+<ul>
+<li>about 10 minutes per video</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="intro_image.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">image credit: Shutterstock</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="learner-profile" class="level2">
+<h2 class="anchored" data-anchor-id="learner-profile">Learner Profile</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="math_background.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">math background</figcaption><p></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>mostly sophomores</li>
+<li>prior experience in flipped classrooms</li>
+<li>mostly White and Asian students</li>
+<li>77 percent female</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="literature" class="level2">
+<h2 class="anchored" data-anchor-id="literature">Literature</h2>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Values</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Values 2</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Emotions</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Emotions 2</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="andrews2017.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Andrews 2017</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="MBVI_prompts.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Math Biology Values Instrument</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="wachsmuth2017.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Wachsmuth 2017</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="emotions_prompts.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Math Emotions Instrument</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="fall-2018-semester" class="level2">
+<h2 class="anchored" data-anchor-id="fall-2018-semester">Fall 2018 Semester</h2>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Sollberger_X_DBER_slides_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Our first glance at the survey data showed no significant results between the pre and post surveys.</p>
+</section>
+<section id="discretize" class="level2">
+<h2 class="anchored" data-anchor-id="discretize">Discretize</h2>
+<p>We grouped students into “unchanged”, “increase”, or “decrease” groups based on their pre- and post-semester survey results for the MBVI queries—where “unchanged” was a difference of -1, 0, or 1 on the 7-point Likert scales</p>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+</section>
+<section id="math-content" class="level2">
+<h2 class="anchored" data-anchor-id="math-content">Math Content</h2>
+<div class="cell">
+
+</div>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">One Video</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">All Videos</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Sollberger_X_DBER_slides_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Sollberger_X_DBER_slides_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="math-emotion" class="level2">
+<h2 class="anchored" data-anchor-id="math-emotion">Math Emotion</h2>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Sollberger_X_DBER_slides_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="mbvi" class="level2">
+<h2 class="anchored" data-anchor-id="mbvi">MBVI</h2>
+<p>Math Biology Values Instrument</p>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Sollberger_X_DBER_slides_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="video-stats" class="level2">
+<h2 class="anchored" data-anchor-id="video-stats">Video Stats</h2>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">Plays</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">Visits</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-3" role="tab" aria-controls="tabset-3-3" aria-selected="false">Persistence</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Sollberger_X_DBER_slides_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Sollberger_X_DBER_slides_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<div id="tabset-3-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-3-tab">
+<p>Do some students stop watching videos across term?</p>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Sollberger_X_DBER_slides_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="models" class="level1">
+<h1>Models</h1>
+<section id="multiple-views" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-views">Multiple Views</h2>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">Query</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-3" role="tab" aria-controls="tabset-4-3" aria-selected="false">Pos Coeff</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-4" role="tab" aria-controls="tabset-4-4" aria-selected="false">Neg Coeff</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<p>What influences students to view students multiple times?</p>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = multiple_plays ~ intrigue_cat + fun_cat + appeals_cat + 
+    interesting_cat + valuable_cat + important_cat + essential_cat + 
+    useful_cat + work_harder_cat + worry_cat + intimidate_cat + 
+    easy_hard + complicated_simple + confusing_clear + comfortable_uncomfortable + 
+    satisfying_frustrating + challenging_not_challenging + pleasant_unpleasant + 
+    chaotic_organized + GPA + pct_math + video_length + video_number, 
+    family = "binomial", data = df)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.3229  -0.9405  -0.4840   1.0090   2.2857  
+
+Coefficients: (1 not defined because of singularities)
+                              Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)                 -2.764e+00  1.859e+00  -1.487 0.137076    
+intrigue_catincrease         1.150e-01  1.302e+00   0.088 0.929576    
+intrigue_catdecrease         1.370e+00  1.173e+00   1.168 0.242842    
+fun_catincrease             -8.922e-01  5.231e-01  -1.705 0.088116 .  
+fun_catdecrease              2.311e+00  7.322e-01   3.156 0.001598 ** 
+appeals_catincrease          2.869e-01  6.281e-01   0.457 0.647773    
+appeals_catdecrease         -1.698e+00  6.447e-01  -2.634 0.008434 ** 
+interesting_catincrease      1.707e+00  6.576e-01   2.595 0.009462 ** 
+interesting_catdecrease     -2.212e+00  4.147e-01  -5.334 9.62e-08 ***
+valuable_catincrease        -1.199e+00  7.577e-01  -1.582 0.113597    
+valuable_catdecrease        -1.618e+01  5.354e+02  -0.030 0.975895    
+important_catincrease       -8.767e-01  3.964e-01  -2.212 0.026967 *  
+important_catdecrease       -1.594e+01  5.354e+02  -0.030 0.976256    
+essential_catincrease       -3.513e-01  4.322e-01  -0.813 0.416374    
+essential_catdecrease        1.932e+01  5.354e+02   0.036 0.971210    
+useful_catincrease           4.869e-01  4.568e-01   1.066 0.286416    
+useful_catdecrease                  NA         NA      NA       NA    
+work_harder_catincrease      2.774e-01  2.685e-01   1.033 0.301604    
+work_harder_catdecrease     -2.725e-01  4.216e-01  -0.647 0.517945    
+worry_catincrease            5.338e-01  3.500e-01   1.525 0.127149    
+worry_catdecrease            9.584e-01  3.564e-01   2.689 0.007159 ** 
+intimidate_catincrease      -1.419e+00  4.625e-01  -3.068 0.002155 ** 
+intimidate_catdecrease      -1.469e+00  3.275e-01  -4.485 7.28e-06 ***
+easy_hard3                   1.374e+00  7.488e-01   1.834 0.066603 .  
+easy_hard4                   2.940e-01  7.214e-01   0.408 0.683598    
+easy_hard5                   1.593e+00  7.100e-01   2.243 0.024890 *  
+easy_hard6                  -3.706e-01  8.303e-01  -0.446 0.655323    
+easy_hard7                  -1.694e-01  1.037e+00  -0.163 0.870239    
+complicated_simple          -6.506e-01  1.773e-01  -3.671 0.000242 ***
+confusing_clear              2.877e-01  1.620e-01   1.776 0.075785 .  
+comfortable_uncomfortable   -3.927e-01  1.298e-01  -3.026 0.002476 ** 
+satisfying_frustrating       2.317e-01  1.159e-01   1.999 0.045608 *  
+challenging_not_challenging -1.322e-01  1.641e-01  -0.805 0.420689    
+pleasant_unpleasant          7.729e-01  1.475e-01   5.239 1.62e-07 ***
+chaotic_organized            3.058e-01  9.865e-02   3.100 0.001935 ** 
+GPA                          2.159e-01  4.056e-01   0.532 0.594511    
+pct_math                    -3.338e-03  3.305e-03  -1.010 0.312373    
+video_length                 1.076e-04  1.861e-04   0.578 0.563013    
+video_number                -4.326e-02  1.217e-02  -3.555 0.000378 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 1198.6  on 867  degrees of freedom
+Residual deviance: 1000.0  on 830  degrees of freedom
+  (1089 observations deleted due to missingness)
+AIC: 1076
+
+Number of Fisher Scoring iterations: 12</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-4-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-3-tab">
+<p>Viewing multiple times is encouraged by</p>
+<ul>
+<li>It is <strong>fun</strong> (decrease) to use math to understand biology</li>
+<li>Using math to understand biology is <strong>interesting</strong> (increase)</li>
+<li>I <strong>worry</strong> (decrease) about getting worse grades in a biology course that incorporates math than one that does not</li>
+<li>pleasant versus <strong>unpleasant</strong></li>
+<li>chaotic versus <strong>organized</strong></li>
+</ul>
+</div>
+<div id="tabset-4-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-4-tab">
+<p>Viewing multiple times is discouraged by</p>
+<ul>
+<li>Using math to understand biology <strong>appeals</strong> (decrease) to me</li>
+<li>Using math to understand biology is <strong>interesting</strong> (decrease)</li>
+<li>It is <strong>important</strong> (increase) for me to be able to do math for my career in the life sciences</li>
+<li>Taking a biology course that incorporates math <strong>intimidates</strong> (<em>both</em>) me</li>
+<li><strong>complicated</strong> versus simple</li>
+<li><strong>comfortable</strong> versus uncomfortable</li>
+<li><strong>satisfying</strong> versus frustrating</li>
+<li>time in semester (video number)</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="viewing-time" class="level2">
+<h2 class="anchored" data-anchor-id="viewing-time">Viewing Time</h2>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true">Query</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-3" role="tab" aria-controls="tabset-5-3" aria-selected="false">Pos Coeff</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-4" role="tab" aria-controls="tabset-5-4" aria-selected="false">Neg Coeff</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<p>What influences students to spend more time watching the videos?</p>
+</div>
+<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = as.numeric(avg_view_time_when_played) ~ intrigue_cat + 
+    fun_cat + appeals_cat + interesting_cat + valuable_cat + 
+    important_cat + essential_cat + useful_cat + work_harder_cat + 
+    worry_cat + intimidate_cat + easy_hard + complicated_simple + 
+    confusing_clear + comfortable_uncomfortable + satisfying_frustrating + 
+    challenging_not_challenging + pleasant_unpleasant + chaotic_organized + 
+    GPA + pct_math + video_length + video_number, family = "gaussian", 
+    data = df)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-853.86  -128.02   -24.41   108.91  1139.41  
+
+Coefficients: (1 not defined because of singularities)
+                             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                  180.5561   176.8864   1.021 0.307672    
+intrigue_catincrease         153.1457   116.2658   1.317 0.188134    
+intrigue_catdecrease         328.5588   104.4253   3.146 0.001712 ** 
+fun_catincrease                2.3447    48.3834   0.048 0.961360    
+fun_catdecrease              -40.4265    74.1309  -0.545 0.585667    
+appeals_catincrease          -22.9577    56.2257  -0.408 0.683149    
+appeals_catdecrease           28.4891    66.2874   0.430 0.667466    
+interesting_catincrease       85.8513    60.3164   1.423 0.155011    
+interesting_catdecrease       -6.5632    41.9026  -0.157 0.875575    
+valuable_catincrease        -153.6194    72.3949  -2.122 0.034136 *  
+valuable_catdecrease        -872.1688   246.4276  -3.539 0.000424 ***
+important_catincrease        -16.3917    39.5645  -0.414 0.678758    
+important_catdecrease       -842.0904   255.4479  -3.297 0.001020 ** 
+essential_catincrease         78.0939    41.2858   1.892 0.058900 .  
+essential_catdecrease        826.7246   268.3537   3.081 0.002133 ** 
+useful_catincrease           -28.3670    41.7338  -0.680 0.496876    
+useful_catdecrease                 NA         NA      NA       NA    
+work_harder_catincrease      -14.9730    27.3546  -0.547 0.584274    
+work_harder_catdecrease       36.4671    38.6517   0.943 0.345711    
+worry_catincrease             13.4219    37.2188   0.361 0.718474    
+worry_catdecrease             -2.8790    35.4262  -0.081 0.935249    
+intimidate_catincrease        -2.7321    45.7014  -0.060 0.952344    
+intimidate_catdecrease        33.5371    32.8474   1.021 0.307552    
+easy_hard3                   -34.3803    74.1131  -0.464 0.642848    
+easy_hard4                   -25.4733    71.6178  -0.356 0.722167    
+easy_hard5                   -26.0246    69.5317  -0.374 0.708289    
+easy_hard6                  -100.2542    82.3422  -1.218 0.223748    
+easy_hard7                   221.9490    96.7221   2.295 0.021999 *  
+complicated_simple           -21.7275    17.1182  -1.269 0.204705    
+confusing_clear               31.3572    16.0778   1.950 0.051472 .  
+comfortable_uncomfortable     28.3085    13.1634   2.151 0.031801 *  
+satisfying_frustrating       -20.8471    12.0115  -1.736 0.083008 .  
+challenging_not_challenging  -17.2412    16.4447  -1.048 0.294744    
+pleasant_unpleasant           -0.3234    14.5043  -0.022 0.982217    
+chaotic_organized            -19.1039     9.7751  -1.954 0.050996 .  
+GPA                           61.4313    39.0669   1.572 0.116225    
+pct_math                       0.1931     0.3323   0.581 0.561199    
+video_length                   0.2106     0.0188  11.204  &lt; 2e-16 ***
+video_number                   3.1522     1.2089   2.607 0.009288 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 51216.36)
+
+    Null deviance: 59330647  on 867  degrees of freedom
+Residual deviance: 42509579  on 830  degrees of freedom
+  (1089 observations deleted due to missingness)
+AIC: 11915
+
+Number of Fisher Scoring iterations: 2</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-5-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-3-tab">
+<p>Viewing time is encouraged by</p>
+<ul>
+<li>Using math to understand biology <strong>intrigues</strong> (decrease) me</li>
+<li>comfortable versus <strong>uncomfortable</strong></li>
+<li>time in semester (video number)</li>
+</ul>
+</div>
+<div id="tabset-5-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-4-tab">
+<p>Viewing time is discouraged by</p>
+<ul>
+<li>Math is <strong>valuable</strong> (<em>both</em>) for me for my life science career</li>
+<li>It is <strong>important</strong> (decrease) for me to be able to do math for my career in the life sciences</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="take-home-messages" class="level2">
+<h2 class="anchored" data-anchor-id="take-home-messages">Take Home Messages</h2>
+<p>Students who viewed videos multiple times and/or for longer duration were</p>
+<ul>
+<li>more pessimistic about math emotions</li>
+<li>worried less about their course grade</li>
+<li>not affected by the proportion of math content</li>
+</ul>
+</section>
+<section id="thank-you" class="level2">
+<h2 class="anchored" data-anchor-id="thank-you">Thank You</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Derek Sollberger</p>
+<ul>
+<li>Data Analyst</li>
+<li>UC Merced</li>
+<li>dsollberger@ucmerced.edu</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p>Dr Emily Weigel</p>
+<ul>
+<li>Course Instructor</li>
+<li>Georgia Tech</li>
+<li>emily.weigel@biosci.gatech.edu</li>
+</ul>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+
+</div><div class="column" style="width:50%;">
+
+</div>
+</div>
+<div class="panel-tabset">
+
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
