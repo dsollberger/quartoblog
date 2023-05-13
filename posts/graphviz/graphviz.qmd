@@ -1,0 +1,40 @@
+---
+title: "graphviz"
+author: "Derek Sollberger"
+date: "2023-05-08"
+format: html
+---
+
+For years, I have been searching for the ability to make color-coded flowcharts, and I have found "graphviz online!".  We can use apps such as [this one](https://dreampuf.github.io/GraphvizOnline/).
+
+The code is very intuitive and easy to use.  Furthermore, there are many attribute options for nodes and edges.
+
+```
+digraph G {
+
+"Egg" -> "Fried\nEgg"
+"Potato" -> "Hashbrowns"
+"Oil" -> "Hashbrowns"
+"Egg" -> "Pancakes"
+"Wheat\nFlour" -> "Pancakes"
+
+"Fried\nEgg" -> "Complete\nBreakfast"
+"Hashbrowns" -> "Complete\nBreakfast"
+"Milk" -> "Complete\nBreakfast"
+"Pancakes" -> "Complete\nBreakfast"
+
+
+"Egg" [shape = circle, style = filled, fillcolor = "#59C9F1"]
+"Potato" [shape = circle, style = filled, fillcolor = "#59C9F1"]
+"Oil" [shape = square, style = filled, fillcolor = "#DDA059"]
+"Wheat\nFlour" [shape = circle, style = filled, fillcolor = "#59C9F1"]
+
+"Fried\nEgg" [shape = square, style = filled, fillcolor = "#DDA059"]
+"Milk" [shape = circle, style = filled, fillcolor = "#59C9F1"]
+"Hashbrowns" [shape = square, style = filled, fillcolor = "#DDA059"]
+"Pancakes" [shape = square, style = filled, fillcolor = "#DDA059"]
+"Complete\nBreakfast" [shape = hexagon, style = filled, fillcolor = " #FFD921"]
+}
+```
+
+![Stardew Valley complete breakfast](complete_breakfast.png)
