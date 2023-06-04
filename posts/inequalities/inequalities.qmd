@@ -1,0 +1,286 @@
+---
+title: "Inequalities"
+author: "Derek Sollberger"
+date: "2023-06-01"
+format: html
+---
+
+There are probably several ways to graph mathematical inequalities in `R`.  Here, I will simply try a brute force method of literally plotting many dots.
+
+```{r}
+#| message: false
+#| warning: false
+library("dplyr")
+library("ggplot2")
+```
+
+Here, I will simply try a brute force method of literally plotting many dots.
+
+```{r}
+N <- 40 #resolution
+x <- seq(-10, 10, length.out = N)
+y <- seq(-10, 10, length.out = N)
+
+df <- expand.grid(x,y)
+colnames(df) <- c("xval", "yval")
+```
+
+Today's tasks come from chapter 9 of the popular ISLR textbook
+
+# Conceptual Task 1a
+
+```{r}
+df1 <- df |>
+  # math function
+  mutate(shade = ifelse(yval > 3*xval + 1, "blue", "red"))
+```
+
+
+```{r}
+df1 |>
+  ggplot() +
+  
+  # shaded regions
+  geom_point(aes(x = xval, y = yval, color = shade),
+             alpha = 0.5) +
+  scale_color_identity() +
+  
+  # axes
+  geom_segment(aes(x = -10, y = 0, xend = 10, yend = 0),
+               alpha = 0.25, color = "gray75", linewidth = 2) +
+  geom_segment(aes(x = 0, y = -10, xend = 0, yend = 10),
+               alpha = 0.25, color = "gray75", linewidth = 2) +
+  
+  # main line
+  geom_segment(aes(x = -(11/3), y = -10, xend = 3, yend = 10),
+               color = "black", linewidth = 3) +
+  
+  # customization
+  coord_equal() +
+  labs(title = "Separating Hyperplane",
+       subtitle = "y = 3x + 1",
+       caption = "ISLR",
+       x = "X1", y = "X2") +
+  theme_minimal()
+```
+
+# Conceptual Task 1b
+
+```{r}
+df1b <- df |>
+  # math function
+  mutate(shade = ifelse(yval > 1 - 0.5*xval, "blue", "red"))
+```
+
+```{r}
+df1b |>
+  ggplot() +
+  
+  # shaded regions
+  geom_point(aes(x = xval, y = yval, color = shade),
+             alpha = 0.5) +
+  scale_color_identity() +
+  
+  # axes
+  geom_segment(aes(x = -10, y = 0, xend = 10, yend = 0),
+               alpha = 0.25, color = "gray75", linewidth = 2) +
+  geom_segment(aes(x = 0, y = -10, xend = 0, yend = 10),
+               alpha = 0.25, color = "gray75", linewidth = 2) +
+  
+  # main line
+  geom_segment(aes(x = -10, y = 6, xend = 10, yend = -4),
+               color = "black", linewidth = 3) +
+  
+  # customization
+  coord_equal() +
+  labs(title = "Separating Hyperplane",
+       subtitle = "y = 1 - 0.5x",
+       caption = "ISLR",
+       x = "X1", y = "X2") +
+  theme_minimal()
+```
+# Conceptual Task 2
+
+```{r}
+euclidean_distance <- function(x1, y1, x2, y2){
+  # computes the Euclidean distance between (x1, y1) and (x2, y2)
+  sqrt( (x2 - x1)^2 + (y2 - y1)^2 )
+}
+```
+
+```{r}
+df2 <- df |>
+  # math function
+  mutate(shade = ifelse(euclidean_distance(xval, yval, -1, 2) > 4, 
+                        "blue", "red"))
+```
+
+```{r}
+df2 |>
+  ggplot() +
+  
+  # shaded regions
+  geom_point(aes(x = xval, y = yval, color = shade),
+             alpha = 0.5) +
+  scale_color_identity() +
+  
+  # axes
+  geom_segment(aes(x = -10, y = 0, xend = 10, yend = 0),
+               alpha = 0.25, color = "gray75", linewidth = 2) +
+  geom_segment(aes(x = 0, y = -10, xend = 0, yend = 10),
+               alpha = 0.25, color = "gray75", linewidth = 2) +
+  
+  # customization
+  coord_equal() +
+  labs(title = "Separating Hyperplane",
+       subtitle = "(x+1)^2 + (y-2)^2 = 4",
+       caption = "ISLR",
+       x = "X1", y = "X2") +
+  theme_minimal()
+```
+
+(c)
+
+```{r}
+ifelse(euclidean_distance(0, 0, -1, 2) > 4, "blue", "red")
+ifelse(euclidean_distance(-1, 1, -1, 2) > 4, "blue", "red")
+ifelse(euclidean_distance(2, 2, -1, 2) > 4, "blue", "red")
+ifelse(euclidean_distance(3, 8, -1, 2) > 4, "blue", "red")
+```
+
+
+# Conceptual Task 3
+
+(a)
+
+```{r}
+obs <- 1:7
+xvals <- c(3,2,4,1,2,4,4)
+yvals <- c(4,2,4,4,1,3,1)
+class_label <- c("Red", "Red", "Red", "Red", "Blue", "Blue", "Blue")
+df3 <- data.frame(obs, xvals, yvals, class_label)
+```
+
+```{r}
+df3 |>
+  ggplot() +
+  geom_point(aes(x = xvals, y = yvals, color = class_label),
+             size = 5) +
+  coord_equal() +
+  scale_color_identity() +
+  labs(title = "Where to Draw the Separating Hyperplane?",
+       # subtitle = "y = x - 0.5",
+       caption = "ISLR",
+       x = "X1", y = "X2") +
+  theme_minimal() +
+  xlim(0,5) + ylim(0,5)
+```
+
+(b)
+
+```{r}
+df3 |>
+  ggplot() +
+  
+  # separating hyperplane
+  geom_segment(aes(x = 0.5, y = 0, xend = 5, yend = 4.5),
+               color = "black", linetype = 1, linewidth = 3) +
+  
+  # margins
+  geom_segment(aes(x = 0, y = 0, xend = 5, yend = 5),
+               color = "black", linetype = 2, linewidth = 2) +
+  geom_segment(aes(x = 1, y = 0, xend = 5, yend = 4),
+               color = "black", linetype = 2, linewidth = 2) +
+  
+  geom_point(aes(x = xvals, y = yvals, color = class_label),
+             size = 5) +
+    coord_equal() +
+  scale_color_identity() +
+  labs(title = "Separating Hyperplane",
+       subtitle = "y = x - 0.5",
+       caption = "ISLR",
+       x = "X1", y = "X2") +
+  theme_minimal() +
+  xlim(0,5) + ylim(0,5)
+```
+
+(e)
+
+```{r}
+df3e <- df3 |>
+  mutate(supp_vec = ifelse(obs %in% c(2,3,5,6), 
+                           "support vector", "other data"))
+  
+df3e$supp_vec <- factor(df3e$supp_vec,
+                        levels = c("support vector", "other data"))
+  
+df3e |>  
+  ggplot() +
+  
+  # separating hyperplane
+  geom_segment(aes(x = 0.5, y = 0, xend = 5, yend = 4.5),
+               color = "black", linetype = 1, linewidth = 3) +
+  
+  # margins
+  geom_segment(aes(x = 0, y = 0, xend = 5, yend = 5),
+               color = "black", linetype = 2, linewidth = 2) +
+  geom_segment(aes(x = 1, y = 0, xend = 5, yend = 4),
+               color = "black", linetype = 2, linewidth = 2) +
+  
+  geom_point(aes(x = xvals, y = yvals, color = supp_vec),
+             size = 5) +
+    coord_equal() +
+  scale_color_manual(values = c("purple", "gray50")) +
+  labs(title = "Separating Hyperplane",
+       subtitle = "y = x - 0.5",
+       caption = "ISLR",
+       x = "X1", y = "X2") +
+  theme_minimal() +
+  xlim(0,5) + ylim(0,5)
+```
+
+(g)
+
+```{r}
+df3 |>
+  ggplot() +
+  
+  # separating hyperplane
+  geom_segment(aes(x = 0, y = 1/4, xend = 5, yend = 16/4),
+               color = "black", linetype = 1, linewidth = 3) +
+  
+  geom_point(aes(x = xvals, y = yvals, color = class_label),
+             size = 5) +
+    coord_equal() +
+  scale_color_identity() +
+  labs(title = "Separating Hyperplane (not optimal)",
+       subtitle = "y = 0.25(3x+1)",
+       caption = "ISLR",
+       x = "X1", y = "X2") +
+  theme_minimal() +
+  xlim(0,5) + ylim(0,5)
+```
+(h)
+
+```{r}
+new_dot <- data.frame(obs = 8, xvals = 0, yvals = 5, class_label = "blue")
+df3h <- rbind(df3, new_dot)
+df3h |>
+  ggplot() +
+  geom_point(aes(x = xvals, y = yvals, color = class_label),
+             size = 5) +
+  coord_equal() +
+  scale_color_identity() +
+  labs(title = "Where to Draw the Separating Hyperplane?",
+       subtitle = "new data at (0,5)",
+       caption = "ISLR",
+       x = "X1", y = "X2") +
+  theme_minimal() +
+  xlim(0,5) + ylim(0,5)
+```
+
+```{r} 
+sessionInfo()
+```
+
+

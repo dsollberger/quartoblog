@@ -1,0 +1,66 @@
+---
+title: "TidyModels Trees"
+author: "Derek Sollberger"
+date: "2023-05-15"
+format: html
+---
+
+Years ago, I would use the `caret` package to perform a random forest search and plot an example of a decision tree.  Can we do that now in the `TidyModels` module?
+
+Here I am adapting code from [Stack Overflow](https://stackoverflow.com/questions/63527684/plotting-decision-tree-results-from-tidymodels)
+
+```{r}
+#| message: false
+#| warning: false
+library("palmerpenguins")
+library("rpart")
+library("rpart.plot")
+library("tidymodels")
+```
+
+```{r}
+df <- penguins |>
+  mutate(species = factor(species))
+
+data_split <- initial_split(df)
+df_train <- training(data_split)
+df_test <- testing(data_split)
+```
+
+```{r}
+df_recipe <- recipe(species ~ ., data = df) %>%
+  step_normalize(all_numeric())
+```
+
+```{r}
+#building model
+tree <- decision_tree() %>%
+   set_engine("rpart") %>%
+   set_mode("classification")
+```
+
+```{r}
+#workflow
+tree_wf <- workflow() %>%
+  add_recipe(df_recipe) %>%
+  add_model(tree) %>%
+  fit(df_train) #results are found here 
+```
+
+```{r}
+tree_fit <- tree_wf |>
+  extract_fit_parsnip()
+rpart.plot(tree_fit$fit, roundint = FALSE)
+```
+
+So far,
+
+* response variable has to be a factor type---and hence should be categorical---in a classification setting
+* I need to learn [what all of those numbers](http://www.milbo.org/rpart-plot/prp.pdf) mean!
+
+
+```{r}
+sessionInfo()
+```
+
+
