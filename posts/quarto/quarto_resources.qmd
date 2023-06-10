@@ -1,0 +1,16 @@
+---
+title: "Quarto Resources"
+author: "Derek Sollberger"
+format: html
+date: "2023-06-03"
+---
+
+making myself a space to save/archive resources for learning/using `Quarto`
+
+* [Quarto documentation](https://quarto.org/)
+
+# YouTube
+
+* 20230522 [Quarto for Academics](https://www.youtube.com/watch?v=EbAAmrB0luA) Mine Cetinkaya-Rundel
+* 20230512 [Getting Started with Quarto](https://www.youtube.com/watch?v=_f3latmOhew) Mine Cetinkaya-Rundel
+* 20230511 [Publishing Jupyter Notebooks with Quarto](https://www.youtube.com/watch?v=nllKcuX7rEc) JJ Allaire

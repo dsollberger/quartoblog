@@ -2,7 +2,9 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/spatialr/07_introduction-to-sf-and-stars.html",
       "/posts/ISLR/ch9.html",
+      "/posts/quarto/quarto_resources.html",
       "/posts/inequalities/inequalities.html",
       "/posts/TidyModels_trees/Tidymodels_Trees.html",
       "/posts/graphviz/graphviz.html",
