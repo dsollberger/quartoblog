@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/bayesrules/14_Naive_Bayes_Classification.html",
       "/posts/spatialr/07_introduction-to-sf-and-stars.html",
       "/posts/ISLR/ch9.html",
       "/posts/quarto/quarto_resources.html",
