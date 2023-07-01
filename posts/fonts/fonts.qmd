@@ -1,0 +1,20 @@
+---
+title: "Fonts"
+author: "Derek Sollberger"
+date: "2023-07-01"
+format: html
+---
+
+Even though I am not planning on making lecture slides in the upcoming semester, I have been meaning to learn how to find and use fonts in my visuals.
+
+I have always loved the `Cowboy Bebop` and felt the zen of the title cards at the end of each episode, such as
+
+![](youre_gonna_carry_that_weight.jpg)
+
+I happened upon a [Reddit post](https://old.reddit.com/r/cowboybebop/comments/actwai/anyone_else_just_love_the_font_they_use/edarmyq/) where someone mentioned that the font is (or is very similar to) Cheltenham Condensed Bold, and I'm sure that the intended font has italics too.  Thus, I grabbed the font over at [FontGeek](https://fontsgeek.com/fonts/Cheltenham-Condensed-Bold-Italic), uploaded the `.tff` file into Canva, and made the following
+
+![](QuoVadimus.png)
+
+This Latin phrase is from the [series finale](https://sntranscripts.livejournal.com/11808.html) of another late 1990s TV show called `Sports Night`
+
+![](Calvin_Traeger.png)

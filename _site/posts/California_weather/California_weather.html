@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.475">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Derek Sollberger">
-<meta name="dcterms.date" content="2022-12-23">
+<meta name="dcterms.date" content="2023-01-25">
 
 <title>The Median Data Scientist - California Weather</title>
 <style>
@@ -185,7 +185,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">December 23, 2022</p>
+        <p class="date">January 25, 2023</p>
       </div>
     </div>
     
@@ -203,6 +203,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
   <li><a href="#data-source" id="toc-data-source" class="nav-link active" data-scroll-target="#data-source">Data Source</a></li>
   <li><a href="#fixed-width-files" id="toc-fixed-width-files" class="nav-link" data-scroll-target="#fixed-width-files">Fixed-Width Files</a></li>
+  <li><a href="#merge" id="toc-merge" class="nav-link" data-scroll-target="#merge">Merge</a></li>
+  <li><a href="#data-viz" id="toc-data-viz" class="nav-link" data-scroll-target="#data-viz">Data Viz</a></li>
+  <li><a href="#sample" id="toc-sample" class="nav-link" data-scroll-target="#sample">Sample</a></li>
   </ul>
 </nav>
     </div>
@@ -229,7 +232,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1>Fixed-Width Files</h1>
 <p>Today I learned how to read <code>fixed-width files</code> in the <a href="https://readr.tidyverse.org/">Tidyverse</a>. From there, I simply need to give the columns easy-to-use names.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>SF_df <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_fwf</span>(<span class="st">"SF_2021.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>LA_df <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_fwf</span>(<span class="st">"LA_2022.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 365 Columns: 9
+── Column specification ────────────────────────────────────────────────────────
+
+chr  (4): X1, X4, X7, X9
+dbl  (4): X3, X5, X6, X8
+time (1): X2
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(LA_df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"date"</span>, <span class="st">"time"</span>, <span class="st">"precipitation"</span>,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"check1"</span>, <span class="st">"high"</span>, <span class="st">"low"</span>, <span class="st">"check2"</span>, <span class="st">"solar"</span>, <span class="st">"check3"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>LA_df<span class="sc">$</span>city <span class="ot">&lt;-</span> <span class="st">"Los Angeles"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Merced_df <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_fwf</span>(<span class="st">"Merced_2022.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 365 Columns: 16
+── Column specification ────────────────────────────────────────────────────────
+
+chr   (4): X1, X4, X7, X12
+dbl  (11): X3, X5, X6, X8, X9, X10, X11, X13, X14, X15, X16
+time  (1): X2
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(Merced_df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"date"</span>, <span class="st">"time"</span>, <span class="st">"precipitation"</span>,</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"check1"</span>, <span class="st">"high"</span>, <span class="st">"low"</span>, <span class="st">"check2"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>Merced_df<span class="sc">$</span>city <span class="ot">&lt;-</span> <span class="st">"Merced"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>SF_df <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_fwf</span>(<span class="st">"SF_2022.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 365 Columns: 7
 ── Column specification ────────────────────────────────────────────────────────
@@ -241,8 +278,66 @@ time (1): X2
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(SF_df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"date"</span>, <span class="st">"time"</span>, <span class="st">"precipitation"</span>,</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"check1"</span>, <span class="st">"high"</span>, <span class="st">"low"</span>, <span class="st">"check2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(SF_df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"date"</span>, <span class="st">"time"</span>, <span class="st">"precipitation"</span>,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"check1"</span>, <span class="st">"high"</span>, <span class="st">"low"</span>, <span class="st">"check2"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>SF_df<span class="sc">$</span>city <span class="ot">&lt;-</span> <span class="st">"San Francisco"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="merge" class="level1">
+<h1>Merge</h1>
+<p>Some of the weather stations had collected more information than others. That is, if the weather station was newer, then it had more instruments.</p>
+<p>For today’s quick exploration, I actually do want to perform a quick <code>rbind</code>, and that requires that each of the 3 data frames have the same number of columns (and should be the same types of information too).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>LA_df <span class="ot">&lt;-</span> LA_df <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(city, date, time, high, low, precipitation)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>Merced_df <span class="ot">&lt;-</span> Merced_df <span class="sc">|&gt;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(city, date, time, high, low, precipitation)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>SF_df <span class="ot">&lt;-</span> SF_df <span class="sc">|&gt;</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(city, date, time, high, low, precipitation)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>CA_weather_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(LA_df, Merced_df, SF_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># write_csv(CA_weather_data, "CA_weather_data.csv")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="data-viz" class="level1">
+<h1>Data Viz</h1>
+<p>Now, boxplots are easy to make.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>CA_weather_data <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> high)) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"California Weather, High Temperatures"</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"(all together)"</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Source: UC</span><span class="sc">\n</span><span class="st">Agriculture and Natural Resources</span><span class="sc">\n</span><span class="st">Statewide Integrated Pest Management Program"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="California_weather_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>CA_weather_data <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> city, <span class="at">y =</span> high, <span class="at">fill =</span> city)) <span class="sc">+</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"California Weather, High Temperatures"</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"(separate groups)"</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Source: UC</span><span class="sc">\n</span><span class="st">Agriculture and Natural Resources</span><span class="sc">\n</span><span class="st">Statewide Integrated Pest Management Program"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="California_weather_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="sample" class="level1">
+<h1>Sample</h1>
+<p>For the creation of a classroom example, I want to randomly select 43 observations from the Merced data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>Merced_sample <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">sample</span>(Merced_df<span class="sc">$</span>high, <span class="dv">43</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dput</span>(Merced_sample)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>c(53, 53, 55, 58, 58, 60, 60, 61, 62, 65, 67, 68, 70, 70, 71, 
+72, 74, 75, 77, 82, 82, 83, 84, 84, 87, 87, 88, 90, 91, 91, 92, 
+92, 93, 93, 94, 95, 96, 96, 98, 99, 101, 101, 105)</code></pre>
+</div>
 </div>
 
 
