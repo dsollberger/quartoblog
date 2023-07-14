@@ -1,0 +1,70 @@
+---
+title: "Using nbgitpuller"
+author: "Derek Sollberger"
+date: "2023-07-13"
+# format:
+#   revealjs:
+#     scrollable: true
+format:
+  html:
+    theme: cerulean
+    toc: true
+# format: docx
+# format: pdf
+# format: pptx
+---
+
+# Installation
+
+Each admin user ("instructor") can [verify](https://nbgitpuller.readthedocs.io/en/latest/install.html) the presence of `nbgitpuller` on their hub presence
+
+* open a `terminal` session
+* run `pip install nbgitpuller`
+
+# File Setup
+
+The purpose of `nbgitpuller` is to ease access to files in a remote GitHub repository.
+
+* create a GitHub repository
+* place a `.ipynb` notebook file
+* TO DO: test this on a private repository
+
+# Create Link
+
+Go to [this website](https://nbgitpuller.readthedocs.io/en/latest/link.html) (or later use a browser extension)
+
+* URL for hub (e.g. https://ucmerced.2i2c.cloud)
+* URL for repo (e.g. https://github.com/dsollberger/shared_stuff)
+* indicate file name (i.e. the assignment's notebook)
+* copy-and-paste generated link to assignment (i.e. back in Canvas)
+
+# Future Work
+
+* TO DO: see if this access works from a student perspective
+* TO DO: apply GitHub Actions (e.g. release file to students after a certain date/time)
+
+
+
+
+
+
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+	
+:::
+
+::: {.column width="50%"}
+
+:::
+
+::::
+
+::::: {.panel-tabset}
+
+
+
+:::::
+

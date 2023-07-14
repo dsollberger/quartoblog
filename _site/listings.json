@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/nbgitpuller/nbgitpuller.html",
       "/posts/exploreUDL/workshop_script.html",
       "/posts/fonts/fonts.html",
       "/posts/quarto/quarto_resources.html",
