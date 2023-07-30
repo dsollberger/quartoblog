@@ -1,0 +1,18 @@
+---
+title: "Resources about Artificial Intelligence Tools"
+author: "Derek Sollberger"
+date: "2023-07-30"
+format:
+  html:
+    theme: cerulean
+    toc: true
+
+---
+
+(I wanted web space where I can organize various links I have encountered about artificial intelligence tools.
+
+# Image Generation
+
+* Computerphile
+
+    - (2022-10-04) [How AI Image Generators Work (Stable Diffusion / Dall-E)](https://www.youtube.com/watch?v=1CIpzeNxIhU)
