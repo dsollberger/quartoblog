@@ -20,3 +20,7 @@ format:
 * Computerphile
 
     - (2023-10-04) [How AI Image Generators Work (Stable Diffusion / Dall-E)](https://www.youtube.com/watch?v=1CIpzeNxIhU)
+    
+# News Stories
+
+* (2023-07-25) [Adobe Staff Worried Their AI Tech Could Kill The Jobs Of Their Own Customers](https://www.benzinga.com/news/23/07/33368787/adobe-staff-worried-their-ai-tech-could-kill-the-jobs-of-their-own-customers) by Rounak Jain
