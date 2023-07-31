@@ -24,3 +24,4 @@ format:
 # News Stories
 
 * (2023-07-25) [Adobe Staff Worried Their AI Tech Could Kill The Jobs Of Their Own Customers](https://www.benzinga.com/news/23/07/33368787/adobe-staff-worried-their-ai-tech-could-kill-the-jobs-of-their-own-customers) by Rounak Jain
+* (2023-07-21) [An MIT student asked AI to make her headshot more ‘professional.’](https://www.boston.com/news/the-boston-globe/2023/07/21/mit-student-ai-racial-blind-spots/) about Rona Wang's explorations
