@@ -19,9 +19,15 @@ format:
 
 * Computerphile
 
+    - (2023-10-20) [Stable Diffusion in Code (AI Image Generation) ](https://www.youtube.com/watch?v=-lz30by8-sU)
     - (2023-10-04) [How AI Image Generators Work (Stable Diffusion / Dall-E)](https://www.youtube.com/watch?v=1CIpzeNxIhU)
     
 # News Stories
 
 * (2023-07-25) [Adobe Staff Worried Their AI Tech Could Kill The Jobs Of Their Own Customers](https://www.benzinga.com/news/23/07/33368787/adobe-staff-worried-their-ai-tech-could-kill-the-jobs-of-their-own-customers) by Rounak Jain
 * (2023-07-21) [An MIT student asked AI to make her headshot more ‘professional.’](https://www.boston.com/news/the-boston-globe/2023/07/21/mit-student-ai-racial-blind-spots/) about Rona Wang's explorations
+* (2023-03-07) [Many bioinformatics programming tasks can be automated with ChatGPT](https://arxiv.org/abs/2303.13528)
+
+# Studying
+
+* (2023-03-02) [How to learn to code FAST using ChatGPT](https://www.youtube.com/watch?v=VznoKyh6AXs) by Tina Huang
