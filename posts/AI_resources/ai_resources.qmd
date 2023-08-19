@@ -19,15 +19,17 @@ format:
 
 * Computerphile
 
-    - (2023-10-20) [Stable Diffusion in Code (AI Image Generation) ](https://www.youtube.com/watch?v=-lz30by8-sU)
-    - (2023-10-04) [How AI Image Generators Work (Stable Diffusion / Dall-E)](https://www.youtube.com/watch?v=1CIpzeNxIhU)
+    - (2022-10-20) [Stable Diffusion in Code (AI Image Generation) ](https://www.youtube.com/watch?v=-lz30by8-sU)
+    - (2022-10-04) [How AI Image Generators Work (Stable Diffusion / Dall-E)](https://www.youtube.com/watch?v=1CIpzeNxIhU)
     
 # News Stories
 
+* (2023-08-13) [These Women Tried to Warn Us About AI](https://www.rollingstone.com/culture/culture-features/women-warnings-ai-danger-risk-before-chatgpt-1234804367/) by Lorena O'Neil
 * (2023-08-10) [Supermarket AI meal planner app suggests recipe that would create chlorine gas](https://www.theguardian.com/world/2023/aug/10/pak-n-save-savey-meal-bot-ai-app-malfunction-recipes) by Tess McClure
 * (2023-07-25) [Adobe Staff Worried Their AI Tech Could Kill The Jobs Of Their Own Customers](https://www.benzinga.com/news/23/07/33368787/adobe-staff-worried-their-ai-tech-could-kill-the-jobs-of-their-own-customers) by Rounak Jain
 * (2023-07-21) [An MIT student asked AI to make her headshot more ‘professional.’](https://www.boston.com/news/the-boston-globe/2023/07/21/mit-student-ai-racial-blind-spots/) about Rona Wang's explorations
 * (2023-03-07) [Many bioinformatics programming tasks can be automated with ChatGPT](https://arxiv.org/abs/2303.13528)
+* (2022-12-15) [Artificial intelligence is transforming our world](https://ourworldindata.org/ai-impact) by Max Roser
 
 # Studying
 
