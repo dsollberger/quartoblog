@@ -774,7 +774,7 @@
     "href": "posts/lin_reg_demo/lin_reg_demo.html#prediction",
     "title": "Linear Regression Demonstration",
     "section": "Prediction",
-    "text": "Prediction\n\nExamplepredictActivity\n\n\nPredict the PM2.5 level for a 78-degree day.\n\n\n\npredict(model1,\n        newdata = data.frame(temperature = 78))\n\n       1 \n16.77266 \n\n\n\n\nThink about what is meant by linear regression. Draw a large area for a graph (\\(x\\)- and \\(y\\)-axes, first quadrant only, you do not have to label the axes). Come up with a scatterplot situation where performing linear regression and a subsequent prediction would be a bad idea."
+    "text": "Prediction\n\nExamplePredictBookActivity\n\n\nPredict the PM2.5 level for a 78-degree day.\n\n\n\npredict(model1,\n        newdata = data.frame(temperature = 78))\n\n       1 \n16.77266 \n\n\n\n\n\n\n\nSeven Pillars of Statistical Wisdom\n\n\n\n\nThink about what is meant by linear regression. Draw a large area for a graph (\\(x\\)- and \\(y\\)-axes, first quadrant only, you do not have to label the axes). Come up with a scatterplot situation where performing linear regression and a subsequent prediction would be a bad idea."
   },
   {
     "objectID": "posts/lin_reg_demo/lin_reg_demo.html#setup-2",
@@ -789,5 +789,33 @@
     "title": "Linear Regression Demonstration",
     "section": "Activity",
     "text": "Activity\n\nPredict the PM2.5 level for a 60-degree morning.\nPredict the PM2.5 level for a 75-degree evening.\n\n\\[Y = -42.844 + 0.680X_{1} + 5.056X_{3} + 8.477X_{4} + 4.186X_{5}\\]\n\\[X_{3} = \\begin{cases} 1 & \\text{morning} \\\\ 0 & \\text{otherwise}\n\\end{cases}\\]\n\\[X_{4} = \\begin{cases} 1 & \\text{afternoon} \\\\ 0 & \\text{otherwise}\n\\end{cases}\\]\n\\[X_{5} = \\begin{cases} 1 & \\text{evening} \\\\ 0 & \\text{otherwise}\n\\end{cases}\\]"
+  },
+  {
+    "objectID": "posts/lin_reg_demo/lin_reg_demo.html#to-consider",
+    "href": "posts/lin_reg_demo/lin_reg_demo.html#to-consider",
+    "title": "Linear Regression Demonstration",
+    "section": "To Consider",
+    "text": "To Consider\n\nHow do we know that the predictions are reliable?\nHow do we know which model to choose?\nHow do we know which variables to use?"
+  },
+  {
+    "objectID": "posts/lin_reg_demo/lin_reg_demo.html#book-2",
+    "href": "posts/lin_reg_demo/lin_reg_demo.html#book-2",
+    "title": "Linear Regression Demonstration",
+    "section": "Book",
+    "text": "Book\n\n\n\nBayes Rules!"
+  },
+  {
+    "objectID": "posts/lin_reg_demo/lin_reg_demo.html#thanks",
+    "href": "posts/lin_reg_demo/lin_reg_demo.html#thanks",
+    "title": "Linear Regression Demonstration",
+    "section": "Thanks!",
+    "text": "Thanks!\n\nDerek Sollberger\nLecturer of Data Science"
+  },
+  {
+    "objectID": "posts/lin_reg_demo/lin_reg_demo.html#more-metrics",
+    "href": "posts/lin_reg_demo/lin_reg_demo.html#more-metrics",
+    "title": "Linear Regression Demonstration",
+    "section": "More Metrics",
+    "text": "More Metrics\n\nget_regression_table(model3)\n\n# A tibble: 5 × 7\n  term               estimate std_error statistic p_value lower_ci upper_ci\n  &lt;chr&gt;                 &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;\n1 intercept            -42.8     16.8       -2.54   0.012  -76.0      -9.68\n2 temperature            0.68     0.184      3.69   0        0.317     1.04\n3 day_part: midnight     5.06     2.89       1.75   0.081   -0.628    10.7 \n4 day_part: morning      8.48     3.29       2.57   0.011    2.00     15.0 \n5 day_part: noon         4.19     2.68       1.56   0.12    -1.10      9.47\n\n\n\nget_regression_summaries(model3)\n\n# A tibble: 1 × 9\n  r_squared adj_r_squared   mse  rmse sigma statistic p_value    df  nobs\n      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1     0.046         0.033  235.  15.3  15.5      3.47   0.009     4   291"
   }
 ]

@@ -248,12 +248,16 @@ model1
 
 Predict the PM2.5 level for a 78-degree day.
 
-## predict
+## Predict
 
 ```{r}
 predict(model1,
         newdata = data.frame(temperature = 78))
 ```
+
+## Book
+
+![Seven Pillars of Statistical Wisdom](book1.png)
 
 ## Activity
 
@@ -290,11 +294,15 @@ Describe the regression coefficients for the two predictor variables (hint: rate
 moderndive::get_regression_table(model2)
 ```
 
+## Book
+
+![ModernDive](book2.png)
+
 ## Example
 
 Predict the PM2.5 level for a 78-degree day where the humidity is 50 percent.
 
-## predict
+## Predict
 
 ```{r}
 predict(model2,
@@ -374,7 +382,7 @@ df |>
   ylim(0,50)
 ```
 
-## code
+## Code
 
 ```{r}
 #| echo: true
@@ -396,7 +404,7 @@ df |>
   ylim(0,50)
 ```
 
-## predict
+## Predict
 
 ```{r}
 predict(model3,
@@ -412,6 +420,30 @@ predict(model3,
 :::::
 
 
-
-
 # Looking Ahead
+
+## To Consider
+
+* How do we know that the predictions are reliable?
+* How do we know which model to choose?
+* How do we know which variables to use?
+
+## More Metrics
+
+```{r}
+get_regression_table(model3)
+```
+
+```{r}
+get_regression_summaries(model3)
+```
+
+
+## Book
+
+![Bayes Rules!](book3.png)
+
+## Thanks!
+
+* Derek Sollberger
+* Lecturer of Data Science
