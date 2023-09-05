@@ -25,6 +25,8 @@ format:
     
 # News Stories
 
+* (2023-08-29) [How to Use AI to Talk to Whales—and Save Life on Earth](https://www.wired.com/story/use-ai-talk-to-whales-save-life-on-earth/) by Camille Bromley
+* (2023-08-23) [How Artificial Intelligence Gave a Paralyzed Woman Her Voice Back](https://www.ucsf.edu/news/2023/08/425986/how-artificial-intelligence-gave-paralyzed-woman-her-voice-back) by Robin Marks and Laura Kurtzman
 * (2023-08-13) [These Women Tried to Warn Us About AI](https://www.rollingstone.com/culture/culture-features/women-warnings-ai-danger-risk-before-chatgpt-1234804367/) by Lorena O'Neil
 * (2023-08-10) [Supermarket AI meal planner app suggests recipe that would create chlorine gas](https://www.theguardian.com/world/2023/aug/10/pak-n-save-savey-meal-bot-ai-app-malfunction-recipes) by Tess McClure
 * (2023-08-02) [AI improves breast cancer detection rate by 20 percent ](https://www.politico.eu/article/ai-improves-breast-cancer-detection-rate-20-percent-swedish-study/) by Ashleigh Furlong

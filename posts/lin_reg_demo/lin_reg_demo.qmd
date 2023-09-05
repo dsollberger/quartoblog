@@ -2,10 +2,13 @@
 title: "Linear Regression Demonstration"
 author: "Derek Sollberger"
 date: "2023-08-23"
-format:
-  html:
-    theme: cerulean
-    toc: true
+# format:
+#   html:
+#     theme: cerulean
+#     toc: true
+format: 
+  revealjs:
+    scrollable: true
 
 ---
 
