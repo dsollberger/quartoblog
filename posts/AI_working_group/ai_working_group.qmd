@@ -6,6 +6,9 @@ format:
   html:
     theme: cerulean
     toc: true
+# format:
+#   revealjs:
+#     scrollable: true
 
 ---
 
