@@ -1,0 +1,1209 @@
+<?xml version="1.0" encoding="UTF-8"?><metadata>
+    <idinfo>
+        <citation>
+            <citeinfo>
+                <origin/>
+                <pubdate>20170817</pubdate>
+                <title>New Jersey College and University Boundaries by Parcel</title>
+                <edition>Revision of a data set originally published 2012-10-03 and revised several times since then</edition>
+                <geoform>vector digital data</geoform>
+                <pubinfo>
+                    <pubplace/>
+                    <publish>Steven Karp</publish>
+                </pubinfo>
+                <onlink>http://nj.gov/state/planning/docs/coll_univ.zip</onlink>
+                <onlink>http://www.nj.gov/state/planning/spc-research-resources-gis.html</onlink>
+            </citeinfo>
+        </citation>
+        <descript>
+            <abstract>This dataset contains the campus boundaries of Colleges and Universities of New Jersey mapped by parcel boundaries.The Colleges and Universities dataset is composed of any type of Post Secondary Education such as: colleges, universities, technical schools, trade schools, business schools, satellite (branch) campuses, etc. that grant First Professional, Associate, Bachelors, Masters, or Doctoral degrees. Secondary education facilities, Administrative offices, or Post Secondary Education facilities that are non degree granting schools are intended to be excluded from this dataset, but a few may be included. All data is non license restricted data that has been added from TGS research. </abstract>
+            <purpose>The College and University file was created to help implement the NJ State Development and Redevelopment Plan by helping to identify areas where technology/health related activities and businesses could locate.</purpose>
+        </descript>
+        <timeperd>
+            <timeinfo>
+                <rngdates>
+                    <begdate>20160808</begdate>
+                    <enddate>20170817</enddate>
+                </rngdates>
+            </timeinfo>
+            <current>State of NJ</current>
+        </timeperd>
+        <status>
+            <progress>Complete</progress>
+            <update>As needed</update>
+        </status>
+        <spdom>
+            <bounding>
+                <westbc>-75.492532</westbc>
+                <eastbc>-73.99474</eastbc>
+                <northbc>41.091293</northbc>
+                <southbc>39.43025</southbc>
+            </bounding>
+        </spdom>
+        <keywords>
+            <theme>
+                <themekt>None</themekt>
+                <themekey>Universities</themekey>
+                <themekey>Colleges</themekey>
+                <themekey>Private Universities and Colleges</themekey>
+                <themekey>Community Colleges</themekey>
+                <themekey>Junior Colleges</themekey>
+                <themekey>Business Schools</themekey>
+                <themekey>Medical Colleges</themekey>
+                <themekey>Dental Schools</themekey>
+                <themekey>Law Schools</themekey>
+                <themekey>Art Study and Teaching</themekey>
+                <themekey>Theological Seminaries</themekey>
+                <themekey>Bible Colleges</themekey>
+                <themekey>Technical Institutes</themekey>
+                <themekey>Church and College</themekey>
+                <themekey>Health Occupations Schools</themekey>
+                <themekey>University and College Religion</themekey>
+                <themekey>Planning Areas</themekey>
+                <themekey>Land Use</themekey>
+                <themekey>NJ State Plan</themekey>
+                <themekey>Regional Planning</themekey>
+                <themekey>Urban Growth</themekey>
+            </theme>
+            <theme>
+                <themekt>ISO 19115 Topic Categories</themekt>
+                <themekey>planningCadastre</themekey>
+            </theme>
+            <place>
+                <placekt>None</placekt>
+                <placekey>New Jersey</placekey>
+            </place>
+        </keywords>
+        <accconst>None</accconst>
+        <useconst>NEW JERSEY DEPARTMENT OF STATE, OFFICE FOR PLANNING ADVOCACY END USER LICENSE AGREEMENT.NOTICE TO USER: THIS IS A CONTRACT. USE OF THE ACCOMPANYING DATA AND/OR SOFTWARE MEANS THAT YOU ACCEPT ALL THE TERMS AND CONDITIONS OF THIS AGREEMENT. If you do not agree with the terms and conditions of this Agreement, erase your copy or return the software and/or data to The New Jersey Office for Planning Advocacy(OPA) without using or copying it in any way. The End User is defined as any person or organization receiving these files directly from OPA. OPA grants to the End User a license to use the software, data and documentation provided the End User agrees to the following: I. LIMITED WARRANTY: Notwithstanding the special conditions regarding the subject data specified in part III of this licensing agreement, the Office for Planning Advocacy makes no representations of any kind, including but not limited to the warranties of merchantability of fitness for a particular use, nor are any such warranties to be implied, with respect to the digital software and data furnished. The Office for Planning Advocacy assumes no responsibility to maintain them in any manner or form. II. TERMS OF AGREEMENT: The data received from OPA is to be used solely by the End User and will not be reproduced or redistributed for use by anyone else, without first obtaining permission from OPA. III. SPECIAL CONDITIONS: The delineations been produced and released by the New Jersey Office for Planning Advocacy. The boundaries reflect delineations as of the date the files are posted on our website: www.nj.gov/state/planning. Any map changes accepted in the interim are not reflected in these delineations. Due to the complex nature of this mapping and the relationship of all of the individual parts of the mapping, questions regarding the the file should not be resolved by or even considered using mapping alone. For this reason, any questions relating to the mapping for the State should be directed to OPA. The information has been delivered in a standard format. OPA assumes no liability for inability of the End User to use the data/software for any financial damages caused by such an inability. OPA agrees, however, to assist in resolving any problems in using the software or data and to reproduce the data if necessary.</useconst>
+        <ptcontac>
+            <cntinfo>
+                <cntorgp>
+                    <cntorg>New Jersey Department of State, Office for Planning Advocacy</cntorg>
+                    <cntper>Steven Karp</cntper>
+                </cntorgp>
+                <cntpos>GIS Manager</cntpos>
+                <cntaddr>
+                    <addrtype>mailing</addrtype>
+                    <address>PO Box 820</address>
+                    <city>Trenton</city>
+                    <state>NJ</state>
+                    <postal>08625</postal>
+                    <country>US</country>
+                </cntaddr>
+                <cntvoice>609293160</cntvoice>
+                <cntfax>6092923292</cntfax>
+                <cntemail>steven.karp@sos.nj.gov</cntemail>
+            </cntinfo>
+        </ptcontac>
+        <datacred>New Jersey Office for Planning Advocacy, NJ Office of GIS, TGS Research.</datacred>
+        <native>Esri ArcGIS 10.3.1.5004</native>
+    </idinfo>
+    <dataqual>
+        <logic>xx</logic>
+        <complete>xx</complete>
+        <lineage>
+            <srcinfo>
+                <srccite>
+                    <citeinfo>
+                        <pubdate>20121119</pubdate>
+                        <title>nj_colleges_univ</title>
+                    </citeinfo>
+                </srccite>
+                <typesrc>onLine</typesrc>
+                <srctime>
+                    <timeinfo>
+                        <rngdates>
+                            <begdate>20070703</begdate>
+                            <enddate>20071012</enddate>
+                        </rngdates>
+                    </timeinfo>
+                    <srccurr>Ground condition</srccurr>
+                </srctime>
+                <srccitea>nj_colleges_univ</srccitea>
+                <srccontr>NJOGIS nj_colleges_univ point GIS file.</srccontr>
+            </srcinfo>
+            <srcinfo>
+                <srccite>
+                    <citeinfo>
+                        <pubdate>20120101</pubdate>
+                        <title>GIS_Cad_parcel_mod4</title>
+                    </citeinfo>
+                </srccite>
+                <typesrc>onLine</typesrc>
+                <srctime>
+                    <timeinfo>
+                        <sngdate>
+                            <caldate>20120101</caldate>
+                        </sngdate>
+                    </timeinfo>
+                    <srccurr>Unknown</srccurr>
+                </srctime>
+                <srccitea>GIS_Cad_parcel_mod4</srccitea>
+                <srccontr>The statewide composite of parcels (cadastral) data for New Jersey was developed during the Parcels Normalization Project in 2008-2014 by the NJ Office of Information Technology, Office of GIS (NJOGIS). The normalized parcels data are compatible with the New Jersey Department of Treasury MOD-IV system currently used by Tax Assessors. This composite of parcels data serves as one of New Jersey&amp;apos;s framework GIS data sets. Stewardship and maintenance of the data will continue to be the purview of county and municipal governments, but the statewide composite will be maintained by NJOGIS. 2016 MOD IV parcels used in update.</srccontr>
+            </srcinfo>
+            <procstep>
+                <procdesc>Started with the NJOGIS  nj_colleges_univ point file as a reference. Boundaries were researched using campus maps and parcel data. A spatial identity was performed to update the NJOGIS point data into the OPA created polygon file. Some columns added from the NJOGIS file were dropped from the table.</procdesc>
+                <procdate>20160809</procdate>
+                <proccont>
+                    <cntinfo>
+                        <cntorgp>
+                            <cntorg>New Jersey Office for Planning Advocacy</cntorg>
+                            <cntper>Steven Karp</cntper>
+                        </cntorgp>
+                        <cntpos>GIS Manager</cntpos>
+                        <cntaddr>
+                            <addrtype>mailing</addrtype>
+                            <address>PO Box 820</address>
+                            <city>Trenton</city>
+                            <state>NJ</state>
+                            <postal>08625</postal>
+                            <country>US</country>
+                        </cntaddr>
+                        <cntvoice>6092923160</cntvoice>
+                        <cntfax>6092923292</cntfax>
+                        <cntemail>steven.karp@sos.nj.gov</cntemail>
+                        <cntinst>Contact the Distributor if you have any questions or concerns regarding the distribution and/or download of this data. If you have questions or concerns regarding the data itself, please contact the Metadata Contact person listed in the Metadata Reference Section.</cntinst>
+                    </cntinfo>
+                </proccont>
+            </procstep>
+            <procstep>
+                <procdesc>Edits made to metadata to correct publication date add Edition information, and add direct download URL.</procdesc>
+                <procdate>20171211</procdate>
+                <proccont>
+                    <cntinfo>
+                        <cntorgp>
+                            <cntorg>NJ Office of Information Technology, Office of GIS (NJOGIS)</cntorg>
+                            <cntper>Edith Konopka</cntper>
+                        </cntorgp>
+                        <cntpos>GIS Specialist</cntpos>
+                        <cntaddr>
+                            <addrtype>mailing</addrtype>
+                            <address>PO Box 212</address>
+                            <city>Trenton</city>
+                            <state>NJ</state>
+                            <postal>08625-0212</postal>
+                            <country>US</country>
+                        </cntaddr>
+                        <cntvoice>609-777-3774</cntvoice>
+                        <cntfax>609-633-0400</cntfax>
+                        <cntemail>edith.konopka@tech.nj.gov</cntemail>
+                        <hours>9-4</hours>
+                        <cntinst>Email is preferred.</cntinst>
+                    </cntinfo>
+                </proccont>
+            </procstep>
+        </lineage>
+    </dataqual>
+    <spdoinfo>
+        <direct>Vector</direct>
+        <ptvctinf>
+            <sdtsterm>
+                <sdtstype>GT-polygon composed of chains</sdtstype>
+                <ptvctcnt>75</ptvctcnt>
+            </sdtsterm>
+        </ptvctinf>
+    </spdoinfo>
+    <eainfo>
+        <detailed>
+            <enttyp>
+                <enttypl>Strc_college_prcl</enttypl>
+                <enttypd>NJ College and University Boundaries by Parcel</enttypd>
+                <enttypds>NJ Office for Planning Advocacy</enttypds>
+            </enttyp>
+            <attr>
+                <attrlabl>OBJECTID</attrlabl>
+                <attrdef>Internal feature number.</attrdef>
+                <attrdefs>Esri</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <udom>Sequential unique whole numbers that are automatically generated.</udom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>Shape</attrlabl>
+                <attrdef>Feature Geometry</attrdef>
+                <attrdefs>ESRI</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <udom>Coordinates defining features.</udom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>NA</edomv>
+                                                						
+                        
+                        <edomvd>NA</edomvd>
+                                                						
+                        
+                        <edomvds>NA</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>Name</attrlabl>
+                <attrdef>Names of institutions or schools.</attrdef>
+                <attrdefs>Institution or school.</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>See dtatbase table</edomv>
+                                                						
+                        
+                        <edomvd>NA</edomvd>
+                                                						
+                        
+                        <edomvds>Misc</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>Municipality</attrlabl>
+                <attrdef>Political subdivision within which the institution of school is located.</attrdef>
+                <attrdefs>NJ Office of Information Technology, Office of GIS (NJOGIS)</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>NA</edomv>
+                                                						
+                        
+                        <edomvd>NA</edomvd>
+                                                						
+                        
+                        <edomvds>NA</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>County</attrlabl>
+                <attrdef>County in which the instition or school is located.</attrdef>
+                <attrdefs>NJ Office of GIS</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>NA</edomv>
+                                                						
+                        
+                        <edomvd>NA</edomvd>
+                                                						
+                        
+                        <edomvds>NA</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>Parcel</attrlabl>
+                <attrdef>Parcels of the state of NJ.</attrdef>
+                <attrdefs>NJ Office of GIS</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>Y</edomv>
+                                                						
+                        
+                        <edomvd>Yes, the boundaries were mapped following the parcels.</edomvd>
+                                                						
+                        
+                        <edomvds>NJ OPA</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>N</edomv>
+                                                						
+                        
+                        <edomvd>No, the boundaries were not mapped according to parcel boundaries. Campus mapps were used.</edomvd>
+                                                						
+                        
+                        <edomvds>NJ OPA</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>Comments</attrlabl>
+                <attrdef>Supplemental information.</attrdef>
+                <attrdefs>NJ OPA</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>NA</edomv>
+                                                						
+                        
+                        <edomvd>NA</edomvd>
+                                                						
+                        
+                        <edomvds>NA</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>NAICSDESCR</attrlabl>
+                <attrdef>North American Industry Classification System (NAICS) Codes. Describes an entities primary products and services.</attrdef>
+                <attrdefs>NAICS Association</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>Universities</edomv>
+                                                						
+                        
+                        <edomvd>Name of institution or school</edomvd>
+                                                						
+                        
+                        <edomvds>NAICS Association</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>Technical and Trade Schools</edomv>
+                                                						
+                        
+                        <edomvd>Name of institution or school</edomvd>
+                                                						
+                        
+                        <edomvds>NAICS Association</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>Medical Schools</edomv>
+                                                						
+                        
+                        <edomvd>Name of institution or school</edomvd>
+                                                						
+                        
+                        <edomvds>NAICS Association</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>Colleges (Except Junior Colleges)</edomv>
+                                                						
+                        
+                        <edomvd>Name of institution or school</edomvd>
+                                                						
+                        
+                        <edomvds>NAICS Association</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>Community Colleges</edomv>
+                                                						
+                        
+                        <edomvd>Name of institution or school</edomvd>
+                                                						
+                        
+                        <edomvds>NAICS Association</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>Theological Seminaries Offering Baccalaureat or Graduate Degrees</edomv>
+                                                						
+                        
+                        <edomvd>Name of institution or school</edomvd>
+                                                						
+                        
+                        <edomvds>NAICS Association</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>Law Schools</edomv>
+                                                						
+                        
+                        <edomvd>Name of institution or school</edomvd>
+                                                						
+                        
+                        <edomvds>NAICS Association</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>Academies, College or University</edomv>
+                                                						
+                        
+                        <edomvd>Name of institution or school</edomvd>
+                                                						
+                        
+                        <edomvds>NAICS Association</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>GNIS</attrlabl>
+                <attrdef>GNIS civil code. Geographic Names Information System, United State Geological Survey.</attrdef>
+                <attrdefs>US Board on Geographic Names</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>NA</edomv>
+                                                						
+                        
+                        <edomvd>Code number.</edomvd>
+                                                						
+                        
+                        <edomvds>NJ OPA</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>NAICSCODE</attrlabl>
+                <attrdef>NAICS Association catagory codes</attrdef>
+                <attrdefs>North American industry Classification System (NAICS)</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>NA</edomv>
+                                                						
+                        
+                        <edomvd>Industry classifications</edomvd>
+                                                						
+                        
+                        <edomvds>NAICS</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>MUN_CODE</attrlabl>
+                <attrdef>municipal code (NJ-1040)</attrdef>
+                <attrdefs>New Jersey Department of Treasury, Division of Taxation</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>NA</edomv>
+                                                						
+                        
+                        <edomvd>NA</edomvd>
+                                                						
+                        
+                        <edomvds>NA</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>AREA_CODE</attrlabl>
+                <attrdef>Three (3) digit telephone area code for entity.</attrdef>
+                <attrdefs>TGS</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>NA</edomv>
+                                                						
+                        
+                        <edomvd>NA</edomvd>
+                                                						
+                        
+                        <edomvds>NA</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>PHONE</attrlabl>
+                <attrdef>Seven (7) digit telephone number for entity formatted as nnn-nnnn. All alphabetic characters have been translated to the corresponding numeric digit.</attrdef>
+                <attrdefs>TGS</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>NA</edomv>
+                                                						
+                        
+                        <edomvd>NA</edomvd>
+                                                						
+                        
+                        <edomvds>NA</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>ADDRESS</attrlabl>
+                <attrdef>Physical street address for entity. "PO Box", "General Delivery", "Rural Route", and "Highway Contract" addresses are not considered physical addresses and should not appear in this attribute. Some areas do not have regular city style addressing so entities in those areas may not have a street number. In such cases, the name of the road they are located on is listed in this attribute.  Some rural areas may not have named roads.  In these rare cases, this attribute will be blank.</attrdef>
+                <attrdefs>TGS</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>NA</edomv>
+                                                						
+                        
+                        <edomvd>NA</edomvd>
+                                                						
+                        
+                        <edomvds>NA</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>ADDRESS2</attrlabl>
+                <attrdef>Location within physical address, e.g., floor, suite, building.</attrdef>
+                <attrdefs>TGS</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>NA</edomv>
+                                                						
+                        
+                        <edomvd>NA</edomvd>
+                                                						
+                        
+                        <edomvds>NA</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>CITY</attrlabl>
+                <attrdef>The name of the city associated with the entity's physical address. For physical addresses that the U.S. Postal Service (USPS) delivers to, this should be a "city" acceptable to the USPS as defined in their Address Information System (AIS). Sometimes the USPS does not deliver mail to a physical address but recognizes the location (i.e., they list the location as "undeliverable"). The cities associated with these locations are acceptable. In some cases, the USPS does not recognize individual physical addresses in a city, rather, they list the city as having "General Delivery". In these cases, the city and associated zip code are acceptable (the entity's [ADDRESS] attribute will contain a street address, not "general delivery"). The entity may not actually be located within the city limits of the "city" specified in its city field. Instead, it may actually be located within the city limits of another city. In some cases, the "city" that appears in this attribute may not even be a city in an administrative sense, but it is still an acceptable "city" to the USPS. An example of this is "Notre Dame, IN". There is no city in Indiana called "Notre Dame", but this is considered an acceptable city by the USPS for any delivery going to the University of Notre Dame which is actually located in the city of South Bend. "Notre Dame", like most USPS cities, is an easily recognized place, and it gives the user of the data a good general idea of where the entity is located (if the entity is located in a small municipality, the USPS "city" may be more recognizable than the name of the municipality), and it would be part of the address one would use to send a shipment to the entity's location. Using the USPS acceptable "city" also allows someone to do a logical consistency check between the zip code and the city by using the USPS AIS.
+
+Sometimes an entity may report a city that is not accepted by the USPS, and although TGS has tried to replace those cities with an acceptable alternative, some of them may remain in this dataset.</attrdef>
+                <attrdefs>TGS</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>NA</edomv>
+                                                						
+                        
+                        <edomvd>NA</edomvd>
+                                                						
+                        
+                        <edomvds>NA</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>STATE</attrlabl>
+                <attrdef>Two (2) character abbreviation for state associated with the entity's physical address. In almost all cases this is the same as the state where the entity has been depicted geospatially. However, there are cases, particularly where an entity is part of a larger facility that cuts across state lines, where the entity's location may be depicted in a state other than the one indicated in this attribute. Also, the state in which an entity appears to be located may change depending on the scale of the state boundary theme being used.</attrdef>
+                <attrdefs>TGS</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>NJ</edomv>
+                                                						
+                        
+                        <edomvd>State of New Jersey</edomvd>
+                                                						
+                        
+                        <edomvds>NA</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>ZIP</attrlabl>
+                <attrdef>Five (5) digit USPS zip code for entity's physical location.</attrdef>
+                <attrdefs>TGS</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>NA</edomv>
+                                                						
+                        
+                        <edomvd>NA</edomvd>
+                                                						
+                        
+                        <edomvds>NA</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>ZIP4</attrlabl>
+                <attrdef>Four (4) digit USPS zip code extension. This attribute was automatically assigned using the entity's physical address and USPS address information system (AIS) data.</attrdef>
+                <attrdefs>TGS</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>NA</edomv>
+                                                						
+                        
+                        <edomvd>NA</edomvd>
+                                                						
+                        
+                        <edomvds>NA</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>FIPS</attrlabl>
+                <attrdef>Five (5) digit FIPS (Federal Information Processing Standards) Code for the County where entity is located. The first two (2) digits represent the state and the last three (3) digits identify the county within the state.</attrdef>
+                <attrdefs>TGS</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>NA</edomv>
+                                                						
+                        
+                        <edomvd>NA</edomvd>
+                                                						
+                        
+                        <edomvds>NA</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>DEGREE</attrlabl>
+                <attrdef>Highest level of degree offered by the institution.
+The values for this attribution have not been verified by TGS</attrdef>
+                <attrdefs>TGS</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>DOCTOR'S DEGREE</edomv>
+                                                						
+                        
+                        <edomvd>Indicates the facility highest level of degree offered is a Doctor's Degree.</edomvd>
+                                                						
+                        
+                        <edomvds>TGS</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>POST MASTER'S CERTIFICATE</edomv>
+                                                						
+                        
+                        <edomvd>Indicates the facility highest level of degree offered is a Post Master's Degree.</edomvd>
+                                                						
+                        
+                        <edomvds>TGS</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>MASTER'S DEGREE</edomv>
+                                                						
+                        
+                        <edomvd>Indicates the facility highest level of degree offered is a Master's Degree.</edomvd>
+                                                						
+                        
+                        <edomvds>TGS</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>ASSOCIATE'S DEGREE</edomv>
+                                                						
+                        
+                        <edomvd>Indicates the facility highest level of degree offered is a Associate's Degree.</edomvd>
+                                                						
+                        
+                        <edomvds>TGS</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>BACHELOR'S DEGREE</edomv>
+                                                						
+                        
+                        <edomvd>Indicates the facility highest level of degree offered is a Bachelor's Degree.</edomvd>
+                                                						
+                        
+                        <edomvds>TGS</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>AT LEAST 2, BUT LESS THAN 4 ACADEMIC YRS</edomv>
+                                                						
+                        
+                        <edomvd>Indicates the facility highest level of degree offered is a two to three year Degree.</edomvd>
+                                                						
+                        
+                        <edomvds>TGS</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>ENROLLMENT</attrlabl>
+                <attrdef>Indicates the total enrollment for the facility.</attrdef>
+                <attrdefs>TGS</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>NA</edomv>
+                                                						
+                        
+                        <edomvd>NA</edomvd>
+                                                						
+                        
+                        <edomvds>NA</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>Shape_Length</attrlabl>
+                <attrdef>Feature Geometry</attrdef>
+                <attrdefs>ESRI</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>NA</edomv>
+                                                						
+                        
+                        <edomvd>NA</edomvd>
+                                                						
+                        
+                        <edomvds>NA</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>Shape_Area</attrlabl>
+                <attrdef>Feature Geometry</attrdef>
+                <attrdefs>ESRI</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>NA</edomv>
+                                                						
+                        
+                        <edomvd>NA</edomvd>
+                                                						
+                        
+                        <edomvds>NA</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>DOCTORAL</attrlabl>
+                <attrdef>List of doctoral universities and colleges for use with A4432 and Economic Opportunity Act eventually.</attrdef>
+                <attrdefs>NJ Economic Development Authority</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>Yes</edomv>
+                                                						
+                        
+                        <edomvd>The school qualifies as Doctoral level for purposes of the legislaton</edomvd>
+                                                						
+                        
+                        <edomvds>NJ Economic Development Authority</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>No</edomv>
+                                                						
+                        
+                        <edomvd>The school does not qualify</edomvd>
+                                                						
+                        
+                        <edomvds>NJ Economic Development Authority</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <begdatea>2017-08-17</begdatea>
+                <enddatea>2017-08-17</enddatea>
+            </attr>
+            <attr>
+                <attrlabl>PUBLIC_RESEARCH</attrlabl>
+                <attrdef>School qualifies for the purposes of the A4432 Act. Will be used later in the Economic Opportunity Act evaluator</attrdef>
+                <attrdefs>NJ Economic Development Authority</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>Yes</edomv>
+                                                						
+                        
+                        <edomvd>Meets qualifications</edomvd>
+                                                						
+                        
+                        <edomvds>NJ Economic Development Authority</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>No</edomv>
+                                                						
+                        
+                        <edomvd>Does not meet qualifications</edomvd>
+                                                						
+                        
+                        <edomvds>NJ Economic Development Authority</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <begdatea>2017-08-17</begdatea>
+                <enddatea>2017-08-10</enddatea>
+            </attr>
+        </detailed>
+    </eainfo>
+    <distinfo>
+        <distrib>
+            <cntinfo>
+                <cntorgp>
+                    <cntorg>New Jersey Office of Planning Advocacy</cntorg>
+                    <cntper>Steven Karp</cntper>
+                </cntorgp>
+                <cntpos>GIS Manager</cntpos>
+                <cntaddr>
+                    <addrtype>mailing</addrtype>
+                    <address>PO Box 820</address>
+                    <city>Trenton</city>
+                    <state>NJ</state>
+                    <postal>08625</postal>
+                    <country>US</country>
+                </cntaddr>
+                <cntvoice>6092923160</cntvoice>
+                <cntfax>6092923292</cntfax>
+                <cntemail>steven.karp@sos.nj.gov</cntemail>
+                <cntinst>Contact the Distributor if you have any questions or concerns regarding the distribution and/or download of this data. If you have questions or concerns regarding the data itself, please contact the Metadata Contact person listed in the Metadata Reference Section.</cntinst>
+            </cntinfo>
+        </distrib>
+        <resdesc>Downloadable Data</resdesc>
+        <distliab>The State of New Jersey makes great effort to provide secure, accurate, and complete data and metadata. However, portions of the data and metadata may be incorrect or not current. Any errors or omissions should be reported for investigation. 
+
+The State of New Jersey, its officers, employees or agents shall not be liable for damages or losses of any kind arising out of or in connection with the use or performance of data and metadata, including but not limited to, damages or losses caused by reliance upon the accuracy or timeliness of any such data and metadata, or damages incurred from the viewing, distributing, or copying of those materials. 
+
+The data and metadata are provided "as is." No warranty of any kind, implied, expressed, or statutory, including but not limited to the warranties of non-infringement of third party rights, title, merchantability, fitness for a particular purpose, and freedom from computer virus, is given with respect to the data and metadata, or its hyperlinks to other Internet resources. The State disclaims any duty or obligation either to maintain availability of or to update the data and metadata.</distliab>
+        <stdorder>
+            <digform>
+                <digtinfo>
+                    <formname>Zip (Created with 7-Zip)</formname>
+                    <formvern>9.20</formvern>
+                    <filedec>7-Zip or any other program than can decompress zip files</filedec>
+                    <transize>209</transize>
+                </digtinfo>
+                <digtopt>
+                    <onlinopt>
+                        <computer>
+                            <networka>
+                                <networkr>http://nj.gov/state/planning/docs/coll_univ.zip</networkr>
+                            </networka>
+                        </computer>
+                        <computer>
+                            <networka>
+                                <networkr>http://www.nj.gov/state/planning/spc-research-resources-gis.html</networkr>
+                            </networka>
+                        </computer>
+                        <accinstr>File geodatabase feature class (zipped)</accinstr>
+                    </onlinopt>
+                </digtopt>
+            </digform>
+            <fees>None</fees>
+        </stdorder>
+    </distinfo>
+    <metainfo>
+        <metd>20171213</metd>
+        <metc>
+            <cntinfo>
+                <cntorgp>
+                    <cntorg>New Jersey Department of State, Office for Planning Advocacy</cntorg>
+                    <cntper>Steven Karp</cntper>
+                </cntorgp>
+                <cntpos>GIS Manager</cntpos>
+                <cntaddr>
+                    <addrtype>mailing</addrtype>
+                    <address>PO Box 820</address>
+                    <city>Trenton</city>
+                    <state>NJ</state>
+                    <postal>08625</postal>
+                    <country>US</country>
+                </cntaddr>
+                <cntvoice>609293160</cntvoice>
+                <cntfax>6092923292</cntfax>
+                <cntemail>steven.karp@sos.nj.gov</cntemail>
+            </cntinfo>
+        </metc>
+        <metstdn>FGDC Content Standard for Digital Geospatial Metadata</metstdn>
+        <metstdv>FGDC-STD-001-1998</metstdv>
+        <mettc>local time</mettc>
+        <metuc>NEW JERSEY DEPARTMENT OF STATE, OFFICE FOR PLANNING ADVOCACY END USER LICENSE AGREEMENT.NOTICE TO USER: THIS IS A CONTRACT. USE OF THE ACCOMPANYING DATA AND/OR SOFTWARE MEANS THAT YOU ACCEPT ALL THE TERMS AND CONDITIONS OF THIS AGREEMENT. If you do not agree with the terms and conditions of this Agreement, erase your copy or return the software and/or data to The New Jersey Office for Planning Advocacy(OPA) without using or copying it in any way. The End User is defined as any person or organization receiving these files directly from OPA. OPA grants to the End User a license to use the software, data and documentation provided the End User agrees to the following: I. LIMITED WARRANTY: Notwithstanding the special conditions regarding the subject data specified in part III of this licensing agreement, the Office for Planning Advocacy makes no representations of any kind, including but not limited to the warranties of merchantability of fitness for a particular use, nor are any such warranties to be implied, with respect to the digital software and data furnished. The Office for Planning Advocacy assumes no responsibility to maintain them in any manner or form. II. TERMS OF AGREEMENT: The data received from OPA is to be used solely by the End User and will not be reproduced or redistributed for use by anyone else, without first obtaining permission from OPA. III. SPECIAL CONDITIONS: The delineations been produced and released by the New Jersey Office for Planning Advocacy. The boundaries reflect delineations as of the date the files are posted on our website: www.nj.gov/state/planning. Any map changes accepted in the interim are not reflected in these delineations. Due to the complex nature of this mapping and the relationship of all of the individual parts of the mapping, questions regarding the the file should not be resolved by or even considered using mapping alone. For this reason, any questions relating to the mapping for the State should be directed to OPA. The information has been delivered in a standard format. OPA assumes no liability for inability of the End User to use the data/software for any financial damages caused by such an inability. OPA agrees, however, to assist in resolving any problems in using the software or data and to reproduce the data if necessary.</metuc>
+    </metainfo>
+</metadata>

@@ -1,0 +1,46 @@
+---
+title: "Some Quick Baseball Stats"
+author: "Derek Sollberger"
+date: "2023-09-17"
+format: 
+  html:
+    toc: true
+---
+
+## Lahman
+
+```{r}
+#| message: false
+#| warning: false
+library("gt")
+library("Lahman")
+library("tidyverse")
+```
+
+```{r}
+df <- Teams |>
+  filter(yearID >= 2004) #focusing on the past 18 season
+```
+
+```{r}
+#| eval: false
+readr::write_csv(df, "baseball_2004_2022.csv")
+```
+
+```{r}
+colnames(df)
+```
+
+```{r}
+df |>
+  select(yearID, franchID, HR) |> #select columns to keep
+  slice_max(HR, n = 10) |> #finds 10 highest values by numerical variable
+  gt() #makes nice tables
+```
+
+```{r}
+df |>
+  select(yearID, franchID, ERA) |> #select columns to keep
+  slice_min(ERA, n = 10) |> #finds 10 loweest values by numerical variable
+  gt() #makes nice tables
+```

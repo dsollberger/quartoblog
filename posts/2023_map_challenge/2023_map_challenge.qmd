@@ -1,0 +1,301 @@
+---
+title: "30 Day Map Challenge"
+author: "Derek Sollberger"
+date: "2023-11-05"
+format: 
+  html:
+    toc: true
+---
+
+## Introduction
+
+Even though I have done the [30 Day Map Challenge](https://30daymapchallenge.com/) each of the past two years, since data visualization is just a hobby for me, I feel like I start from scratch each time.  This year, I decided to lean into that feeling and treat the month as production of a long blog post that likewise nearly starts from scratch.
+
+![](30dmc-2023.png)
+
+I am interested in learning about the state of New Jersey, and we will perhaps get data from sites such as
+
+* [NJDEP Bureau of GIS](https://www.nj.gov/dep/gis/) and its [ArcGIS repository](https://gisdata-njdep.opendata.arcgis.com/) 
+* [NJGIN Open Data](https://njogis-newjersey.opendata.arcgis.com/)
+
+Most of my work here will be performed with the `ggplot2` and `sf` ("special features") packages in the `R` programmer universe.
+
+```{r}
+#| message: false
+#| warning: false
+library("dplyr")
+library("ggplot2")
+library("ggtext")
+library("sf")
+```
+
+
+# Day 1: Points
+
+Initially, my searches for "New Jersey cities shapefile" and "New Jersey colleges shapefile" actually retrived polygons, so I am already taking liberties about what 'points' will mean here.  I still intend on starting simple and working outward.
+
+First, we load the shapefile.  This data comes from the NJGIN ([source](https://njogis-newjersey.opendata.arcgis.com/datasets/60070a28b95248e9a1f3398d37b91775/explore))
+
+```{r}
+nj_colleges <- sf::st_read("data/Colleges_and_Universities_in_NJ/Colleges_and_Universities_in_NJ.shp")
+```
+
+Now, we can make an initial map using `ggplot2`.
+
+```{r}
+# make rough map
+nj_colleges |>
+  ggplot() +
+  geom_sf()
+```
+
+## Graph Labels
+
+For now, I should get in the habit of labeling my graphs.
+
+```{r}
+nj_colleges |>
+  ggplot() +
+  geom_sf() +
+  labs(title = "Colleges of New Jersey",
+       subtitle = "30 Day Map Challenge, Day 1: Points",
+       caption = "Data source: NJGIN")
+```
+
+Of course, this product lacks meaning without context, but that gives us something to look forward to in future days!
+
+
+# Day 2: Lines
+
+Each 30 Day Map Challenge probably started with the same first 3 themes to emphasize one of the main ways to classify spatial data: points, lines, and polygons.  Those notions affect how the data is stored in shapefiles.
+
+Today, in the theme of building maps about New Jersey, let us simply plot the state itself.  Once again, I will intentionally miss the academic meaning of the theme ("lines"); the data is of polygon type, but I am thinking of the state border as one line.  This data comes from the NJGIN ([source](https://njogis-newjersey.opendata.arcgis.com/datasets/state-boundary-of-nj/explore))
+
+```{r}
+nj_state_shp <- sf::st_read("data/State_Boundary_of_NJ/State_Boundary_of_NJ.shp")
+```
+
+We can continue to adapt code and apply yesterday's code to today's shapefile.
+
+```{r}
+nj_state_shp |> #changed the data set
+  ggplot() +
+  geom_sf() +
+  labs(title = "The State of New Jersey",
+       subtitle = "30 Day Map Challenge, Day 2: Lines",
+       caption = "Data source: NJGIN")
+```
+
+## Aesthetic Customization
+
+Each day, I may challenge myself to add to the complexity.  For now, let us emphasize the "line" in the picture by customizing the color.
+
+```{r}
+nj_state_shp |>
+  ggplot() +
+  geom_sf(color = "blue", linewidth = 3) + #updated attributes
+  labs(title = "The State of New Jersey",
+       subtitle = "30 Day Map Challenge, Day 2: Lines",
+       caption = "Data source: NJGIN")
+```
+
+
+# Day 3: Polygons
+
+Well, after actually using 'polygon' data in the previous two days, finally being advised to use polygons should be simple here.  For mentally planning ideas for map making, one can think "regions" when dealing with polygon data. This data comes from the NJGIN ([source](https://njogis-newjersey.opendata.arcgis.com/datasets/newjersey::county-boundaries-of-nj/explore))
+
+```{r}
+nj_counties <- sf::st_read("data/County_Boundaries_of_NJ/County_Boundaries_of_NJ.shp")
+```
+
+Notice that the `geom_sf` layer function works in the `ggplot` framework and will handle the polygon data well.
+
+```{r}
+nj_counties |>
+  ggplot() +
+  geom_sf() +
+  labs(title = "The Counties of New Jersey",
+       subtitle = "30 Day Map Challenge, Day 3: Polygons",
+       caption = "Data source: NJGIN")
+```
+
+## Aesthetic Mapping
+
+One of the joys of programming in R is the ease of color-coding by a categorical label.  Here, we can create a rather impressive map by letting the software choose various colors for the counties.
+
+First, we should get a sense of the variable names.
+
+```{r}
+colnames(nj_counties)
+```
+
+
+```{r}
+nj_counties |>
+  ggplot() +
+  geom_sf(aes(fill = COUNTY)) +
+  labs(title = "The Counties of New Jersey",
+       subtitle = "30 Day Map Challenge, Day 3: Polygons",
+       caption = "Data source: NJGIN") +
+  theme(legend.position = "none")
+```
+
+
+# Day 4: A Bad Map
+
+If you're following along, you might have wondered why I didn't label the counties in the previous map.  Here, for "Day 4: A Bad Map", let me show you.
+
+## Centroids
+
+The way that `geom_text` or `geom_label` work inside `ggplot` is that you need to indicate the aesthetics of locations (i.e. x and y coordinates) and labels.  That is, while polygons are many points of data, we need to compute one point per polygon to tell the software where to put the labels.  One way to compute those locations is to compute the centroids (and, long story short, there are several ways to compute centroids).
+
+```{r}
+# Calculate the centroid of each hexagon to add the label
+# https://stackoverflow.com/questions/49343958/do-the-values-returned-by-rgeosgcentroid-and-sfst-centroid-differ
+centers <- data.frame(
+  st_coordinates(st_centroid(nj_counties$geometry)),
+  id=nj_counties$COUNTY)
+
+nj_counties <- nj_counties |>
+  left_join(centers, by = c("COUNTY" = "id"))
+```
+
+Now, the data frame has convenient "X" and "Y" coordinates (which happen to be capital letters in these default codes).
+
+## Aesthetic Labeling
+
+Now let us see how `geom_label` works with our map so far.
+
+```{r}
+nj_counties |>
+  ggplot() +
+  geom_sf(aes(fill = COUNTY)) +
+  geom_label(aes(x = X, y = Y, label = COUNTY)) +
+  labs(title = "The Counties of New Jersey",
+       subtitle = "30 Day Map Challenge, Day 4: A Bad Map",
+       caption = "Data source: NJGIN") +
+  theme(legend.position = "none")
+```
+
+There are certainly ways to improve the readability and beauty of this map, and we might explore those ways in future days.
+
+
+# Day 5: Analog Map
+
+The intent of the 'Analog Map' theme is to encourage us map making nerds to draw a map "in real life" (or, "in meat space"). However, there is an idea that has been on my mind, so I want to try to overlap shapefiles of New Jersey and California---that is, closer to the word "analogy".
+
+Today's shapefile for the state of California comes from the [California Open Data Portal](https://data.ca.gov/dataset/ca-geographic-boundaries/resource/3db1e426-fb51-44f5-82d5-a54d7c6e188b).
+
+```{r}
+ca_state_shp <- sf::st_read("data/ca-state-boundary/CA_State_TIGER2016.shp")
+```
+
+## Coordinate Reference Systems
+
+Long story short, each map of the 3D Earth is projected onto a 2D plane, but there are ways to perform that projection (with goals such as maintaining areas or shapes as well as possible).  For our purposes, the work here will be easier if both of the California and New Jersey shapefiles use the same projection.
+
+```{r}
+# check CRS
+st_crs(ca_state_shp)[1]
+st_crs(nj_state_shp)[1]
+```
+
+```{r}
+ca_state_shp <- st_transform(ca_state_shp, st_crs(nj_state_shp))
+```
+
+
+We can observe that the projection systems are not the same. Hopefully, the simplest fix is to simply re-project the CRS of the California shapefile into the CRS of the New Jersey shapefile.
+
+```{r}
+# set CRS
+# st_crs(ca_state_shp) <- st_crs(nj_state_shp)
+
+# verify
+st_crs(ca_state_shp)[1]
+```
+
+So far, here is the juxtaposition.
+
+```{r}
+nj_state_shp |>
+  ggplot() +
+  geom_sf() +
+  geom_sf(data = ca_state_shp)
+```
+
+
+## Coordinates
+
+For some of the math I intend on carrying out, I will need to manipulate the latitude and/or longitude values (i.e. the x and y coordinates). We can extract coordinates using the `st_geometry` command.
+
+```{r}
+ca_sfc <- st_geometry(ca_state_shp) #extracts geom column
+nj_sfc <- st_geometry(nj_state_shp) #extracts geom column
+```
+
+Next, I want the median longitude value for each shapefile.  I am going to brute force my way through the list data type.
+
+```{r}
+# ca_long_median_x <- median(ca_sfc[[1]][[7]][[1]][,1])
+# nj_long_median_x <- median(nj_sfc[[1]][[1]][,1])
+# median_difference_x <- nj_long_median_x - ca_long_median_x
+# 
+# ca_long_median_y <- median(ca_sfc[[1]][[7]][[1]][,2])
+# nj_long_median_y <- median(nj_sfc[[1]][[1]][,2])
+# median_difference_y <- nj_long_median_y - ca_long_median_y
+```
+
+Maybe centroids will work better?
+
+```{r}
+ca_centroid <- st_coordinates(st_centroid(ca_state_shp$geometry))
+nj_centroid <- st_coordinates(st_centroid(nj_state_shp$geometry))
+long_diff <- nj_centroid[1] - ca_centroid[1]
+lat_diff <- nj_centroid[2] - ca_centroid[2]
+```
+
+
+## Translation
+
+Now, I want to translate the Calfornia shape over to the New Jersey shape.  Some social media posts were clever by aligning San Francisco with New York City, but my interest came from maintaining latitude values (which might help me understand weather and climate), so that will take place with the zero in `c(median_difference, 0)`.
+
+```{r}
+# ca_shifted_sfc <- ca_sfc + c(median_difference_x, 0)
+# ca_shifted_shp <- st_set_geometry(ca_state_shp, ca_shifted_sfc)
+# st_crs(ca_shifted_shp) <- st_crs(nj_state_shp) #ensure same CRS
+```
+
+```{r}
+# using the centroids instead
+ca_shifted_sfc <- ca_sfc + c(long_diff, lat_diff)
+ca_shifted_shp <- st_set_geometry(ca_state_shp, ca_shifted_sfc)
+st_crs(ca_shifted_shp) <- st_crs(nj_state_shp) #ensure same CRS
+```
+
+So far, here is the juxtaposition. I decided to place the New Jersey layer on top of the Calfornia layer.
+
+```{r}
+ca_shifted_shp |>
+  ggplot() +
+  geom_sf() +
+  geom_sf(data = nj_state_shp)
+```
+
+## Markdown Titles
+
+With just two objects in one map, one neat way of labeling the objects is to change the text colors in the title using the `ggtext` package.
+
+```{r}
+title_string <- "<span style='color:brown'><b>California</b></span> and <span style='color:blue'><b>New Jersey</b></span>"
+
+ca_shifted_shp |>
+  ggplot() +
+  geom_sf(color = "brown", fill = "brown") +
+  geom_sf(data = nj_state_shp, color = "blue", fill = "blue") +
+  labs(title = title_string,
+       subtitle = "30 Day Map Challenge\nDay 5: Analog Map",
+       caption = "Data sources: NJGIN\nand CA Open Data Portal") +
+  theme(plot.title = element_markdown()) #need ggtext here
+```
+
