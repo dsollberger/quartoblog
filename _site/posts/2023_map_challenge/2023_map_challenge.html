@@ -200,6 +200,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#translation" id="toc-translation" class="nav-link" data-scroll-target="#translation">Translation</a></li>
   <li><a href="#markdown-titles" id="toc-markdown-titles" class="nav-link" data-scroll-target="#markdown-titles">Markdown Titles</a></li>
   </ul></li>
+  <li><a href="#day-6-asia" id="toc-day-6-asia" class="nav-link" data-scroll-target="#day-6-asia">Day 6: Asia</a>
+  <ul class="collapse">
+  <li><a href="#patchwork" id="toc-patchwork" class="nav-link" data-scroll-target="#patchwork">Patchwork</a></li>
+  </ul></li>
+  <li><a href="#day-7-navigation" id="toc-day-7-navigation" class="nav-link" data-scroll-target="#day-7-navigation">Day 7: Navigation</a>
+  <ul class="collapse">
+  <li><a href="#recoding" id="toc-recoding" class="nav-link" data-scroll-target="#recoding">Recoding</a></li>
+  </ul></li>
+  <li><a href="#day-8-africa" id="toc-day-8-africa" class="nav-link" data-scroll-target="#day-8-africa">Day 8: Africa</a></li>
+  <li><a href="#day-9-hexagons" id="toc-day-9-hexagons" class="nav-link" data-scroll-target="#day-9-hexagons">Day 9: Hexagons</a>
+  <ul class="collapse">
+  <li><a href="#square-grid" id="toc-square-grid" class="nav-link" data-scroll-target="#square-grid">Square Grid</a></li>
+  </ul></li>
+  <li><a href="#day-10-north-america" id="toc-day-10-north-america" class="nav-link" data-scroll-target="#day-10-north-america">Day 10: North America</a></li>
   </ul>
 </nav>
     </div>
@@ -223,7 +237,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"dplyr"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggtext"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"sf"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"patchwork"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"sf"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="day-1-points" class="level1">
@@ -441,16 +456,14 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
 [1] "NAD83 / New Jersey (ftUS)"</code></pre>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>ca_state_shp <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(ca_state_shp, <span class="fu">st_crs</span>(nj_state_shp))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <p>We can observe that the projection systems are not the same. Hopefully, the simplest fix is to simply re-project the CRS of the California shapefile into the CRS of the New Jersey shapefile.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set CRS</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># st_crs(ca_state_shp) &lt;- st_crs(nj_state_shp)</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># verify</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(ca_state_shp)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set CRS</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co"># st_crs(ca_state_shp) &lt;- st_crs(nj_state_shp)</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>ca_state_shp <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(ca_state_shp, <span class="fu">st_crs</span>(nj_state_shp))</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># verify</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(ca_state_shp)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$input
 [1] "NAD83 / New Jersey (ftUS)"</code></pre>
@@ -458,12 +471,12 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
 </div>
 <p>So far, here is the juxtaposition.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>nj_state_shp <span class="sc">|&gt;</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> ca_state_shp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>nj_state_shp <span class="sc">|&gt;</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> ca_state_shp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="2023_map_challenge_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+<p><img src="2023_map_challenge_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -471,73 +484,297 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
 <h2 class="anchored" data-anchor-id="coordinates">Coordinates</h2>
 <p>For some of the math I intend on carrying out, I will need to manipulate the latitude and/or longitude values (i.e.&nbsp;the x and y coordinates). We can extract coordinates using the <code>st_geometry</code> command.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>ca_sfc <span class="ot">&lt;-</span> <span class="fu">st_geometry</span>(ca_state_shp) <span class="co">#extracts geom column</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>nj_sfc <span class="ot">&lt;-</span> <span class="fu">st_geometry</span>(nj_state_shp) <span class="co">#extracts geom column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>ca_sfc <span class="ot">&lt;-</span> <span class="fu">st_geometry</span>(ca_state_shp) <span class="co">#extracts geom column</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>nj_sfc <span class="ot">&lt;-</span> <span class="fu">st_geometry</span>(nj_state_shp) <span class="co">#extracts geom column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Next, I want the median longitude value for each shapefile. I am going to brute force my way through the list data type.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ca_long_median_x &lt;- median(ca_sfc[[1]][[7]][[1]][,1])</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co"># nj_long_median_x &lt;- median(nj_sfc[[1]][[1]][,1])</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co"># median_difference_x &lt;- nj_long_median_x - ca_long_median_x</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ca_long_median_y &lt;- median(ca_sfc[[1]][[7]][[1]][,2])</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co"># nj_long_median_y &lt;- median(nj_sfc[[1]][[1]][,2])</span></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co"># median_difference_y &lt;- nj_long_median_y - ca_long_median_y</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ca_long_median_x &lt;- median(ca_sfc[[1]][[7]][[1]][,1])</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># nj_long_median_x &lt;- median(nj_sfc[[1]][[1]][,1])</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># median_difference_x &lt;- nj_long_median_x - ca_long_median_x</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ca_long_median_y &lt;- median(ca_sfc[[1]][[7]][[1]][,2])</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="co"># nj_long_median_y &lt;- median(nj_sfc[[1]][[1]][,2])</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co"># median_difference_y &lt;- nj_long_median_y - ca_long_median_y</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Maybe centroids will work better?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>ca_centroid <span class="ot">&lt;-</span> <span class="fu">st_coordinates</span>(<span class="fu">st_centroid</span>(ca_state_shp<span class="sc">$</span>geometry))</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>nj_centroid <span class="ot">&lt;-</span> <span class="fu">st_coordinates</span>(<span class="fu">st_centroid</span>(nj_state_shp<span class="sc">$</span>geometry))</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>long_diff <span class="ot">&lt;-</span> nj_centroid[<span class="dv">1</span>] <span class="sc">-</span> ca_centroid[<span class="dv">1</span>]</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>lat_diff <span class="ot">&lt;-</span> nj_centroid[<span class="dv">2</span>] <span class="sc">-</span> ca_centroid[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>ca_centroid <span class="ot">&lt;-</span> <span class="fu">st_coordinates</span>(<span class="fu">st_centroid</span>(ca_state_shp<span class="sc">$</span>geometry))</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>nj_centroid <span class="ot">&lt;-</span> <span class="fu">st_coordinates</span>(<span class="fu">st_centroid</span>(nj_state_shp<span class="sc">$</span>geometry))</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>long_diff <span class="ot">&lt;-</span> nj_centroid[<span class="dv">1</span>] <span class="sc">-</span> ca_centroid[<span class="dv">1</span>]</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>lat_diff <span class="ot">&lt;-</span> nj_centroid[<span class="dv">2</span>] <span class="sc">-</span> ca_centroid[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="translation" class="level2">
 <h2 class="anchored" data-anchor-id="translation">Translation</h2>
 <p>Now, I want to translate the Calfornia shape over to the New Jersey shape. Some social media posts were clever by aligning San Francisco with New York City, but my interest came from maintaining latitude values (which might help me understand weather and climate), so that will take place with the zero in <code>c(median_difference, 0)</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ca_shifted_sfc &lt;- ca_sfc + c(median_difference_x, 0)</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ca_shifted_shp &lt;- st_set_geometry(ca_state_shp, ca_shifted_sfc)</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># st_crs(ca_shifted_shp) &lt;- st_crs(nj_state_shp) #ensure same CRS</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ca_shifted_sfc &lt;- ca_sfc + c(median_difference_x, 0)</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ca_shifted_shp &lt;- st_set_geometry(ca_state_shp, ca_shifted_sfc)</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># st_crs(ca_shifted_shp) &lt;- st_crs(nj_state_shp) #ensure same CRS</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using the centroids instead</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>ca_shifted_sfc <span class="ot">&lt;-</span> ca_sfc <span class="sc">+</span> <span class="fu">c</span>(long_diff, lat_diff)</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>ca_shifted_shp <span class="ot">&lt;-</span> <span class="fu">st_set_geometry</span>(ca_state_shp, ca_shifted_sfc)</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(ca_shifted_shp) <span class="ot">&lt;-</span> <span class="fu">st_crs</span>(nj_state_shp) <span class="co">#ensure same CRS</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using the centroids instead</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>ca_shifted_sfc <span class="ot">&lt;-</span> ca_sfc <span class="sc">+</span> <span class="fu">c</span>(long_diff, lat_diff)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>ca_shifted_shp <span class="ot">&lt;-</span> <span class="fu">st_set_geometry</span>(ca_state_shp, ca_shifted_sfc)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(ca_shifted_shp) <span class="ot">&lt;-</span> <span class="fu">st_crs</span>(nj_state_shp) <span class="co">#ensure same CRS</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>So far, here is the juxtaposition. I decided to place the New Jersey layer on top of the Calfornia layer.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>ca_shifted_shp <span class="sc">|&gt;</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> nj_state_shp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>ca_shifted_shp <span class="sc">|&gt;</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> nj_state_shp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="2023_map_challenge_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+<p><img src="2023_map_challenge_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>I ended up maintaining the areas, but alas, not the latitude values.</p>
 </section>
 <section id="markdown-titles" class="level2">
 <h2 class="anchored" data-anchor-id="markdown-titles">Markdown Titles</h2>
 <p>With just two objects in one map, one neat way of labeling the objects is to change the text colors in the title using the <code>ggtext</code> package.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>title_string <span class="ot">&lt;-</span> <span class="st">"&lt;span style='color:brown'&gt;&lt;b&gt;California&lt;/b&gt;&lt;/span&gt; and &lt;span style='color:blue'&gt;&lt;b&gt;New Jersey&lt;/b&gt;&lt;/span&gt;"</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>ca_shifted_shp <span class="sc">|&gt;</span></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">color =</span> <span class="st">"brown"</span>, <span class="at">fill =</span> <span class="st">"brown"</span>) <span class="sc">+</span></span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> nj_state_shp, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">fill =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> title_string,</span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"30 Day Map Challenge</span><span class="sc">\n</span><span class="st">Day 5: Analog Map"</span>,</span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Data sources: NJGIN</span><span class="sc">\n</span><span class="st">and CA Open Data Portal"</span>) <span class="sc">+</span></span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_markdown</span>()) <span class="co">#need ggtext here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>title_string <span class="ot">&lt;-</span> <span class="st">"&lt;span style='color:brown'&gt;&lt;b&gt;California&lt;/b&gt;&lt;/span&gt; and &lt;span style='color:blue'&gt;&lt;b&gt;New Jersey&lt;/b&gt;&lt;/span&gt;"</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>ca_shifted_shp <span class="sc">|&gt;</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">color =</span> <span class="st">"brown"</span>, <span class="at">fill =</span> <span class="st">"brown"</span>) <span class="sc">+</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> nj_state_shp, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">fill =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> title_string,</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"30 Day Map Challenge</span><span class="sc">\n</span><span class="st">Day 5: Analog Map"</span>,</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Data sources: NJGIN</span><span class="sc">\n</span><span class="st">and CA Open Data Portal"</span>) <span class="sc">+</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_markdown</span>()) <span class="co">#need ggtext here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="2023_map_challenge_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+<p><img src="2023_map_challenge_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-
-
 </section>
+</section>
+<section id="day-6-asia" class="level1">
+<h1>Day 6: Asia</h1>
+<p>Several of the themes in this year’s 30 Day Map Challenge are the names of the continents. For this, I think I will answer the thought “New Jersey is close to the size of ____”.</p>
+<p>The following shapefile can be found in the Princeton University Library’s Digital Maps and Geospatial Data collection.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># https://maps.princeton.edu/catalog/stanford-yt530bw9654</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>kuwait_shp <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_read</span>(<span class="st">"data/Kuwait_data/KWT_adm1.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `KWT_adm1' from data source 
+  `C:\Users\freex\Documents\GitHub\quartoblog\posts\2023_map_challenge\data\Kuwait_data\KWT_adm1.shp' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 6 features and 12 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 46.55062 ymin: 28.52461 xmax: 48.65403 ymax: 30.08444
+Geodetic CRS:  WGS 84</code></pre>
+</div>
+</div>
+<p>We can store maps as variables in the R programming language.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>kuwait_map <span class="ot">&lt;-</span> kuwait_shp <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_sf</span>()</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>nj_map <span class="ot">&lt;-</span> nj_state_shp <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_sf</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="patchwork" class="level2">
+<h2 class="anchored" data-anchor-id="patchwork">Patchwork</h2>
+<p>Using the <code>patchwork</code> package, we can place the maps side-by-side.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># patchwork</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>kuwait_map <span class="sc">+</span> nj_map <span class="sc">+</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Kuwait is close to the size of New Jersey"</span>,</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"30 Day Map Challenge, Day 6: Asia"</span>,</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Data sources: NJGIN and Princeton Univ"</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2023_map_challenge_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="day-7-navigation" class="level1">
+<h1>Day 7: Navigation</h1>
+<p>Now we get to what the “Lines” day could have been. I downloaded a shapefile (<a href="https://www.arcgis.com/home/item.html?id=2b11e237a6e149c0a94027780c22c9c4">source</a>) with all of the roads in New Jersey, but that was too much information for this casual project. Also that file wasn’t formatted in a way that was easy to digest</p>
+<p>Instead, I looked for a more sparse data set, and found <a href="https://catalog.data.gov/dataset/tiger-line-shapefile-2019-state-new-jersey-primary-and-secondary-roads-state-based-shapefile">one</a> at Data.gov.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">#nj_road_shp &lt;- sf::st_read("data/Tran_road_NG911/Tran_road.shp")</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>nj_road_shp <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_read</span>(<span class="st">"data/tl_2019_34_prisecroads/tl_2019_34_prisecroads.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `tl_2019_34_prisecroads' from data source 
+  `C:\Users\freex\Documents\GitHub\quartoblog\posts\2023_map_challenge\data\tl_2019_34_prisecroads\tl_2019_34_prisecroads.shp' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 2834 features and 4 fields
+Geometry type: LINESTRING
+Dimension:     XY
+Bounding box:  xmin: -75.52117 ymin: 38.94787 xmax: -73.91159 ymax: 41.35297
+Geodetic CRS:  NAD83</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>nj_road_shp <span class="sc">|&gt;</span> </span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"The Major Roads of New Jersey"</span>,</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"30 Day Map Challenge, Day 7: Navigation"</span>,</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Data source: Data.gov"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2023_map_challenge_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>This shapefile was easier to navigate (pun intended).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(nj_road_shp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 6 features and 4 fields
+Geometry type: LINESTRING
+Dimension:     XY
+Bounding box:  xmin: -74.64413 ymin: 40.48055 xmax: -74.04469 ymax: 40.73207
+Geodetic CRS:  NAD83
+        LINEARID            FULLNAME RTTYP MTFCC                       geometry
+1   110457975956 New Jersey Tpke Exd     M S1100 LINESTRING (-74.11917 40.69...
+2  1105046014336 New Jersey Tpke Exd     M S1100 LINESTRING (-74.11926 40.69...
+3  1105047389300 New Jersey Tpke Exd     M S1100 LINESTRING (-74.15602 40.70...
+4  1105646774349 New Jersey Tpke Exd     M S1100 LINESTRING (-74.04613 40.73...
+5  1105046014337 New Jersey Tpke Exd     M S1100 LINESTRING (-74.11926 40.69...
+6 11010934626794      US Hwy 206 Byp     U S1200 LINESTRING (-74.63902 40.48...</code></pre>
+</div>
+</div>
+<p>We can highlight the road types.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>nj_road_shp <span class="sc">|&gt;</span> </span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">color =</span> RTTYP)) <span class="sc">+</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"The Major Roads of New Jersey"</span>,</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"30 Day Map Challenge, Day 7: Navigation"</span>,</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Data source: Data.gov"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2023_map_challenge_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<section id="recoding" class="level2">
+<h2 class="anchored" data-anchor-id="recoding">Recoding</h2>
+<p>Let us try to redo the labels in plain language according to the <a href="https://www.census.gov/library/reference/code-lists/route-type-codes.html">US Census codes for road types</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>nj_road_shp <span class="sc">|&gt;</span> </span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">road_type =</span> <span class="fu">case_match</span>(RTTYP,</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"C"</span> <span class="sc">~</span> <span class="st">"County"</span>,</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"I"</span> <span class="sc">~</span> <span class="st">"Interstate"</span>,</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"M"</span> <span class="sc">~</span> <span class="st">"common name"</span>,</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"S"</span> <span class="sc">~</span> <span class="st">"State recognized"</span>,</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"U"</span> <span class="sc">~</span> <span class="st">"U.S."</span>,</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">.default =</span> <span class="st">"other"</span></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">|&gt;</span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">color =</span> road_type)) <span class="sc">+</span></span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"The Major Roads of New Jersey"</span>,</span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"30 Day Map Challenge, Day 7: Navigation"</span>,</span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Data source: Data.gov"</span>) <span class="sc">+</span></span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name =</span> <span class="st">"Road Type"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2023_map_challenge_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="day-8-africa" class="level1">
+<h1>Day 8: Africa</h1>
+<p>The country in Africa that is closest to the size of New Jersey is Eswatini. Let us get that shapefile (<a href="https://data.humdata.org/dataset/cod-ab-swz?">source</a>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>eswatini_shp <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">read_sf</span>(<span class="st">"data/swz_admbnda_cso2007_shp/swz_admbnda_adm0_CSO_2007.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>I am simply adapting code from before.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>eswatini_map <span class="ot">&lt;-</span> eswatini_shp <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_sf</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># patchwork</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>eswatini_map <span class="sc">+</span> nj_map <span class="sc">+</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Eswatini is close to the size of New Jersey"</span>,</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"30 Day Map Challenge, Day 8: Africa"</span>,</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Data sources: NJGIN and</span><span class="sc">\n</span><span class="st">Humanitarian Data Exchange"</span></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2023_map_challenge_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="day-9-hexagons" class="level1">
+<h1>Day 9: Hexagons</h1>
+<p>In years past, I combined state-by-state data with an established hexagon map of the United States. Today, I am trying instead to apply a hexagon-cell heat map to some data.</p>
+<p>Whelp, I found some great data sets that would have been great here, but they were hosted on sites that did not actually have download links for open source use. Instead, I will use a list of US cities found at <a href="https://simplemaps.com/data/us-cities">https://simplemaps.com/data/us-cities</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>us_cities_df <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"data/simplemaps_uscities/uscities.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 30844 Columns: 17
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (9): city, city_ascii, state_id, state_name, county_fips, county_name, s...
+dbl (6): lat, lng, population, density, ranking, id
+lgl (2): military, incorporated
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<p>Now we can make a density map of New Jersey cities (note: density map of the city names, not of the human populations).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>us_cities_df <span class="sc">|&gt;</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(state_id <span class="sc">==</span> <span class="st">"NJ"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> lng, <span class="at">y =</span> lat)) <span class="sc">+</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hex</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2023_map_challenge_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<section id="square-grid" class="level2">
+<h2 class="anchored" data-anchor-id="square-grid">Square Grid</h2>
+<p>The viewing window seems a bit skewed, and there is a lot of empty space. Next, I will</p>
+<ul>
+<li>apply a <code>coord_equal</code> layer</li>
+<li>change the <code>geom_hex</code> binwidth (by guess-and-check)</li>
+<li>apply slightly more divergent colors</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>us_cities_df <span class="sc">|&gt;</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(state_id <span class="sc">==</span> <span class="st">"NJ"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> lng, <span class="at">y =</span> lat)) <span class="sc">+</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hex</span>(<span class="at">binwidth =</span> <span class="fu">c</span>(<span class="fl">0.15</span>, <span class="fl">0.15</span>)) <span class="sc">+</span></span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density Map of New Jersey Cities"</span>,</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"30 Day Map Challenge, Day 9: Hexagons"</span>,</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Data Source: SimpleMaps"</span>) <span class="sc">+</span></span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"green"</span>, <span class="at">high =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2023_map_challenge_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="day-10-north-america" class="level1">
+<h1>Day 10: North America</h1>
+<p>While pointing out New Jersey in a larger map of North America subdivisions (states, provinces) makes sense here, I am going to contine my silly comparison of land mass sizes.</p>
+<p>Among countries in North America, the one closest in size to New Jersey is El Salvador.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>el_salvador_shp <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">read_sf</span>(<span class="st">"data/slv_adm_gadm_2021_shp/slv_admbnda_adm0_gadm_20210204.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>I am once again adapting code from before.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>el_salvador_map <span class="ot">&lt;-</span> el_salvador_shp <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_sf</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># patchwork</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>el_salvador_map <span class="sc">+</span> nj_map <span class="sc">+</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"El Salvador is close to the size of New Jersey"</span>,</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"30 Day Map Challenge, Day 10: North America"</span>,</span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Data sources: NJGIN and</span><span class="sc">\n</span><span class="st">Humanitarian Data Exchange"</span></span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2023_map_challenge_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->

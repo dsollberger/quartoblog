@@ -26,6 +26,7 @@ Most of my work here will be performed with the `ggplot2` and `sf` ("special fea
 library("dplyr")
 library("ggplot2")
 library("ggtext")
+library("patchwork")
 library("sf")
 ```
 
@@ -200,16 +201,12 @@ st_crs(ca_state_shp)[1]
 st_crs(nj_state_shp)[1]
 ```
 
-```{r}
-ca_state_shp <- st_transform(ca_state_shp, st_crs(nj_state_shp))
-```
-
-
 We can observe that the projection systems are not the same. Hopefully, the simplest fix is to simply re-project the CRS of the California shapefile into the CRS of the New Jersey shapefile.
 
 ```{r}
 # set CRS
 # st_crs(ca_state_shp) <- st_crs(nj_state_shp)
+ca_state_shp <- st_transform(ca_state_shp, st_crs(nj_state_shp))
 
 # verify
 st_crs(ca_state_shp)[1]
@@ -282,6 +279,8 @@ ca_shifted_shp |>
   geom_sf(data = nj_state_shp)
 ```
 
+I ended up maintaining the areas, but alas, not the latitude values.
+
 ## Markdown Titles
 
 With just two objects in one map, one neat way of labeling the objects is to change the text colors in the title using the `ggtext` package.
@@ -299,3 +298,187 @@ ca_shifted_shp |>
   theme(plot.title = element_markdown()) #need ggtext here
 ```
 
+
+# Day 6: Asia
+
+Several of the themes in this year's 30 Day Map Challenge are the names of the continents.  For this, I think I will answer the thought "New Jersey is close to the size of ____".
+
+The following shapefile can be found in the Princeton University Library's Digital Maps and Geospatial Data collection.
+
+```{r}
+# https://maps.princeton.edu/catalog/stanford-yt530bw9654
+kuwait_shp <- sf::st_read("data/Kuwait_data/KWT_adm1.shp")
+```
+
+We can store maps as variables in the R programming language.
+
+```{r}
+kuwait_map <- kuwait_shp |> ggplot() + geom_sf()
+nj_map <- nj_state_shp |> ggplot() + geom_sf()
+```
+
+## Patchwork
+
+Using the `patchwork` package, we can place the maps side-by-side.
+
+```{r}
+# patchwork
+kuwait_map + nj_map +
+  plot_annotation(
+    title = "Kuwait is close to the size of New Jersey",
+    subtitle = "30 Day Map Challenge, Day 6: Asia",
+    caption = "Data sources: NJGIN and Princeton Univ"
+  )
+```
+
+
+# Day 7: Navigation
+
+Now we get to what the "Lines" day could have been.  I downloaded a shapefile ([source](https://www.arcgis.com/home/item.html?id=2b11e237a6e149c0a94027780c22c9c4)) with all of the roads in New Jersey, but that was too much information for this casual project.  Also that file wasn't formatted in a way that was easy to digest
+
+Instead, I looked for a more sparse data set, and found [one](https://catalog.data.gov/dataset/tiger-line-shapefile-2019-state-new-jersey-primary-and-secondary-roads-state-based-shapefile) at Data.gov.
+
+```{r}
+#nj_road_shp <- sf::st_read("data/Tran_road_NG911/Tran_road.shp")
+nj_road_shp <- sf::st_read("data/tl_2019_34_prisecroads/tl_2019_34_prisecroads.shp")
+```
+
+```{r}
+nj_road_shp |> 
+  ggplot() + 
+  geom_sf() +
+  labs(title = "The Major Roads of New Jersey",
+       subtitle = "30 Day Map Challenge, Day 7: Navigation",
+       caption = "Data source: Data.gov")
+```
+
+This shapefile was easier to navigate (pun intended).
+
+```{r}
+head(nj_road_shp)
+```
+
+We can highlight the road types.
+
+```{r}
+nj_road_shp |> 
+  ggplot() + 
+  geom_sf(aes(color = RTTYP)) +
+  labs(title = "The Major Roads of New Jersey",
+       subtitle = "30 Day Map Challenge, Day 7: Navigation",
+       caption = "Data source: Data.gov")
+```
+
+## Recoding
+
+Let us try to redo the labels in plain language according to the [US Census codes for road types](https://www.census.gov/library/reference/code-lists/route-type-codes.html).
+
+```{r}
+nj_road_shp |> 
+  mutate(road_type = case_match(RTTYP,
+    "C" ~ "County",
+    "I" ~ "Interstate",
+    "M" ~ "common name",
+    "S" ~ "State recognized",
+    "U" ~ "U.S.",
+    .default = "other"
+  )) |>
+  ggplot() + 
+  geom_sf(aes(color = road_type)) +
+  labs(title = "The Major Roads of New Jersey",
+       subtitle = "30 Day Map Challenge, Day 7: Navigation",
+       caption = "Data source: Data.gov") +
+  scale_color_discrete(name = "Road Type")
+```
+
+
+# Day 8: Africa
+
+The country in Africa that is closest to the size of New Jersey is Eswatini.  Let us get that shapefile ([source](https://data.humdata.org/dataset/cod-ab-swz?)).
+
+```{r}
+eswatini_shp <- sf::read_sf("data/swz_admbnda_cso2007_shp/swz_admbnda_adm0_CSO_2007.shp")
+```
+
+I am simply adapting code from before.
+
+```{r}
+eswatini_map <- eswatini_shp |> ggplot() + geom_sf()
+```
+
+```{r}
+# patchwork
+eswatini_map + nj_map +
+  plot_annotation(
+    title = "Eswatini is close to the size of New Jersey",
+    subtitle = "30 Day Map Challenge, Day 8: Africa",
+    caption = "Data sources: NJGIN and\nHumanitarian Data Exchange"
+  )
+```
+
+
+# Day 9: Hexagons
+
+In years past, I combined state-by-state data with an established hexagon map of the United States.  Today, I am trying instead to apply a hexagon-cell heat map to some data.
+
+Whelp, I found some great data sets that would have been great here, but they were hosted on sites that did not actually have download links for open source use.  Instead, I will use a list of US cities found at [https://simplemaps.com/data/us-cities](https://simplemaps.com/data/us-cities).
+
+```{r}
+us_cities_df <- readr::read_csv("data/simplemaps_uscities/uscities.csv")
+```
+
+Now we can make a density map of New Jersey cities (note: density map of the city names, not of the human populations).
+
+```{r}
+us_cities_df |>
+  filter(state_id == "NJ") |>
+  ggplot(aes(x = lng, y = lat)) +
+  geom_hex()
+```
+
+## Square Grid
+
+The viewing window seems a bit skewed, and there is a lot of empty space.  Next, I will 
+
+* apply a `coord_equal` layer
+* change the `geom_hex` binwidth (by guess-and-check)
+* apply slightly more divergent colors
+
+```{r}
+us_cities_df |>
+  filter(state_id == "NJ") |>
+  ggplot(aes(x = lng, y = lat)) +
+  coord_equal() +
+  geom_hex(binwidth = c(0.15, 0.15)) +
+  labs(title = "Density Map of New Jersey Cities",
+       subtitle = "30 Day Map Challenge, Day 9: Hexagons",
+       caption = "Data Source: SimpleMaps") +
+  scale_fill_gradient(low = "green", high = "blue")
+```
+
+
+# Day 10: North America
+
+While pointing out New Jersey in a larger map of North America subdivisions (states, provinces) makes sense here, I am going to contine my silly comparison of land mass sizes.
+
+Among countries in North America, the one closest in size to New Jersey is El Salvador.
+
+```{r}
+el_salvador_shp <- sf::read_sf("data/slv_adm_gadm_2021_shp/slv_admbnda_adm0_gadm_20210204.shp")
+```
+
+I am once again adapting code from before.
+
+```{r}
+el_salvador_map <- el_salvador_shp |> ggplot() + geom_sf()
+```
+
+```{r}
+# patchwork
+el_salvador_map + nj_map +
+  plot_annotation(
+    title = "El Salvador is close to the size of New Jersey",
+    subtitle = "30 Day Map Challenge, Day 10: North America",
+    caption = "Data sources: NJGIN and\nHumanitarian Data Exchange"
+  )
+```

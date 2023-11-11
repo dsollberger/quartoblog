@@ -1019,14 +1019,14 @@
     "href": "posts/2023_map_challenge/2023_map_challenge.html",
     "title": "30 Day Map Challenge",
     "section": "",
-    "text": "Even though I have done the 30 Day Map Challenge each of the past two years, since data visualization is just a hobby for me, I feel like I start from scratch each time. This year, I decided to lean into that feeling and treat the month as production of a long blog post that likewise nearly starts from scratch.\n\nI am interested in learning about the state of New Jersey, and we will perhaps get data from sites such as\n\nNJDEP Bureau of GIS and its ArcGIS repository\nNJGIN Open Data\n\nMost of my work here will be performed with the ggplot2 and sf (“special features”) packages in the R programmer universe.\n\nlibrary(\"dplyr\")\nlibrary(\"ggplot2\")\nlibrary(\"ggtext\")\nlibrary(\"sf\")"
+    "text": "Even though I have done the 30 Day Map Challenge each of the past two years, since data visualization is just a hobby for me, I feel like I start from scratch each time. This year, I decided to lean into that feeling and treat the month as production of a long blog post that likewise nearly starts from scratch.\n\nI am interested in learning about the state of New Jersey, and we will perhaps get data from sites such as\n\nNJDEP Bureau of GIS and its ArcGIS repository\nNJGIN Open Data\n\nMost of my work here will be performed with the ggplot2 and sf (“special features”) packages in the R programmer universe.\n\nlibrary(\"dplyr\")\nlibrary(\"ggplot2\")\nlibrary(\"ggtext\")\nlibrary(\"patchwork\")\nlibrary(\"sf\")"
   },
   {
     "objectID": "posts/2023_map_challenge/2023_map_challenge.html#introduction",
     "href": "posts/2023_map_challenge/2023_map_challenge.html#introduction",
     "title": "30 Day Map Challenge",
     "section": "",
-    "text": "Even though I have done the 30 Day Map Challenge each of the past two years, since data visualization is just a hobby for me, I feel like I start from scratch each time. This year, I decided to lean into that feeling and treat the month as production of a long blog post that likewise nearly starts from scratch.\n\nI am interested in learning about the state of New Jersey, and we will perhaps get data from sites such as\n\nNJDEP Bureau of GIS and its ArcGIS repository\nNJGIN Open Data\n\nMost of my work here will be performed with the ggplot2 and sf (“special features”) packages in the R programmer universe.\n\nlibrary(\"dplyr\")\nlibrary(\"ggplot2\")\nlibrary(\"ggtext\")\nlibrary(\"sf\")"
+    "text": "Even though I have done the 30 Day Map Challenge each of the past two years, since data visualization is just a hobby for me, I feel like I start from scratch each time. This year, I decided to lean into that feeling and treat the month as production of a long blog post that likewise nearly starts from scratch.\n\nI am interested in learning about the state of New Jersey, and we will perhaps get data from sites such as\n\nNJDEP Bureau of GIS and its ArcGIS repository\nNJGIN Open Data\n\nMost of my work here will be performed with the ggplot2 and sf (“special features”) packages in the R programmer universe.\n\nlibrary(\"dplyr\")\nlibrary(\"ggplot2\")\nlibrary(\"ggtext\")\nlibrary(\"patchwork\")\nlibrary(\"sf\")"
   },
   {
     "objectID": "posts/2023_map_challenge/2023_map_challenge.html#graph-labels",
@@ -1068,7 +1068,7 @@
     "href": "posts/2023_map_challenge/2023_map_challenge.html#coordinate-reference-systems",
     "title": "30 Day Map Challenge",
     "section": "Coordinate Reference Systems",
-    "text": "Coordinate Reference Systems\nLong story short, each map of the 3D Earth is projected onto a 2D plane, but there are ways to perform that projection (with goals such as maintaining areas or shapes as well as possible). For our purposes, the work here will be easier if both of the California and New Jersey shapefiles use the same projection.\n\n# check CRS\nst_crs(ca_state_shp)[1]\n\n$input\n[1] \"WGS 84 / Pseudo-Mercator\"\n\nst_crs(nj_state_shp)[1]\n\n$input\n[1] \"NAD83 / New Jersey (ftUS)\"\n\n\n\nca_state_shp &lt;- st_transform(ca_state_shp, st_crs(nj_state_shp))\n\nWe can observe that the projection systems are not the same. Hopefully, the simplest fix is to simply re-project the CRS of the California shapefile into the CRS of the New Jersey shapefile.\n\n# set CRS\n# st_crs(ca_state_shp) &lt;- st_crs(nj_state_shp)\n\n# verify\nst_crs(ca_state_shp)[1]\n\n$input\n[1] \"NAD83 / New Jersey (ftUS)\"\n\n\nSo far, here is the juxtaposition.\n\nnj_state_shp |&gt;\n  ggplot() +\n  geom_sf() +\n  geom_sf(data = ca_state_shp)"
+    "text": "Coordinate Reference Systems\nLong story short, each map of the 3D Earth is projected onto a 2D plane, but there are ways to perform that projection (with goals such as maintaining areas or shapes as well as possible). For our purposes, the work here will be easier if both of the California and New Jersey shapefiles use the same projection.\n\n# check CRS\nst_crs(ca_state_shp)[1]\n\n$input\n[1] \"WGS 84 / Pseudo-Mercator\"\n\nst_crs(nj_state_shp)[1]\n\n$input\n[1] \"NAD83 / New Jersey (ftUS)\"\n\n\nWe can observe that the projection systems are not the same. Hopefully, the simplest fix is to simply re-project the CRS of the California shapefile into the CRS of the New Jersey shapefile.\n\n# set CRS\n# st_crs(ca_state_shp) &lt;- st_crs(nj_state_shp)\nca_state_shp &lt;- st_transform(ca_state_shp, st_crs(nj_state_shp))\n\n# verify\nst_crs(ca_state_shp)[1]\n\n$input\n[1] \"NAD83 / New Jersey (ftUS)\"\n\n\nSo far, here is the juxtaposition.\n\nnj_state_shp |&gt;\n  ggplot() +\n  geom_sf() +\n  geom_sf(data = ca_state_shp)"
   },
   {
     "objectID": "posts/2023_map_challenge/2023_map_challenge.html#coordinates",
@@ -1082,7 +1082,7 @@
     "href": "posts/2023_map_challenge/2023_map_challenge.html#translation",
     "title": "30 Day Map Challenge",
     "section": "Translation",
-    "text": "Translation\nNow, I want to translate the Calfornia shape over to the New Jersey shape. Some social media posts were clever by aligning San Francisco with New York City, but my interest came from maintaining latitude values (which might help me understand weather and climate), so that will take place with the zero in c(median_difference, 0).\n\n# ca_shifted_sfc &lt;- ca_sfc + c(median_difference_x, 0)\n# ca_shifted_shp &lt;- st_set_geometry(ca_state_shp, ca_shifted_sfc)\n# st_crs(ca_shifted_shp) &lt;- st_crs(nj_state_shp) #ensure same CRS\n\n\n# using the centroids instead\nca_shifted_sfc &lt;- ca_sfc + c(long_diff, lat_diff)\nca_shifted_shp &lt;- st_set_geometry(ca_state_shp, ca_shifted_sfc)\nst_crs(ca_shifted_shp) &lt;- st_crs(nj_state_shp) #ensure same CRS\n\nSo far, here is the juxtaposition. I decided to place the New Jersey layer on top of the Calfornia layer.\n\nca_shifted_shp |&gt;\n  ggplot() +\n  geom_sf() +\n  geom_sf(data = nj_state_shp)"
+    "text": "Translation\nNow, I want to translate the Calfornia shape over to the New Jersey shape. Some social media posts were clever by aligning San Francisco with New York City, but my interest came from maintaining latitude values (which might help me understand weather and climate), so that will take place with the zero in c(median_difference, 0).\n\n# ca_shifted_sfc &lt;- ca_sfc + c(median_difference_x, 0)\n# ca_shifted_shp &lt;- st_set_geometry(ca_state_shp, ca_shifted_sfc)\n# st_crs(ca_shifted_shp) &lt;- st_crs(nj_state_shp) #ensure same CRS\n\n\n# using the centroids instead\nca_shifted_sfc &lt;- ca_sfc + c(long_diff, lat_diff)\nca_shifted_shp &lt;- st_set_geometry(ca_state_shp, ca_shifted_sfc)\nst_crs(ca_shifted_shp) &lt;- st_crs(nj_state_shp) #ensure same CRS\n\nSo far, here is the juxtaposition. I decided to place the New Jersey layer on top of the Calfornia layer.\n\nca_shifted_shp |&gt;\n  ggplot() +\n  geom_sf() +\n  geom_sf(data = nj_state_shp)\n\n\n\n\nI ended up maintaining the areas, but alas, not the latitude values."
   },
   {
     "objectID": "posts/2023_map_challenge/2023_map_challenge.html#polish",
@@ -1097,5 +1097,26 @@
     "title": "30 Day Map Challenge",
     "section": "Markdown Titles",
     "text": "Markdown Titles\nWith just two objects in one map, one neat way of labeling the objects is to change the text colors in the title using the ggtext package.\n\ntitle_string &lt;- \"&lt;span style='color:brown'&gt;&lt;b&gt;California&lt;/b&gt;&lt;/span&gt; and &lt;span style='color:blue'&gt;&lt;b&gt;New Jersey&lt;/b&gt;&lt;/span&gt;\"\n\nca_shifted_shp |&gt;\n  ggplot() +\n  geom_sf(color = \"brown\", fill = \"brown\") +\n  geom_sf(data = nj_state_shp, color = \"blue\", fill = \"blue\") +\n  labs(title = title_string,\n       subtitle = \"30 Day Map Challenge\\nDay 5: Analog Map\",\n       caption = \"Data sources: NJGIN\\nand CA Open Data Portal\") +\n  theme(plot.title = element_markdown()) #need ggtext here"
+  },
+  {
+    "objectID": "posts/2023_map_challenge/2023_map_challenge.html#patchwork",
+    "href": "posts/2023_map_challenge/2023_map_challenge.html#patchwork",
+    "title": "30 Day Map Challenge",
+    "section": "Patchwork",
+    "text": "Patchwork\nUsing the patchwork package, we can place the maps side-by-side.\n\n# patchwork\nkuwait_map + nj_map +\n  plot_annotation(\n    title = \"Kuwait is close to the size of New Jersey\",\n    subtitle = \"30 Day Map Challenge, Day 6: Asia\",\n    caption = \"Data sources: NJGIN and Princeton Univ\"\n  )"
+  },
+  {
+    "objectID": "posts/2023_map_challenge/2023_map_challenge.html#square-grid",
+    "href": "posts/2023_map_challenge/2023_map_challenge.html#square-grid",
+    "title": "30 Day Map Challenge",
+    "section": "Square Grid",
+    "text": "Square Grid\nThe viewing window seems a bit skewed, and there is a lot of empty space. Next, I will\n\napply a coord_equal layer\nchange the geom_hex binwidth (by guess-and-check)\napply slightly more divergent colors\n\n\nus_cities_df |&gt;\n  filter(state_id == \"NJ\") |&gt;\n  ggplot(aes(x = lng, y = lat)) +\n  coord_equal() +\n  geom_hex(binwidth = c(0.15, 0.15)) +\n  labs(title = \"Density Map of New Jersey Cities\",\n       subtitle = \"30 Day Map Challenge, Day 9: Hexagons\",\n       caption = \"Data Source: SimpleMaps\") +\n  scale_fill_gradient(low = \"green\", high = \"blue\")"
+  },
+  {
+    "objectID": "posts/2023_map_challenge/2023_map_challenge.html#recoding",
+    "href": "posts/2023_map_challenge/2023_map_challenge.html#recoding",
+    "title": "30 Day Map Challenge",
+    "section": "Recoding",
+    "text": "Recoding\nLet us try to redo the labels in plain language according to the US Census codes for road types.\n\nnj_road_shp |&gt; \n  mutate(road_type = case_match(RTTYP,\n    \"C\" ~ \"County\",\n    \"I\" ~ \"Interstate\",\n    \"M\" ~ \"common name\",\n    \"S\" ~ \"State recognized\",\n    \"U\" ~ \"U.S.\",\n    .default = \"other\"\n  )) |&gt;\n  ggplot() + \n  geom_sf(aes(color = road_type)) +\n  labs(title = \"The Major Roads of New Jersey\",\n       subtitle = \"30 Day Map Challenge, Day 7: Navigation\",\n       caption = \"Data source: Data.gov\") +\n  scale_color_discrete(name = \"Road Type\")"
   }
 ]
