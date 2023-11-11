@@ -24,10 +24,12 @@ Most of my work here will be performed with the `ggplot2` and `sf` ("special fea
 #| message: false
 #| warning: false
 library("dplyr")
+library("ggameboy")
 library("ggplot2")
 library("ggtext")
 library("patchwork")
 library("sf")
+library("showtext")
 ```
 
 
@@ -482,3 +484,91 @@ el_salvador_map + nj_map +
     caption = "Data sources: NJGIN and\nHumanitarian Data Exchange"
   )
 ```
+
+
+# Day 11: Retro
+
+I heard about a "Gameboy theme" among the R packages.  It doesn't seem to be compatible with current versions of R, but perhaps we can simply adopt a color scheme instead?
+
+* [https://www.designpieces.com/palette/game-boy-original-color-palette-hex-and-rgb/](https://www.designpieces.com/palette/game-boy-original-color-palette-hex-and-rgb/)
+
+Let us apply it to our counties map.
+
+```{r}
+nj_counties |>
+  ggplot() +
+  geom_sf(color = "#8bac0f", 
+          fill = "#306230", 
+          size = 3) +
+  labs(title = "The Counties\nof New Jersey") +
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.ticks.y = element_blank(),
+        panel.background = element_rect(fill = "#9bbc0f"),
+        panel.grid.major = element_blank(),
+        plot.background = element_rect(fill = "#9bbc0f"),
+        plot.title = element_text(color = "#0f380f",,
+                                  hjust = 0.5, 
+                                  size = 20))
+```
+
+## Fonts
+
+Next, perhaps we can apply some sort of "GameBoy" font to our image?
+
+* followed [this vignette](https://cran.rstudio.com/web/packages/showtext/vignettes/introduction.html)
+* grabbed [this font](https://fonts.google.com/specimen/Press+Start+2P) from Google Fonts
+* aided by [this Stack Overflow post](https://stackoverflow.com/questions/71573377/cannot-import-fonts-into-r)
+
+```{r}
+font_add_google("Press Start 2P", "gameboy")
+showtext_auto()
+
+nj_counties |>
+  ggplot() +
+  geom_sf(color = "#8bac0f", 
+          fill = "#306230", 
+          size = 3) +
+  labs(title = "The Counties\nof New Jersey") +
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.ticks.y = element_blank(),
+        panel.background = element_rect(fill = "#9bbc0f"),
+        panel.grid.major = element_blank(),
+        plot.background = element_rect(fill = "#9bbc0f"),
+        plot.title = element_text(color = "#0f380f", 
+                                  family = "gameboy",
+                                  hjust = 0.5, 
+                                  size = 10))
+```
+
+## Package: GameBoy
+
+In my searches, I saw that there was a `ggameboy` package, so let's try it out!
+
+* [https://r-charts.com/miscellaneous/ggameboy/](https://r-charts.com/miscellaneous/ggameboy/)
+* [GameBoy console palette](https://www.color-hex.com/color-palette/100266)
+
+```{r}
+#| message: false
+#| warning: false
+gameboy_plot(Abutton = "#9a2257",
+             Bbutton = "#9a2257",
+             background = "white",
+             case = "#C0C0C0",
+             Done_col = "white",
+             glassframe = "#555a56",
+             screentext = "30 Day Map Challenge\nDay 11: Retro",
+             select = "#494786",
+             start = "#494786")
+```
+
+
+
+
+
+
+
+

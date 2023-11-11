@@ -1019,14 +1019,14 @@
     "href": "posts/2023_map_challenge/2023_map_challenge.html",
     "title": "30 Day Map Challenge",
     "section": "",
-    "text": "Even though I have done the 30 Day Map Challenge each of the past two years, since data visualization is just a hobby for me, I feel like I start from scratch each time. This year, I decided to lean into that feeling and treat the month as production of a long blog post that likewise nearly starts from scratch.\n\nI am interested in learning about the state of New Jersey, and we will perhaps get data from sites such as\n\nNJDEP Bureau of GIS and its ArcGIS repository\nNJGIN Open Data\n\nMost of my work here will be performed with the ggplot2 and sf (“special features”) packages in the R programmer universe.\n\nlibrary(\"dplyr\")\nlibrary(\"ggplot2\")\nlibrary(\"ggtext\")\nlibrary(\"patchwork\")\nlibrary(\"sf\")"
+    "text": "Even though I have done the 30 Day Map Challenge each of the past two years, since data visualization is just a hobby for me, I feel like I start from scratch each time. This year, I decided to lean into that feeling and treat the month as production of a long blog post that likewise nearly starts from scratch.\n\nI am interested in learning about the state of New Jersey, and we will perhaps get data from sites such as\n\nNJDEP Bureau of GIS and its ArcGIS repository\nNJGIN Open Data\n\nMost of my work here will be performed with the ggplot2 and sf (“special features”) packages in the R programmer universe.\n\nlibrary(\"dplyr\")\nlibrary(\"ggameboy\")\nlibrary(\"ggplot2\")\nlibrary(\"ggtext\")\nlibrary(\"patchwork\")\nlibrary(\"sf\")\nlibrary(\"showtext\")"
   },
   {
     "objectID": "posts/2023_map_challenge/2023_map_challenge.html#introduction",
     "href": "posts/2023_map_challenge/2023_map_challenge.html#introduction",
     "title": "30 Day Map Challenge",
     "section": "",
-    "text": "Even though I have done the 30 Day Map Challenge each of the past two years, since data visualization is just a hobby for me, I feel like I start from scratch each time. This year, I decided to lean into that feeling and treat the month as production of a long blog post that likewise nearly starts from scratch.\n\nI am interested in learning about the state of New Jersey, and we will perhaps get data from sites such as\n\nNJDEP Bureau of GIS and its ArcGIS repository\nNJGIN Open Data\n\nMost of my work here will be performed with the ggplot2 and sf (“special features”) packages in the R programmer universe.\n\nlibrary(\"dplyr\")\nlibrary(\"ggplot2\")\nlibrary(\"ggtext\")\nlibrary(\"patchwork\")\nlibrary(\"sf\")"
+    "text": "Even though I have done the 30 Day Map Challenge each of the past two years, since data visualization is just a hobby for me, I feel like I start from scratch each time. This year, I decided to lean into that feeling and treat the month as production of a long blog post that likewise nearly starts from scratch.\n\nI am interested in learning about the state of New Jersey, and we will perhaps get data from sites such as\n\nNJDEP Bureau of GIS and its ArcGIS repository\nNJGIN Open Data\n\nMost of my work here will be performed with the ggplot2 and sf (“special features”) packages in the R programmer universe.\n\nlibrary(\"dplyr\")\nlibrary(\"ggameboy\")\nlibrary(\"ggplot2\")\nlibrary(\"ggtext\")\nlibrary(\"patchwork\")\nlibrary(\"sf\")\nlibrary(\"showtext\")"
   },
   {
     "objectID": "posts/2023_map_challenge/2023_map_challenge.html#graph-labels",
@@ -1118,5 +1118,19 @@
     "title": "30 Day Map Challenge",
     "section": "Recoding",
     "text": "Recoding\nLet us try to redo the labels in plain language according to the US Census codes for road types.\n\nnj_road_shp |&gt; \n  mutate(road_type = case_match(RTTYP,\n    \"C\" ~ \"County\",\n    \"I\" ~ \"Interstate\",\n    \"M\" ~ \"common name\",\n    \"S\" ~ \"State recognized\",\n    \"U\" ~ \"U.S.\",\n    .default = \"other\"\n  )) |&gt;\n  ggplot() + \n  geom_sf(aes(color = road_type)) +\n  labs(title = \"The Major Roads of New Jersey\",\n       subtitle = \"30 Day Map Challenge, Day 7: Navigation\",\n       caption = \"Data source: Data.gov\") +\n  scale_color_discrete(name = \"Road Type\")"
+  },
+  {
+    "objectID": "posts/2023_map_challenge/2023_map_challenge.html#fonts",
+    "href": "posts/2023_map_challenge/2023_map_challenge.html#fonts",
+    "title": "30 Day Map Challenge",
+    "section": "Fonts",
+    "text": "Fonts\nNext, perhaps we can apply some sort of “GameBoy” font to our image?\n\nfollowed this vignette\ngrabbed this font from Google Fonts\naided by this Stack Overflow post\n\n\nfont_add_google(\"Press Start 2P\", \"gameboy\")\nshowtext_auto()\n\nnj_counties |&gt;\n  ggplot() +\n  geom_sf(color = \"#8bac0f\", \n          fill = \"#306230\", \n          size = 3) +\n  labs(title = \"The Counties\\nof New Jersey\") +\n  theme(axis.text.x = element_blank(),\n        axis.text.y = element_blank(),\n        axis.ticks.x = element_blank(),\n        axis.ticks.y = element_blank(),\n        panel.background = element_rect(fill = \"#9bbc0f\"),\n        panel.grid.major = element_blank(),\n        plot.background = element_rect(fill = \"#9bbc0f\"),\n        plot.title = element_text(color = \"#0f380f\", \n                                  family = \"gameboy\",\n                                  hjust = 0.5, \n                                  size = 10))"
+  },
+  {
+    "objectID": "posts/2023_map_challenge/2023_map_challenge.html#package-gameboy",
+    "href": "posts/2023_map_challenge/2023_map_challenge.html#package-gameboy",
+    "title": "30 Day Map Challenge",
+    "section": "Package: GameBoy",
+    "text": "Package: GameBoy\nIn my searches, I saw that there was a ggameboy package, so let’s try it out!\n\nhttps://r-charts.com/miscellaneous/ggameboy/\nGameBoy console palette\n\n\ngameboy_plot(Abutton = \"#9a2257\",\n             Bbutton = \"#9a2257\",\n             background = \"white\",\n             case = \"#C0C0C0\",\n             Done_col = \"white\",\n             glassframe = \"#555a56\",\n             screentext = \"30 Day Map Challenge\\nDay 11: Retro\",\n             select = \"#494786\",\n             start = \"#494786\")"
   }
 ]
