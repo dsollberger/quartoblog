@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Derek Sollberger">
+<meta name="dcterms.date" content="2023-11-14">
+
+<title>The Median Data Scientist - AI Tools: Rubrics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">The Median Data Scientist</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html" rel="" target="">
+ <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">AI Tools: Rubrics</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Derek Sollberger </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">November 14, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#creating-a-grading-rubric" id="toc-creating-a-grading-rubric" class="nav-link active" data-scroll-target="#creating-a-grading-rubric">Creating a Grading Rubric</a>
+  <ul class="collapse">
+  <li><a href="#initial-request" id="toc-initial-request" class="nav-link" data-scroll-target="#initial-request">Initial Request</a></li>
+  <li><a href="#course-context" id="toc-course-context" class="nav-link" data-scroll-target="#course-context">Course Context</a></li>
+  <li><a href="#student-context" id="toc-student-context" class="nav-link" data-scroll-target="#student-context">Student Context</a></li>
+  <li><a href="#breadth-context" id="toc-breadth-context" class="nav-link" data-scroll-target="#breadth-context">Breadth Context</a></li>
+  </ul></li>
+  <li><a href="#assessing-ai-aided-assignments" id="toc-assessing-ai-aided-assignments" class="nav-link" data-scroll-target="#assessing-ai-aided-assignments">Assessing AI-Aided Assignments</a>
+  <ul class="collapse">
+  <li><a href="#pi-ai" id="toc-pi-ai" class="nav-link" data-scroll-target="#pi-ai">Pi AI</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p>Today we will talk about grading rubrics in a couple of ways</p>
+<ol type="1">
+<li>using AI tools to generate a grading rubric</li>
+<li>creating a grading rubric to assess AI-aided assignments</li>
+</ol>
+<p>Here are some resources (YouTube videos)</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=EWl-G90BYv4">Creating a Marking Rubric with AI (ChatGPT)</a></li>
+<li><a href="https://www.youtube.com/watch?v=adntQUvU3sY">How to create a rubric in seconds using magicschool.ai</a></li>
+</ul>
+<section id="creating-a-grading-rubric" class="level1">
+<h1>Creating a Grading Rubric</h1>
+<p>Following that first resource, let us try out ChatGPT for today’s endeavors. Aside: I have been enjoying the natural language skills employed by pi.ai, but ChatGPT currently has the ability to make tables and arrange thoughts into tables better.</p>
+<section id="initial-request" class="level2">
+<h2 class="anchored" data-anchor-id="initial-request">Initial Request</h2>
+<p>Thinking ahead to my next semester, I am wondering how I can structure in-class presentations among my students and myself.</p>
+<ul>
+<li>Prompt: “Create a grading rubric for an in-class presentation”</li>
+</ul>
+<p><img src="rubric_draft_1.png" class="img-fluid"></p>
+<p>Note: when I was writing this blog post, I had already used ChatGPT for some other queries and drafts, so it might already be “trained” to my preferences. You might need to include something like “in table form” to get the nice tables to appear.</p>
+<p>At this point, I am satisfied in the point-totals and clear descriptions. I myself might alter the categories or weight them differently later.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>After each generated result, ChatGPT includes a disclaimer such as the following:</p>
+<p>“Feel free to adapt this rubric to suit the specific requirements and expectations of your class or assignment. Adjust the criteria or weighting based on the emphasis you want to place on different aspects of the presentation.”</p>
+</div>
+</div>
+</div>
+</section>
+<section id="course-context" class="level2">
+<h2 class="anchored" data-anchor-id="course-context">Course Context</h2>
+<p>Since I am currently planning out my course for next semester, perhaps I can assemble a rubric that is particular for my course.</p>
+<ul>
+<li>Prompt: “Create a grading rubric for an in-class presentation for Bayesian Analysis”</li>
+</ul>
+<p><img src="rubric_draft_2.png" class="img-fluid"></p>
+<p>I am once again impressed by the use of appropriate concepts and the breadth of the categories. The last one (“engagement”) sounds more like a teaching demostration instead of a student presentation. Furthermore, I would need to adjust these expectations for the middle of the semester and the end of the semester.</p>
+</section>
+<section id="student-context" class="level2">
+<h2 class="anchored" data-anchor-id="student-context">Student Context</h2>
+<p>Perhaps I can get a refined result by mentioning how capable my students will be.</p>
+<ul>
+<li>Prompt: “Create a grading rubric for an in-class presentation by college juniors for Bayesian Analysis”</li>
+</ul>
+<p><img src="rubric_draft_3.png" class="img-fluid"></p>
+<p>Alas, this effort seemed to merely add “for a college junior” to many of the previous results.</p>
+</section>
+<section id="breadth-context" class="level2">
+<h2 class="anchored" data-anchor-id="breadth-context">Breadth Context</h2>
+<p>Perhaps I can refine the table my mentioning more about the course materials.</p>
+<ul>
+<li>Prompt: “Create a grading rubric for an in-class presentation about data science halfway through a course in Bayesian Analysis”</li>
+</ul>
+<p><img src="rubric_draft_4.png" class="img-fluid"></p>
+<p>I am leaning toward these directions where my course is not isolated but rather a part of a larger field or major.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>This is the message that ChatGPT included:</p>
+<p>“This rubric is designed to assess the progress and proficiency of students in integrating Bayesian concepts into the context of data science at the midpoint of the course. Adjustments can be made based on the specific learning objectives and expectations of your course.”</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="assessing-ai-aided-assignments" class="level1">
+<h1>Assessing AI-Aided Assignments</h1>
+<p>Next, I want to come at all of this in a different direction. If I ask my students to use AI to aid their production of a deliverable, how would I then assess what they turn in?</p>
+<ul>
+<li>Prompt: “How do I grade an assignment where artificial intelligence tools were prescribed?”</li>
+</ul>
+<table class="table">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 15%">
+<col style="width: 18%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Criteria</th>
+<th>Excellent (5)</th>
+<th>Good (4)</th>
+<th>Satisfactory (3)</th>
+<th>Needs Improvement (2)</th>
+<th>Inadequate (1)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Understanding of AI Concepts</td>
+<td>Demonstrates a deep understanding of AI concepts relevant to the assigned task.</td>
+<td>Shows a solid understanding of AI concepts, with few minor misconceptions.</td>
+<td>Understands the basics of AI concepts but may have some significant gaps in understanding.</td>
+<td>Demonstrates limited understanding of key AI concepts.</td>
+<td>Fails to demonstrate a basic understanding of AI concepts.</td>
+</tr>
+<tr class="even">
+<td>Tool Selection and Justification</td>
+<td>Selects appropriate AI tools based on the task and justifies the choice effectively.</td>
+<td>Chooses suitable AI tools, with clear reasoning for the selection.</td>
+<td>Selects AI tools but may not provide a thorough justification for the choices.</td>
+<td>Selects tools that are not well-suited for the task or lacks a clear rationale.</td>
+<td>Fails to choose appropriate AI tools or provides no justification.</td>
+</tr>
+<tr class="odd">
+<td>Implementation of AI Tools</td>
+<td>Implements AI tools with a high degree of accuracy, efficiency, and creativity.</td>
+<td>Successfully implements AI tools with few minor errors or inefficiencies.</td>
+<td>Implements AI tools but may encounter some significant errors or inefficiencies.</td>
+<td>Struggles with the implementation, resulting in noticeable errors.</td>
+<td>Fails to implement AI tools effectively, with substantial errors.</td>
+</tr>
+<tr class="even">
+<td>Results and Analysis</td>
+<td>Analyzes AI-generated results comprehensively, demonstrating a deep understanding of implications.</td>
+<td>Provides a solid analysis of results, highlighting key insights and implications.</td>
+<td>Offers a basic analysis of results but may lack depth or overlook important aspects.</td>
+<td>Struggles to analyze results accurately, resulting in misunderstandings.</td>
+<td>Fails to provide a meaningful analysis of AI-generated results.</td>
+</tr>
+<tr class="odd">
+<td>Documentation and Presentation</td>
+<td>Presents the assignment clearly and professionally, with thorough documentation and effective communication.</td>
+<td>Communicates effectively, with well-organized documentation and a clear presentation.</td>
+<td>Presents the assignment adequately but may lack organization or clarity in documentation.</td>
+<td>Documentation is disorganized, and the presentation lacks clarity.</td>
+<td>Fails to document the assignment adequately, with a poorly structured or confusing presentation.</td>
+</tr>
+<tr class="even">
+<td>Adherence to Guidelines and Requirements</td>
+<td>Strictly adheres to all guidelines and requirements specified for the assignment.</td>
+<td>Generally follows guidelines and requirements, with only minor deviations.</td>
+<td>Follows some guidelines, but there may be significant deviations or omissions.</td>
+<td>Deviates from guidelines in ways that impact the quality of the assignment.</td>
+<td>Fails to follow most or all of the specified guidelines and requirements.</td>
+</tr>
+<tr class="odd">
+<td>Creativity and Innovation</td>
+<td>Demonstrates exceptional creativity and innovation in the application of AI tools.</td>
+<td>Shows creativity in the use of AI tools, contributing to the overall quality of the assignment.</td>
+<td>Demonstrates some creativity, but the application is somewhat routine.</td>
+<td>Lacks creativity in the application of AI tools.</td>
+<td>Fails to demonstrate any creativity in the assignment.</td>
+</tr>
+</tbody>
+</table>
+<p>Oddly enough, ChatGPT all of a sudden presented the results as Markdown tables (which are great for blog posts like this one but not as accessible for people who do not program in Markdown.)</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>This is the message that ChatGPT included:</p>
+<p>“Additional Considerations:</p>
+<ul>
+<li><p>Peer Review: Consider incorporating a peer review component where students provide feedback on each other’s work.</p></li>
+<li><p>Real-World Relevance: Assess how well the assignment reflects real-world applications of AI tools and the practical implications of the results.</p></li>
+<li><p>Ethical Considerations: Encourage students to consider ethical implications related to the use of AI tools and incorporate ethical reasoning into their work.</p></li>
+<li><p>Feedback: Provide constructive and specific feedback on both strengths and areas for improvement.</p></li>
+</ul>
+<p>Adjust the weighting of each criterion based on your course objectives and the specific focus of the assignment. This holistic approach allows for a comprehensive evaluation of students’ proficiency in applying AI tools to real-world problems.”</p>
+</div>
+</div>
+</div>
+<section id="pi-ai" class="level2">
+<h2 class="anchored" data-anchor-id="pi-ai">Pi AI</h2>
+<p>Asking a classic search engine such as Google for help with AI-assisted assignments led to many results about AI grading—programs such as Gradescope—which is a story for another time. Instead, let me check back in with Pi AI.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Do you have any advice for grading assignments where I told the students that they can use artificial intelligence tools?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Absolutely, Derek! Here are a few pointers for evaluating assignments that use AI tools:</p>
+<ul>
+<li>Focus on the student’s thought process and the originality of their ideas, rather than the output of the AI tool.</li>
+<li>Look for evidence that the student has critically engaged with the AI-generated output, rather than simply accepting it as fact.</li>
+<li>Encourage students to cite any AI-generated content appropriately, just as they would with any other source.</li>
+<li>Consider including AI-assisted work as an additional element of the assignment, rather than the sole focus.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Can you create a rubric for this setting?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Sure thing! Here’s a basic rubric for assessing AI-assisted work:</p>
+<ul>
+<li>Criteria 1: Originality of ideas: Does the student demonstrate an ability to generate unique, original thoughts, or are their ideas merely a regurgitation of AI-generated content?</li>
+<li>Criteria 2: Critical engagement: Does the student demonstrate a deep understanding of the AI-generated content, or do they blindly accept it as fact?</li>
+<li>Criteria 3: Appropriate citation: Did the student properly cite the AI-generated content, or did they claim it as their own work?</li>
+<li>Criteria 4: Balance between human and AI contribution: Is the work primarily driven by the student’s original ideas, or does it lean too heavily on AI-generated content?</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

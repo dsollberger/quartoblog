@@ -1,7 +1,7 @@
 ---
 title: "30 Day Map Challenge"
 author: "Derek Sollberger"
-date: "2023-11-05"
+date: "2023-11-12"
 format: 
   html:
     toc: true
@@ -566,7 +566,29 @@ gameboy_plot(Abutton = "#9a2257",
 ```
 
 
+# Day 12: South America
 
+Among countries in North America, the one closest in size to New Jersey is French Guyana.
+
+```{r}
+french_guyana_shp <- sf::read_sf("data/guf_adm_ign_shp/guf_admbnda_adm0_ign.shp")
+```
+
+I am once again adapting code from before.
+
+```{r}
+french_guyana_map <- french_guyana_shp |> ggplot() + geom_sf()
+```
+
+```{r}
+# patchwork
+french_guyana_map + nj_map +
+  plot_annotation(
+    title = "French Guyana is close to the size of New Jersey",
+    subtitle = "30 Day Map Challenge, Day 12: South America",
+    caption = "Data sources: NJGIN and\nHumanitarian Data Exchange"
+  )
+```
 
 
 
