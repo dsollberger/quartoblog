@@ -1,0 +1,47 @@
+---
+title: "Ghibli Palettes"
+author: "Derek Sollberger"
+date: "2024-01-27"
+format: html
+---
+
+Today, inspired by [this article](https://medium.com/@jchen001/r-ggplot2-color-palettes-inspired-by-hayao-miyazakis-animes-f2aeccce45fd), I want to try out the `ghibli` package of color palettes inspired by some of the famous Studio Ghibli animated movies.
+
+```{r}
+library("ghibli")
+library("ggplot2")
+```
+
+For some data, I was looking at the [demographics at Princeton University](https://inclusive.princeton.edu/about/demographics). I am to create a simple data frame with the proportion of Asian people in each of various populations found at the university.
+
+```{r}
+asian_percent <- c(28, 27, 33, 31, 20, 11, 11, 14, 11, 12)
+populations <- c("undergraduates", "master's students", "doctoral students", "postdocs", "assistant professors", "associate professors", "full professors", "non-tenure-track faculty", "senior staff", "all other staff")
+
+df <- data.frame(asian_percent, populations)
+```
+
+Here is a graph made with some of the `ggplot2` default settings.
+
+```{r}
+df |>
+  ggplot(aes(x = asian_percent, y = populations, fill = asian_percent)) +
+  geom_bar(stat = "identity")
+```
+
+And here is a graph made with a palette inspired by the movie *Kiki's Delivery Service*
+
+```{r}
+df |>
+  ggplot(aes(x = asian_percent, y = populations, fill = asian_percent)) +
+  geom_bar(show.legend = FALSE,
+           stat = "identity") +
+  labs(title = "Asian Populations at Princeton",
+       subtitle = "Academic Year 2022-2023",
+       x = "percent",
+       y = "") +
+  scale_fill_ghibli_c("KikiMedium") +
+  theme_minimal()
+```
+
+In this quick exploration, it appears that the color scales can be applied only to continuous scales.
