@@ -1,0 +1,49 @@
+---
+title: "Highcharter"
+author: "Derek Sollberger"
+date: "2024-02-21"
+format: html
+---
+
+Recently, a colleague told us about the `highcharter` data visualization package.  It seems to have wrappers for Javascript functionality, so we could aim for pop-up information and other interactivity.  Perhaps `highcharter` is more robust than `plotly` in some ways, but we cannot simply add to `ggplot2` code has `highcharter` has its own syntax.
+
+```{r}
+#| message: false
+#| warning: false
+library("highcharter")
+library("palmerpenguins")
+library("tidyverse")
+```
+
+## Grammer of Graphics
+
+We will create a simple scatterplot in `ggplot2`.
+
+```{r}
+#| message: false
+#| warning: false
+penguins |>
+  ggplot() +
+  geom_point(aes(x = flipper_length_mm, y = bill_length_mm,
+             color = species)) +
+  labs(title = "Scatterplot in ggplot2",
+       subtitle = "Data source: Palmer Penguins",
+       caption = "SML 201")
+```
+
+## Highcharter
+
+We will create a simple scatterplot in `highcharter`.
+
+```{r}
+hchart(
+  penguins,
+  "scatter",
+  hcaes(x = flipper_length_mm, y = bill_length_mm,
+        group = species)
+) |>
+  hc_title(text = "Scatterplot in Highcharter") |>
+  hc_subtitle(text = "Data source: Palmer Penguins") |>
+  hc_caption(text = "SML 201")
+```
+
