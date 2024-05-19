@@ -1,0 +1,14 @@
+---
+title: "baseballr package"
+author: "Derek Sollberger"
+date: "2024-05-16"
+format: html
+---
+
+I want to get back into exploring sports statistics.  This semester, some of my students pointed out that there is a `baseballr` package to ease data acquisition.
+
+```{r}
+# install.packages("baseballr")
+library("baseballr")
+```
+

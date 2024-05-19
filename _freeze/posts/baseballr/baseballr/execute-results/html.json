@@ -1,0 +1,15 @@
+{
+  "hash": "31857e3550a1c4d51d3057d2fa418ce3",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"baseballr package\"\nauthor: \"Derek Sollberger\"\ndate: \"2024-05-16\"\nformat: html\n---\n\n\nI want to get back into exploring sports statistics.  This semester, some of my students pointed out that there is a `baseballr` package to ease data acquisition.\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# install.packages(\"baseballr\")\nlibrary(\"baseballr\")\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\nWarning: package 'baseballr' was built under R version 4.3.3\n```\n\n\n:::\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

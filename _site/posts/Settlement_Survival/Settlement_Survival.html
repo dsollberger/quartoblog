@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Derek Sollberger">
-<meta name="dcterms.date" content="2022-09-03">
+<meta name="dcterms.date" content="2024-02-25">
 
-<title>The Median Data Scientist - Settlement Survival Start</title>
+<title>The Median Data Scientist - Settlement Survival</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -91,17 +91,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
-<script src="../../site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="../../site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
 <script src="../../site_libs/d3-3.3.8/d3.min.js"></script>
 <script src="../../site_libs/dagre-0.4.0/dagre-d3.min.js"></script>
 <link href="../../site_libs/mermaid-0.3.0/dist/mermaid.css" rel="stylesheet">
 <script src="../../site_libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
 <link href="../../site_libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
 <script src="../../site_libs/chromatography-0.1/chromatography.js"></script>
-<script src="../../site_libs/DiagrammeR-binding-1.0.9/DiagrammeR.js"></script>
+<script src="../../site_libs/DiagrammeR-binding-1.0.10/DiagrammeR.js"></script>
 
 
 <link rel="stylesheet" href="../../styles.css">
@@ -149,7 +150,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Settlement Survival Start</h1>
+      <h1 class="title">Settlement Survival</h1>
                       </div>
   </div>
     
@@ -166,7 +167,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">September 3, 2022</p>
+        <p class="date">February 25, 2024</p>
       </div>
     </div>
     
@@ -178,7 +179,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#settings" id="toc-settings" class="nav-link active" data-scroll-target="#settings">Settings</a></li>
+  <li><a href="#year-1-settlement" id="toc-year-1-settlement" class="nav-link" data-scroll-target="#year-1-settlement">Year 1: Settlement</a>
+  <ul class="collapse">
+  <li><a href="#houses-and-farms" id="toc-houses-and-farms" class="nav-link" data-scroll-target="#houses-and-farms">Houses and Farms</a></li>
+  <li><a href="#division-of-labor" id="toc-division-of-labor" class="nav-link" data-scroll-target="#division-of-labor">Division of Labor</a></li>
+  </ul></li>
+  <li><a href="#year-2-community" id="toc-year-2-community" class="nav-link" data-scroll-target="#year-2-community">Year 2: Community</a></li>
+  <li><a href="#year-3-immigration" id="toc-year-3-immigration" class="nav-link" data-scroll-target="#year-3-immigration">Year 3: Immigration</a></li>
+  <li><a href="#year-4-mining" id="toc-year-4-mining" class="nav-link" data-scroll-target="#year-4-mining">Year 4: Mining</a></li>
+  <li><a href="#year-5-dredge" id="toc-year-5-dredge" class="nav-link" data-scroll-target="#year-5-dredge">Year 5: Dredge</a></li>
+  <li><a href="#year-6-animals" id="toc-year-6-animals" class="nav-link" data-scroll-target="#year-6-animals">Year 6: Animals</a></li>
+  <li><a href="#year-7-trade" id="toc-year-7-trade" class="nav-link" data-scroll-target="#year-7-trade">Year 7: Trade</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -186,57 +204,529 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p>One of my silly side-projects is to organize the dependency chart in the Settlement Survival video game into a <code>mermaid</code> diagram (or a similar flow chart). Today, I will start with the beginning of the game—that is, what tends to be built in the first “year”.</p>
+<p>One of my silly side-projects is to organize the dependency chart in the Settlement Survival video game into a <code>mermaid</code> diagram (or a similar flow chart).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"DiagrammeR"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>I am going to take some liberties and actually <em>add</em> more prerequisites in the beginning (otherwise, the graph simply starts with about 12 unlinked nodes).</p>
+<p>I called this settlement “Palo Verde” after a town that used to exist in the Los Angeles area. I was reading about Palo Verde in a book called <em>Stealing Home</em>, which provides history of the area that became Dodger Stadium.</p>
+<p>I was also reading another history book called <em>Salt</em>, and Settlement Survival will allow me to simulate a community that relies on salt exports.</p>
+<section id="settings" class="level1">
+<h1>Settings</h1>
+<p>I simply play this game on “easy” difficulty settings to relax. That mainly means that natural disasters will not fall onto Palo Verde.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Settings
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><img src="Palo_Verde_settings.png" class="img-fluid"> <img src="Palo_Verde_settings_2.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="year-1-settlement" class="level1">
+<h1>Year 1: Settlement</h1>
+<p>Today, I will start with the beginning of the game—that is, what tends to be built in the first “year”. I am going to take some liberties and actually <em>add</em> more prerequisites in the beginning (otherwise, the graph simply starts with about 9 unlinked nodes).</p>
+<p>We choose a place that appeared to have promising grounds for fields and farming while still near to some mountains.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Palo_Verde_20231226.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Choosing a Staring Point</figcaption>
+</figure>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Flowchart</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>my_plot <span class="ot">&lt;-</span> DiagrammeR<span class="sc">::</span><span class="fu">mermaid</span>(<span class="st">"</span></span>
+<div class="cell-output-display">
+<div class="DiagrammeR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-79f8799044e3ccaa2a1f" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-79f8799044e3ccaa2a1f">{"x":{"diagram":"\n  graph TD\n  start[Select Location]\n  \n  house1[1 House]\n  fields[3 Standard Fields]\n  water[Big Well]\n  forest_hut[Forester's Hut]\n  gather_hut[Gatherer's Hut]\n  hunter_hut[Hunter's Hut]\n  chopping_house[Chopping House]\n  house10[10 Houses]\n  \n  start --> house1\n  start --> fields\n  start --> water\n  start --> hunter_hut\n  \n  house1 --> house10\n  fields --> forest_hut\n  water --> gather_hut\n  hunter_hut --> chopping_house\n"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>year_1_tree <span class="ot">&lt;-</span> DiagrammeR<span class="sc">::</span><span class="fu">mermaid</span>(<span class="st">"</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="st">  graph TD</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="st">  start[Select Location]</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">  house1[1 House]</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="st">  farms[2 Standard Fields]</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="st">  fields[3 Standard Fields]</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="st">  water[Big Well]</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="st">  forest_hut[Forester's Hut]</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="st">  gather_hut[Gatherer's Hut]</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="st">  hunter_hut[Hunter's Hut]</span></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="st">  chopping_house[Chopping House]</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="st">  house7[7 Houses]</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="st">  repair_shop[Repair Shop]</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="st">  church[Church]</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="st">  clinic[Clinic]</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="st">  distillery[Distillery]</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="st">  start --&gt; house1</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="st">  start --&gt; farms</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="st">  start --&gt; water</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="st">  start --&gt; gather_hut</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="st">  house1 --&gt; house7</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="st">  farms --&gt; clinic</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="st">  gather_hut --&gt; forest_hut</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="st">  gather_hut --&gt; hunter_hut</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="st">  water --&gt; repair_shop</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="st">  forest_hut --&gt; chopping_house</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="st">  house7 --&gt; church</span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="st">  repair_shop --&gt; distillery</span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="st">  house10[10 Houses]</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="st">  start --&gt; house1</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="st">  start --&gt; fields</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="st">  start --&gt; water</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="st">  start --&gt; hunter_hut</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="st">  house1 --&gt; house10</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="st">  fields --&gt; forest_hut</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="st">  water --&gt; gather_hut</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="st">  hunter_hut --&gt; chopping_house</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co"># print</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>year_1_tree</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</div>
+</div>
+</div>
+<section id="houses-and-farms" class="level2">
+<h2 class="anchored" data-anchor-id="houses-and-farms">Houses and Farms</h2>
+<p>The initial 30 settlers want at least <code>7 houses</code> to comfortably live with their families.</p>
+<p>Meanwhile, we start with <code>3 standard fields</code> to grow food</p>
+<ul>
+<li>2 fields of cabbages</li>
+<li>one field of pumpkins on the especially fertile grounds</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="year_1_houses_farms.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">houses and farms</figcaption>
+</figure>
+</div>
+</section>
+<section id="division-of-labor" class="level2">
+<h2 class="anchored" data-anchor-id="division-of-labor">Division of Labor</h2>
+<p>After the farmers sow seeds for the year, I send some to build a <code>Forester's Hut</code> out in the woods to coordinate the chopping down of trees to get fuel for to survive the first winter.</p>
+<p>Some folks quickly make a <code>Big Well</code> and one of them works as a water deliverer. Others move out to the forest too to build a <code>Gatherer's Hut</code> to gather wild herbs and berries.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Forestry
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>You can toggle the desire for the foresters to</p>
+<ul>
+<li>fell trees</li>
+<li>plant trees</li>
+</ul>
+<p>For instance, by telling the forester to not chop down trees, a lush forest will grow around the <code>Forester's Hut</code>, which may be better for the <em>nearby</em> <code>Gatherer's Hut</code>. You can always ask the townsfolk at large to chop down trees when needed.</p>
+</div>
+</div>
+</div>
+<p>A hunter also went out in to the woods to build a <code>Hunter's Hut</code>, but the town has a higher priority to have firewood, so the crew is sent back into the main village to build a <code>Chopping House</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="year_1_expanded.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">village and beyond</figcaption>
+</figure>
+</div>
+<p>Early ambition leads to some surplus of supplies, so we spend a <strong>tech point</strong> to learn how to build a <code>Warehouse</code> for storage.</p>
+</section>
+</section>
+<section id="year-2-community" class="level1">
+<h1>Year 2: Community</h1>
+<p>After surviving the first winter on the inventory that we arrived with at the marketplace, our main priorities are to grow crops for sustenance and chopping wood for survival. Nevertheless, the townsfolk want to build a community, so let us build</p>
+<ul>
+<li>a <code>Chapel</code> (for the game mechanic of happiness)</li>
+<li>a <code>Clinic</code> (for the game mechanic of health)</li>
+<li>a <code>School</code> (game mechanic where educated people are more productive at their jobs)</li>
+<li>2 <code>Latrine</code> (a lot of city planning is “Where does the poop go?”)</li>
+</ul>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Flowchart</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>my_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="htmlwidget-22ac5bd6f6de8001eb49" style="width:100%;height:464px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-22ac5bd6f6de8001eb49">{"x":{"diagram":"\n  graph TD\n  start[Select Location]\n  \n  house1[1 House]\n  farms[2 Standard Fields]\n  water[Big Well]\n  forest_hut[Forester's Hut]\n  gather_hut[Gatherer's Hut]\n  hunter_hut[Hunter's Hut]\n  chopping_house[Chopping House]\n  house7[7 Houses]\n  repair_shop[Repair Shop]\n  church[Church]\n  clinic[Clinic]\n  distillery[Distillery]\n  \n  start --> house1\n  start --> farms\n  start --> water\n  start --> gather_hut\n  \n  house1 --> house7\n  farms --> clinic\n  gather_hut --> forest_hut\n  gather_hut --> hunter_hut\n  water --> repair_shop\n  \n  forest_hut --> chopping_house\n  \n  house7 --> church\n  repair_shop --> distillery\n"},"evals":[],"jsHooks":[]}</script>
+<div class="DiagrammeR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-0896e8fa6e1965632380" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-0896e8fa6e1965632380">{"x":{"diagram":"\n  graph TD\n  start[Select Location]\n  \n  house1[1 House]\n  fields[3 Standard Fields]\n  water[Big Well]\n  forest_hut[Forester's Hut]\n  gather_hut[Gatherer's Hut]\n  hunter_hut[Hunter's Hut]\n  chopping_house[Chopping House]\n  house10[10 Houses]\n  chapel[Chapel]\n  clinic[Clinic]\n  school[School]\n  latrine[2 Latrines]\n  \n  start --> house1\n  start --> fields\n  start --> water\n  start --> hunter_hut\n  \n  house1 --> house10\n  fields --> forest_hut\n  water --> gather_hut\n  hunter_hut --> chopping_house\n  \n  house10 --> chapel\n  forest_hut --> clinic\n  gather_hut --> school\n  chopping_house --> latrine\n"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-<p><img src="Rplot.png" class="img-fluid"></p>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>year_2_tree <span class="ot">&lt;-</span> DiagrammeR<span class="sc">::</span><span class="fu">mermaid</span>(<span class="st">"</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="st">  graph TD</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="st">  start[Select Location]</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="st">  house1[1 House]</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="st">  fields[3 Standard Fields]</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="st">  water[Big Well]</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="st">  forest_hut[Forester's Hut]</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="st">  gather_hut[Gatherer's Hut]</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="st">  hunter_hut[Hunter's Hut]</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="st">  chopping_house[Chopping House]</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="st">  house10[10 Houses]</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="st">  chapel[Chapel]</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="st">  clinic[Clinic]</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="st">  school[School]</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="st">  latrine[2 Latrines]</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="st">  start --&gt; house1</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="st">  start --&gt; fields</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="st">  start --&gt; water</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="st">  start --&gt; hunter_hut</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="st">  house1 --&gt; house10</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="st">  fields --&gt; forest_hut</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="st">  water --&gt; gather_hut</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="st">  hunter_hut --&gt; chopping_house</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="st">  house10 --&gt; chapel</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="st">  forest_hut --&gt; clinic</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="st">  gather_hut --&gt; school</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="st">  chopping_house --&gt; latrine</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="co"># print</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>year_2_tree</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="year-3-immigration" class="level1">
+<h1>Year 3: Immigration</h1>
+<p>The original settlers are a little homesick and want some more of the variety that their former towns had. Alas, we don’t have many people leftover to take on new jobs, so we need to welcome immigrants to our settlement. This means demand for new homes to house them all and a <code>Town Hall</code> for these official matters.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="year_3_town_hall.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">town hall</figcaption>
+</figure>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">Flowchart</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">Code</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-3" role="tab" aria-controls="tabset-3-3" aria-selected="false">Admin</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div class="DiagrammeR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-bc669d11f9a9048fc941" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-bc669d11f9a9048fc941">{"x":{"diagram":"\n  graph TD\n  start[Select Location]\n  \n  house1[1 House]\n  fields[3 Standard Fields]\n  water[Big Well]\n  forest_hut[Forester's Hut]\n  gather_hut[Gatherer's Hut]\n  hunter_hut[Hunter's Hut]\n  chopping_house[Chopping House]\n  house10[10 Houses]\n  chapel[Chapel]\n  clinic[Clinic]\n  school[School]\n  latrine[2 Latrines]\n  town_hall[Town Hall]\n  \n  start --> house1\n  start --> fields\n  start --> water\n  start --> hunter_hut\n  \n  house1 --> house10\n  fields --> forest_hut\n  water --> gather_hut\n  hunter_hut --> chopping_house\n  \n  house10 --> chapel\n  forest_hut --> clinic\n  gather_hut --> school\n  chopping_house --> latrine\n  \n  chapel --> town_hall\n  clinic --> town_hall\n  school --> town_hall\n  latrine --> town_hall\n"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>year_3_tree <span class="ot">&lt;-</span> DiagrammeR<span class="sc">::</span><span class="fu">mermaid</span>(<span class="st">"</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="st">  graph TD</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="st">  start[Select Location]</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="st">  house1[1 House]</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="st">  fields[3 Standard Fields]</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="st">  water[Big Well]</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="st">  forest_hut[Forester's Hut]</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="st">  gather_hut[Gatherer's Hut]</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="st">  hunter_hut[Hunter's Hut]</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="st">  chopping_house[Chopping House]</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="st">  house10[10 Houses]</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="st">  chapel[Chapel]</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="st">  clinic[Clinic]</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="st">  school[School]</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="st">  latrine[2 Latrines]</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="st">  town_hall[Town Hall]</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="st">  start --&gt; house1</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="st">  start --&gt; fields</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="st">  start --&gt; water</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="st">  start --&gt; hunter_hut</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="st">  house1 --&gt; house10</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="st">  fields --&gt; forest_hut</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="st">  water --&gt; gather_hut</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="st">  hunter_hut --&gt; chopping_house</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="st">  house10 --&gt; chapel</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="st">  forest_hut --&gt; clinic</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="st">  gather_hut --&gt; school</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="st">  chopping_house --&gt; latrine</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="st">  chapel --&gt; town_hall</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="st">  clinic --&gt; town_hall</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="st">  school --&gt; town_hall</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="st">  latrine --&gt; town_hall</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="co"># print</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>year_3_tree</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-3-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-3-tab">
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Upon reaching a population of 50, we elected an administrator to start to oversee matters. The charismatic Virginia uses her experience in entertainment to reduce the stress of the citizens.</p>
+<p>The other candidate was personable too, but ran on a platform of increased fruit yield (but we don’t have any orchards yet).</p>
+</div><div class="column" style="width:10%;">
+<!-- empty column to create gap -->
+</div><div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="year_3_admin.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Administrator Virginia</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="year-4-mining" class="level1">
+<h1>Year 4: Mining</h1>
+<p>In this magical land, the trees grow back quickly, so having enough lumber is easy to achieve. However, stone and iron ore do not replenish in the grassy valleys, so we ask the young laborers to excavate</p>
+<ul>
+<li>a <code>Mine</code> in a mountainside</li>
+<li>a <code>Quarry</code> along the border of our territory</li>
+</ul>
+<p>Both are indestructible (cannot reclaim the land nor materials), so we placed both features far from the main community areas.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="year_4_mine_quarry.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">mine and quarry</figcaption>
+</figure>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">Flowchart</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">Code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div class="DiagrammeR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-8c8a729f7b93b2734a92" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-8c8a729f7b93b2734a92">{"x":{"diagram":"\n  graph TD\n  town_hall[Town Hall]\n  mine[Mine]\n  quarry[Quarry]\n  \n  town_hall --> mine\n  town_hall --> quarry\n"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>year_4_tree <span class="ot">&lt;-</span> DiagrammeR<span class="sc">::</span><span class="fu">mermaid</span>(<span class="st">"</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="st">  graph TD</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="st">  town_hall[Town Hall]</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="st">  mine[Mine]</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="st">  quarry[Quarry]</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="st">  town_hall --&gt; mine</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="st">  town_hall --&gt; quarry</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># print</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>year_4_tree</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="year-5-dredge" class="level1">
+<h1>Year 5: Dredge</h1>
+<p>With a steady supply of stone and iron ore (for now), we can look toward the river for more resources. The clever townsfolk construct 2 <code>Sandpit</code>—one to gather sand, and another to gather clay. The sand pits are placed near the warehouses for quick storage.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="year_5_dredge.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">sand pits</figcaption>
+</figure>
+</div>
+<p>Meanwhile, work out in the <code>Mine</code>, in the <code>Quarry</code>, and on the fields creates wear and tear. The townsfolk needed rough clothes and stone tools. Thus, a <code>Tailor</code> and a <code>Smithy</code> are granted buildings to meet those respective needs.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true">Flowchart</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false">Code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div class="DiagrammeR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-e95920c9f23a789e9d66" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-e95920c9f23a789e9d66">{"x":{"diagram":"\n  graph TD\n  town_hall[Town Hall]\n  mine[Mine]\n  quarry[Quarry]\n  sandpit_sand[Sand Pit: Sand]\n  sandpit_clay[Sand Pit: Clay]\n  tailor[Tailor]\n  smithy[Smithy]\n  \n  town_hall --> mine\n  town_hall --> quarry\n  \n  mine --> sandpit_sand\n  quarry --> sandpit_sand\n  mine --> sandpit_clay\n  quarry --> sandpit_clay\n  town_hall --> tailor\n  quarry --> smithy\n"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>year_5_tree <span class="ot">&lt;-</span> DiagrammeR<span class="sc">::</span><span class="fu">mermaid</span>(<span class="st">"</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="st">  graph TD</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="st">  town_hall[Town Hall]</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="st">  mine[Mine]</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="st">  quarry[Quarry]</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="st">  sandpit_sand[Sand Pit: Sand]</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="st">  sandpit_clay[Sand Pit: Clay]</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="st">  tailor[Tailor]</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="st">  smithy[Smithy]</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="st">  town_hall --&gt; mine</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="st">  town_hall --&gt; quarry</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="st">  mine --&gt; sandpit_sand</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="st">  quarry --&gt; sandpit_sand</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="st">  mine --&gt; sandpit_clay</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="st">  quarry --&gt; sandpit_clay</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="st">  town_hall --&gt; tailor</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="st">  quarry --&gt; smithy</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co"># print</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>year_5_tree</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="year-6-animals" class="level1">
+<h1>Year 6: Animals</h1>
+<p>A fad grabbed the attention of entreprenuerial townsfolk, and they built a couple of <code>Apiary</code> to raise bees. We can either gather honey or beeswax at apiaries, and we focus on the latter now by storing surplus beeswax in the warehouses.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Commentary on Apiaries
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>I liked the apiaries in-game because the trade value of beeswax. However, patches of the game nerfed some abilities to accelerate the growth of settlements (while enhancing other aspects of the game). Now, the beeswax is no more valuable than selling crops from the fields. I chose to build 2 apiaries here (along with assigning 3 villagers to each) out of nostalgia. Furthermore, I liked having a crop (beeswax) that was separate from our main food supplies.</p>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="year_6_apiaries.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Apiaries</figcaption>
+</figure>
+</div>
+<p>Also, with the growing town, finding animals through the <code>Hunters Hut</code> did not produce enough materials for the <code>Tailor</code>, so we dedicated some land as a <code>Pasture</code> to raise some alpacas to eventually get a steady supply of fur, fat, and meat.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true">Flowchart</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false">Code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div class="DiagrammeR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-61b97b111d7dc97b190d" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-61b97b111d7dc97b190d">{"x":{"diagram":"\n  graph TD\n  town_hall[Town Hall]\n  mine[Mine]\n  quarry[Quarry]\n  sandpit_sand[Sand Pit: Sand]\n  sandpit_clay[Sand Pit: Clay]\n  tailor[Tailor]\n  smithy[Smithy]\n  apiary[Apriary]\n  pasture[Pasture]\n  \n  town_hall --> mine\n  town_hall --> quarry\n  \n  mine --> sandpit_sand\n  quarry --> sandpit_sand\n  mine --> sandpit_clay\n  quarry --> sandpit_clay\n  town_hall --> tailor\n  quarry --> smithy\n  \n  sandpit_sand --> apiary\n  sandpit_clay --> apiary\n  tailor --> pasture\n"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>year_6_tree <span class="ot">&lt;-</span> DiagrammeR<span class="sc">::</span><span class="fu">mermaid</span>(<span class="st">"</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="st">  graph TD</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="st">  town_hall[Town Hall]</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="st">  mine[Mine]</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="st">  quarry[Quarry]</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="st">  sandpit_sand[Sand Pit: Sand]</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="st">  sandpit_clay[Sand Pit: Clay]</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="st">  tailor[Tailor]</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="st">  smithy[Smithy]</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="st">  apiary[Apriary]</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="st">  pasture[Pasture]</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="st">  town_hall --&gt; mine</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="st">  town_hall --&gt; quarry</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="st">  mine --&gt; sandpit_sand</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="st">  quarry --&gt; sandpit_sand</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="st">  mine --&gt; sandpit_clay</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="st">  quarry --&gt; sandpit_clay</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="st">  town_hall --&gt; tailor</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="st">  quarry --&gt; smithy</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="st">  sandpit_sand --&gt; apiary</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="st">  sandpit_clay --&gt; apiary</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="st">  tailor --&gt; pasture</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="co"># print</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>year_6_tree</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="year-7-trade" class="level1">
+<h1>Year 7: Trade</h1>
+<p>While the tailor and smithy are valued members of the community, it seems that production of clothes and tools respectively will not match the needs for a growing settlement. We build a <code>Small Trading Post</code> and send out caravans (7 villagers each) to buy those supplies. We have plenty of flax (from the initial settlement supplies) and beeswax (from the apiaries) to sell in the processes. I try to obtain each desired good at an amount of double the current population, but also mindful to try to make the caravan have a positive gain in silver coins.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Commentary on Insurance
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Yes, it seems to be good to always get the insurance (small cost now, but pays out if the caravan trip does not return). The game has been refined to make the insurance worth it.</p>
+</div>
+</div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true">Flowchart</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false">Code</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-3" role="tab" aria-controls="tabset-7-3" aria-selected="false">Trade 1</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-4" role="tab" aria-controls="tabset-7-4" aria-selected="false">Trade 2</a></li></ul>
+<div class="tab-content">
+<div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div class="DiagrammeR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-0284134deb7ff7977398" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-0284134deb7ff7977398">{"x":{"diagram":"\n  graph TD\n  town_hall[Town Hall]\n  mine[Mine]\n  quarry[Quarry]\n  sandpit_sand[Sand Pit: Sand]\n  sandpit_clay[Sand Pit: Clay]\n  tailor[Tailor]\n  smithy[Smithy]\n  apiary[Apriary]\n  pasture[Pasture]\n  small_trading_post[Small Trading Post]\n  \n  town_hall --> mine\n  town_hall --> quarry\n  \n  mine --> sandpit_sand\n  quarry --> sandpit_sand\n  mine --> sandpit_clay\n  quarry --> sandpit_clay\n  town_hall --> tailor\n  quarry --> smithy\n  \n  sandpit_sand --> apiary\n  sandpit_clay --> apiary\n  tailor --> pasture\n  \n  apiary --> small_trading_post\n"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>year_7_tree <span class="ot">&lt;-</span> DiagrammeR<span class="sc">::</span><span class="fu">mermaid</span>(<span class="st">"</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="st">  graph TD</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="st">  town_hall[Town Hall]</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="st">  mine[Mine]</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="st">  quarry[Quarry]</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="st">  sandpit_sand[Sand Pit: Sand]</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="st">  sandpit_clay[Sand Pit: Clay]</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="st">  tailor[Tailor]</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="st">  smithy[Smithy]</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="st">  apiary[Apriary]</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="st">  pasture[Pasture]</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="st">  small_trading_post[Small Trading Post]</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="st">  town_hall --&gt; mine</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="st">  town_hall --&gt; quarry</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="st">  mine --&gt; sandpit_sand</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="st">  quarry --&gt; sandpit_sand</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="st">  mine --&gt; sandpit_clay</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="st">  quarry --&gt; sandpit_clay</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="st">  town_hall --&gt; tailor</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="st">  quarry --&gt; smithy</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="st">  sandpit_sand --&gt; apiary</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="st">  sandpit_clay --&gt; apiary</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="st">  tailor --&gt; pasture</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="st">  apiary --&gt; small_trading_post</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="co"># print</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>year_7_tree</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-7-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-3-tab">
+<p>The first trade sent beeswax and flax to Miao’s faction in exchange for rough clothes.</p>
+<p><img src="year_7_trade_1.png" class="img-fluid"></p>
+</div>
+<div id="tabset-7-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-4-tab">
+<p>The first trade sent beeswax and flax to Lorenzo’s faction in exchange for iron tools.</p>
+<p><img src="year_7_trade_2.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

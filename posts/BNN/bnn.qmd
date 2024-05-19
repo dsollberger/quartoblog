@@ -1,0 +1,141 @@
+---
+title: "Bayesian Neural Networks"
+author: "Derek Sollberger"
+date: "2024-03-17"
+format: html
+---
+
+Over the next few weeks, I want to learn more about **Bayesian Neural Networks**.  Here in this blog post, I will gather resources and examples.
+
+# Causal Impact
+
+I have seen several people mention (on Twitter or Slack) the `CausalImpact`
+package.  Here, I roughly follow the [vignette](https://cran.r-project.org/web/packages/CausalImpact/vignettes/CausalImpact.html).
+
+```{r}
+#| message: false
+#| warning: false
+library("CausalImpact")
+library("tidyverse")
+```
+
+## Toy Data
+
+```{r}
+set.seed(320)
+
+# create time series and apply vertical shift
+ts_raw <- 100 + arima.sim(model = list(ar = 0.999), n = 100)
+
+# add "noise"
+y <- 1.2*ts_raw + rnorm(100) 
+
+# intentionlly "break" time series and lift a part
+y[71:100] <- y[71:100] + 25
+
+x <- 1:100
+df <- data.frame(x,y)
+```
+
+```{r}
+#| message: false
+#| warning: false
+df |>
+  ggplot(aes(x,y)) +
+  geom_vline(xintercept = 70, color = "gray50", 
+             linetype = 2, linewidth = 3) +
+  geom_line(color = "red", linewidth = 2) +
+  labs(title = "Time Series",
+       subtitle = "with an induced discontinuity") +
+  theme_minimal()
+```
+
+## Bayesian Analysis
+
+* training over *pre-intervention period*
+* testing over *post-intervention period*
+* the `CausalImpact` function
+
+    * assembles structural time-series model
+    * performs posterior inference
+    * computes estimates for casual effect
+    
+```{r}
+pre_intervention  <- c(1,70)
+post_intervention <- c(71, 100)
+ts_impact <- CausalImpact::CausalImpact(df,
+                                        pre_intervention,
+                                        post_intervention)
+```
+
+### Model Statistics
+
+```{r}
+summary(ts_impact)
+```
+
+### Visualization
+
+The `plot` of an "impact" object returns a `ggplot` object!
+
+```{r}
+plot(ts_impact)
+```
+
+
+# bsts
+
+## Bayesian structural time series
+
+* looking at the first example on [this blog post](https://www.unofficialgoogledatascience.com/2017/07/fitting-bayesian-structural-time-series.html)
+
+```{r}
+#| message: false
+#| warning: false
+library("bsts")
+data(iclaims) #unemployment data
+```
+
+## Trend and Seasonal Components
+
+```{r}
+state_specs <- 
+  bsts::AddSemilocalLinearTrend(list(),
+                                initial.claims$iclaimsNSA)
+state_specs <- bsts::AddSeasonal(state_specs,
+                                 initial.claims$iclaimsNSA,
+                                 nseasons = 52)
+```
+
+## Model
+
+```{r}
+model_1 <- bsts::bsts(initial.claims$iclaimsNSA,
+                      state.specification = state_specs,
+                      niter = 100)
+```
+
+## Visualization
+
+```{r}
+plot(model_1)
+```
+
+## Prediction
+
+* predict next 12 time points
+* along last 156 time points (3 years)
+
+```{r}
+pred_3y <- predict(model_1, horizon = 12)
+plot(pred_3y, plot.original = 156)
+```
+
+
+
+
+
+# Online Videos
+
+* [Bayesian Neural Network](https://www.youtube.com/watch?v=OVne8jDKGUI) by TwinEd Productions (7 minute video)
+* [Bayesian Network](https://www.youtube.com/watch?v=mebXoVrfchg) by LiquidBrain Bioinformatics (25 minute video)

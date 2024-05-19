@@ -1,0 +1,64 @@
+---
+title: "ggflowchart"
+author: "Derek Sollberger"
+date: "2024-05-18"
+format: html
+---
+
+Today I explore the `ggflowchart` [package](https://nrennie.rbind.io/blog/introducing-ggflowchart/) (made by Dr Nicola Rennie).  For some data, the scenario comes from [The Planet Crafter](https://mijugames.com/pages/planetcrafter/presskit.html) video game.  Later in the game (minor spoiler), you can fire rockets into space to *deliver* and trade items for currency.  Before then, these items are *crafted* out of materials that are *gathered* on the planet.  The information comes from [The Planet Crafter wiki page](https://planet-crafter.fandom.com/wiki/Planet_Crafter_Wiki).  This blog post is not meant to be an accurate guide for gameplay; I took some liberties (and also did not indicate the quantities of the ingredients) in this quick exploration.
+
+```{r}
+#| message: false
+#| warning: false
+library("ggflowchart")
+library("readxl")
+```
+
+
+# Data
+
+I transcribed information for the nodes and edges into an Excel spreadsheet for typing convenience.
+
+:::: {.panel-tabset}
+
+## Loading
+
+```{r}
+edge_df <- readxl::read_xlsx("planet_crafter_trade_goods.xlsx", sheet = "edges")
+node_df <- readxl::read_xlsx("planet_crafter_trade_goods.xlsx", sheet = "nodes")
+```
+
+## Nodes
+
+```{r}
+node_df
+```
+
+## Edges
+
+```{r}
+edge_df
+```
+
+::::
+
+## Network
+
+Now let's see if the main `ggflowchart` function will work well with this situation.
+
+```{r}
+ggflowchart::ggflowchart(edge_df, node_df, fill = stage)
+```
+The code package did the job as prescribed correctly and quickly, but I had presented a situation that was slightly complicated for a default graph.
+
+## Customization
+
+Next, we try to adjust the network presentation with some of the underlying tools in the `igraph` package.
+
+```{r}
+ggflowchart(edge_df, node_df, fill = stage, horizontal = TRUE)
+```
+
+This graph is more readable.  From here, one could explicity define where the nodes are (by x and y coordinates).
+
+In the game's jargon, it might have made more sense to group the materials by tiers ("T1", "T2", "T3") and perhaps repeat nodes that are used in multiple crafting recipes.

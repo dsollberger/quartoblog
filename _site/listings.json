@@ -2,6 +2,11 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/LDA/lda.html",
+      "/posts/ggflowchart/ggflowchart.html",
+      "/posts/baseballr/baseballr.html",
+      "/posts/BNN/bnn.html",
+      "/posts/Settlement_Survival/Settlement_Survival.html",
       "/posts/highcharter/highcharter.html",
       "/posts/Ghibli_palettes/Ghibli_palettes.html",
       "/posts/AI_rubrics/ai_rubrics.html",
@@ -28,7 +33,6 @@
       "/posts/Christmas_plots/Christmas_plots.html",
       "/posts/wonderwall/wonderwall.html",
       "/posts/patchwork/patchwork.html",
-      "/posts/Settlement_Survival/Settlement_Survival.html",
       "/posts/cofficient_of_variation/coefficient_of_variation.html",
       "/posts/intentional_walks/ibb.html",
       "/posts/oblicubes/oblicubes.html",
