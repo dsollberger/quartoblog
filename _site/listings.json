@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/naive_bayes/09_linear-discriminant-analysis.html",
       "/posts/LDA/lda.html",
       "/posts/ggflowchart/ggflowchart.html",
       "/posts/baseballr/baseballr.html",

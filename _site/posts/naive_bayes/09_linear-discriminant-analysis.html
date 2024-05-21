@@ -1,0 +1,2123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Derek Sollberger">
+
+<title>The Median Data Scientist</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">The Median Data Scientist</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com"> <i class="bi bi-twitter" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Derek Sollberger </p>
+            </div>
+    </div>
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#linear-discriminant-analysis" id="toc-linear-discriminant-analysis" class="nav-link active" data-scroll-target="#linear-discriminant-analysis">9 Linear Discriminant Analysis</a>
+  <ul class="collapse">
+  <li><a href="#tooling" id="toc-tooling" class="nav-link" data-scroll-target="#tooling">Tooling</a></li>
+  <li><a href="#classification-models" id="toc-classification-models" class="nav-link" data-scroll-target="#classification-models">Classification Models</a></li>
+  <li><a href="#linear-discriminant-analysis-1" id="toc-linear-discriminant-analysis-1" class="nav-link" data-scroll-target="#linear-discriminant-analysis-1">Linear discriminant analysis</a></li>
+  <li><a href="#gaussian-discriminant-analysis" id="toc-gaussian-discriminant-analysis" class="nav-link" data-scroll-target="#gaussian-discriminant-analysis">Gaussian discriminant analysis</a></li>
+  <li><a href="#gaussian-discriminants---quadratic-decision-boundaries" id="toc-gaussian-discriminants---quadratic-decision-boundaries" class="nav-link" data-scroll-target="#gaussian-discriminants---quadratic-decision-boundaries">Gaussian discriminants -&gt; Quadratic decision boundaries</a></li>
+  <li><a href="#tied-covariance-matrices---linear-decision-boundaries" id="toc-tied-covariance-matrices---linear-decision-boundaries" class="nav-link" data-scroll-target="#tied-covariance-matrices---linear-decision-boundaries">Tied covariance matrices -&gt; Linear decision boundaries</a></li>
+  <li><a href="#lda-logistic-regression" id="toc-lda-logistic-regression" class="nav-link" data-scroll-target="#lda-logistic-regression">LDA &amp; Logistic regression</a></li>
+  <li><a href="#naive-bayes-example" id="toc-naive-bayes-example" class="nav-link" data-scroll-target="#naive-bayes-example">Naive Bayes Example</a>
+  <ul class="collapse">
+  <li><a href="#data-palmer-penguins" id="toc-data-palmer-penguins" class="nav-link" data-scroll-target="#data-palmer-penguins">Data: Palmer Penguins</a></li>
+  <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation">Motivation</a></li>
+  <li><a href="#one-categorical-predictor" id="toc-one-categorical-predictor" class="nav-link" data-scroll-target="#one-categorical-predictor">One Categorical Predictor</a></li>
+  <li><a href="#recall-bayes-rule" id="toc-recall-bayes-rule" class="nav-link" data-scroll-target="#recall-bayes-rule">Recall: Bayes Rule</a></li>
+  <li><a href="#calculation" id="toc-calculation" class="nav-link" data-scroll-target="#calculation">Calculation</a></li>
+  <li><a href="#one-numerical-predictor" id="toc-one-numerical-predictor" class="nav-link" data-scroll-target="#one-numerical-predictor">One Numerical Predictor</a></li>
+  <li><a href="#prior-probability-distributions" id="toc-prior-probability-distributions" class="nav-link" data-scroll-target="#prior-probability-distributions">Prior Probability Distributions</a></li>
+  <li><a href="#two-predictor-variables" id="toc-two-predictor-variables" class="nav-link" data-scroll-target="#two-predictor-variables">Two Predictor Variables</a></li>
+  </ul></li>
+  <li><a href="#naive-bayes-in-r" id="toc-naive-bayes-in-r" class="nav-link" data-scroll-target="#naive-bayes-in-r">Naive Bayes in R</a>
+  <ul class="collapse">
+  <li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models">Models</a></li>
+  <li><a href="#predictions" id="toc-predictions" class="nav-link" data-scroll-target="#predictions">Predictions</a></li>
+  <li><a href="#validation" id="toc-validation" class="nav-link" data-scroll-target="#validation">Validation</a></li>
+  <li><a href="#confusion-matrices" id="toc-confusion-matrices" class="nav-link" data-scroll-target="#confusion-matrices">Confusion Matrices</a></li>
+  <li><a href="#cross-validation" id="toc-cross-validation" class="nav-link" data-scroll-target="#cross-validation">Cross-Validation</a></li>
+  </ul></li>
+  <li><a href="#nbc-math" id="toc-nbc-math" class="nav-link" data-scroll-target="#nbc-math">NBC Math</a>
+  <ul class="collapse">
+  <li><a href="#mles" id="toc-mles" class="nav-link" data-scroll-target="#mles">MLEs</a></li>
+  <li><a href="#imputation" id="toc-imputation" class="nav-link" data-scroll-target="#imputation">Imputation</a></li>
+  </ul></li>
+  <li><a href="#bayes-and-logistic-regression" id="toc-bayes-and-logistic-regression" class="nav-link" data-scroll-target="#bayes-and-logistic-regression">Bayes and Logistic Regression</a>
+  <ul class="collapse">
+  <li><a href="#naive-bayes" id="toc-naive-bayes" class="nav-link" data-scroll-target="#naive-bayes">Naive Bayes</a></li>
+  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression">Logistic Regression</a></li>
+  </ul></li>
+  <li><a href="#covariance-revisited" id="toc-covariance-revisited" class="nav-link" data-scroll-target="#covariance-revisited">Covariance Revisited</a></li>
+  <li><a href="#flda-ideas" id="toc-flda-ideas" class="nav-link" data-scroll-target="#flda-ideas">FLDA Ideas</a></li>
+  <li><a href="#pca-example" id="toc-pca-example" class="nav-link" data-scroll-target="#pca-example">PCA Example</a></li>
+  <li><a href="#flda-example" id="toc-flda-example" class="nav-link" data-scroll-target="#flda-example">FLDA Example</a></li>
+  <li><a href="#flda-vs-pca" id="toc-flda-vs-pca" class="nav-link" data-scroll-target="#flda-vs-pca">FLDA vs PCA</a></li>
+  <li><a href="#discriminative-vs-generative" id="toc-discriminative-vs-generative" class="nav-link" data-scroll-target="#discriminative-vs-generative">Discriminative vs Generative</a>
+  <ul class="collapse">
+  <li><a href="#advantages-of-discriminative-classifiers" id="toc-advantages-of-discriminative-classifiers" class="nav-link" data-scroll-target="#advantages-of-discriminative-classifiers">Advantages of discriminative classifiers</a></li>
+  <li><a href="#advantages-of-generative-classifiers" id="toc-advantages-of-generative-classifiers" class="nav-link" data-scroll-target="#advantages-of-generative-classifiers">Advantages of generative classifiers</a></li>
+  </ul></li>
+  <li><a href="#meeting-videos" id="toc-meeting-videos" class="nav-link" data-scroll-target="#meeting-videos">Meeting Videos</a>
+  <ul class="collapse">
+  <li><a href="#cohort-1" id="toc-cohort-1" class="nav-link" data-scroll-target="#cohort-1">Cohort 1</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="linear-discriminant-analysis" class="level1">
+<h1>9 Linear Discriminant Analysis</h1>
+<p><strong>Learning objectives:</strong></p>
+<ul>
+<li>Purpose of classifiers</li>
+<li>What are generative classifiers</li>
+<li>Gaussian Discriminant Analysis lead to curved decision boundaries</li>
+<li>Linear Discriminant Analysis and linear decision boundaries</li>
+<li>ScikitLearn approaches for Linear / Gaussian Discriminant Analysis</li>
+<li>Explore Naive Bayes classification</li>
+<li>Discuss Fisher’s linear discriminant analysis</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"bayesrules"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"dplyr"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"e1071"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggtext"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"gt"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"janitor"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"magrittr"</span>) <span class="co">#need for "." in pipe acts</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># library("MASS") #carefully use lda() later to not overwrite select()</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"patchwork"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyr"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.3.2 (2023-10-31 ucrt)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 10 x64 (build 19045)
+
+Matrix products: default
+
+
+locale:
+[1] LC_COLLATE=English_United States.utf8 
+[2] LC_CTYPE=English_United States.utf8   
+[3] LC_MONETARY=English_United States.utf8
+[4] LC_NUMERIC=C                          
+[5] LC_TIME=English_United States.utf8    
+
+time zone: America/New_York
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] tidyr_1.3.1      patchwork_1.1.2  magrittr_2.0.3   janitor_2.2.0   
+ [5] gt_0.9.0         ggtext_0.1.2     ggplot2_3.4.3    e1071_1.7-13    
+ [9] dplyr_1.1.4      bayesrules_0.0.2
+
+loaded via a namespace (and not attached):
+ [1] gridExtra_2.3      inline_0.3.19      rlang_1.1.1        snakecase_0.11.0  
+ [5] matrixStats_1.0.0  compiler_4.3.2     loo_2.6.0          callr_3.7.3       
+ [9] vctrs_0.6.5        reshape2_1.4.4     stringr_1.5.1      pkgconfig_2.0.3   
+[13] crayon_1.5.2       fastmap_1.1.1      ellipsis_0.3.2     utf8_1.2.4        
+[17] threejs_0.3.3      promises_1.2.1     rmarkdown_2.24     markdown_1.8      
+[21] ps_1.7.5           nloptr_2.0.3       purrr_1.0.2        xfun_0.40         
+[25] jsonlite_1.8.7     later_1.3.1        parallel_4.3.2     prettyunits_1.2.0 
+[29] R6_2.5.1           dygraphs_1.1.1.6   stringi_1.8.3      StanHeaders_2.32.5
+[33] boot_1.3-28.1      lubridate_1.9.3    Rcpp_1.0.11        rstan_2.32.5      
+[37] knitr_1.43         zoo_1.8-12         base64enc_0.1-3    bayesplot_1.10.0  
+[41] httpuv_1.6.11      Matrix_1.6-1.1     splines_4.3.2      igraph_1.4.3      
+[45] timechange_0.3.0   tidyselect_1.2.0   rstudioapi_0.15.0  codetools_0.2-19  
+[49] miniUI_0.1.1.1     curl_5.0.2         processx_3.8.1     pkgbuild_1.4.0    
+[53] lattice_0.21-9     tibble_3.2.1       plyr_1.8.8         shiny_1.7.5       
+[57] withr_3.0.0        groupdata2_2.0.2   evaluate_0.21      survival_3.5-7    
+[61] proxy_0.4-27       RcppParallel_5.1.7 xml2_1.3.6         xts_0.13.1        
+[65] pillar_1.9.0       DT_0.28            stats4_4.3.2       shinyjs_2.1.0     
+[69] generics_0.1.3     rstantools_2.3.1   munsell_0.5.0      scales_1.2.1      
+[73] minqa_1.2.5        gtools_3.9.4       xtable_1.8-4       class_7.3-22      
+[77] glue_1.6.2         tools_4.3.2        shinystan_2.6.0    lme4_1.1-33       
+[81] colourpicker_1.2.0 grid_4.3.2         QuickJSR_1.1.3     crosstalk_1.2.0   
+[85] colorspace_2.1-0   nlme_3.1-163       cli_3.6.1          fansi_1.0.6       
+[89] V8_4.3.0           gtable_0.3.4       digest_0.6.33      htmlwidgets_1.6.2 
+[93] htmltools_0.5.6    lifecycle_1.0.4    mime_0.12          rstanarm_2.21.4   
+[97] gridtext_0.1.5     shinythemes_1.2.0  MASS_7.3-60       </code></pre>
+</div>
+</div>
+<section id="tooling" class="level2">
+<h2 class="anchored" data-anchor-id="tooling">Tooling</h2>
+<p>Scikitlearn:</p>
+<ul>
+<li><a href="https://scikit-learn.org/stable/modules/classes.html#module-sklearn.discriminant_analysis">API</a></li>
+<li>and <a href="https://scikit-learn.org/stable/modules/lda_qda.html">chapter</a></li>
+</ul>
+<p>… on Linear / Gaussian Discriminant Analysis</p>
+</section>
+<section id="classification-models" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="classification-models">Classification Models</h2>
+<p><span class="math inline">\(p(y=c|x,\theta) = \frac{p(x|y=c,\theta)p(y=c|\theta)}{\Sigma_{c'}{p(x|y=c',\theta)p(y=c'|\theta)}}\)</span></p>
+<p>Note:</p>
+<ul>
+<li>Prior <span class="math inline">\(p(y=c|\theta) = \pi_c\)</span></li>
+<li>Class conditional density <span class="math inline">\(p(x|y=c,\theta)\)</span></li>
+<li>Generative classifier</li>
+</ul>
+<p>Discriminative classifiers directly model <span class="math inline">\(p(y|x,\theta)\)</span></p>
+</section>
+<section id="linear-discriminant-analysis-1" class="level2">
+<h2 class="anchored" data-anchor-id="linear-discriminant-analysis-1">Linear discriminant analysis</h2>
+<p>We want the posterior over classes to be a linear function of <span class="math inline">\(x\)</span></p>
+<p><span class="math inline">\(\log{p(y=c|x,\theta)}=w^Tx+const\)</span></p>
+</section>
+<section id="gaussian-discriminant-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="gaussian-discriminant-analysis">Gaussian discriminant analysis</h2>
+<p><span class="math inline">\(p(x|y = c, θ) = N(x|µ_c , Σ_c )\)</span></p>
+<p>Hence,</p>
+<p><span class="math inline">\(p(y = c|x, θ) ∝ π_c N (x|µ_c , Σ_c )\)</span></p>
+</section>
+<section id="gaussian-discriminants---quadratic-decision-boundaries" class="level2">
+<h2 class="anchored" data-anchor-id="gaussian-discriminants---quadratic-decision-boundaries">Gaussian discriminants -&gt; Quadratic decision boundaries</h2>
+<p>Log posterior is “The discriminant function”</p>
+<p><span class="math inline">\(\log p(y = c|x, θ) = \log π_c − (1/2)\log|2πΣ_c | − (x − µ_c )^T Σ^{−1}_c (x − µ_c ) + const\)</span></p>
+<p>Let <span class="math inline">\(p(y=c|x,\theta)=p(y=c'|x,\theta)\)</span></p>
+<p>Then</p>
+<p><span class="math inline">\((x − µ_c )^TΣ^{−1}_c(x − µ_c) - (x − µ_{c'} )^T Σ^{−1}_{c'} (x − µ_{c'})=f(\pi_c,\pi_c',\Sigma_c,\Sigma_c')\)</span></p>
+<p>So the decision boundaries between classes are quadratic in <span class="math inline">\(x\)</span>.</p>
+<p>GOTO <a href="https://github.com/probml/pyprobml/blob/master/notebooks/book1/09/discrim_analysis_dboundaries_plot2.ipynb">workbook</a></p>
+</section>
+<section id="tied-covariance-matrices---linear-decision-boundaries" class="level2">
+<h2 class="anchored" data-anchor-id="tied-covariance-matrices---linear-decision-boundaries">Tied covariance matrices -&gt; Linear decision boundaries</h2>
+<p><span class="math inline">\(\log p(y = c|x, θ) = \log π_c − (x − µ_c )^T Σ^{−1} (x − µ_c ) + const\)</span></p>
+<p><span class="math inline">\(= \log π_c − µ^T_c Σ^{−1} µ_c +x^T Σ^−1 µ_c +const − x^T Σ^{−1} x\)</span></p>
+<p><span class="math inline">\(=\gamma_c + x^T\beta_c + \kappa\)</span></p>
+<p>So the decision boundaries occur when</p>
+<p><span class="math inline">\(\gamma_c + x^T\beta_c + \kappa = \gamma_{c'} + x^T\beta_{c'} + \kappa\)</span></p>
+<p><span class="math inline">\(x^T(\beta_c - \beta_{c'}) = \gamma_{c'} - \gamma_{c}\)</span></p>
+<p>GOTO <a href="https://github.com/probml/pyprobml/blob/master/notebooks/book1/09/discrim_analysis_dboundaries_plot2.ipynb">workbook</a></p>
+</section>
+<section id="lda-logistic-regression" class="level2">
+<h2 class="anchored" data-anchor-id="lda-logistic-regression">LDA &amp; Logistic regression</h2>
+<p>GOTO textbook</p>
+</section>
+<section id="naive-bayes-example" class="level2">
+<h2 class="anchored" data-anchor-id="naive-bayes-example">Naive Bayes Example</h2>
+<section id="data-palmer-penguins" class="level3">
+<h3 class="anchored" data-anchor-id="data-palmer-penguins">Data: Palmer Penguins</h3>
+<p>There exist multiple penguin species throughout Antarctica, including the <em>Adelie</em>, <em>Chinstrap</em>, and <em>Gentoo</em>. When encountering one of these penguins on an Antarctic trip, we might <em>classify</em> its species</p>
+<p><span class="math display">\[Y = \begin{cases} A &amp; \text{Adelie} \\ C &amp; \text{Chinstrap} \\ G &amp; \text{Gentoo} \end{cases}\]</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lter_penguins.png" class="img-fluid figure-img"></p>
+<figcaption>three species</figcaption>
+</figure>
+</div>
+<p>Example comes from chapter 14 of <em>Bayes Rules!</em></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/bayes_rules_textbook.png" class="img-fluid figure-img"></p>
+<figcaption>Bayes Rules! textbook</figcaption>
+</figure>
+</div>
+<p><span class="math inline">\(X_{1}\)</span> categorical variable: whether the penguin weighs more than the average 4200 grams</p>
+<p><span class="math display">\[X_{1} = \begin{cases} 1 &amp; \text{above-average weight} \\ 0 &amp; \text{below-average weight} \end{cases}\]</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/culmen_depth.png" class="img-fluid figure-img"></p>
+<figcaption>AKA culmen length and depth</figcaption>
+</figure>
+</div>
+<p>Numerical variables:</p>
+<p><span class="math display">\[\begin{array}{rcl}
+  X_{2} &amp; = &amp; \text{bill length (mm)} \\
+  X_{3} &amp; = &amp; \text{flipper length (mm)} \\
+\end{array}\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(penguins_bayes)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> penguins_bayes</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>adelie_color <span class="ot">=</span> <span class="st">"#fb7504"</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>chinstrap_color <span class="ot">=</span> <span class="st">"#c65ccc"</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>gentoo_color <span class="ot">=</span> <span class="st">"#067476"</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabyl</span>(species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   species   n   percent
+    Adelie 152 0.4418605
+ Chinstrap  68 0.1976744
+    Gentoo 124 0.3604651</code></pre>
+</div>
+</div>
+</section>
+<section id="motivation" class="level3">
+<h3 class="anchored" data-anchor-id="motivation">Motivation</h3>
+<p>Here, we have <em>three</em> categories, whereas logistic regression is limited to classifying <em>binary</em> response variables. As an alternative, <strong>naive Bayes classification</strong></p>
+<ul>
+<li>can classify categorical response variables <span class="math inline">\(Y\)</span> with two or more categories</li>
+<li>doesn’t require much theory beyond Bayes’ Rule</li>
+<li>it’s computationally efficient, i.e., doesn’t require MCMC simulation</li>
+</ul>
+<p>But why is it called “naive”?</p>
+</section>
+<section id="one-categorical-predictor" class="level3">
+<h3 class="anchored" data-anchor-id="one-categorical-predictor">One Categorical Predictor</h3>
+<p>Suppose an Antarctic researcher comes across a penguin that weighs less than 4200g with a 195mm-long flipper and 50mm-long bill. Our goal is to help this researcher identify the species of this penguin: Adelie, Chinstrap, or Gentoo</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="09_linear-discriminant-analysis_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<details>
+<summary>
+image code
+</summary>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(above_average_weight) <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">fill =</span> above_average_weight, <span class="at">x =</span> species)) <span class="sc">+</span> </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span> </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"&lt;span style = 'color:#067476'&gt;For which species is a&lt;br&gt;below-average weight most likely?&lt;/span&gt;"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"(focus on the &lt;span style = 'color:#c65ccc'&gt;below-average&lt;/span&gt; category)"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"R4DS Book Club"</span>) <span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#c65ccc"</span>, <span class="st">"#fb7504"</span>)) <span class="sc">+</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_markdown</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">24</span>),</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_markdown</span>(<span class="at">size =</span> <span class="dv">16</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</details>
+</section>
+<section id="recall-bayes-rule" class="level3">
+<h3 class="anchored" data-anchor-id="recall-bayes-rule">Recall: Bayes Rule</h3>
+<p><span class="math display">\[f(y|x_{1}) = \frac{\text{prior}\cdot\text{likelihood}}{\text{normalizing constant}} = \frac{f(y) \cdot L(y|x_{1})}{f(x_{1})}\]</span> where, by the Law of Total Probability,</p>
+<p><span class="math display">\[\begin{array}{rcl}
+f(x_{1} &amp; = &amp; \displaystyle\sum_{\text{all } y'} f(y')L(y'|x_{1}) \\
+~ &amp; = &amp; f(y' = A)L(y' = A|x_{1}) + f(y' = C)L(y' = C|x_{1}) + f(y' = G)L(y' = G|x_{1}) \\
+\end{array}\]</span></p>
+<p>over our three penguin species.</p>
+</section>
+<section id="calculation" class="level3">
+<h3 class="anchored" data-anchor-id="calculation">Calculation</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species, above_average_weight) <span class="sc">|&gt;</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabyl</span>(species, above_average_weight) <span class="sc">|&gt;</span> </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_totals</span>(<span class="fu">c</span>(<span class="st">"row"</span>, <span class="st">"col"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   species   0   1 Total
+    Adelie 126  25   151
+ Chinstrap  61   7    68
+    Gentoo   6 117   123
+     Total 193 149   342</code></pre>
+</div>
+</div>
+<p>Prior probabilities:</p>
+<p><span class="math display">\[f(y = A) = \frac{151}{342}, \quad f(y = C) = \frac{68}{342}, \quad f(y = G) = \frac{123}{342}\]</span></p>
+<p>Likelihoods:</p>
+<p><span class="math display">\[\begin{array}{rcccl}
+  L(y = A | x_{1} = 0) &amp; = &amp; \frac{126}{151} &amp; \approx &amp; 0.8344 \\
+  L(y = C | x_{1} = 0) &amp; = &amp; \frac{61}{68} &amp; \approx &amp; 0.8971 \\
+  L(y = G | x_{1} = 0) &amp; = &amp; \frac{6}{123} &amp; \approx &amp; 0.0488 \\
+\end{array}\]</span></p>
+<p>Total probability:</p>
+<p><span class="math display">\[f(x_{1} = 0) = \frac{151}{342}\cdot\frac{126}{151} + \frac{68}{342}\cdot\frac{61}{68} + \frac{123}{342}\cdot\frac{6}{123} = \frac{193}{342}\]</span></p>
+<p>Bayes’ Rules:</p>
+<p><span class="math display">\[\begin{array}{rcccccl}
+  f(y = A | x_{1} = 0) &amp; = &amp; \frac{f(y = A) \cdot L(y = A | x_{1} = 0)}{f(x_{1} = 0)} = \frac{\frac{151}{342}\cdot\frac{126}{151}}{\frac{193}{342}} &amp; \approx &amp; 0.6528 \\
+  f(y = C | x_{1} = 0) &amp; = &amp; \frac{f(y = A) \cdot L(y = C | x_{1} = 0)}{f(x_{1} = 0)} = \frac{\frac{68}{342}\cdot\frac{61}{68}}{\frac{193}{342}} &amp; \approx &amp; 0.3161 \\
+  f(y = G | x_{1} = 0) &amp; = &amp; \frac{f(y = A) \cdot L(y = G | x_{1} = 0)}{f(x_{1} = 0)} = \frac{\frac{123}{342}\cdot\frac{6}{123}}{\frac{193}{342}} &amp; \approx &amp; 0.0311 \\
+\end{array}\]</span></p>
+<p>The posterior probability that this penguin is an Adelie is more than double that of the other two species</p>
+</section>
+<section id="one-numerical-predictor" class="level3">
+<h3 class="anchored" data-anchor-id="one-numerical-predictor">One Numerical Predictor</h3>
+<p>Let’s ignore the penguin’s weight for now and classify its species using only the fact that it has a 50mm-long bill</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="09_linear-discriminant-analysis_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<details>
+<summary>
+image code
+</summary>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>penguins<span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">fill =</span> species)) <span class="sc">+</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span> </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">50</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"&lt;span style = 'color:#c65ccc'&gt;For which species is a&lt;br&gt;50mm-long bill the most common?&lt;/span&gt;"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"one numerical predictor"</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"R4DS Book Club"</span>) <span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(adelie_color, chinstrap_color, gentoo_color)) <span class="sc">+</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_markdown</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">24</span>),</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_markdown</span>(<span class="at">size =</span> <span class="dv">16</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</details>
+<p>Our data points to our penguin being a Chinstrap</p>
+<ul>
+<li>we must weigh this data against the fact that Chinstraps are the rarest of these three species</li>
+<li>difficult to compute likelihood <span class="math inline">\(L(y = A | x_{2} = 50)\)</span></li>
+</ul>
+<p>This is where one “<em>naive</em>” part of naive Bayes classification comes into play. The naive Bayes method typically assumes that any quantitative predictor, here <span class="math inline">\(X_{2}\)</span>, is <strong>continuous</strong> and <strong>conditionally normal</strong>:</p>
+<p><span class="math display">\[\begin{array}{rcl}
+  X_{2} | (Y = A) &amp; \sim &amp; N(\mu_{A}, \sigma_{A}^{2}) \\
+  X_{2} | (Y = C) &amp; \sim &amp; N(\mu_{C}, \sigma_{C}^{2}) \\
+  X_{2} | (Y = G) &amp; \sim &amp; N(\mu_{G}, \sigma_{G}^{2}) \\
+\end{array}\]</span></p>
+</section>
+<section id="prior-probability-distributions" class="level3">
+<h3 class="anchored" data-anchor-id="prior-probability-distributions">Prior Probability Distributions</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate sample mean and sd for each Y group</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">|&gt;</span> </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(bill_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(bill_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  species    mean    sd
+  &lt;fct&gt;     &lt;dbl&gt; &lt;dbl&gt;
+1 Adelie     38.8  2.66
+2 Chinstrap  48.8  3.34
+3 Gentoo     47.5  3.08</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">color =</span> species)) <span class="sc">+</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fl">38.8</span>, <span class="at">sd =</span> <span class="fl">2.66</span>), </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="at">color =</span> <span class="st">"Adelie"</span>), <span class="at">linewidth =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fl">48.8</span>, <span class="at">sd =</span> <span class="fl">3.34</span>),</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="at">color =</span> <span class="st">"Chinstrap"</span>), <span class="at">linewidth =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fl">47.5</span>, <span class="at">sd =</span> <span class="fl">3.08</span>),</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="at">color =</span> <span class="st">"Gentoo"</span>), <span class="at">linewidth =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="09_linear-discriminant-analysis_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<details>
+<summary>
+image code
+</summary>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">color =</span> species)) <span class="sc">+</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fl">38.8</span>, <span class="at">sd =</span> <span class="fl">2.66</span>), </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="at">color =</span> <span class="st">"Adelie"</span>), <span class="at">linewidth =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fl">48.8</span>, <span class="at">sd =</span> <span class="fl">3.34</span>),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="at">color =</span> <span class="st">"Chinstrap"</span>), <span class="at">linewidth =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fl">47.5</span>, <span class="at">sd =</span> <span class="fl">3.08</span>),</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="at">color =</span> <span class="st">"Gentoo"</span>), <span class="at">linewidth =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">50</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span> </span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"&lt;span style = 'color:#c65ccc'&gt;Prior Probabilities&lt;/span&gt;"</span>,</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"conditionally normal"</span>,</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"R4DS Book Club"</span>) <span class="sc">+</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(adelie_color, chinstrap_color, gentoo_color)) <span class="sc">+</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_markdown</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">24</span>),</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_markdown</span>(<span class="at">size =</span> <span class="dv">16</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</details>
+<p>Computing the likelihoods in <code>R</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># L(y = A | x_2 = 50) = 2.12e-05</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dnorm</span>(<span class="dv">50</span>, <span class="at">mean =</span> <span class="fl">38.8</span>, <span class="at">sd =</span> <span class="fl">2.66</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># L(y = C | x_2 = 50) = 0.112</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dnorm</span>(<span class="dv">50</span>, <span class="at">mean =</span> <span class="fl">48.8</span>, <span class="at">sd =</span> <span class="fl">3.34</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># L(y = G | x_2 = 50) = 0.09317</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">dnorm</span>(<span class="dv">50</span>, <span class="at">mean =</span> <span class="fl">47.5</span>, <span class="at">sd =</span> <span class="fl">3.08</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Total probability:</p>
+<p><span class="math display">\[f(x_{2} = 50) = \frac{151}{342} \cdot 0.0000212 + \frac{68}{342} \cdot 0.112 + \frac{123}{342} \cdot 0.09317 \approx 0.05579\]</span></p>
+<p>Bayes’ Rules:</p>
+<p><span class="math display">\[\begin{array}{rcccccl}
+  f(y = A | x_{2} = 50) &amp; = &amp; \frac{f(y = A) \cdot L(y = A | x_{1} = 0)}{f(x_{1} = 0)} = \frac{\frac{151}{342} \cdot 0.0000212}{0.05579} &amp; \approx &amp; 0.0002 \\
+  f(y = C | x_{2} = 50) &amp; = &amp; \frac{f(y = A) \cdot L(y = C | x_{1} = 0)}{f(x_{1} = 0)} = \frac{\frac{68}{342} \cdot 0.112}{0.05579} &amp; \approx &amp; 0.3992 \\
+  f(y = G | x_{2} = 50) &amp; = &amp; \frac{f(y = A) \cdot L(y = G | x_{1} = 0)}{f(x_{1} = 0)} = \frac{\frac{123}{342} \cdot 0.09317}{0.05579} &amp; \approx &amp; 0.6006 \\
+\end{array}\]</span></p>
+<p>Though a 50mm-long bill is relatively less common among <span style="color:#067476">Gentoo</span> than among <span style="color:#c65ccc">Chinstrap</span>, it follows that our naive Bayes classification, based on our prior information and penguin’s bill length alone, is that this penguin is a <span style="color:#067476">Gentoo</span> – it has the highest posterior probability.</p>
+<p>We’ve now made two naive Bayes classifications of our penguin’s species, one based solely on the fact that our penguin has below-average weight and the other based solely on its 50mm-long bill (in addition to our prior information). And these classifications <strong>disagree</strong>: we classified the penguin as Adelie in the former analysis and Gentoo in the latter. This discrepancy indicates that there’s <em>room for improvement</em> in our naive Bayes classification method.</p>
+</section>
+<section id="two-predictor-variables" class="level3">
+<h3 class="anchored" data-anchor-id="two-predictor-variables">Two Predictor Variables</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="09_linear-discriminant-analysis_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<details>
+<summary>
+image code
+</summary>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> flipper_length_mm, <span class="at">y =</span> bill_length_mm, </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> species)) <span class="sc">+</span> </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">195</span>, <span class="at">y =</span> <span class="dv">30</span>, <span class="at">xend =</span> <span class="dv">195</span>, <span class="at">yend =</span> <span class="dv">50</span>),</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">linewidth =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">170</span>, <span class="at">y =</span> <span class="dv">50</span>, <span class="at">xend =</span> <span class="dv">195</span>, <span class="at">yend =</span> <span class="dv">50</span>),</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">linewidth =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"&lt;span style = 'color:#c65ccc'&gt;Two Predictor Variables&lt;/span&gt;"</span>,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"50mm-long bill and 195mm-long flipper"</span>,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"R4DS Book Club"</span>) <span class="sc">+</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(adelie_color, chinstrap_color, gentoo_color)) <span class="sc">+</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_markdown</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">24</span>),</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_markdown</span>(<span class="at">size =</span> <span class="dv">16</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</details>
+<p>Generalizing Bayes’ Rule:</p>
+<p><span class="math display">\[f(y | x_{2}, x_{3}) = \frac{f(y) \cdot L(y | x_{2}, x_{3})}{\sum_{y'} f(y') \cdot L(y' | x_{2}, x_{3})}\]</span></p>
+<p>Another “naive” assumption of <strong>conditionally independent</strong>:</p>
+<p><span class="math display">\[L(y | x_{2}, x_{3}) = f(x_{2}, x_{3} | y) = f(x_{2} | y) \cdot f(x_{3} | y)\]</span></p>
+<ul>
+<li>mathematically efficient</li>
+<li>but what about correlation?</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sample statistics of x_3: flipper length</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">|&gt;</span> </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(flipper_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(flipper_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  species    mean    sd
+  &lt;fct&gt;     &lt;dbl&gt; &lt;dbl&gt;
+1 Adelie     190.  6.54
+2 Chinstrap  196.  7.13
+3 Gentoo     217.  6.48</code></pre>
+</div>
+</div>
+<p>Likelihoods of a flipper length of 195 mm:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># L(y = A | x_3 = 195) = 0.04554</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dnorm</span>(<span class="dv">195</span>, <span class="at">mean =</span> <span class="dv">190</span>, <span class="at">sd =</span> <span class="fl">6.54</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># L(y = C | x_3 = 195) = 0.05541</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dnorm</span>(<span class="dv">195</span>, <span class="at">mean =</span> <span class="dv">196</span>, <span class="at">sd =</span> <span class="fl">7.13</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># L(y = G | x_3 = 195) = 0.0001934</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="fu">dnorm</span>(<span class="dv">195</span>, <span class="at">mean =</span> <span class="dv">217</span>, <span class="at">sd =</span> <span class="fl">6.48</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Total probability:</p>
+<p><span class="math display">\[f(x_{2} = 50, x_{3} = 195) = \frac{151}{342} \cdot 0.0000212 \cdot 0.04554 + \frac{68}{342} \cdot 0.112 \cdot 0.05541 + \frac{123}{342} \cdot 0.09317 \cdot 0.0001931 \approx 0.001241\]</span></p>
+<p>Bayes’ Rules:</p>
+<p><span class="math display">\[\begin{array}{rcccl}
+  f(y = A | x_{2} = 50, x_{3} = 195) &amp; = &amp; \frac{\frac{151}{342} \cdot 0.0000212 \cdot 0.04554}{0.0001931} &amp; \approx &amp; 0.0003 \\
+  f(y = C | x_{2} = 50, x_{3} = 195) &amp; = &amp; \frac{\frac{68}{342} \cdot 0.112 \cdot 0.05541}{0.0001931} &amp; \approx &amp; 0.9944 \\
+  f(y = G | x_{2} = 50, x_{3} = 195) &amp; = &amp; \frac{\frac{123}{342} \cdot 0.09317 \cdot 0.0001931}{0.0001931} &amp; \approx &amp; 0.0052 \\
+\end{array}\]</span></p>
+<p>In conclusion, our penguin is <em>almost certainly</em> a <span style="color:#c65ccc">Chinstrap</span>.</p>
+</section>
+</section>
+<section id="naive-bayes-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="naive-bayes-in-r">Naive Bayes in R</h2>
+<p>To implement naive Bayes classification in <code>R</code>, we’ll use the <code>naiveBayes()</code> function in the <code>e1071</code> package (Meyer et al.&nbsp;2021)</p>
+<section id="models" class="level3">
+<h3 class="anchored" data-anchor-id="models">Models</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># two models</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>naive_model_1 <span class="ot">&lt;-</span> e1071<span class="sc">::</span><span class="fu">naiveBayes</span>(species <span class="sc">~</span> bill_length_mm, </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">data =</span> penguins)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>naive_model_2 <span class="ot">&lt;-</span> e1071<span class="sc">::</span><span class="fu">naiveBayes</span>(species <span class="sc">~</span> bill_length_mm <span class="sc">+</span> flipper_length_mm, </span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">data =</span> penguins)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># our penguin to classify</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>our_penguin <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">bill_length_mm =</span> <span class="dv">50</span>, <span class="at">flipper_length_mm =</span> <span class="dv">195</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="predictions" class="level3">
+<h3 class="anchored" data-anchor-id="predictions">Predictions</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(naive_model_1, <span class="at">newdata =</span> our_penguin, <span class="at">type =</span> <span class="st">"raw"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       Adelie Chinstrap Gentoo
+[1,] 0.000169  0.397831  0.602</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(naive_model_1, <span class="at">newdata =</span> our_penguin)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] Gentoo
+Levels: Adelie Chinstrap Gentoo</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(naive_model_2, <span class="at">newdata =</span> our_penguin, <span class="at">type =</span> <span class="st">"raw"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       Adelie Chinstrap   Gentoo
+[1,] 0.000345  0.994868 0.004787</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(naive_model_2, <span class="at">newdata =</span> our_penguin)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] Chinstrap
+Levels: Adelie Chinstrap Gentoo</code></pre>
+</div>
+</div>
+</section>
+<section id="validation" class="level3">
+<h3 class="anchored" data-anchor-id="validation">Validation</h3>
+</section>
+<section id="confusion-matrices" class="level3">
+<h3 class="anchored" data-anchor-id="confusion-matrices">Confusion Matrices</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> <span class="co"># keep magrittr pipe?</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">class_1 =</span> <span class="fu">predict</span>(naive_model_1, <span class="at">newdata =</span> .),</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">class_2 =</span> <span class="fu">predict</span>(naive_model_2, <span class="at">newdata =</span> .))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">84735</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">4</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(bill_length_mm, flipper_length_mm, species, class_1, class_2) <span class="sc">|&gt;</span> </span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">bill =</span> bill_length_mm, <span class="at">flipper =</span> flipper_length_mm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 5
+   bill flipper species   class_1 class_2  
+  &lt;dbl&gt;   &lt;int&gt; &lt;fct&gt;     &lt;fct&gt;   &lt;fct&gt;    
+1  47.5     199 Chinstrap Gentoo  Chinstrap
+2  40.9     214 Gentoo    Adelie  Gentoo   
+3  41.3     194 Adelie    Adelie  Adelie   
+4  38.5     190 Adelie    Adelie  Adelie   </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Confusion matrix for naive_model_1</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabyl</span>(species, class_1) <span class="sc">|&gt;</span> </span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_percentages</span>(<span class="st">"row"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_pct_formatting</span>(<span class="at">digits =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_ns</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   species       Adelie Chinstrap       Gentoo
+    Adelie 95.39% (145) 0.00% (0)  4.61%   (7)
+ Chinstrap  5.88%   (4) 8.82% (6) 85.29%  (58)
+    Gentoo  6.45%   (8) 4.84% (6) 88.71% (110)</code></pre>
+</div>
+</div>
+<ul>
+<li>accuracy: 76 percent</li>
+<li>85 percent of Chinstap penguins are misclassified as Gentoo!</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Confusion matrix for naive_model_2</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabyl</span>(species, class_2) <span class="sc">|&gt;</span> </span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_percentages</span>(<span class="st">"row"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_pct_formatting</span>(<span class="at">digits =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_ns</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   species       Adelie   Chinstrap       Gentoo
+    Adelie 96.05% (146)  2.63%  (4)  1.32%   (2)
+ Chinstrap  7.35%   (5) 86.76% (59)  5.88%   (4)
+    Gentoo  0.81%   (1)  0.81%  (1) 98.39% (122)</code></pre>
+</div>
+</div>
+<ul>
+<li>accuracy: 95 percent</li>
+</ul>
+</section>
+<section id="cross-validation" class="level3">
+<h3 class="anchored" data-anchor-id="cross-validation">Cross-Validation</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 10-fold cross-validation</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">84735</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>cv_model_2 <span class="ot">&lt;-</span> <span class="fu">naive_classification_summary_cv</span>(</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> naive_model_2, <span class="at">data =</span> penguins, <span class="at">y =</span> <span class="st">"species"</span>, <span class="at">k =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>cv_model_2<span class="sc">$</span>cv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   species       Adelie   Chinstrap       Gentoo
+    Adelie 96.05% (146)  2.63%  (4)  1.32%   (2)
+ Chinstrap  7.35%   (5) 86.76% (59)  5.88%   (4)
+    Gentoo  0.81%   (1)  0.81%  (1) 98.39% (122)</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="nbc-math" class="level2">
+<h2 class="anchored" data-anchor-id="nbc-math">NBC Math</h2>
+<section id="mles" class="level3">
+<h3 class="anchored" data-anchor-id="mles">MLEs</h3>
+<ul>
+<li>binary features</li>
+</ul>
+<p><span class="math display">\[\hat{\theta}_{dc} = \frac{N_{dc}}{N_{c}}\]</span></p>
+<ul>
+<li>discrete features</li>
+</ul>
+<p><span class="math display">\[\hat{\theta}_{dck} = \displaystyle\frac{N_{dck}}{N_{c}}\]</span></p>
+<ul>
+<li>numerical features</li>
+</ul>
+<p><span class="math display">\[\begin{array}{rcl}
+  \hat{\mu}_{dc} &amp; = &amp; \displaystyle\frac{1}{N_{dc}} \displaystyle\sum_{n:y_{n} = c} x_{nd} \\
+  \hat{\sigma}_{dc}^{2} &amp; = &amp; \displaystyle\frac{1}{N_{dc}} \displaystyle\sum_{n:y_{n} = c} (x_{nd} - \hat{\mu}_{dc})^{2} \\
+\end{array}\]</span></p>
+<ul>
+<li>MAP: add-one smoothing</li>
+</ul>
+<p><span class="math display">\[\begin{array}{rcl}
+  \bar{\theta}_{dc} &amp; = &amp; \displaystyle\frac{1 + N_{dc1}}{2 + N_{dc}} \\
+  p(y = c|\vec{x}, D) &amp; \propto &amp; \bar{\pi}_{c}\displaystyle\prod_{d}\prod_{k} \bar{\theta}_{dck} \cdot I(x_{d} = k) \\
+\end{array}\]</span></p>
+</section>
+<section id="imputation" class="level3">
+<h3 class="anchored" data-anchor-id="imputation">Imputation</h3>
+<p>Suppose that we are missing the value of <span class="math inline">\(x_{j}\)</span></p>
+<ul>
+<li>Gaussian discriminant analysis</li>
+</ul>
+<p><span class="math display">\[p(y=c|\vec{x}_{i \neq j}, \vec{\theta}) = p(y = c)\displaystyle\sum_{x_{j}} p(x_{j}, \vec{x}_{i \neq j}|y = c, \vec{\theta})\]</span></p>
+<ul>
+<li>Naive Bayes classifier</li>
+</ul>
+<p><span class="math display">\[\displaystyle\sum_{x_{j}} p(x_{j}, x_{i \neq j} | y = c, \vec{\theta}) = \displaystyle\prod_{i \neq j}^{D} p(x_{i}|\vec{\theta}_{dc})\]</span></p>
+</section>
+</section>
+<section id="bayes-and-logistic-regression" class="level2">
+<h2 class="anchored" data-anchor-id="bayes-and-logistic-regression">Bayes and Logistic Regression</h2>
+<p>The class posterior distribution for a Naive Bayes classification model has the same form as multinomial logistic regression:</p>
+<p><span class="math display">\[p(y = c|\vec{x}, \vec{\theta}) = \displaystyle\frac{e^{\beta_{c}^{T}\vec{x} + \gamma_{c}}}{\displaystyle\sum_{c'=1}^{C} e^{\beta_{c}^{T}\vec{x} + \gamma_{c}}}\]</span></p>
+<section id="naive-bayes" class="level3">
+<h3 class="anchored" data-anchor-id="naive-bayes">Naive Bayes</h3>
+<p><span class="math display">\[f(y | x_{1}, x_{2}, ..., x_{p}) = \frac{f(y) \cdot L(y | x_{1}, x_{2}, ..., x_{p})}{\sum_{y'} f(y') \cdot L(y' | x_{1}, x_{2}, ..., x_{p})}\]</span></p>
+<ul>
+<li>conditionally independent <span class="math inline">\(\rightarrow\)</span> computationally efficient</li>
+<li>generalizes to more than two categories</li>
+<li>assumptions violated commonly in practice</li>
+<li>optimizes joint likelihood <span class="math inline">\(\displaystyle\prod_{n} p(y_{n},\vec{x}_{n}|\vec{\theta})\)</span></li>
+</ul>
+</section>
+<section id="logistic-regression" class="level3">
+<h3 class="anchored" data-anchor-id="logistic-regression">Logistic Regression</h3>
+<p><span class="math display">\[\log\left(\frac{\pi}{1-\pi}\right) = \beta_{0} + \beta_{1}X_{1} + \cdots + \beta_{k}X_{p}\]</span></p>
+<ul>
+<li>binary classification</li>
+<li>coefficients <span class="math inline">\(\rightarrow\)</span> illumination of the relationships among these variables</li>
+<li>optimizes conditional likelihood <span class="math inline">\(\displaystyle\prod_{n} p(y_{n}|\vec{x}_{n},\vec{\theta})\)</span></li>
+</ul>
+</section>
+</section>
+<section id="covariance-revisited" class="level2">
+<h2 class="anchored" data-anchor-id="covariance-revisited">Covariance Revisited</h2>
+<ul>
+<li>Naive Bayes ignored covariance (assumed conditional independence)</li>
+<li>discriminant analyses (generative approach): fit multivariate Gaussians</li>
+<li>want: dimensionality reduction</li>
+</ul>
+<p>Fisher’s linear discriminant analysis (FLDA) is a hybrid of discriminative and generative techniques, but limited to</p>
+<p><span class="math display">\[K \leq C - 1 \text{ dimensions}\]</span></p>
+<ul>
+<li><span class="math inline">\(C\)</span>: number of classes in response variable</li>
+<li><span class="math inline">\(D\)</span>: number of dimensions in projected space</li>
+</ul>
+</section>
+<section id="flda-ideas" class="level2">
+<h2 class="anchored" data-anchor-id="flda-ideas">FLDA Ideas</h2>
+<ul>
+<li><span class="math inline">\(S_{B}, S_{W}\)</span>: scatter matrices (estimate covariance)</li>
+<li><span class="math inline">\(W\)</span>: projection matrix from <span class="math inline">\(D\)</span> to <span class="math inline">\(K\)</span> dimensions</li>
+</ul>
+<p>Objective: maximize</p>
+<p><span class="math display">\[J(W) = \displaystyle\frac{|W^{T}S_{B}W|}{|W^{T}S_{W}W|}\]</span></p>
+<ul>
+<li>eigenvalue scenario instead of gradient descent</li>
+</ul>
+</section>
+<section id="pca-example" class="level2">
+<h2 class="anchored" data-anchor-id="pca-example">PCA Example</h2>
+<details>
+<summary>
+R setup
+</summary>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>penguin_2_class <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Chinstrap"</span>, <span class="st">"Gentoo"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>()</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>penguin_2_class <span class="sc">|&gt;</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> flipper_length_mm, <span class="at">y =</span> bill_length_mm, </span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> species)) <span class="sc">+</span> </span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Two Predictor Variables"</span>,</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"50mm-long bill and 195mm-long flipper"</span>,</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Data Science Learning Community"</span>) <span class="sc">+</span></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(chinstrap_color, gentoo_color)) <span class="sc">+</span></span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_markdown</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">24</span>),</span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_markdown</span>(<span class="at">size =</span> <span class="dv">16</span>))</span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>train_set <span class="ot">&lt;-</span> penguin_2_class <span class="sc">|&gt;</span></span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(flipper_length_mm, bill_length_mm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</details>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="09_linear-discriminant-analysis_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>pca_results <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(train_set, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<details>
+<summary>
+PCA math
+</summary>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>del_x <span class="ot">&lt;-</span> pca_results<span class="sc">$</span>rotation[<span class="dv">1</span>,<span class="dv">1</span>]</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>del_y <span class="ot">&lt;-</span> pca_results<span class="sc">$</span>rotation[<span class="dv">2</span>,<span class="dv">1</span>]</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>pca_slope <span class="ot">&lt;-</span> del_y <span class="sc">/</span> del_x</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>xbar <span class="ot">&lt;-</span> <span class="fu">mean</span>(train_set<span class="sc">$</span>flipper_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>ybar <span class="ot">&lt;-</span> <span class="fu">mean</span>(train_set<span class="sc">$</span>bill_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>pca_intercept <span class="ot">&lt;-</span> ybar <span class="sc">-</span> pca_slope <span class="sc">*</span> xbar</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>pca_plot_1 <span class="ot">&lt;-</span> penguin_2_class <span class="sc">|&gt;</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> flipper_length_mm, <span class="at">y =</span> bill_length_mm)) <span class="sc">+</span> </span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> pca_slope, <span class="at">intercept =</span> pca_intercept,</span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> adelie_color, <span class="at">linewidth =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Principal Component Analysis"</span>,</span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"&lt;span style = 'color:#fb7504'&gt;first principal component&lt;/span&gt;"</span>,</span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Data Science Learning Community"</span>) <span class="sc">+</span></span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># scale_color_manual(values = c(chinstrap_color, gentoo_color)) +</span></span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_markdown</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_markdown</span>(<span class="at">size =</span> <span class="dv">12</span>))</span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a>pca_plot_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</details>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="09_linear-discriminant-analysis_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>PC1 captures variance of the <em>entire</em> data set</li>
+</ul>
+<details>
+<summary>
+Projection math
+</summary>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>train_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(train_set)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>proj_mat  <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(pca_results<span class="sc">$</span>rotation[,<span class="dv">1</span>])</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>projection_data <span class="ot">&lt;-</span> train_mat <span class="sc">%*%</span> proj_mat</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>projection_df <span class="ot">&lt;-</span> <span class="fu">cbind</span>(penguin_2_class, projection_data)</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>pca_plot_2 <span class="ot">&lt;-</span> projection_df <span class="sc">|&gt;</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> projection_data)) <span class="sc">+</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">fill =</span> species),</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Classification via &lt;br&gt;&lt;span style = 'color:#fb7504'&gt;Principal Component Analysis&lt;/span&gt;"</span>,</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">""</span>,</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Data Science Learning Community"</span>,</span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"(PC1) first principal component"</span>,</span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(chinstrap_color, gentoo_color)) <span class="sc">+</span></span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.y  =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y   =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.y  =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title    =</span> <span class="fu">element_markdown</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">24</span>),</span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_markdown</span>(<span class="at">size =</span> <span class="dv">16</span>))</span>
+<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a>pca_plot_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</details>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="09_linear-discriminant-analysis_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="flda-example" class="level2">
+<h2 class="anchored" data-anchor-id="flda-example">FLDA Example</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>lda_model <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">lda</span>(bill_length_mm <span class="sc">~</span> flipper_length_mm, </span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">data =</span> train_set)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<details>
+<summary>
+LDA math
+</summary>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>del_x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>del_y <span class="ot">&lt;-</span> lda_model<span class="sc">$</span>scaling[<span class="dv">1</span>,<span class="dv">1</span>]</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>lda_slope <span class="ot">&lt;-</span> del_y <span class="sc">/</span> del_x</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>xbar <span class="ot">&lt;-</span> <span class="fu">mean</span>(train_set<span class="sc">$</span>flipper_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>ybar <span class="ot">&lt;-</span> <span class="fu">mean</span>(train_set<span class="sc">$</span>bill_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>lda_intercept <span class="ot">&lt;-</span> ybar <span class="sc">-</span> lda_slope <span class="sc">*</span> xbar</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>lda_plot_1 <span class="ot">&lt;-</span> penguin_2_class <span class="sc">|&gt;</span></span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> flipper_length_mm, <span class="at">y =</span> bill_length_mm, </span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> species)) <span class="sc">+</span> </span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> lda_slope, <span class="at">intercept =</span> lda_intercept,</span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> adelie_color, <span class="at">linewidth =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Linear Discriminant Analysis"</span>,</span>
+<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"&lt;span style = 'color:#fb7504'&gt;first linear discriminant&lt;/span&gt;"</span>,</span>
+<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Data Science Learning Community"</span>) <span class="sc">+</span></span>
+<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(chinstrap_color, gentoo_color)) <span class="sc">+</span></span>
+<span id="cb42-19"><a href="#cb42-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb42-20"><a href="#cb42-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_markdown</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">24</span>),</span>
+<span id="cb42-21"><a href="#cb42-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_markdown</span>(<span class="at">size =</span> <span class="dv">16</span>))</span>
+<span id="cb42-22"><a href="#cb42-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-23"><a href="#cb42-23" aria-hidden="true" tabindex="-1"></a>lda_plot_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</details>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="09_linear-discriminant-analysis_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<details>
+<summary>
+Projection math
+</summary>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>train_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(train_set)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>proj_mat  <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, lda_model<span class="sc">$</span>scaling[<span class="dv">1</span>,<span class="dv">1</span>]))</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>projection_data <span class="ot">&lt;-</span> train_mat <span class="sc">%*%</span> proj_mat</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>projection_df <span class="ot">&lt;-</span> <span class="fu">cbind</span>(penguin_2_class, projection_data)</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>lda_plot_2 <span class="ot">&lt;-</span> projection_df <span class="sc">|&gt;</span></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> projection_data)) <span class="sc">+</span></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">fill =</span> species),</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Classification via &lt;br&gt;&lt;span style = 'color:#fb7504'&gt;Linear Discriminant Analysis&lt;/span&gt;"</span>,</span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">""</span>,</span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Data Science Learning Community"</span>,</span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"(LDA1) first linear discriminant"</span>,</span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(chinstrap_color, gentoo_color)) <span class="sc">+</span></span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.y  =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y   =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.y  =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title    =</span> <span class="fu">element_markdown</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">24</span>),</span>
+<span id="cb43-21"><a href="#cb43-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_markdown</span>(<span class="at">size =</span> <span class="dv">16</span>))</span>
+<span id="cb43-22"><a href="#cb43-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-23"><a href="#cb43-23" aria-hidden="true" tabindex="-1"></a>lda_plot_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</details>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="09_linear-discriminant-analysis_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="flda-vs-pca" class="level2">
+<h2 class="anchored" data-anchor-id="flda-vs-pca">FLDA vs PCA</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="09_linear-discriminant-analysis_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="discriminative-vs-generative" class="level2">
+<h2 class="anchored" data-anchor-id="discriminative-vs-generative">Discriminative vs Generative</h2>
+<section id="advantages-of-discriminative-classifiers" class="level3">
+<h3 class="anchored" data-anchor-id="advantages-of-discriminative-classifiers">Advantages of discriminative classifiers</h3>
+<ul>
+<li>Better predictive accuracy</li>
+<li>Can handle feature preprocessing</li>
+<li>Well-calibrated probabilities</li>
+</ul>
+</section>
+<section id="advantages-of-generative-classifiers" class="level3">
+<h3 class="anchored" data-anchor-id="advantages-of-generative-classifiers">Advantages of generative classifiers</h3>
+<ul>
+<li>Easy to fit</li>
+<li>Can easily handle missing input features</li>
+<li>Can fit classes separately</li>
+<li>Can handle unlabeled training data</li>
+<li>May be more robust to spurious features</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div id="wsldsosjak" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wsldsosjak table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#wsldsosjak thead, #wsldsosjak tbody, #wsldsosjak tfoot, #wsldsosjak tr, #wsldsosjak td, #wsldsosjak th {
+  border-style: none;
+}
+
+#wsldsosjak p {
+  margin: 0;
+  padding: 0;
+}
+
+#wsldsosjak .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#wsldsosjak .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#wsldsosjak .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#wsldsosjak .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#wsldsosjak .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wsldsosjak .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wsldsosjak .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wsldsosjak .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#wsldsosjak .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#wsldsosjak .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#wsldsosjak .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#wsldsosjak .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#wsldsosjak .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#wsldsosjak .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#wsldsosjak .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#wsldsosjak .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#wsldsosjak .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#wsldsosjak .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#wsldsosjak .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wsldsosjak .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#wsldsosjak .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#wsldsosjak .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#wsldsosjak .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wsldsosjak .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#wsldsosjak .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#wsldsosjak .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wsldsosjak .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wsldsosjak .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#wsldsosjak .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wsldsosjak .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#wsldsosjak .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wsldsosjak .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wsldsosjak .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wsldsosjak .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wsldsosjak .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wsldsosjak .gt_left {
+  text-align: left;
+}
+
+#wsldsosjak .gt_center {
+  text-align: center;
+}
+
+#wsldsosjak .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#wsldsosjak .gt_font_normal {
+  font-weight: normal;
+}
+
+#wsldsosjak .gt_font_bold {
+  font-weight: bold;
+}
+
+#wsldsosjak .gt_font_italic {
+  font-style: italic;
+}
+
+#wsldsosjak .gt_super {
+  font-size: 65%;
+}
+
+#wsldsosjak .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#wsldsosjak .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#wsldsosjak .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#wsldsosjak .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#wsldsosjak .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#wsldsosjak .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#wsldsosjak .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+
+<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_heading">
+<th colspan="2" class="gt_heading gt_title gt_font_normal gt_bottom_border">Types of Classification Techniques<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+</tr>
+<tr class="odd gt_col_headings">
+<th id="Discriminative Classifiers" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Discriminative Classifiers</th>
+<th id="Generative Classifiers" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Generative Classifiers</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="discriminative_classifiers" style="background-color: #F9E3D6">Logistic regression</td>
+<td class="gt_row gt_center" headers="generative_classifiers" style="background-color: #E0FFFF">Naive Bayes</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="discriminative_classifiers" style="background-color: #F9E3D6">Support vector machines</td>
+<td class="gt_row gt_center" headers="generative_classifiers" style="background-color: #E0FFFF">Bayesian networks</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="discriminative_classifiers" style="background-color: #F9E3D6">Neural networks</td>
+<td class="gt_row gt_center" headers="generative_classifiers" style="background-color: #E0FFFF">Markov random fields</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="discriminative_classifiers" style="background-color: #F9E3D6">Nearest neighbor</td>
+<td class="gt_row gt_center" headers="generative_classifiers" style="background-color: #E0FFFF">Hidden Markov Models</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="discriminative_classifiers" style="background-color: #F9E3D6">Conditional Random Fields</td>
+<td class="gt_row gt_center" headers="generative_classifiers" style="background-color: #E0FFFF">Latent Dirichlet Allocation</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="discriminative_classifiers" style="background-color: #F9E3D6">Random Forests</td>
+<td class="gt_row gt_center" headers="generative_classifiers" style="background-color: #E0FFFF">Generative Adversarial Networks</td>
+</tr>
+</tbody><tfoot class="gt_footnotes">
+<tr class="even">
+<td colspan="2" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> Source: https://www.analyticsvidhya.com/blog/2021/07/deep-understanding-of-discriminative-and-generative-models-in-machine-learning/</td>
+</tr>
+</tfoot>
+
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="meeting-videos" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="meeting-videos">Meeting Videos</h2>
+<section id="cohort-1" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="cohort-1">Cohort 1</h3>
+<iframe src="https://www.youtube.com/embed/URL" width="100%" height="400px" data-external="1">
+</iframe>
+<details>
+<summary>
+Meeting chat log
+</summary>
+<pre><code>00:51:52    Heidi L Wallace:    I have to jump before my next meeting, thank you so much  for this!</code></pre>
+</details>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
