@@ -1,0 +1,10 @@
+https://www.charlesbordet.com/en/extract-pdf/#extract-the-right-information
+
+Loading the Data Better
+
+```{r}
+tm_setup    <- tm::readPDF(engine = "pdftools", control = list(text = "-layout"))
+raw_data_tm <- Corpus(URISource("Penzu_Export_-_20210414.pdf"),
+                      readerControl = list(reader = tm_setup))
+
+```
