@@ -2,7 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
-      "/posts/sentiment/sentiment.html",
+      "/posts/office_sentiment/office_sentiment.html",
       "/posts/ggflowchart/ggflowchart.html",
       "/posts/baseballr/baseballr.html",
       "/posts/BNN/bnn.html",

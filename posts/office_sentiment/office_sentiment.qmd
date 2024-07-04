@@ -1,0 +1,116 @@
+---
+title: "Sentiment Analysis of The Office"
+author: "Derek Sollberger"
+date: "2024-07-03"
+execute:
+  cache: true
+format: html
+---
+
+This summer, I am mentoring some high school students through their data science projects. For a data set, I am suggesting the repository of scripts from the TV show The Office through the `schrute` package, but with sentiment scores attached to the data.
+
+```{r}
+#| message: false
+#| warning: false
+library("dplyr")
+library("schrute")
+library("sentiment.ai")
+library("SentimentAnalysis")
+library("sentimentr")
+library("SnowballC")
+library("syuzhet")
+```
+
+## Loading the Data
+
+Following the [documentation](https://cran.r-project.org/web/packages/schrute/vignettes/theoffice.html) at the `schrute` package, we can get copy of the episode scripts.
+
+```{r}
+script_data <- schrute::theoffice
+colnames(script_data)
+```
+## Computing Sentiment Scores
+
+Following the [documentation](https://cran.r-project.org/web/packages/sentiment.ai/readme/README.html) at the `sentiment.ai` package, we can compute sentiment scores for each `text` (please refer to the 3 sentiment packages for more information.)
+
+```{r}
+start_time <- Sys.time()
+sentimentr_score <- sentimentr::sentiment_by(
+  get_sentences(script_data$text), 1:length(script_data$text))$ave_sentiment
+
+# computation time
+end_time <- Sys.time()
+end_time - start_time
+
+# for some reason, this computation created one extra number
+sentimentr_score <- sentimentr_score[-length(sentimentr_score)]
+```
+
+```{r}
+start_time <- Sys.time()
+sentimentAnalysis_score <- SentimentAnalysis::analyzeSentiment(script_data$text)$SentimentQDAP
+
+# computation time
+end_time <- Sys.time()
+end_time - start_time
+```
+This code for the `sentiment.ai` package isn't working for me at the moment; I might return to it later.
+
+```{r}
+#| eval: false
+# Initiate the model
+# This will create the sentiment.ai.embed model
+# Do this so it can be reused without recompiling - especially on GPU!
+
+# run once overall
+# sentiment.ai::install_sentiment.ai() 
+
+# run once per session
+sentiment.ai::init_sentiment.ai()
+
+start_time <- Sys.time()
+sentiment_ai_score <- sentiment.ai::sentiment_score(script_data$text)
+
+# computation time
+end_time <- Sys.time()
+end_time - start_time
+```
+
+```{r}
+start_time <- Sys.time()
+syuzhet_score <- syuzhet::get_sentiment(script_data$text)
+
+# computation time
+end_time <- Sys.time()
+end_time - start_time
+```
+
+## Combining the Data
+
+```{r}
+office_sentiment <- cbind(script_data,
+                          sentimentAnalysis_score,
+                          sentimentr_score,
+                          syuzhet_score)
+```
+
+Here is a glimpse of the data set.
+
+```{r}
+set.seed(20240703)
+office_sentiment |>
+  dplyr::select(episode, character,
+                sentimentAnalysis_score,
+                sentimentr_score,
+                syuzhet_score, 
+                text) |>
+  dplyr::slice_sample(n = 10) |>
+  dplyr::as_tibble()
+```
+
+## Saving the Data
+
+```{r}
+readr::write_csv(office_sentiment, "office_sentiment.csv")
+```
+
