@@ -1,0 +1,23 @@
+---
+title: "webR in a Quarto Blog Post"
+author: "Derek Sollberger"
+date: "2024-08-21"
+execute:
+  cache: true
+filters:
+  - webr
+format: html
+---
+
+`webR` is a Quarto extension made by The Coatless Professor that allows users to type code right there in a webpage.
+
+* In the terminal, type `quarto add coatless/quarto-webr` and press Enter. Allow the installation to proceed.
+    
+    * [YouTube tutorial](https://www.youtube.com/watch?v=DoRR2S5lLvk) by The Coatless Professor
+
+After installing the extension, the `extensions` appears in my `quartoblog` folder (i.e. not just the folder for this blog post)
+
+```{webr-r}
+plot(pressure)
+```
+
