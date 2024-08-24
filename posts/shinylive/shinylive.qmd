@@ -1,0 +1,52 @@
+---
+title: "Shiny Apps in a Quarto Blog Post"
+author: "Derek Sollberger"
+date: "2024-08-23"
+format:
+  html
+filters:
+  - shinylive
+---
+
+I have long wanted to include simple `Shiny` apps in my lecture notes so that I can show data science concepts to my students quickly.  Today, I want to see if `shinylive` helps me.
+
+For now, I am following [this blog post](https://r-posts.com/add-shiny-in-quarto-blog-with-shinylive/) by jhk0530
+
+After installing the `shinylive` Quarto extension, we add "shinylive" to the `filters` in the QMD YAML, and then start the desired code block with `{shinylive-r}`.
+
+```{shinylive-r}
+#| echo: false
+#| standalone: true
+#| viewerHeight: 800
+library(shiny)
+ui <- fluidPage(
+  titlePanel("Hello Shiny!"),
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput(
+        inputId = "bins",
+        label = "Number of bins:",
+        min = 1,
+        max = 50,
+        value = 30
+      )
+    ),
+    mainPanel(
+      plotOutput(outputId = "distPlot")
+    )
+  )
+)
+server <- function(input, output) {
+  output$distPlot <- renderPlot({
+    x <- faithful$waiting
+    bins <- seq(min(x), max(x), length.out = input$bins + 1)
+    hist(x,
+      breaks = bins, col = "#75AADB", border = "white",
+      xlab = "Waiting time to next eruption (in mins)",
+      main = "Histogram of waiting times"
+    )
+  })
+}
+shinyApp(ui = ui, server = server)
+```
+

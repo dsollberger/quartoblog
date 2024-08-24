@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/shinylive/shinylive.html",
       "/posts/webR/webR.html",
       "/posts/office_sentiment/office_sentiment.html",
       "/posts/ggflowchart/ggflowchart.html",
