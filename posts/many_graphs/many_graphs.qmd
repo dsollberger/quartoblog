@@ -1,5 +1,5 @@
 ---
-title: "Tidy Evaluation (for Shiny apps)"
+title: "Filtering in Shiny apps"
 author: "Derek Sollberger"
 date: "2024-08-31"
 format:
@@ -8,7 +8,7 @@ filters:
   - shinylive
 ---
 
-For my data science lectures, I want to be able to run small Shiny apps (e.g. to demonstrate `dplyr` concepts).  With my current knowledge of Shiny code, I am rather sure that I will need the notion of *tidy evaluation* to carry out the following demonstration:
+For my data science lectures, I want to be able to run small Shiny apps (e.g. to demonstrate `dplyr` concepts).  With my current knowledge of Shiny code, I am rather sure that I will need a *reactive* data frame to carry out the following demonstration:
 
 > Using data from the USDA NASS, plot a time series of bee colony population counts, but allow the user to filter the results by each of the United States regions.
 

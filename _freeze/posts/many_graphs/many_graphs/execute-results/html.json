@@ -1,0 +1,15 @@
+{
+  "hash": "9db58be27c544a6531ff43b8e7a1cc94",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Filtering in Shiny apps\"\nauthor: \"Derek Sollberger\"\ndate: \"2024-08-31\"\nformat:\n  html\nfilters:\n  - shinylive\n---\n\n\nFor my data science lectures, I want to be able to run small Shiny apps (e.g. to demonstrate `dplyr` concepts).  With my current knowledge of Shiny code, I am rather sure that I will need a *reactive* data frame to carry out the following demonstration:\n\n> Using data from the USDA NASS, plot a time series of bee colony population counts, but allow the user to filter the results by each of the United States regions.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(\"shiny\")\nlibrary(\"tidyverse\")\n\nbee_df <- readr::read_csv(\"bee_population_states.csv\")\nUS_states <- unique(bee_df$State)\n```\n:::\n\n\n\n```{shinylive-r}\n#| echo: false\n#| standalone: true\n#| viewerHeight: 800\nui <- fluidPage(\n  titlePanel(\"Bee Populations\"),\n  sidebarLayout(\n    sidebarPanel(\n      selectInput(\"chosen_state\", \"Select location\", \n                  choices = US_states,\n                  selected = \"OTHER STATES\")\n    ),\n    mainPanel(\n      plotOutput(outputId = \"beePlot\")\n    )\n  )\n)\nserver <- function(input, output) {\n  filtered_data <- reactive({\n    bee_df %>%\n      filter(State == input$chosen_state)\n  })\n  \n  output$beePlot <- renderPlot({\n    filtered_data() %>%\n      ggplot(aes(x = Year, y = Value)) +\n      geom_bar(stat = \"identity\")\n  })\n}\nshinyApp(ui = ui, server = server)\n```\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
