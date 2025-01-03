@@ -1,0 +1,49 @@
+---
+title: "Interactive Dashboards"
+author: "Derek Sollberger"
+date: "2025-01-16"
+format:
+  html
+---
+
+# Interactive Dashboards
+
+In this blog post, I want to outline my upcoming Princeton Wintersession workshop *Interactive Dashboards for Collaborative Communication*.  In this workshop, we will explore the new technology called Quarto dashboards. In this exploration, I have chosen a different data set per my interest, but much of the credit for the design of this workshop goes to the folks at Posit and other data scientists who have already created wonderful tutorials (see Additional Resources).
+
+## Dashboards
+
+## Why R?
+
+## Why Quarto?
+
+## Posit Cloud
+
+# Case Study: Bees!
+
+## Scenario
+
+## Data Source
+
+Our data come from the Quick Stats at [USDA NASS](https://www.nass.usda.gov/) (United States Department of Agriculture National Agricultural Statistics Service).  Users can access a subset of the data through dropdown menus.  For replicability, I list my selections below:
+
+![USDA NASS Quick Stats](bee_search_criteria.png)
+
+* **Commodity:**
+
+    * **Program:** SURVEY
+    * **Sector:** ANIMALS & PRODUCTS
+    * **Group:** SPECIALTY
+    * **Commodity:** HONEY
+    * **Category:** INVENTORY
+    * **Data item:** HONEY, BEE COLONIES - INVENTORY, MEASURED IN COLONIES
+    
+* **Location:**
+
+    * **Geographic Level:** STATE
+    * **State:** [leave unselected for all states]
+    
+* **Time:**
+
+    * **Year:** [selected 2014 to 2024 to obtain about a decade of data]
+    * **Period Type:** ANNUAL (note: the "annual" measurements were done by each state, while other granularity might not be available for all states)
+    * **Period:** MARKETING YEAR
