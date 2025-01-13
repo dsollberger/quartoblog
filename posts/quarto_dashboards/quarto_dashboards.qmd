@@ -8,11 +8,28 @@ format:
 
 # Interactive Dashboards
 
-In this blog post, I want to outline my upcoming Princeton Wintersession workshop *Interactive Dashboards for Collaborative Communication*.  In this workshop, we will explore the new technology called Quarto dashboards. In this exploration, I have chosen a different data set per my interest, but much of the credit for the design of this workshop goes to the folks at Posit and other data scientists who have already created wonderful tutorials (see Additional Resources).
+In this blog post, I want to outline my upcoming Princeton Wintersession workshop *Interactive Dashboards for Collaborative Communication*.  In this workshop, we will explore the new technology called [Quarto dashboards](https://quarto.org/docs/dashboards/). In this exploration, I have chosen a different data set per my interest, but much of the credit for the design of this workshop goes to the folks at Posit and other data scientists who have already created wonderful tutorials (see Additional Resources).
 
 ## Dashboards
 
+* [Examples](https://quarto.org/docs/dashboards/#examples) from Posit
+
 ## Why R?
+
+```{r}
+#| message: false
+#| warning: false
+
+library("sf")
+library("tidyverse")
+
+bee_data <- readr::read_csv("bee_data.csv")
+states_shp <- readr::read_rds("us_states_shp.rds")
+
+color_1 <- "#E77500"
+color_2 <- "#121212"
+```
+
 
 ## Why Quarto?
 
@@ -20,7 +37,23 @@ In this blog post, I want to outline my upcoming Princeton Wintersession worksho
 
 # Case Study: Bees!
 
-## Scenario
+## Concern for Bee Populations
+
+:::: {.columns}
+
+::: {.column width="45%"}
+![Time](bee_news_1.png)
+:::
+
+::: {.column width="10%"}
+	
+:::
+
+::: {.column width="45%"}
+![ABC](bee_news_2.png)
+:::
+
+::::
 
 ## Data Source
 
@@ -47,3 +80,177 @@ Our data come from the Quick Stats at [USDA NASS](https://www.nass.usda.gov/) (U
     * **Year:** [selected 2014 to 2024 to obtain about a decade of data]
     * **Period Type:** ANNUAL (note: the "annual" measurements were done by each state, while other granularity might not be available for all states)
     * **Period:** MARKETING YEAR
+
+## Bar Charts
+
+:::: {.panel-tabset}
+
+## Plot
+
+```{r}
+#| echo: false
+#| eval: true
+#| message: false
+#| warning: false
+
+bee_data |> 
+  filter(Year >= 2015 & Year <= 2019) |>
+  group_by(Year) |>
+  mutate(total_colonies = sum(Value)) |>
+  ungroup() |>
+  select(Year, total_colonies) |>
+  distinct() |>
+  mutate(num_colonies = total_colonies / 1e6) |>
+  ggplot(aes(x = factor(Year), y = num_colonies)) +
+  geom_bar(color = "#121212", fill = "#E77500",
+           stat = "identity") +
+  coord_cartesian(ylim = c(2.5,3.0)) +
+  labs(title = "US Bee Population",
+       subtitle = "Survey of bee colonies",
+       caption = "source: USDA NASS",
+       x = "year",
+       y = "bee colonies (in millions)") +
+  theme_minimal()
+```
+
+## Code
+
+```{r}
+#| echo: true
+#| eval: false
+#| message: false
+#| warning: false
+
+bee_data |> 
+  group_by(Year) |>
+  mutate(total_colonies = sum(Value)) |>
+  ungroup() |>
+  select(Year, total_colonies) |>
+  distinct() |>
+  mutate(num_colonies = total_colonies / 1e6) |>
+  ggplot(aes(x = factor(Year), y = num_colonies)) +
+  geom_bar(color = "#121212", fill = "#E77500",
+           stat = "identity") +
+  coord_cartesian(ylim = c(2.5,3.0)) +
+  labs(title = "US Bee Population",
+       subtitle = "Survey of bee colonies",
+       # caption = "source: USDA NASS",
+       x = "year",
+       y = "bee colonies (in millions)") +
+  theme_minimal()
+```
+
+## Facets
+
+```{r}
+#| echo: false
+#| eval: true
+#| message: false
+#| warning: false
+
+bee_data |>
+  filter(Year >= 2015 & Year <= 2019) |>
+  filter(State %in% c("CALIFORNIA", "NEW JERSEY")) |>
+  ggplot(aes(x = Year, y = Value)) +
+  facet_wrap(vars(State), scales = "free_y") +
+  geom_bar(stat = "identity")
+```
+
+## Code
+
+```{r}
+#| echo: true
+#| eval: false
+#| message: false
+#| warning: false
+
+bee_data |>
+  filter(Year >= 2015 & Year <= 2019) |>
+  filter(State %in% c("CALIFORNIA", "NEW JERSEY")) |>
+  ggplot(aes(x = Year, y = Value)) +
+  facet_wrap(vars(State), scales = "free_y") +
+  geom_bar(stat = "identity")
+```
+
+::::
+
+## Maps
+
+:::: {.panel-tabset}
+
+## Spatial Viz
+
+```{r}
+#| echo: false
+#| eval: true
+#| message: false
+#| warning: false
+
+states_shp |>
+  mutate(this_selection = ifelse(NAME == "New Jersey", 
+                               "focus", "other states")) |>
+  ggplot() +
+  geom_sf(aes(fill = this_selection)) +
+  labs(title = "State Selection", 
+         subtitle = "toward a Dashboard card",
+         caption = "Princeton Wintersession") +
+  scale_fill_manual(values = c(color_1, "gray80")) +
+  theme_minimal()
+```
+
+## Code
+
+```{r}
+#| echo: true
+#| eval: false
+#| message: false
+#| warning: false
+
+states_shp |>
+  mutate(this_selection = ifelse(NAME == "New Jersey", 
+                               "focus", "other states")) |>
+  ggplot() +
+  geom_sf(aes(fill = this_selection)) +
+  labs(title = "State Selection", 
+         subtitle = "toward a Dashboard card",
+         caption = "Princeton Wintersession") +
+  scale_fill_manual(values = c(color_1, "gray80")) +
+  theme_minimal()
+```
+
+::::
+
+
+
+# Setup (YAML)
+
+In a Posit Cloud session, create a new Quarto document, and then change the `format` to `dashboard`.
+
+```
+---
+title: "My Dashboard"
+format: dashboard
+---
+
+# notebook content goes here...
+```
+
+    
+# Additional Resources
+
+For this workshop, I followed the materials presented by Mine Cetinkaya-Rundel and Posit
+
+* [Part 1](https://www.youtube.com/watch?v=HW7QbqI4fH0)
+* [Part 2](https://www.youtube.com/watch?v=KdsQgwaY950)
+* [Part 3](https://www.youtube.com/watch?v=NigWSB-jG4Y)
+
+Folks that are interested in learning more about Quarto Dashboards can refer to resources such as the following:
+
+* How to [Automate](https://www.youtube.com/watch?v=xnJuXOw7iu8) your Reporting by Isabella Velasquez
+* [Easy Dashboards](https://www.youtube.com/watch?v=R3sNVE8TYeo) by The GRAPH Courses
+* Interactive Infographic using [DisplayR](https://www.youtube.com/watch?v=RXdcHCPJRg8) by Melisaa Van Bussel
+* [Quarto Dashboards](https://www.youtube.com/watch?v=jX4_Dnzhl0M) by Charles Teague
+* [Quarto Dashboards](https://www.youtube.com/watch?v=Kq1hgg2NtE4) by Isabella Velasquez
+* How to [Style](https://www.youtube.com/watch?v=jX4_Dnzhl0M) your Quarto docs without HTML & CSS by Albert Rapp
+
+* [Beyond Dashboards](https://www.youtube.com/watch?v=fzykFa6c3LI) by Sean Nguyen

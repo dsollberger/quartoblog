@@ -1,0 +1,11 @@
+---
+title: "Historical Investments"
+author: "Derek Sollberger"
+date: "2025-01-11"
+format:
+  html
+---
+
+Sometimes I wonder what I would do if I had to redo my whole life.
+
+* here is a historical look at different [investment asset classes](https://themeasureofaplan.com/investment-returns-by-asset-class) and how they did each year

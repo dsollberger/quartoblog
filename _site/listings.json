@@ -3,6 +3,7 @@
     "listing": "/blog.html",
     "items": [
       "/posts/quarto_dashboards/quarto_dashboards.html",
+      "/posts/historical_investments/historical_investments.html",
       "/posts/many_graphs/many_graphs.html",
       "/posts/shinylive/shinylive.html",
       "/posts/webR/webR.html",
