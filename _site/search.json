@@ -1635,13 +1635,41 @@
     "href": "posts/quarto_dashboards/quarto_dashboards.html#bar-charts",
     "title": "Interactive Dashboards",
     "section": "Bar Charts",
-    "text": "Bar Charts\n\nPlotCodeFacetsCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nbee_data |&gt; \n  group_by(Year) |&gt;\n  mutate(total_colonies = sum(Value)) |&gt;\n  ungroup() |&gt;\n  select(Year, total_colonies) |&gt;\n  distinct() |&gt;\n  mutate(num_colonies = total_colonies / 1e6) |&gt;\n  ggplot(aes(x = factor(Year), y = num_colonies)) +\n  geom_bar(color = \"#121212\", fill = \"#E77500\",\n           stat = \"identity\") +\n  coord_cartesian(ylim = c(2.5,3.0)) +\n  labs(title = \"US Bee Population\",\n       subtitle = \"Survey of bee colonies\",\n       # caption = \"source: USDA NASS\",\n       x = \"year\",\n       y = \"bee colonies (in millions)\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nbee_data |&gt;\n  filter(Year &gt;= 2015 & Year &lt;= 2019) |&gt;\n  filter(State %in% c(\"CALIFORNIA\", \"NEW JERSEY\")) |&gt;\n  ggplot(aes(x = Year, y = Value)) +\n  facet_wrap(vars(State), scales = \"free_y\") +\n  geom_bar(stat = \"identity\")"
+    "text": "Bar Charts\n\nPlotCodeEach StateCodeFacetsCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nbee_data |&gt; \n  group_by(Year) |&gt;\n  mutate(total_colonies = sum(Value)) |&gt;\n  ungroup() |&gt;\n  select(Year, total_colonies) |&gt;\n  distinct() |&gt;\n  mutate(num_colonies = total_colonies / 1e6) |&gt;\n  ggplot(aes(x = factor(Year), y = num_colonies)) +\n  geom_bar(color = \"#121212\", fill = \"#E77500\",\n           stat = \"identity\") +\n  coord_cartesian(ylim = c(2.5,3.0)) +\n  labs(title = \"US Bee Population\",\n       subtitle = \"Survey of bee colonies\",\n       # caption = \"source: USDA NASS\",\n       x = \"year\",\n       y = \"bee colonies (in millions)\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnj_plot &lt;- bee_data |&gt; \n  filter(State == \"NEW JERSEY\") |&gt;\n  mutate(num_colonies = Value / 1e3) |&gt;\n  ggplot(aes(x = factor(Year), y = num_colonies)) +\n  geom_bar(color = \"#121212\", fill = \"#E77500\",\n           stat = \"identity\") +\n  labs(title = \"NEW JERSEY\",\n       subtitle = \"Survey of bee colonies\",\n       caption = \"source: USDA NASS\",\n       x = \"year\",\n       y = \"bee colonies (in thousands)\") +\n  theme_minimal()\n\nnj_plot\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nbee_data |&gt;\n  filter(Year &gt;= 2015 & Year &lt;= 2019) |&gt;\n  filter(State %in% c(\"CALIFORNIA\", \"NEW JERSEY\")) |&gt;\n  ggplot(aes(x = Year, y = Value)) +\n  facet_wrap(vars(State), scales = \"free_y\") +\n  geom_bar(stat = \"identity\")"
   },
   {
     "objectID": "posts/quarto_dashboards/quarto_dashboards.html#maps",
     "href": "posts/quarto_dashboards/quarto_dashboards.html#maps",
     "title": "Interactive Dashboards",
     "section": "Maps",
-    "text": "Maps\n\nSpatial VizCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nstates_shp |&gt;\n  mutate(this_selection = ifelse(NAME == \"New Jersey\", \n                               \"focus\", \"other states\")) |&gt;\n  ggplot() +\n  geom_sf(aes(fill = this_selection)) +\n  labs(title = \"State Selection\", \n         subtitle = \"toward a Dashboard card\",\n         caption = \"Princeton Wintersession\") +\n  scale_fill_manual(values = c(color_1, \"gray80\")) +\n  theme_minimal()"
+    "text": "Maps\n\nSpatial VizCodeEach StateCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nstates_shp |&gt;\n  mutate(this_selection = ifelse(NAME == \"New Jersey\", \n                               \"focus\", \"other states\")) |&gt;\n  ggplot() +\n  geom_sf(aes(fill = this_selection)) +\n  labs(title = \"State Selection\", \n         subtitle = \"toward a Dashboard card\",\n         caption = \"Princeton Wintersession\") +\n  scale_fill_manual(values = c(color_1, \"gray80\")) +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnj_map &lt;- states_shp |&gt;\n  mutate(this_selection = ifelse(NAME == \"New Jersey\", \n                               \"focus\", \"other states\")) |&gt;\n  ggplot() +\n  geom_sf(aes(fill = this_selection)) +\n  labs(title = \"New Jersey\", \n         # subtitle = \"toward a Dashboard card\",\n         caption = \"Princeton Wintersession\") +\n  scale_fill_manual(values = c(color_1, \"gray80\")) +\n  theme_minimal() +\n  theme(axis.title.x = element_blank(),\n        axis.text.x  = element_blank(),\n        axis.ticks.x = element_blank(),\n        axis.title.y = element_blank(),\n        axis.text.y  = element_blank(),\n        axis.ticks.y = element_blank(),\n        legend.position = \"none\")\n\nnj_map"
+  },
+  {
+    "objectID": "posts/quarto_dashboards/quarto_dashboards.html#cards",
+    "href": "posts/quarto_dashboards/quarto_dashboards.html#cards",
+    "title": "Interactive Dashboards",
+    "section": "Cards",
+    "text": "Cards\nEach additional visible object is arranged into the dashboard as a card."
+  },
+  {
+    "objectID": "posts/quarto_dashboards/quarto_dashboards.html#rows",
+    "href": "posts/quarto_dashboards/quarto_dashboards.html#rows",
+    "title": "Interactive Dashboards",
+    "section": "Rows",
+    "text": "Rows\nBy default, the arrangement of the cards is in rows.\nnj_plot\nnj_map"
+  },
+  {
+    "objectID": "posts/quarto_dashboards/quarto_dashboards.html#columns",
+    "href": "posts/quarto_dashboards/quarto_dashboards.html#columns",
+    "title": "Interactive Dashboards",
+    "section": "Columns",
+    "text": "Columns\nTo change the arrangements into columns, change the YAML header\nformat: \n  dashboard:\n    orientation: columns"
+  },
+  {
+    "objectID": "posts/quarto_dashboards/quarto_dashboards.html#value-boxes",
+    "href": "posts/quarto_dashboards/quarto_dashboards.html#value-boxes",
+    "title": "Interactive Dashboards",
+    "section": "Value Boxes",
+    "text": "Value Boxes\n::: {.valuebox icon=\"award-fill\" color=\"#E77500\"}\nNEW JERSEY\n:::"
   }
 ]

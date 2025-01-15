@@ -140,6 +140,54 @@ bee_data |>
   theme_minimal()
 ```
 
+## Each State
+
+```{r}
+#| echo: false
+#| eval: true
+#| message: false
+#| warning: false
+
+nj_plot <- bee_data |> 
+  filter(State == "NEW JERSEY") |>
+  mutate(num_colonies = Value / 1e3) |>
+  ggplot(aes(x = factor(Year), y = num_colonies)) +
+  geom_bar(color = "#121212", fill = "#E77500",
+           stat = "identity") +
+  labs(title = "NEW JERSEY",
+       subtitle = "Survey of bee colonies",
+       caption = "source: USDA NASS",
+       x = "year",
+       y = "bee colonies (in thousands)") +
+  theme_minimal()
+
+nj_plot
+```
+
+## Code
+
+```{r}
+#| echo: true
+#| eval: false
+#| message: false
+#| warning: false
+
+nj_plot <- bee_data |> 
+  filter(State == "NEW JERSEY") |>
+  mutate(num_colonies = Value / 1e3) |>
+  ggplot(aes(x = factor(Year), y = num_colonies)) +
+  geom_bar(color = "#121212", fill = "#E77500",
+           stat = "identity") +
+  labs(title = "NEW JERSEY",
+       subtitle = "Survey of bee colonies",
+       caption = "source: USDA NASS",
+       x = "year",
+       y = "bee colonies (in thousands)") +
+  theme_minimal()
+
+nj_plot
+```
+
 ## Facets
 
 ```{r}
@@ -218,6 +266,64 @@ states_shp |>
   theme_minimal()
 ```
 
+## Each State
+
+```{r}
+#| echo: false
+#| eval: true
+#| message: false
+#| warning: false
+
+nj_map <- states_shp |>
+  mutate(this_selection = ifelse(NAME == "New Jersey", 
+                               "focus", "other states")) |>
+  ggplot() +
+  geom_sf(aes(fill = this_selection)) +
+  labs(title = "New Jersey", 
+         # subtitle = "toward a Dashboard card",
+         caption = "Princeton Wintersession") +
+  scale_fill_manual(values = c(color_1, "gray80")) +
+  theme_minimal() +
+  theme(axis.title.x = element_blank(),
+        axis.text.x  = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.y  = element_blank(),
+        axis.ticks.y = element_blank(),
+        legend.position = "none")
+
+nj_map
+```
+
+## Code
+
+```{r}
+#| echo: true
+#| eval: false
+#| message: false
+#| warning: false
+
+nj_map <- states_shp |>
+  mutate(this_selection = ifelse(NAME == "New Jersey", 
+                               "focus", "other states")) |>
+  ggplot() +
+  geom_sf(aes(fill = this_selection)) +
+  labs(title = "New Jersey", 
+         # subtitle = "toward a Dashboard card",
+         caption = "Princeton Wintersession") +
+  scale_fill_manual(values = c(color_1, "gray80")) +
+  theme_minimal() +
+  theme(axis.title.x = element_blank(),
+        axis.text.x  = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.y  = element_blank(),
+        axis.ticks.y = element_blank(),
+        legend.position = "none")
+
+nj_map
+```
+
 ::::
 
 
@@ -234,6 +340,92 @@ format: dashboard
 
 # notebook content goes here...
 ```
+
+
+# Layout
+
+## Cards
+
+Each additional visible object is arranged into the dashboard as a *card*.
+
+## Rows
+
+By default, the arrangement of the cards is in rows.
+
+```
+nj_plot
+```
+
+```
+nj_map
+```
+
+## Columns
+
+To change the arrangements into columns, change the YAML header
+
+```
+format: 
+  dashboard:
+    orientation: columns
+```
+
+More specifically, our file will use 
+
+* first-level headers (`#`) for tabs
+* second-level headers (`##`) for columns
+* third-level headers (`###`) for rows
+
+## Value Boxes
+
+```
+::: {.valuebox icon="award-fill" color="#E77500"}
+NEW JERSEY
+:::
+```
+
+Of importance, for a valuebox to appear and function as intended, the `R` code needs to output a value.
+
+
+## Sidebar
+
+```
+# {.sidebar}
+
+Instructions to user goes here
+```
+
+
+## Heights and Widths
+
+At the desired header, use commands like
+
+* `{height = "25%"}`
+* `{width = "30%"}`
+
+
+
+
+# Interactivity
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     
 # Additional Resources
