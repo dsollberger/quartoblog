@@ -20,6 +20,8 @@ In this blog post, I want to outline my upcoming Princeton Wintersession worksho
 #| message: false
 #| warning: false
 
+library("bslib")
+library("bsicons")
 library("sf")
 library("tidyverse")
 
@@ -408,15 +410,108 @@ At the desired header, use commands like
 
 # Interactivity
 
+## Inputs
 
+Let the user pick the state. Place the following code into the sidebar.
 
+```
+selectInput(
+  "state_choice",
+  "Choose a state:",
+  choices = unique(bee_data$State)
+)
+```
 
+Let the user pick the year.  Place the following code into the sidebar.
 
+```
+sliderInput(
+  "year_choice", "Choose a year:",
+  min = 2015, max = 2023, step = 1, 
+  value = 2023,
+)
+```
 
+## Server
 
+Now, we need use the `shiny` framework to perform these computations in a *reactive* way.  Create the following code chunk, and be sure to set `#| context: server`.
 
+```
+#| context: server
+output$state_plot <- renderPlot({
+  bee_data |> 
+  filter(State == input$state_choice) |>
+  mutate(num_colonies = Value / 1e3) |>
+  mutate(year_color = ifelse(Year == input$year_choice,
+         TRUE, FALSE)) |>
+  ggplot(aes(x = factor(Year), y = num_colonies)) +
+  geom_bar(aes(fill = year_color),
+           color = "#121212", ,
+           stat = "identity") +
+  labs(title = paste0(str_to_title(input$state_choice)),
+       subtitle = "Survey of bee colonies",
+       caption = "source: USDA NASS",
+       x = "year",
+       y = "bee colonies (in thousands)") +
+  scale_fill_manual(values = c("#121212", "#E77500")) +
+  theme_minimal() +
+  theme(legend.position = "none")
+})
 
+output$state_map <- renderPlot({
+  states_shp |>
+    mutate(this_selection = ifelse(
+      NAME == str_to_title(input$state_choice),
+      "focus", "other states")) |>
+    ggplot() +
+    geom_sf(aes(fill = this_selection)) +
+    labs(title = paste0(str_to_title(input$state_choice)),
+         caption = "Princeton Wintersession") +
+    scale_fill_manual(values = c(color_1, "gray80")) +
+    theme_minimal() +
+    theme(axis.title.x = element_blank(),
+          axis.text.x  = element_blank(),
+          axis.ticks.x = element_blank(),
+          axis.title.y = element_blank(),
+          axis.text.y  = element_blank(),
+          axis.ticks.y = element_blank(),
+          legend.position = "none")
+})
 
+output$num_colonies <- renderText({
+  bee_data |>
+    filter(State == input$state_choice) |>
+    filter(Year == input$year_choice) |>
+    pull(Value)
+})
+
+output$state_choice <- renderText({input$state_choice})
+output$year_choice <- renderText({input$year_choice})
+```
+
+## Plots
+
+Now we have have the `output` in place, we can use more `shiny` code to plot that output. Where the barchart code was intended to be, place the following
+
+```
+plotOutput("state_plot")
+```
+
+Do something similar for the geographic map.
+
+## Valueboxes
+
+Now we have have the `output` in place, we can use more `shiny` code to display  certain numbers. Inside the valueboxes' divs, place the following
+
+```
+`r textOutput("state_choice")`
+```
+
+```
+`r textOutput("year_choice")`
+```
+
+Do something similar for the number of bee colonies.
 
 
 
