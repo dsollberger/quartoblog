@@ -203,6 +203,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#rows" id="toc-rows" class="nav-link" data-scroll-target="#rows">Rows</a></li>
   <li><a href="#columns" id="toc-columns" class="nav-link" data-scroll-target="#columns">Columns</a></li>
   <li><a href="#value-boxes" id="toc-value-boxes" class="nav-link" data-scroll-target="#value-boxes">Value Boxes</a></li>
+  <li><a href="#sidebar" id="toc-sidebar" class="nav-link" data-scroll-target="#sidebar">Sidebar</a></li>
+  <li><a href="#heights-and-widths" id="toc-heights-and-widths" class="nav-link" data-scroll-target="#heights-and-widths">Heights and Widths</a></li>
+  </ul></li>
+  <li><a href="#interactivity" id="toc-interactivity" class="nav-link" data-scroll-target="#interactivity">Interactivity</a>
+  <ul class="collapse">
+  <li><a href="#inputs" id="toc-inputs" class="nav-link" data-scroll-target="#inputs">Inputs</a></li>
+  <li><a href="#server" id="toc-server" class="nav-link" data-scroll-target="#server">Server</a></li>
+  <li><a href="#plots" id="toc-plots" class="nav-link" data-scroll-target="#plots">Plots</a></li>
+  <li><a href="#valueboxes" id="toc-valueboxes" class="nav-link" data-scroll-target="#valueboxes">Valueboxes</a></li>
   </ul></li>
   <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources">Additional Resources</a></li>
   </ul>
@@ -227,14 +236,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="why-r" class="level2">
 <h2 class="anchored" data-anchor-id="why-r">Why R?</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"sf"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>bee_data <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"bee_data.csv"</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>states_shp <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_rds</span>(<span class="st">"us_states_shp.rds"</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>color_1 <span class="ot">&lt;-</span> <span class="st">"#E77500"</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>color_2 <span class="ot">&lt;-</span> <span class="st">"#121212"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"bslib"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"bsicons"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"sf"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>bee_data <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"bee_data.csv"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>states_shp <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_rds</span>(<span class="st">"us_states_shp.rds"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>color_1 <span class="ot">&lt;-</span> <span class="st">"#E77500"</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>color_2 <span class="ot">&lt;-</span> <span class="st">"#121212"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="why-quarto" class="level2">
@@ -486,12 +497,118 @@ format: dashboard
 <pre><code>format: 
   dashboard:
     orientation: columns</code></pre>
+<p>More specifically, our file will use</p>
+<ul>
+<li>first-level headers (<code>#</code>) for tabs</li>
+<li>second-level headers (<code>##</code>) for columns</li>
+<li>third-level headers (<code>###</code>) for rows</li>
+</ul>
 </section>
 <section id="value-boxes" class="level2">
 <h2 class="anchored" data-anchor-id="value-boxes">Value Boxes</h2>
 <pre><code>::: {.valuebox icon="award-fill" color="#E77500"}
 NEW JERSEY
 :::</code></pre>
+<p>Of importance, for a valuebox to appear and function as intended, the <code>R</code> code needs to output a value.</p>
+</section>
+<section id="sidebar" class="level2">
+<h2 class="anchored" data-anchor-id="sidebar">Sidebar</h2>
+<pre><code># {.sidebar}
+
+Instructions to user goes here</code></pre>
+</section>
+<section id="heights-and-widths" class="level2">
+<h2 class="anchored" data-anchor-id="heights-and-widths">Heights and Widths</h2>
+<p>At the desired header, use commands like</p>
+<ul>
+<li><code>{height = "25%"}</code></li>
+<li><code>{width = "30%"}</code></li>
+</ul>
+</section>
+</section>
+<section id="interactivity" class="level1">
+<h1>Interactivity</h1>
+<section id="inputs" class="level2">
+<h2 class="anchored" data-anchor-id="inputs">Inputs</h2>
+<p>Let the user pick the state. Place the following code into the sidebar.</p>
+<pre><code>selectInput(
+  "state_choice",
+  "Choose a state:",
+  choices = unique(bee_data$State)
+)</code></pre>
+<p>Let the user pick the year. Place the following code into the sidebar.</p>
+<pre><code>sliderInput(
+  "year_choice", "Choose a year:",
+  min = 2015, max = 2023, step = 1, 
+  value = 2023,
+)</code></pre>
+</section>
+<section id="server" class="level2">
+<h2 class="anchored" data-anchor-id="server">Server</h2>
+<p>Now, we need use the <code>shiny</code> framework to perform these computations in a <em>reactive</em> way. Create the following code chunk, and be sure to set <code>#| context: server</code>.</p>
+<pre><code>#| context: server
+output$state_plot &lt;- renderPlot({
+  bee_data |&gt; 
+  filter(State == input$state_choice) |&gt;
+  mutate(num_colonies = Value / 1e3) |&gt;
+  mutate(year_color = ifelse(Year == input$year_choice,
+         TRUE, FALSE)) |&gt;
+  ggplot(aes(x = factor(Year), y = num_colonies)) +
+  geom_bar(aes(fill = year_color),
+           color = "#121212", ,
+           stat = "identity") +
+  labs(title = paste0(str_to_title(input$state_choice)),
+       subtitle = "Survey of bee colonies",
+       caption = "source: USDA NASS",
+       x = "year",
+       y = "bee colonies (in thousands)") +
+  scale_fill_manual(values = c("#121212", "#E77500")) +
+  theme_minimal() +
+  theme(legend.position = "none")
+})
+
+output$state_map &lt;- renderPlot({
+  states_shp |&gt;
+    mutate(this_selection = ifelse(
+      NAME == str_to_title(input$state_choice),
+      "focus", "other states")) |&gt;
+    ggplot() +
+    geom_sf(aes(fill = this_selection)) +
+    labs(title = paste0(str_to_title(input$state_choice)),
+         caption = "Princeton Wintersession") +
+    scale_fill_manual(values = c(color_1, "gray80")) +
+    theme_minimal() +
+    theme(axis.title.x = element_blank(),
+          axis.text.x  = element_blank(),
+          axis.ticks.x = element_blank(),
+          axis.title.y = element_blank(),
+          axis.text.y  = element_blank(),
+          axis.ticks.y = element_blank(),
+          legend.position = "none")
+})
+
+output$num_colonies &lt;- renderText({
+  bee_data |&gt;
+    filter(State == input$state_choice) |&gt;
+    filter(Year == input$year_choice) |&gt;
+    pull(Value)
+})
+
+output$state_choice &lt;- renderText({input$state_choice})
+output$year_choice &lt;- renderText({input$year_choice})</code></pre>
+</section>
+<section id="plots" class="level2">
+<h2 class="anchored" data-anchor-id="plots">Plots</h2>
+<p>Now we have have the <code>output</code> in place, we can use more <code>shiny</code> code to plot that output. Where the barchart code was intended to be, place the following</p>
+<pre><code>plotOutput("state_plot")</code></pre>
+<p>Do something similar for the geographic map.</p>
+</section>
+<section id="valueboxes" class="level2">
+<h2 class="anchored" data-anchor-id="valueboxes">Valueboxes</h2>
+<p>Now we have have the <code>output</code> in place, we can use more <code>shiny</code> code to display certain numbers. Inside the valueboxes’ divs, place the following</p>
+<pre><code>r textOutput("state_choice")</code></pre>
+<pre><code>r textOutput("year_choice")</code></pre>
+<p>Do something similar for the number of bee colonies.</p>
 </section>
 </section>
 <section id="additional-resources" class="level1">

@@ -504,11 +504,11 @@ Do something similar for the geographic map.
 Now we have have the `output` in place, we can use more `shiny` code to display  certain numbers. Inside the valueboxes' divs, place the following
 
 ```
-`r textOutput("state_choice")`
+r textOutput("state_choice")
 ```
 
 ```
-`r textOutput("year_choice")`
+r textOutput("year_choice")
 ```
 
 Do something similar for the number of bee colonies.

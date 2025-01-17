@@ -1579,7 +1579,7 @@
     "href": "posts/quarto_dashboards/quarto_dashboards.html",
     "title": "Interactive Dashboards",
     "section": "",
-    "text": "In this blog post, I want to outline my upcoming Princeton Wintersession workshop Interactive Dashboards for Collaborative Communication. In this workshop, we will explore the new technology called Quarto dashboards. In this exploration, I have chosen a different data set per my interest, but much of the credit for the design of this workshop goes to the folks at Posit and other data scientists who have already created wonderful tutorials (see Additional Resources).\n\n\n\nExamples from Posit\n\n\n\n\n\nlibrary(\"sf\")\nlibrary(\"tidyverse\")\n\nbee_data &lt;- readr::read_csv(\"bee_data.csv\")\nstates_shp &lt;- readr::read_rds(\"us_states_shp.rds\")\n\ncolor_1 &lt;- \"#E77500\"\ncolor_2 &lt;- \"#121212\""
+    "text": "In this blog post, I want to outline my upcoming Princeton Wintersession workshop Interactive Dashboards for Collaborative Communication. In this workshop, we will explore the new technology called Quarto dashboards. In this exploration, I have chosen a different data set per my interest, but much of the credit for the design of this workshop goes to the folks at Posit and other data scientists who have already created wonderful tutorials (see Additional Resources).\n\n\n\nExamples from Posit\n\n\n\n\n\nlibrary(\"bslib\")\nlibrary(\"bsicons\")\nlibrary(\"sf\")\nlibrary(\"tidyverse\")\n\nbee_data &lt;- readr::read_csv(\"bee_data.csv\")\nstates_shp &lt;- readr::read_rds(\"us_states_shp.rds\")\n\ncolor_1 &lt;- \"#E77500\"\ncolor_2 &lt;- \"#121212\""
   },
   {
     "objectID": "posts/quarto_dashboards/quarto_dashboards.html#scenario",
@@ -1614,7 +1614,7 @@
     "href": "posts/quarto_dashboards/quarto_dashboards.html#why-r",
     "title": "Interactive Dashboards",
     "section": "",
-    "text": "library(\"sf\")\nlibrary(\"tidyverse\")\n\nbee_data &lt;- readr::read_csv(\"bee_data.csv\")\nstates_shp &lt;- readr::read_rds(\"us_states_shp.rds\")\n\ncolor_1 &lt;- \"#E77500\"\ncolor_2 &lt;- \"#121212\""
+    "text": "library(\"bslib\")\nlibrary(\"bsicons\")\nlibrary(\"sf\")\nlibrary(\"tidyverse\")\n\nbee_data &lt;- readr::read_csv(\"bee_data.csv\")\nstates_shp &lt;- readr::read_rds(\"us_states_shp.rds\")\n\ncolor_1 &lt;- \"#E77500\"\ncolor_2 &lt;- \"#121212\""
   },
   {
     "objectID": "posts/quarto_dashboards/quarto_dashboards.html#concern-for-bee-populations",
@@ -1663,13 +1663,55 @@
     "href": "posts/quarto_dashboards/quarto_dashboards.html#columns",
     "title": "Interactive Dashboards",
     "section": "Columns",
-    "text": "Columns\nTo change the arrangements into columns, change the YAML header\nformat: \n  dashboard:\n    orientation: columns"
+    "text": "Columns\nTo change the arrangements into columns, change the YAML header\nformat: \n  dashboard:\n    orientation: columns\nMore specifically, our file will use\n\nfirst-level headers (#) for tabs\nsecond-level headers (##) for columns\nthird-level headers (###) for rows"
   },
   {
     "objectID": "posts/quarto_dashboards/quarto_dashboards.html#value-boxes",
     "href": "posts/quarto_dashboards/quarto_dashboards.html#value-boxes",
     "title": "Interactive Dashboards",
     "section": "Value Boxes",
-    "text": "Value Boxes\n::: {.valuebox icon=\"award-fill\" color=\"#E77500\"}\nNEW JERSEY\n:::"
+    "text": "Value Boxes\n::: {.valuebox icon=\"award-fill\" color=\"#E77500\"}\nNEW JERSEY\n:::\nOf importance, for a valuebox to appear and function as intended, the R code needs to output a value."
+  },
+  {
+    "objectID": "posts/quarto_dashboards/quarto_dashboards.html#sidebar",
+    "href": "posts/quarto_dashboards/quarto_dashboards.html#sidebar",
+    "title": "Interactive Dashboards",
+    "section": "Sidebar",
+    "text": "Sidebar\n# {.sidebar}\n\nInstructions to user goes here"
+  },
+  {
+    "objectID": "posts/quarto_dashboards/quarto_dashboards.html#heights-and-widths",
+    "href": "posts/quarto_dashboards/quarto_dashboards.html#heights-and-widths",
+    "title": "Interactive Dashboards",
+    "section": "Heights and Widths",
+    "text": "Heights and Widths\nAt the desired header, use commands like\n\n{height = \"25%\"}\n{width = \"30%\"}"
+  },
+  {
+    "objectID": "posts/quarto_dashboards/quarto_dashboards.html#inputs",
+    "href": "posts/quarto_dashboards/quarto_dashboards.html#inputs",
+    "title": "Interactive Dashboards",
+    "section": "Inputs",
+    "text": "Inputs\nLet the user pick the state. Place the following code into the sidebar.\nselectInput(\n  \"state_choice\",\n  \"Choose a state:\",\n  choices = unique(bee_data$State)\n)\nLet the user pick the year. Place the following code into the sidebar.\nsliderInput(\n  \"year_choice\", \"Choose a year:\",\n  min = 2015, max = 2023, step = 1, \n  value = 2023,\n)"
+  },
+  {
+    "objectID": "posts/quarto_dashboards/quarto_dashboards.html#server",
+    "href": "posts/quarto_dashboards/quarto_dashboards.html#server",
+    "title": "Interactive Dashboards",
+    "section": "Server",
+    "text": "Server\nNow, we need use the shiny framework to perform these computations in a reactive way. Create the following code chunk, and be sure to set #| context: server.\n#| context: server\noutput$state_plot &lt;- renderPlot({\n  bee_data |&gt; \n  filter(State == input$state_choice) |&gt;\n  mutate(num_colonies = Value / 1e3) |&gt;\n  mutate(year_color = ifelse(Year == input$year_choice,\n         TRUE, FALSE)) |&gt;\n  ggplot(aes(x = factor(Year), y = num_colonies)) +\n  geom_bar(aes(fill = year_color),\n           color = \"#121212\", ,\n           stat = \"identity\") +\n  labs(title = paste0(str_to_title(input$state_choice)),\n       subtitle = \"Survey of bee colonies\",\n       caption = \"source: USDA NASS\",\n       x = \"year\",\n       y = \"bee colonies (in thousands)\") +\n  scale_fill_manual(values = c(\"#121212\", \"#E77500\")) +\n  theme_minimal() +\n  theme(legend.position = \"none\")\n})\n\noutput$state_map &lt;- renderPlot({\n  states_shp |&gt;\n    mutate(this_selection = ifelse(\n      NAME == str_to_title(input$state_choice),\n      \"focus\", \"other states\")) |&gt;\n    ggplot() +\n    geom_sf(aes(fill = this_selection)) +\n    labs(title = paste0(str_to_title(input$state_choice)),\n         caption = \"Princeton Wintersession\") +\n    scale_fill_manual(values = c(color_1, \"gray80\")) +\n    theme_minimal() +\n    theme(axis.title.x = element_blank(),\n          axis.text.x  = element_blank(),\n          axis.ticks.x = element_blank(),\n          axis.title.y = element_blank(),\n          axis.text.y  = element_blank(),\n          axis.ticks.y = element_blank(),\n          legend.position = \"none\")\n})\n\noutput$num_colonies &lt;- renderText({\n  bee_data |&gt;\n    filter(State == input$state_choice) |&gt;\n    filter(Year == input$year_choice) |&gt;\n    pull(Value)\n})\n\noutput$state_choice &lt;- renderText({input$state_choice})\noutput$year_choice &lt;- renderText({input$year_choice})"
+  },
+  {
+    "objectID": "posts/quarto_dashboards/quarto_dashboards.html#plots",
+    "href": "posts/quarto_dashboards/quarto_dashboards.html#plots",
+    "title": "Interactive Dashboards",
+    "section": "Plots",
+    "text": "Plots\nNow we have have the output in place, we can use more shiny code to plot that output. Where the barchart code was intended to be, place the following\nplotOutput(\"state_plot\")\nDo something similar for the geographic map."
+  },
+  {
+    "objectID": "posts/quarto_dashboards/quarto_dashboards.html#valueboxes",
+    "href": "posts/quarto_dashboards/quarto_dashboards.html#valueboxes",
+    "title": "Interactive Dashboards",
+    "section": "Valueboxes",
+    "text": "Valueboxes\nNow we have have the output in place, we can use more shiny code to display certain numbers. Inside the valueboxes’ divs, place the following\nr textOutput(\"state_choice\")\nr textOutput(\"year_choice\")\nDo something similar for the number of bee colonies."
   }
 ]
