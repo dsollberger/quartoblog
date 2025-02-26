@@ -2,6 +2,8 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/quarto_dashboards/beedashboard/beedashboard.html",
+      "/posts/DSLC_quarto_dashboards/quarto_dashboards.html",
       "/posts/quarto_dashboards/quarto_dashboards.html",
       "/posts/historical_investments/historical_investments.html",
       "/posts/many_graphs/many_graphs.html",
