@@ -1,0 +1,149 @@
+---
+title: "KL Divergence for Likert Data"
+author: "Derek Sollberger"
+date: "2025-04-22"
+format:
+  html
+---
+
+```{r}
+#| message: false
+#| warning: false
+
+library("tidyverse")
+```
+
+
+# Abstract
+
+Here I argue that we should use KL Divergence as a metric to measure survey data that was collected as Likert scales.  In this blog post, I will discuss Likert scales, motivate analyses done through the response distributions, and offer guidance on using KL Divergence as a study metric for academic work.
+
+# Introduction
+
+When my colleagues and I do research in the realm of the social sciences, we tend to survey our students in hopes of establishing the learning environment and measuring our interventions in the classroom. One scheme is to deploy pre and post surveys at the beginning and end of the term respectively.  To ease the survey taker, some of our survey questions are phrased as Likert scales: "On a scale from 1 to 7, rate ...".
+
+Without loss of generality, this blog post will assume a Likert scale from 1 to 7 and that "1" is a label for the worst outcome and "7" is a label for the best outcome.
+
+## Likert Scales
+
+::: {.callout-warning collapse="true"}
+## TODO: Describe Likert Scales
+
+Literature search too?
+:::
+
+But let me rhetorically ask this:
+
+* Does it make sense to *average* or *weighted mean* of survey responses from Likert scales?
+* Would a response of "6" really *double* a response of "3"?
+
+Of concern, most responses are simply integers; for example, a response such as "3.5" might be highly unusual (or even impossible based on the survey tool). Mathematically, we are not using dense numbers such as real numbers.
+
+Likert scales act more like *categorical labels*. These labels do remind us of ordinal numbers---"first", "second", "third", etc.---but in the opposite direction from "worst" to "best".
+
+Instead of conventional point statistics such as the mean or median, I suggest focusing on the *distribution* of the survey responses.
+
+
+## KL Divergence
+
+This view of **relative entropy** was introduced in the field of information theory back in 1951. For our purposes, for Likert scale $X = \{1, 2, 3, 4, 5, 6, 7\}$, we have a probability distribution $p(x)$ for the pre-survey response and a probability distribution $q(x)$ for the post-survey response. In this discrete setting, we define the **KL Divergence** from $P$ to $Q$ as
+
+$$D_{\text{KL}}(Q||P) = \displaystyle\sum_{x\in X} q(x) \ln \left(\frac{q(x)}{p(x)}\right)$$
+
+This is the *expectation* of the logarithm of the ratio of probability values.
+
+::: {.callout-warning collapse="true"}
+## TODO: edge cases
+
+What if $p(x) = 0$?  What if $q(x) = 0$?
+:::
+
+
+# Methods
+
+## Example
+
+Suppose that we conducted a pre and post survey and received survey results that had the following probability distributions $P$ and $Q$ respectively.
+
+```{r}
+x <- 1:7
+p_x <- c(0.1, 0.2, 0.3, 0.1, 0.1, 0.1, 0.1)
+q_x <- c(0.1, 0.1, 0.1, 0.1, 0.2, 0.3, 0.1)
+prob_tables <- data.frame(x, p_x, q_x)
+```
+
+```{r}
+#| echo: false
+
+prob_tables |>
+  ggplot(aes(x = x, y = p_x)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Pre Survey",
+       x = "Likert scale",
+       y = "probability") +
+  theme_minimal()
+```
+
+```{r}
+#| echo: false
+
+prob_tables |>
+  ggplot(aes(x = x, y = q_x)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Post Survey",
+       x = "Likert scale",
+       y = "probability") +
+  theme_minimal()
+```
+
+Then the KL Divergence going from $P$ to $Q$ is
+
+$$(0.1)\ln\frac{0.1}{0.1} + (0.1)\ln\frac{0.1}{0.2} + (0.1)\ln\frac{0.1}{0.3} + (0.1)\ln\frac{0.1}{0.1} + (0.2)\ln\frac{0.2}{0.1} + (0.3)\ln\frac{0.3}{0.1} + (0.1)\ln\frac{0.1}{0.1}$$
+
+```{r}
+P_to_Q <- rbind(p_x, q_x)
+philentropy::KL(P_to_Q, unit = "log")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+::: {.callout-note collapse="true"}
+## Session Info
+
+```{r}
+sessionInfo()
+```
+:::
+
+
+:::: {.columns}
+
+::: {.column width="45%"}
+	
+:::
+
+::: {.column width="10%"}
+	
+:::
+
+::: {.column width="45%"}
+
+:::
+
+::::
+
+::::: {.panel-tabset}
+
+
+
+:::::

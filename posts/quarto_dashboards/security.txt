@@ -1,0 +1,6 @@
+Ever wanted to restrict your Quarto project to only a few select people? You can do so by
+
+1️⃣ Hosting your project on Azure Static Web Apps
+2️⃣ Creating your own user base via Azure's AAD B2C service
+3️⃣ Configuring your app so that it only allows users from your user base
+---Albert Rapp

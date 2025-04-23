@@ -1,0 +1,42 @@
+---
+title: "AI Tools: Explain Paper"
+author: "Derek Sollberger"
+date: "2025-03-04"
+format:
+  html
+---
+
+Today I tried out the **Explain Paper** AI tool to aid in research.  It may have features that helps summarize papers at various levels of complexity for parts of the papers at a time, but at the moment, I simply wanted a tool that summarized whole papers.
+
+Instead, I think that I will simply focus on the abstracts of the papers.
+
+
+:::: {.columns}
+
+::: {.column width="45%"}
+	
+:::
+
+::: {.column width="10%"}
+	
+:::
+
+::: {.column width="45%"}
+
+:::
+
+::::
+
+
+
+
+
+
+
+
+
+
+
+
+
+
