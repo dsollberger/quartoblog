@@ -1,0 +1,90 @@
+---
+title: "Andre Ethier versus Brad Lidge"
+author: "Derek Sollberger"
+date: "2025-04-25"
+format:
+  html
+---
+
+```{r}
+#| message: false
+#| warning: false
+
+library("Lahman")
+library("tidyverse")
+```
+
+
+# Setting the Scene
+
+I am finally reading [Analyzing Baseball Data with R](https://beanumber.github.io/abdwr3e/), and thankfully there is a book club over at the DSLC Slack channel (Data Science Learning Community).
+
+As we proceed through the first few chapters, I want to apply our new skills to a particular half-inning that is cherished in my memories. In particular, I want to see if I can find a particular at-bat by Andre Ethier where he faced Brad Lidge in the bottom of the ninth ...
+
+## Lahman
+
+The [Lahman](https://github.com/cdalzell/Lahman) data set can help us find overall information through its `People`, `Batting`, `Pitching`, `Fielding`, and `Teams` tables (and this data set is more extensive than I remember). First, let us find certain players in the `People` table:
+
+```{r}
+Lahman::People |>
+  filter(nameLast %in% c("Ethier", "Lidge", "Werth"))
+```
+
+We will need these player IDs (the latter one in the case of "Werth"). I will now try to look up Ethier, Lidge, and Werth in the `Batting`, `Pitching`, and `Fielding` tables respectively.
+
+::::: {.panel-tabset}
+
+### Batting
+
+```{r}
+Lahman::Batting |>
+  filter(playerID == "ethiean01")
+```
+
+### Pitching
+
+```{r}
+Lahman::Pitching |>
+  filter(playerID == "lidgebr01")
+```
+
+### Fielding
+
+
+```{r}
+Lahman::Fielding |>
+  filter(playerID == "werthja01")
+```
+
+:::::
+
+::: {.callout-note collapse="true"}
+## Session Info
+
+```{r}
+sessionInfo()
+```
+:::
+
+
+:::: {.columns}
+
+::: {.column width="45%"}
+	
+:::
+
+::: {.column width="10%"}
+	
+:::
+
+::: {.column width="45%"}
+
+:::
+
+::::
+
+::::: {.panel-tabset}
+
+
+
+:::::
