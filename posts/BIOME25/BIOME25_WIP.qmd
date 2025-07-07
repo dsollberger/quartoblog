@@ -586,6 +586,8 @@ data.frame(table(df_cats)) |> gt()
 
 * moving from **satisfying** to **frustrating** $\rightarrow$ <span style="color:blue;">more views</span>
 
+## RQ1: Which variables affected multiple views of a video?
+
 ### Math Values
 
 :::: {.columns}
@@ -622,6 +624,8 @@ data.frame(table(df_cats)) |> gt()
 ### Math Emotion
 
 * moving from **complicated** to **simple** $\rightarrow$ <span style="color:red;">shorter viewing</span>
+
+## RQ2: Which variables affected viewing duration of a video?
 
 ### Math Values
 

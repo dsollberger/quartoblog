@@ -1,7 +1,7 @@
 ---
 title: "Andre Ethier versus Brad Lidge"
 author: "Derek Sollberger"
-date: "2025-04-25"
+date: "2025-07-16"
 format:
   html
 ---
@@ -11,15 +11,19 @@ format:
 #| warning: false
 
 library("Lahman")
+library("retrosheet")
 library("tidyverse")
 ```
 
 
 # Setting the Scene
 
-I am finally reading [Analyzing Baseball Data with R](https://beanumber.github.io/abdwr3e/), and thankfully there is a book club over at the DSLC Slack channel (Data Science Learning Community).
+I am finally reading [Analyzing Baseball Data with R](https://beanumber.github.io/abdwr3e/), and thankfully there is a book club over at the DSLC Slack channel (Data Science Learning Community). I want to apply our new skills to a particular half-inning that is cherished in my memories. In particular, I want to see if I can find *a particular at-bat by Andre Ethier where he faced Brad Lidge in the bottom of the ninth* ...
 
-As we proceed through the first few chapters, I want to apply our new skills to a particular half-inning that is cherished in my memories. In particular, I want to see if I can find a particular at-bat by Andre Ethier where he faced Brad Lidge in the bottom of the ninth ...
+After volunteering to present the chapter on Quarto for our book club, I have decided to proceed through the materials as if I was giving a review session.
+
+
+# Ch 1: Data Sets
 
 ## Lahman
 
@@ -57,6 +61,83 @@ Lahman::Fielding |>
 ```
 
 :::::
+
+## Retrosheet
+
+Let us try out the [retrosheet package](https://cran.r-project.org/web/packages/retrosheet/index.html) (by Colin Douglas and Richard Scriven) to get **game data** from each of those four seasons where *Brad Lidge was pitching for the Philadelphia Phillies*. Note: we probably do not have to concern ourselves with mid-season trades in this case study.
+
+```{r}
+season_2008 <- retrosheet::get_retrosheet("game", 2008)
+season_2009 <- retrosheet::get_retrosheet("game", 2009)
+season_2010 <- retrosheet::get_retrosheet("game", 2010)
+season_2011 <- retrosheet::get_retrosheet("game", 2011)
+```
+
+
+## Statcast
+
+As recommended by the textbook authors in section C.2, we can load a list of player IDs for Statcast data (takes a few seconds to load and download)
+
+```{r, eval = FALSE}
+chadwick_id <- baseballr::chadwick_player_lu()
+readr::write_rds(chadwick_id, "data/chadwick_id.rds")
+chadwick_id <- readr::read_rds("data/chadwick_id.rds")
+
+statcast_ids <- chadwick_id |>
+  filter(name_last %in% c("Ethier", "Lidge", "Werth")) |>
+  select(key_mlbam, name_last, name_first, mlb_played_first, mlb_played_last) |>
+  filter(!is.na(mlb_played_first))
+readr::write_rds(statcast_ids, "data/statcast_ids.rds")
+```
+
+```{r}
+statcast_ids <- readr::read_rds("data/statcast_ids.rds")
+statcast_ids
+```
+
+
+# Ch 2: dplyr
+
+## Retrosheet
+
+For this case study, we can use the `filter` command from the `dplyr` to subset our data where
+
+* visiting team: Philadelphia Phillies
+* home team: Los Angeles Dodgers
+
+```{r}
+lidge_phillies_dodgers <- rbind(season_2008, season_2009, season_2010, season_2011) |>
+  dplyr::filter(VisTm == "PHI" & HmTm == "LAN")
+lidge_phillies_dodgers |> select(Date, VisTm, HmTm, VisRuns, HmRuns, Attendance)
+```
+
+## Statcast
+
+In addition to the calendar dates found above, we can try to get pitch-by-pitch data from the `statcast_search` function in the `baseballr` package.
+
+```{r, eval = FALSE}
+lidge1 <- baseballr::statcast_search(start_date = "2008-08-11", end_date = "2008-08-11", playerid = 400058)
+```
+
+[Derek forgot that Statcast data only dates back to 2015]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ::: {.callout-note collapse="true"}
 ## Session Info
