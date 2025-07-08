@@ -2266,5 +2266,40 @@
     "title": "Math Biology Video Project",
     "section": "RQ2: Which variables affected viewing duration of a video?",
     "text": "RQ2: Which variables affected viewing duration of a video?\n\nMath Values\n\n\n\nLonger Viewing\n\nincrease in intrigue\ndecrease in intrigue\nincrease in fun\ndecrease in interesting\nincrease in valuable\nincrease in work harder\n\n\n\n\n\n\nShorter Viewing\n\nincrease in appeals\ndecrease in appeals"
+  },
+  {
+    "objectID": "posts/summer_of_ai/summer_of_ai.html#princeton-csml",
+    "href": "posts/summer_of_ai/summer_of_ai.html#princeton-csml",
+    "title": "About Me",
+    "section": "Princeton CSML",
+    "text": "Princeton CSML\n\nCurrent courses\n\nData Science\nMachine Learning\nArtificial Intelligence"
+  },
+  {
+    "objectID": "posts/summer_of_ai/summer_of_ai.html#uc-merced",
+    "href": "posts/summer_of_ai/summer_of_ai.html#uc-merced",
+    "title": "About Me",
+    "section": "UC Merced",
+    "text": "UC Merced\n\nPrevious Courses\n\nBioinformatics\nCalculus\nProbability\nSports Analytics\nStatistics"
+  },
+  {
+    "objectID": "posts/summer_of_ai/summer_of_ai.html#project-4",
+    "href": "posts/summer_of_ai/summer_of_ai.html#project-4",
+    "title": "About Me",
+    "section": "project 4",
+    "text": "project 4\n\nForeign Language Tutor\n\n\n\n\n\nproficiency levels\n\n\n\n\n\nLLM prompting. “I am at the A2 level in German. Help me advance to B1.”\n\norganize vocabulary words\ncreate lesson plans\nmake quizzes\n\nImage credit: Smarter German"
+  },
+  {
+    "objectID": "posts/summer_of_ai/summer_of_ai.html#ai-medical-imaging",
+    "href": "posts/summer_of_ai/summer_of_ai.html#ai-medical-imaging",
+    "title": "About Me",
+    "section": "AI: Medical Imaging",
+    "text": "AI: Medical Imaging\n\n\n\n\n\nMRI scans\n\n\n\n\n\n\ndata set validation\nclustering\nimage segmentation\nannotation"
+  },
+  {
+    "objectID": "posts/summer_of_ai/summer_of_ai.html#ds-sentiment-analysis",
+    "href": "posts/summer_of_ai/summer_of_ai.html#ds-sentiment-analysis",
+    "title": "About Me",
+    "section": "DS: Sentiment Analysis",
+    "text": "DS: Sentiment Analysis\n\n\n\n\n\nThe Office\n\n\n\n\n\n\nsentiment: “negative” to “positive”\nalgorithm comparison\ndata standardization\nfeature selection\n\n\n\n\n\n\n\n\n\nSession Info\n\n\n\n\n\n\nsessionInfo()\n\nR version 4.5.0 (2025-04-11 ucrt)\nPlatform: x86_64-w64-mingw32/x64\nRunning under: Windows 10 x64 (build 19045)\n\nMatrix products: default\n  LAPACK version 3.12.1\n\nlocale:\n[1] LC_COLLATE=English_United States.utf8 \n[2] LC_CTYPE=English_United States.utf8   \n[3] LC_MONETARY=English_United States.utf8\n[4] LC_NUMERIC=C                          \n[5] LC_TIME=English_United States.utf8    \n\ntime zone: America/New_York\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nloaded via a namespace (and not attached):\n [1] htmlwidgets_1.6.4 compiler_4.5.0    fastmap_1.2.0     cli_3.6.5        \n [5] tools_4.5.0       htmltools_0.5.8.1 rstudioapi_0.17.1 yaml_2.3.10      \n [9] rmarkdown_2.29    knitr_1.50        jsonlite_2.0.0    xfun_0.52        \n[13] digest_0.6.37     rlang_1.1.6       evaluate_1.0.3"
   }
 ]
