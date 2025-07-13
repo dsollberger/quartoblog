@@ -5,6 +5,8 @@ date: "2025-07-21"
 # format:
 #   revealjs:
 #     scrollable: true
+#     theme: beige
+#     toc: false
 format:
   html:
     toc: true
@@ -584,7 +586,8 @@ data.frame(table(df_cats)) |> gt()
 
 ### Math Emotion
 
-* moving from **satisfying** to **frustrating** $\rightarrow$ <span style="color:blue;">more views</span>
+* moving from **satisfying** to **frustrating** 
+* $\rightarrow$ <span style="color:blue;">more views</span>
 
 ## RQ1: Which variables affected multiple views of a video?
 
@@ -623,7 +626,8 @@ data.frame(table(df_cats)) |> gt()
 
 ### Math Emotion
 
-* moving from **complicated** to **simple** $\rightarrow$ <span style="color:red;">shorter viewing</span>
+* moving from **complicated** to **simple** 
+* $\rightarrow$ <span style="color:red;">shorter viewing</span>
 
 ## RQ2: Which variables affected viewing duration of a video?
 
@@ -685,7 +689,8 @@ Derek Sollberger
 
 * Data Analyst
 * UC Merced
-* dsollberger@ucmerced.edu
+* dsollberger
+     * @princeton.edu
 
 :::
 
@@ -699,11 +704,14 @@ Dr Emily Weigel
 
 * Course Instructor
 * Georgia Tech
-* emily.weigel@biosci.gatech.edu
+* emily.weigel
+    * @biosci.gatech.edu
 
 :::
 
 ::::
+
+
 
 ## Fall 2018 Semester
 

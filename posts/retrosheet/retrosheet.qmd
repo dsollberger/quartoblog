@@ -1,0 +1,706 @@
+---
+title: "Andre Ethier versus Brad Lidge"
+author: "Derek Sollberger"
+date: "2025-07-16"
+# format: 
+#   revealjs:
+#     scrollable: true
+#     theme: league
+#     toc: false  
+format:
+  html:
+    toc: true
+---
+
+```{r}
+#| message: false
+#| warning: false
+
+library("ggtext")
+library("Lahman")
+library("retrosheet")
+library("tidyverse")
+```
+
+
+# Setting the Scene
+
+I am finally reading [Analyzing Baseball Data with R](https://beanumber.github.io/abdwr3e/), and thankfully there is a book club over at the DSLC Slack channel (Data Science Learning Community). I want to apply our new skills to a particular half-inning that is cherished in my memories. In particular, I want to see if I can find *a particular at-bat by Andre Ethier where he faced Brad Lidge in the bottom of the ninth* ...
+
+:::: {.columns}
+
+::: {.column width="45%"}
+![Brad Lidge](images/Brad_Lidge_Phillies.png)
+:::
+
+::: {.column width="10%"}
+	
+:::
+
+::: {.column width="45%"}
+![Andre Ethier](images/Andre_Ethier_Dodgers.png)
+:::
+
+::::
+
+After volunteering to present the chapter on Quarto for our book club, I have decided to further explore the `retrosheet` package for R users.
+
+
+# Data Sets
+
+## Lahman
+
+The [Lahman](https://github.com/cdalzell/Lahman) data set can help us find overall information through its `People`, `Batting`, `Pitching`, `Fielding`, and `Teams` tables (and this data set is more extensive than I remember). First, let us find certain players in the `People` table:
+
+```{r}
+Lahman::People |>
+  filter(nameLast %in% c("Ethier", "Lidge", "Werth"))
+```
+
+We will need these player IDs (the latter one in the case of "Werth"). I will now try to look up Ethier, Lidge, and Werth in the `Batting`, `Pitching`, and `Fielding` tables respectively.
+
+::::: {.panel-tabset}
+
+### Batting
+
+```{r}
+Lahman::Batting |>
+  filter(playerID == "ethiean01")
+```
+
+### Pitching
+
+```{r}
+Lahman::Pitching |>
+  filter(playerID == "lidgebr01")
+```
+
+### Fielding
+
+
+```{r}
+Lahman::Fielding |>
+  filter(playerID == "werthja01")
+```
+
+:::::
+
+::: {.callout-warning}
+## Brad Lidge
+
+"Bradley Thomas Lidge (born December 23, 1976), nicknamed "Lights Out",[1] is an American former professional baseball pitcher. Lidge played 11 seasons in Major League Baseball (MLB), from 2002–2012. He played for the Houston Astros, Philadelphia Phillies, and Washington Nationals. As a relief pitcher Lidge saved 225 games during his career. He was a two-time All-Star, and in 2008 won the Delivery Man of the Year Award and the National League (NL) Rolaids Relief Man Award. Lidge was a host on SiriusXM's MLB Network Radio.
+
+"Lidge threw a four-seam fastball that consistently reached 95–97 miles per hour, as well as a hard, sharp breaking slider that ranged from 85 to 87 mph. He also had a cutter of the variation. He sealed the Phillies' 2008 World Series championship with the final out, a strikeout of Eric Hinske in Game 5."
+---[Wikipedia](https://en.wikipedia.org/wiki/Brad_Lidge)
+
+:::
+
+::: {.callout-note}
+## Andre Ethier
+
+"Andre Everett Ethier (/ˈiːθiər/; born April 10, 1982) is an American former professional baseball outfielder. He played in Major League Baseball (MLB) for the Los Angeles Dodgers from 2006 to 2017 and is second all-time in post-season appearances as a Dodger with 51.
+
+"Drafted in the second round (62nd pick overall) of the 2003 MLB draft by the Oakland Athletics, Ethier played in the major leagues from 2006 through 2017, all for the Dodgers. Career highlights include All-Star selections in 2010 and 2011, a Silver Slugger Award in 2009, and a Gold Glove Award in 2011. Primarily a right fielder throughout his career, Ethier also filled in at left field and center field for the Dodgers. Due to leg and back injuries, he had only 58 at bats in the 2016 and 2017 regular seasons, combined." ---[Wikipedia](https://en.wikipedia.org/wiki/Andre_Ethier)
+:::
+
+## Retrosheet
+
+Let us try out the [retrosheet package](https://cran.r-project.org/web/packages/retrosheet/index.html) (by Colin Douglas and Richard Scriven) to get **game data** from each of those four seasons where *Brad Lidge was pitching for the Philadelphia Phillies*. Note: we probably do not have to concern ourselves with mid-season trades in this case study.
+
+```{r}
+season_2008 <- retrosheet::get_retrosheet("game", 2008)
+season_2009 <- retrosheet::get_retrosheet("game", 2009)
+season_2010 <- retrosheet::get_retrosheet("game", 2010)
+season_2011 <- retrosheet::get_retrosheet("game", 2011)
+```
+
+
+## Statcast
+
+::: {.callout-tip collapse="true"}
+## (optional) Obtaining Chadwick IDs
+
+As recommended by the textbook authors in section C.2, we can load a list of player IDs for Statcast data (takes a few seconds to load and download)
+
+```{r, eval = FALSE}
+chadwick_id <- baseballr::chadwick_player_lu()
+readr::write_rds(chadwick_id, "data/chadwick_id.rds")
+chadwick_id <- readr::read_rds("data/chadwick_id.rds")
+
+statcast_ids <- chadwick_id |>
+  filter(name_last %in% c("Ethier", "Lidge", "Werth")) |>
+  select(key_mlbam, name_last, name_first, mlb_played_first, mlb_played_last) |>
+  filter(!is.na(mlb_played_first))
+readr::write_rds(statcast_ids, "data/statcast_ids.rds")
+```
+
+Here, I kept a subset of the data rather than keeping a 100 MB file in our GitHub repo.
+
+:::
+
+
+```{r}
+statcast_ids <- readr::read_rds("data/statcast_ids.rds")
+statcast_ids
+```
+
+
+# Match Ups
+
+## Retrosheet
+
+For this case study, we can use the `filter` command from the `dplyr` to subset our data where
+
+* visiting team: Philadelphia Phillies
+* home team: Los Angeles Dodgers
+
+```{r}
+lidge_phillies_dodgers <- rbind(season_2008, season_2009, season_2010, season_2011) |>
+  dplyr::filter(VisTm == "PHI" & HmTm == "LAN")
+lidge_phillies_dodgers |> select(Date, VisTm, HmTm, VisRuns, HmRuns, Attendance)
+```
+
+## Statcast
+
+In addition to the calendar dates found above, we can try to get pitch-by-pitch data from the `statcast_search` function in the `baseballr` package.
+
+```{r, eval = FALSE}
+lidge1 <- baseballr::statcast_search(start_date = "2008-08-11", end_date = "2008-08-11", playerid = 400058)
+```
+
+::: {.callout-warning collapse="true"}
+## Oops
+
+I forgot that Statcast data only dates back to 2015
+
+:::
+
+# Schedule
+
+::: {.callout-tip}
+## Why June 5, 2009?
+
+For brevity, I looked up the game in particular with a simple search of [Baseball Reference](https://www.baseball-reference.com/boxes/LAN/LAN200906050.shtml).  Other `dplyr` filters could have been applied after more data wrangling.
+
+:::
+
+```{r}
+schedule_2009 <- retrosheet::getRetrosheet("schedule", 2009)
+schedule_2009 |> filter(Date == "20090605")
+```
+
+# Standings
+
+## 2008 Season
+
+In the previous season,
+
+```{r}
+Lahman::Teams |>
+  filter(yearID == 2008) |>
+  filter(lgID == "NL") |>
+  select(yearID, teamID, W, L, DivWin, WCWin, LgWin, WSWin) |>
+  arrange(desc(W)) |>
+  filter(W > 81)
+```
+
+the Dodgers won the NL West (with a relatively low amount of wins), lost to the Phillies in the NLCS, and then Phillies went on to defeat the Tampa Bay Rays in the World Series.
+
+## 2009 Season
+
+```{r}
+standings_2009 <- season_2009 |>
+  select(Date, VisTm, HmTm, VisRuns, HmRuns) |>
+  mutate(WinTm = ifelse(VisRuns > HmRuns, VisTm, HmTm)) |>
+  count(WinTm, Date, name = "TeamWins") |>
+  group_by(WinTm) |>
+  mutate(TeamWins = cumsum(TeamWins)) |>
+  ungroup()
+```
+
+::::: {.panel-tabset}
+
+## Plot
+
+```{r}
+#| echo: false
+#| eval: true
+title_text <- "<span style='color:#E81828;'>Philadelphia Phillies</span> at <span style='color:#005A9C;'>Los Angeles Dodgers</span>"
+
+standings_2009 |>
+  ggplot(aes(x = Date, y = TeamWins, group = WinTm)) +
+  # geom_vline(xintercept = "2009-06-05") +
+  geom_line(aes(x = Date, y = TeamWins, group = WinTm),
+            color = "gray70",
+            data = standings_2009 |> filter(!WinTm %in% c("LAN", "PHI") & Date < "2009-06-05")) +
+  geom_line(aes(x = Date, y = TeamWins),
+            color = "#005A9C",
+            data = standings_2009 |> 
+              filter(WinTm == "LAN" & Date < "2009-06-05"),
+            linewidth = 3) +
+  geom_line(aes(x = Date, y = TeamWins),
+            color = "#E81828",
+            data = standings_2009 |>
+              filter(WinTm == "PHI" & Date < "2009-06-05"),
+            linewidth = 3) +
+  geom_point(aes(x = Date, y = TeamWins),
+            color = "#005A9C",
+            data = standings_2009 |> 
+              filter(WinTm == "LAN" & Date == "2009-06-03"),
+            size = 5) +
+  geom_point(aes(x = Date, y = TeamWins),
+            color = "#E81828",
+            data = standings_2009 |>
+              filter(WinTm == "PHI" & Date == "2009-06-04"),
+            size = 5) +
+  labs(title = title_text,
+       subtitle = "June 5, 2009",
+       y = "Wins") +
+  theme_minimal() +
+  theme(plot.title = ggtext::element_markdown())
+```
+
+## Code
+
+```{r}
+#| echo: true
+#| eval: false
+title_text <- "<span style='color:#E81828;'>Philadelphia Phillies</span> at <span style='color:#005A9C;'>Los Angeles Dodgers</span>"
+
+standings_2009 |>
+  ggplot(aes(x = Date, y = TeamWins, group = WinTm)) +
+  # geom_vline(xintercept = "2009-06-05") +
+  geom_line(aes(x = Date, y = TeamWins, group = WinTm),
+            color = "gray70",
+            data = standings_2009 |> filter(!WinTm %in% c("LAN", "PHI") & Date < "2009-06-05")) +
+  geom_line(aes(x = Date, y = TeamWins),
+            color = "#005A9C",
+            data = standings_2009 |> 
+              filter(WinTm == "LAN" & Date < "2009-06-05"),
+            linewidth = 3) +
+  geom_line(aes(x = Date, y = TeamWins),
+            color = "#E81828",
+            data = standings_2009 |>
+              filter(WinTm == "PHI" & Date < "2009-06-05"),
+            linewidth = 3) +
+  geom_point(aes(x = Date, y = TeamWins),
+            color = "#005A9C",
+            data = standings_2009 |> 
+              filter(WinTm == "LAN" & Date == "2009-06-03"),
+            size = 5) +
+  geom_point(aes(x = Date, y = TeamWins),
+            color = "#E81828",
+            data = standings_2009 |>
+              filter(WinTm == "PHI" & Date == "2009-06-04"),
+            size = 5) +
+  labs(title = title_text,
+       subtitle = "June 5, 2009",
+       y = "Wins") +
+  theme_minimal() +
+  theme(plot.title = ggtext::element_markdown())
+```
+
+:::::
+
+
+# Play by Play
+
+## Retrosheet play-by-play data
+
+```{r}
+dodgers_2009 <- retrosheet::getRetrosheet("play",  2009, "LAN")
+#length(dodgers_2009) # 81 home games
+#class(dodgers_2009)  # list
+str(dodgers_2009[[1]])
+```
+
+
+```{r}
+num_home <- length(dodgers_2009)
+for(game_index in 1:num_home){
+  if(dodgers_2009[[game_index]]$id == "LAN200906050"){
+    print(paste0("Home game number: ", game_index))
+    break
+  }
+}
+dodgers200906050 <- dodgers_2009[[28]]
+```
+
+```{r}
+game_df <- dodgers200906050$play |> as.data.frame()
+```
+
+## First Inning
+
+```{r}
+game_df |> filter(inning == 1)
+```
+
+## Run-Scoring Plays
+
+```{r}
+game_df |> 
+  filter((str_detect(retroID, "iba") & inning == 3) |
+           (str_detect(retroID, "utl") & inning == 4) |
+           (str_detect(retroID, "hud") & inning == 4) |
+           (str_detect(retroID, "lon") & inning == 7))
+```
+
+At this time, I simply used the parsed results at [Baseball Reference](https://www.baseball-reference.com/boxes/LAN/LAN200906050.shtml)
+
+* top 3rd: Raul Ibanez RBI groundout (PHI 1, LAD 0)
+* top 4th: Chase Utley 2-RBI double (PHI 3, LAD 0)
+* bottom 4th: Orlando Hudson RBI groundout (PHI 3, LAD 1)
+* bottom 7th: James Loney RBI single (PHI 3, LAD 2)
+
+
+# Bottom of the Ninth
+
+:::: {.columns}
+
+::: {.column width="45%"}
+```{r}
+#| echo: true
+#| eval: false
+game_df |> 
+  filter(inning == 9 & team == 1)
+```
+
+With the save situation, Philadelphia sent their closer Brad Lidge to the mound to face the top of the Dodger lineup.
+:::
+
+::: {.column width="10%"}
+	
+:::
+
+::: {.column width="45%"}
+![Brad Lidge](images/Brad_Lidge_Phillies.png)
+:::
+
+::::
+
+
+
+::::: {.panel-tabset}
+
+## Furcal
+
+:::: {.columns}
+
+::: {.column width="30%"}
+![Rafael Furcal](images/Rafael_Furcal_Dodgers.png)
+:::
+
+::: {.column width="10%"}
+	
+:::
+
+::: {.column width="60%"}
+```{r}
+game_df |> 
+  filter(inning == 9 & team == 1) |>
+  filter(str_detect(retroID, "fur"))
+```
+
+After two quick strikes, Furcal worked up to a full count.  Lidge was able to get Furcal to strikeout looking.
+
+**<span style='color:#E81828;'>One out</span>**
+
+:::
+
+::::
+
+## Hudson
+
+:::: {.columns}
+
+::: {.column width="30%"}
+![Orlando Hudson](images/Orlando_Hudson_Dodgers.png)	
+:::
+
+::: {.column width="10%"}
+	
+:::
+
+::: {.column width="60%"}
+```{r}
+game_df |> 
+  filter(inning == 9 & team == 1) |>
+  filter(str_detect(retroID, "hud"))
+```
+
+On a 1-2 count, Hudson grounded out to the pitcher.
+
+**<span style='color:#E81828;'>Two outs</span>**
+
+:::
+
+::::
+
+## Blake
+
+:::: {.columns}
+
+::: {.column width="30%"}
+![Casey Blake](images/Casey_Blake_Dodgers.png)	
+:::
+
+::: {.column width="10%"}
+	
+:::
+
+::: {.column width="60%"}
+```{r}
+game_df |> 
+  filter(inning == 9 & team == 1) |>
+  filter(str_detect(retroID, "bla"))
+```
+
+After a 1-2 count, Casey Blake singled to left field.
+
+**<span style='color:#005A9C;'>Runner on first</span>**
+
+:::
+
+::::
+
+## Loney
+
+:::: {.columns}
+
+::: {.column width="30%"}
+![James Loney](images/James_Loney_Dodgers.png)	
+:::
+
+::: {.column width="10%"}
+	
+:::
+
+::: {.column width="60%"}
+```{r}
+game_df |> 
+  filter(inning == 9 & team == 1) |>
+  filter(str_detect(retroID, "lon"))
+```
+
+* called strike
+* ball
+* swinging strike (blocked by catcher)
+* ball
+* foul (blocked by catcher)
+* ball (Blake faked steal attempt)
+* ball (Blake to 2B)
+
+Clean-up hitter James Loney worked a walk.
+
+**<span style='color:#005A9C;'>Runners on first and second</span>**
+
+:::
+
+::::
+
+## Martin
+
+:::: {.columns}
+
+::: {.column width="30%"}
+![Russel Martin](images/Russel_Martin_Dodgers.png)	
+:::
+
+::: {.column width="10%"}
+	
+:::
+
+::: {.column width="60%"}
+```{r}
+game_df |> 
+  filter(inning == 9 & team == 1) |>
+  filter(str_detect(retroID, "mar"))
+```
+
+After a 1-2 count, Martin lightly hit a squibber, but the third baseman committed an error!
+
+**<span style='color:#005A9C;'>Bases loaded</span>**
+
+:::
+
+::::
+
+## Ethier
+
+:::: {.columns}
+
+::: {.column width="30%"}
+![Andre Ethier](images/Andre_Ethier_Dodgers.png)	
+:::
+
+::: {.column width="10%"}
+	
+:::
+
+::: {.column width="60%"}
+```{r}
+game_df |> 
+  filter(inning == 9 & team == 1) |>
+  filter(str_detect(retroID, "eth"))
+```
+
+On the very next pitch, Ethier hit a long double down the right-field line for a **walk-off victory**!
+
+**<span style='color:#005A9C;'>Dodgers win!</span>**
+
+:::
+
+::::
+
+:::::
+
+
+# Epilogue
+
+::::: {.panel-tabset}
+
+## Plot
+
+```{r}
+#| echo: false
+#| eval: true
+title_text <- "<span style='color:#E81828;'>Philadelphia Phillies</span> at <span style='color:#005A9C;'>Los Angeles Dodgers</span>"
+
+standings_2009 |>
+  ggplot(aes(x = Date, y = TeamWins, group = WinTm)) +
+  # geom_vline(xintercept = "2009-06-05") +
+  geom_line(aes(x = Date, y = TeamWins, group = WinTm),
+            color = "gray70",
+            data = standings_2009 |> filter(!WinTm %in% c("LAN", "PHI"))) +
+  geom_line(aes(x = Date, y = TeamWins),
+            alpha = 0.5,
+            color = "#005A9C",
+            data = standings_2009 |> filter(WinTm == "LAN"),
+            linewidth = 2) +
+  geom_line(aes(x = Date, y = TeamWins),
+            alpha = 0.5,
+            color = "#E81828",
+            data = standings_2009 |> filter(WinTm == "PHI"),
+            linewidth = 2) +
+  geom_line(aes(x = Date, y = TeamWins),
+            color = "#005A9C",
+            data = standings_2009 |> 
+              filter(WinTm == "LAN" & Date < "2009-06-05"),
+            linewidth = 3) +
+  geom_line(aes(x = Date, y = TeamWins),
+            color = "#E81828",
+            data = standings_2009 |>
+              filter(WinTm == "PHI" & Date < "2009-06-05"),
+            linewidth = 3) +
+  geom_point(aes(x = Date, y = TeamWins),
+            color = "#005A9C",
+            data = standings_2009 |> 
+              filter(WinTm == "LAN" & Date == "2009-06-05"),
+            size = 5) +
+  geom_point(aes(x = Date, y = TeamWins),
+            color = "#E81828",
+            data = standings_2009 |>
+              filter(WinTm == "PHI" & Date == "2009-06-04"),
+            size = 5) +
+  labs(title = title_text,
+       subtitle = "June 5, 2009",
+       y = "Wins") +
+  theme_minimal() +
+  theme(plot.title = ggtext::element_markdown())
+```
+
+## Code
+
+```{r}
+#| echo: true
+#| eval: false
+title_text <- "<span style='color:#E81828;'>Philadelphia Phillies</span> at <span style='color:#005A9C;'>Los Angeles Dodgers</span>"
+
+standings_2009 |>
+  ggplot(aes(x = Date, y = TeamWins, group = WinTm)) +
+  # geom_vline(xintercept = "2009-06-05") +
+  geom_line(aes(x = Date, y = TeamWins, group = WinTm),
+            color = "gray70",
+            data = standings_2009 |> filter(!WinTm %in% c("LAN", "PHI"))) +
+  geom_line(aes(x = Date, y = TeamWins),
+            alpha = 0.5,
+            color = "#005A9C",
+            data = standings_2009 |> filter(WinTm == "LAN"),
+            linewidth = 2) +
+  geom_line(aes(x = Date, y = TeamWins),
+            alpha = 0.5,
+            color = "#E81828",
+            data = standings_2009 |> filter(WinTm == "PHI"),
+            linewidth = 2) +
+  geom_line(aes(x = Date, y = TeamWins),
+            color = "#005A9C",
+            data = standings_2009 |> 
+              filter(WinTm == "LAN" & Date < "2009-06-05"),
+            linewidth = 3) +
+  geom_line(aes(x = Date, y = TeamWins),
+            color = "#E81828",
+            data = standings_2009 |>
+              filter(WinTm == "PHI" & Date < "2009-06-05"),
+            linewidth = 3) +
+  geom_point(aes(x = Date, y = TeamWins),
+            color = "#005A9C",
+            data = standings_2009 |> 
+              filter(WinTm == "LAN" & Date == "2009-06-05"),
+            size = 5) +
+  geom_point(aes(x = Date, y = TeamWins),
+            color = "#E81828",
+            data = standings_2009 |>
+              filter(WinTm == "PHI" & Date == "2009-06-04"),
+            size = 5) +
+  labs(title = title_text,
+       subtitle = "June 5, 2009",
+       y = "Wins") +
+  theme_minimal() +
+  theme(plot.title = ggtext::element_markdown())
+```
+
+:::::
+
+```{r}
+Lahman::Teams |>
+  filter(yearID == 2009) |>
+  filter(lgID == "NL") |>
+  select(yearID, teamID, W, L, DivWin, WCWin, LgWin, WSWin) |>
+  arrange(desc(W)) |>
+  filter(W > 81)
+```
+
+The Dodgers and Phillies would face off in the NLCS again in 2009---with the Phillies once again defeating the Dodgers 4 games to one.  The Phillies would not repeat as champions in the World Series, however, as that season was won by the New York Yankees.
+
+
+::: {.callout-note collapse="true"}
+## Session Info
+
+```{r}
+sessionInfo()
+```
+:::
+
+
+:::: {.columns}
+
+::: {.column width="45%"}
+	
+:::
+
+::: {.column width="10%"}
+	
+:::
+
+::: {.column width="45%"}
+
+:::
+
+::::
+
+::::: {.panel-tabset}
+
+
+
+:::::
