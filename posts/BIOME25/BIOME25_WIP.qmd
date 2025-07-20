@@ -41,7 +41,7 @@ GT_color_navy_blue <- "#003057"
 Derek Sollberger
 
 * Data Analyst
-* UC Merced
+* Princeton University
 
 :::
 
@@ -380,7 +380,28 @@ df_math_content |>
         plot.caption = element_markdown(hjust = 1.0))
 ```
 
+## Literature
 
+::::: {.panel-tabset}
+
+### Values
+
+![Andrews 2017](andrews2017.png)
+
+### Values 2
+
+![Math Biology Values Instrument](MBVI_prompts.png)
+
+### Emotions
+
+![Wachsmuth 2017](wachsmuth2017.png)
+
+### Emotions 2
+
+![Math Emotions Instrument](emotions_prompts.png)
+
+
+:::::
 
 
 ## Math Emotion
@@ -688,7 +709,7 @@ To encourage <span style="color:blue;">more views</span> or <span style="color:b
 Derek Sollberger
 
 * Data Analyst
-* UC Merced
+* Princeton University
 * dsollberger
      * @princeton.edu
 
@@ -772,28 +793,7 @@ make_ten_boxplots(df, 1)
 
 Our first glance at the survey data showed no significant results between the pre and post surveys.
 
-## Literature
 
-::::: {.panel-tabset}
-
-### Values
-
-![Andrews 2017](andrews2017.png)
-
-### Values 2
-
-![Math Biology Values Instrument](MBVI_prompts.png)
-
-### Emotions
-
-![Wachsmuth 2017](wachsmuth2017.png)
-
-### Emotions 2
-
-![Math Emotions Instrument](emotions_prompts.png)
-
-
-:::::
 
 ## Video Stats
 

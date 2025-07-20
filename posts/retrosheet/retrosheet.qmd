@@ -2,14 +2,14 @@
 title: "Andre Ethier versus Brad Lidge"
 author: "Derek Sollberger"
 date: "2025-07-16"
-# format: 
-#   revealjs:
-#     scrollable: true
-#     theme: league
-#     toc: false  
 format:
-  html:
-    toc: true
+  revealjs:
+     scrollable: true
+     theme: league
+     toc: false  
+# format:
+#   html:
+#     toc: true
 ---
 
 ```{r}
@@ -76,7 +76,6 @@ Lahman::Pitching |>
 ```
 
 ### Fielding
-
 
 ```{r}
 Lahman::Fielding |>
@@ -366,7 +365,7 @@ game_df |>
   filter(inning == 9 & team == 1)
 ```
 
-With the save situation, Philadelphia sent their closer Brad Lidge to the mound to face the top of the Dodger lineup.
+With the save situation, Philadelphia sent their closer Brad Lidge to the mound to face the heart of the Dodger lineup.
 :::
 
 ::: {.column width="10%"}
