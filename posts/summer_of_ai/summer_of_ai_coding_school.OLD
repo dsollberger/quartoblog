@@ -1,7 +1,7 @@
 ---
 title: "About Me"
 author: "Derek Sollberger"
-date: "2025-07-24"
+date: "2025-07-09"
 format:
   html
 ---
@@ -141,55 +141,52 @@ Image credit: [Smarter German](https://smartergerman.com/blog/german-language-le
 
 ::::
 
-## project 5
+:::::
 
-### Color Sensitivity
+
+# Coding School
+
+## AI: Medical Imaging
 
 :::: {.columns}
 
 ::: {.column width="45%"}
-#### Setup
-
-- We hope to build a CNN to classify pictures in terms of susceptibility to color blindness
-- Trained model on Ishihara data set
-- Run model on novel images from the Princeton Art Museum
-
-![301](ishihara_example_301.png)
+![MRI scans](MRI_scans.png)
 :::
 
 ::: {.column width="10%"}
-
+	
 :::
 
 ::: {.column width="45%"}
-#### Future Directions
-
-* better data
-
-    * increase data set by factor of 10
-    * recenter, resize, rotations, shears
-
-* model architecture
-
-    * more hidden layers
-    * 3D convolutions
-    * vary filter sizes
-    
-* hyperparameter search
-
-* validate results
-
-* regression model
-
-    * goal: image's susceptibility to color vision deficiency
+* data set validation
+* clustering
+* image segmentation
+* annotation
 :::
 
 ::::
 
-:::::
+## DS: Sentiment Analysis
 
+:::: {.columns}
 
+::: {.column width="45%"}
+![The Office](Office_Michael_shouting.png)
+:::
 
+::: {.column width="10%"}
+	
+:::
+
+::: {.column width="45%"}
+* sentiment: "negative" to "positive"
+* algorithm comparison
+* data standardization
+* feature selection
+:::
+
+::::
 
 
 

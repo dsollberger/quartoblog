@@ -2,9 +2,9 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/summer_of_ai/summer_of_ai.html",
       "/posts/BIOME25/BIOME25_WIP.html",
       "/posts/retrosheet/retrosheet.html",
-      "/posts/summer_of_ai/summer_of_ai.html",
       "/posts/processor_checks/processor_checks.html",
       "/posts/KL_Likert/KL_Likert.html",
       "/posts/ExplainPaper/explain_paper.html",
