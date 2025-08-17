@@ -1,0 +1,368 @@
+---
+title: "RNA-Seq Exploratory Data Analysis"
+author: "Derek Sollberger"
+date: "2025-08-17"
+format:
+  closeread-html:
+    fig-width: 6
+    narrative-background-color-sidebar: lightyellow
+    remove-header-space: true
+---
+
+:::{.cr-section layout="sidebar-left"}
+
+# RNA-Seq Exploratory Data Analysis
+
+@cr-setup
+
+::::{#cr-setup}
+```{r}
+#| message: false
+#| warning: false
+#| echo: true
+
+# Bioconductor
+library("airway")
+library("ComplexHeatmap")
+library("DESeq2")
+library("org.Hs.eg.db")
+library("SummarizedExperiment")
+data(airway)
+
+# data visualization
+library("circlize")
+library("ggplot2")
+library("ggtext")
+
+# data wrangling
+library("dplyr")
+library("magrittr")
+library("tidyr")
+```
+::::
+
+To conclude an online course in RNA-seq analysis, here I hope to review our materials into a concise presentation adorned with `closeread`. I shall work with the `airway` data set found in some **Bioconductor** documentation---in fact, I will be adapting from the [EnhancedVolcano manual](https://bioconductor.org/packages/devel/bioc/vignettes/EnhancedVolcano/inst/doc/EnhancedVolcano.html) by Blighe, Rana, and Lewis---while also implementing the tools found in the course presented by Dean Lee.
+
+:::
+
+:::{.cr-section layout="sidebar-left"}
+# Data Set
+
+@cr-dex_image
+
+::::{#cr-dex_image}
+![dexamethoasone](images/dexamethasone.png)
+::::
+
+The `airway` package in the Bioconductor suite is maintained by Michael Love, and it contains data from the experiment results published by Himes, et al in 2014. "that summarizes an RNA-seq experiment wherein airway smooth muscle cells were treated with dexamethasone, a synthetic glucocorticoid steroid with anti-inflammatory effects".
+:::
+
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+# clean metadata (from useR!2025 workshop on tidyomics)
+dimnames(assay(airway, "counts")) <- dimnames(airway)
+rowData(airway)$exonic_length <- sum(width(reduce(rowRanges(airway))))
+rowRanges(airway) <- NULL
+```
+
+In the *RangedSummarizedExperiment object*, we can use the `rowData` command from `SummarizedExperiment` to look at meta data that has been collected about the **reads**. Here, I then present only the column names of that `rowData` for brevity.
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+# using SummarizedExperiment to explore the data
+colnames(rowData(airway))
+```
+
+In the *RangedSummarizedExperiment object*, we can use the `rowData` command from `SummarizedExperiment` to look at meta data that has been collected about the **samples**. Here, I then present only a subset of that `colData` for brevity.
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+# using SummarizedExperiment to explore the data
+colData(airway)[1:6,1:6]
+```
+
+## Toward Gene Expression
+
+Overall, I want to focus on the genes and the **assay** of counts of gene expression. Continuing with the `EnhancedVolcano` documentation, we "annotate the Ensembl gene IDs to gene symbols".
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+airway$dex %<>% relevel('untrt')
+ens <- rownames(airway)
+symbols <- mapIds(org.Hs.eg.db, keys = ens,
+                  column = c('SYMBOL'), keytype = 'ENSEMBL')
+symbols <- symbols[!is.na(symbols)]
+symbols <- symbols[match(rownames(airway), names(symbols))]
+rownames(airway) <- symbols
+keep <- !is.na(rownames(airway))
+airway <- airway[keep,]
+```
+
+:::{.cr-section layout="sidebar-left"}
+## Variance Stabilizing Transformation
+
+@cr-vst_image
+
+::::{#cr-vst_image}
+![VST](images/week_2_vst.png)
+::::
+
+To the best of my novice knowledge, lab technicians can obtain **reads** of the RNA-Seq at various levels of quality and "better" reads can come from multiple scans.  However, when seeking *counts* of gene expression, some genes now have much more representation than others simply from the scanning processes.  We perform **variance stabilizing transformation** to *normalize* the data to treat the sequence data more similarly.
+:::
+
+
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+dds <- DESeqDataSet(airway, design = ~ cell + dex)
+dds <- DESeq(dds, betaPrior = FALSE)
+vsd <- vst(dds)
+```
+
+:::{.cr-section layout="sidebar-left"}
+
+# Principal Component Analysis
+
+Across scans of various genes, we have a high-dimensional matrix of counts.  In hopes of seeking out patterns, we can perform **principal component analysis** (PCA) and project the data into a lower dimensional space and see if there are perhaps some clusters there.  Here, we retain the first two principal components that may already capture the majority of the variance and also is easy to visualize.
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+# find genes with highest variance of expression
+# then graph first two principal components
+variances <- rowVars(assay(vsd))
+top_var_genes <- order(variances, decreasing = TRUE)[1:500]
+high_var_mat <- assay(vsd)[top_var_genes,]
+pca_res <- prcomp(t(high_var_mat), center = TRUE, scale = FALSE)
+explained_variance <- pca_res$sdev^2 / sum(pca_res$sdev^2) * 100
+df_pca <- data.frame(PC1 = pca_res$x[, 1], 
+                     PC2 = pca_res$x[, 2], 
+                     colData(dds)) #is colData correct here??
+```
+
+@cr-pca_plot
+
+::::{#cr-pca_plot}
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+title_text = "Dexamethasone Experiment: <span style='color:#FF0000;'>Untreated</span> or <span style='color:#0000FF;'>Treatment</span>"
+
+df_pca |>
+  ggplot(aes(x = PC1, y = PC2, color = dex)) +
+  geom_point(size = 5, ) + 
+  labs(title = title_text,
+       subtitle = "Principal Component Analysis",
+       caption = "Data Source: Bioconductor::airway\n
+       Analysis by: Derek Sollberger",
+       x = paste0("PC1: ", round(explained_variance[1], 1), "% variance"), 
+       y = paste0("PC2: ", round(explained_variance[2], 1), "% variance")) +
+  scale_color_manual(values = c("#FF0000", "#0000FF")) +
+  theme_minimal() +
+  theme(legend.position = "none",
+        plot.title = ggtext::element_markdown(size = 15, hjust = 0.5),
+        plot.subtitle = element_text(size = 10, hjust = 0.5))
+```
+::::
+
+In this example of PCA, the treated cell lines and the untreated cell lines are clearly separated by the first principal component. This gives us some encouragement that the medical intervention is indeed affecting these lung cells.
+
+:::
+
+:::{.cr-section layout="sidebar-left"}
+# Hierarchical Clustering
+
+Earlier, we used the `DESeq` function from Bioconductor to set us on the path toward differential expression analysis.  For now, we take a numerical matrix of counts of the gene expression, compute the Euclidian distances between matrix entries, and organize the distances---starting with the shortest---in a process called **hierarchical clustering**. Like other clustering algorithms, we hope to use this unsupervised learning approach to encounter underlying structure in the data.
+
+@cr-hc_k2
+
+::::{#cr-hc_k2}
+```{r, fig.height=6, fig.width=8}
+high_var_genes <- head(order(rowVars(assay(vsd)), decreasing = TRUE), 10)
+high_var_mat <- assay(vsd)[high_var_genes,]
+
+hc <- hclust(dist(t(high_var_mat)), method = "complete")
+clusters <- cutree(hc, k = 2)
+
+sample_annotation_df <- colData(dds) |> as.data.frame()
+sample_annotation_df <- sample_annotation_df |> dplyr::select(dex)
+
+sample_annotation_colors <- list(
+  # cell = c("N61311" = "#121212", "N052611" = "#E77500"),
+  dex = c("untrt" = "#FF0000", "trt" = "#0000FF")
+)
+
+column_annotation <- HeatmapAnnotation(
+  df = sample_annotation_df,
+  col = sample_annotation_colors,
+  annotation_label = "dex"
+)
+
+col_fun = colorRamp2(c(0, 10, 20), c("#121212", "white", "#E77500"))
+
+Heatmap(high_var_mat,
+        clustering_distance_columns = "euclidean",
+        clustering_method_columns = "complete",
+        clustering_distance_rows = "euclidean",
+        clustering_method_rows = "complete",
+        col = col_fun,
+        show_row_names = TRUE,
+        show_column_names = FALSE,
+        name = "VST_Counts",
+        column_split = clusters,
+        top_annotation = column_annotation)
+```
+::::
+
+The Bioconductor community provides a `ComplexHeatmap` package to handle a lot of these ideas simultaneously. We start by assuming $k = 2$ clusters and *cut off* the **dendrogram** (treemodel) where there would be 2 clusters.  Upon looking at the *annotation* (here: the Dexamethasone treatment), we don't seem to have discerning patterns at 2 clusters.
+
+@cr-hc_k4
+
+::::{#cr-hc_k4}
+```{r, fig.height=12, fig.width=8}
+high_var_genes <- head(order(rowVars(assay(vsd)), decreasing = TRUE), 25)
+high_var_mat <- assay(vsd)[high_var_genes,]
+
+hc <- hclust(dist(t(high_var_mat)), method = "complete")
+clusters <- cutree(hc, k = 4)
+
+sample_annotation_df <- colData(dds) |> as.data.frame()
+sample_annotation_df <- sample_annotation_df |> dplyr::select(dex)
+
+sample_annotation_colors <- list(
+  # cell = c("N61311" = "#121212", "N052611" = "#E77500"),
+  dex = c("untrt" = "#FF0000", "trt" = "#0000FF")
+)
+
+column_annotation <- HeatmapAnnotation(
+  df = sample_annotation_df,
+  col = sample_annotation_colors,
+  annotation_label = "dex"
+)
+
+col_fun = colorRamp2(c(0, 10, 20), c("#121212", "white", "#E77500"))
+
+Heatmap(high_var_mat,
+        clustering_distance_columns = "euclidean",
+        clustering_method_columns = "complete",
+        clustering_distance_rows = "euclidean",
+        clustering_method_rows = "complete",
+        col = col_fun,
+        show_row_names = TRUE,
+        show_column_names = FALSE,
+        name = "VST_Counts",
+        column_split = clusters,
+        top_annotation = column_annotation)
+```
+::::
+
+Tweaking the exploration up to $k = 3$ and then $k = 4$ clusters, we now have some clusters that separate the genes that may be affected differently from the Dexamethasone treatment. In the [search](https://biocorecrg.github.io/CRG_Bioinformatics_for_Biologists/differential_gene_expression.html) for **more expressed** or **less expressed** genes, we have respectively candidates
+
+* **up-regulated** genes: ITIH5, SAMHD1, GPX3
+* **down-regulated** genes: RPS4Y1, DDX3Y, USP9Y, KDM5D
+
+Of course, this is a tutorial data set and exploration.  A more complex data set might display clustering better.
+
+:::
+
+:::{.cr-section layout="sidebar-left"}
+# Differential Expression Analysis
+
+It appears that the main bioinformatics technique in RNA-Seq is **differential expression analysis**.  After normalizing the data (understanding sequence lengths and number of reads), we compare group means and overall means like in statistical tests.  Here, I focus on $\log_{2}$ **fold change** to discuss the *less expressed* or *more expressed* genes.
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+meta_df <- colData(airway) |> as.data.frame()
+meta_df$Cluster <- factor(clusters)
+
+dds_compiled <- DESeqDataSetFromMatrix(countData = assay(airway),
+                                       colData = meta_df,
+                                       design = ~ Cluster)
+dds_compiled$Cluster <- relevel(dds_compiled$Cluster, ref = "2")
+dds_compiled <- dds_compiled[rowSums(counts(dds_compiled)) >= 100,]
+dds_compiled <- DESeq(dds_compiled)
+
+dds_results <- results(dds_compiled)
+dds_results <- dds_results |>
+  as.data.frame() |>
+  filter(!is.na(padj)) |>
+  filter(padj < 0.001) |>
+  arrange(desc(abs(log2FoldChange))) |>
+  tibble::rownames_to_column(var = "gene")
+```
+
+@cr-DEA_plot
+
+::::{#cr-DEA_plot}
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+df_for_graph <- dds_results |>
+  mutate(log_mag = -1.0*log10(padj)) |>
+  filter(log_mag < 40)
+
+df_right <- df_for_graph |>
+  slice_max(order_by = log2FoldChange, n = 3)
+df_left <- df_for_graph |>
+  slice_min(order_by = log2FoldChange, n = 3)
+df_for_labels <- df_right |>
+  rbind(df_left)
+
+df_for_graph |>
+  ggplot(aes(x = log2FoldChange, y = log_mag)) +
+  geom_point(aes(color = abs(log2FoldChange)),
+             alpha = 0.5,
+             size = 5) +
+  geom_label(aes(x = log2FoldChange, y = log_mag,
+                 label = gene), 
+             data = df_for_labels,
+             fill = "#ee7f2d") +
+  labs(title = "Differential Expression Analysis",
+       subtitle = "Volcano Plot",
+       caption = "Data Source: Bioconductor::airway\n
+       Analysis by: Derek Sollberger",
+       x = "fold change",
+       y = "adjusted p-value magnitude") +
+  scale_color_gradient(low = "red", high = "#ee7f2d") +
+  theme(axis.title.x = element_text(colour = "red"),
+        axis.title.y = element_text(colour = "red"),
+        legend.position = "none",
+        panel.background = element_rect(fill = "black"),
+        panel.grid = element_line(color = "gray25"),
+        plot.background = element_rect(fill = "black"),
+        plot.title = element_text(color = "#ee7f2d", hjust = 0.5, size = 20),
+        plot.subtitle = element_text(color = "red", hjust = 0.5, size = 15),
+        plot.caption = element_text(color = "#ee7f2d", size = 10)
+        ) +
+  xlim(-15, 15)
+```
+::::
+
+## Results
+
+In these calculations, the differential expression analysis yielded
+
+* **up-regulated** genes: XIST, GAS7, GPB3
+* **down-regulated** genes: RPS4Y1, USP9Y, UTY
+
+where we have also noted that RPS4Y1, USP9Y were highly less expressed in the hierarchical clustering. Gene RPS4Y1 is involved in protein syntheis and may be related to cancer growth. Gene USP9Y is involved in protein turnover and has been associated with lung cancer.  It appears that the dexamethasone steroid suppressed these genes.
+
+Among the more expressed genes, it appears that the dexamethasone steroid activated GPB3 in particular.  That gene may affect energy metabolism in lung cells.
+
+:::
