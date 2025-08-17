@@ -2,14 +2,14 @@
 title: "Andre Ethier versus Brad Lidge"
 author: "Derek Sollberger"
 date: "2025-07-16"
-format:
-  revealjs:
-     scrollable: true
-     theme: league
-     toc: false  
 # format:
-#   html:
-#     toc: true
+  # revealjs:
+  #    scrollable: true
+  #    theme: league
+  #    toc: false  
+format:
+  html:
+    toc: true
 ---
 
 ```{r}
