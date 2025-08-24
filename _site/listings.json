@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/RLR_quarto_dashboards/quarto_dashboards.html",
       "/posts/rna_seq_eda/RNA_Seq_wrapup_EDA.html",
       "/posts/summer_of_ai/summer_of_ai.html",
       "/posts/retrosheet/retrosheet.html",
