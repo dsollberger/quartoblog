@@ -1,0 +1,181 @@
+---
+title: "Ice Cream in Princeton"
+author: "Derek Sollberger"
+date: "2025-10-27"
+format: 
+  closeread-html:
+    cr-style:
+      narrative-background-color-overlay: "#FF671F"
+      narrative-font-size: 16
+      narrative-text-color-overlay: "#000000"
+---
+
+# DDSS Lightning Talk
+
+`Closeread` is a custom format for Quarto that enables "scrollytelling" features for HTML documents. This plug-in helps a presenter tell a narrative, quickly annotate visuals, and affect the viewing "camera" of the materials. This talk will give a brief demo of `Closeread` and discuss its applications.
+
+
+
+::: {.callout-tip collapse="true"}
+## Scroll Down!
+
+This Quarto blog post is an example of the `closeread` plugin.  To see its effects, scroll down.
+:::
+
+:::::{.cr-section}
+
+
+Today, we will discuss the ice cream shoppes in Princeton.
+
+There are several popular locations in Princeton to sate ice cream cravings
+@cr-icplot
+
+::::{#cr-icplot}
+![ice cream shoppes](princeton_ice_cream.png)
+::::
+
+Students, staff, and faculty at Princeton rave about the treats offered by
+
+1. Thomas Sweet
+2. Bent Spoon
+3. Halo Pub
+
+:::::
+
+# Thomas Sweet Ice Cream
+
+:::::{.cr-section layout="overlay-left"}
+
+Let us first visit Thomas Sweet Ice Cream!
+
+
+Established in 1979, Thomas Sweet has a few locations.  The Nassau Street shop specializes in popular ice cream flavors
+@cr-thomasmap
+
+::::{#cr-thomasmap}
+![from JRR to Thomas Sweet](map_JRR_to_Thomas.png)
+::::
+
+As we enter the shop from the busy Nassau Street, the quaint shop offers a retro feel.
+@cr-thomasshop
+
+::::{#cr-thomasshop}
+![Thomas Sweet ice cream](thomas_sweet_facade.png)
+::::
+
+Don't forget to take a selfie with the fun house mirror!
+@cr-thomasmirror
+
+::::{#cr-thomasmirror}
+![fun house mirror](thomas_sweet_mirror.png)
+
+* image source: [Princeton Ice Cream Tour](https://princetonicecreamtour.blogspot.com/2013/05/thomas-sweet.html)
+
+::::
+
+This ice cream parlor offers many toppings to add variety to your day.
+@cr-thomasmenu
+
+::::{#cr-thomasmenu}
+![toppings](thomas_sweet_menu.png)
+
+* image source: [Princeton Ice Cream Tour](https://princetonicecreamtour.blogspot.com/2013/05/thomas-sweet.html)
+
+::::
+
+:::::
+
+# The Bent Spoon
+
+:::::{.cr-section layout="overlay-center"}
+
+We now visit The Bent Spoon (in Palmer Square).
+[@cr-bentmap]{scale-by="3"}
+
+
+::::{#cr-bentmap}
+![zooming into The Bent Spoon](princeton_map_zoomed_out.png)
+::::
+
+Despite its secluded location in Palmer Square, The Bent Spoon is popular with the local townsfolk.  Don't be surprised if there is a line. (The wait is only a few minutes).
+@cr-bentshop
+
+::::{#cr-bentshop}
+![The Bent Spoon](bent_spoon_facade.png)
+::::
+
+The Bent Spoon is known for very creative and esoteric flavors. Be prepared to surprise yourself!
+@cr-bentflavors
+
+::::{#cr-bentflavors}
+![The Bent Spoon flavors](bent_spoon_flavors.png)
+
+* image source: [You Don't Know New Jersey](https://www.youdontknowjersey.com/2013/08/the-bent-spoon-princeton-review/)
+::::
+
+Treat yourself to a nice day outside.  The colors will really shine in the sun.
+@cr-bentcolors
+
+::::{#cr-bentcolors}
+![The Bent Spoon colors](bent_spoon_colors.png)
+
+* image source: [You Don't Know New Jersey](https://www.youdontknowjersey.com/2013/08/the-bent-spoon-princeton-review/)
+::::
+
+:::::
+
+# Halo Pub
+
+:::::{.cr-section layout="overlay-right"}
+
+We then walk over to the Halo Pub (on Hulfish Avenue).
+[@cr-halomap]{pan-to="20%,-40%"}
+
+
+::::{#cr-halomap}
+![panning over to Halo Pub](bent_to_halo.png)
+::::
+
+This restored location presents a feel of Americana.
+@cr-haloinside
+
+::::{#cr-haloinside}
+![Halo Pub](halo_inside.png)
+
+* image source: [Halo Pub](https://palmersquare.com/directory/halo-pub/)
+::::
+
+Halo Pub is known for serving locally-made ice cream and coffee
+@cr-haloscoops
+
+::::{#cr-haloscoops}
+![Halo Pub](halo_two_scoops.png)
+
+* image source: [Halo Pub](https://palmersquare.com/directory/halo-pub/)
+::::
+
+Halo Pub also serves a variety of beverages.
+@cr-halodrinks
+
+::::{#cr-halodrinks}
+![Halo Pub](halo_drinks.png)
+
+* image source: [Halo Pub](https://palmersquare.com/directory/halo-pub/)
+::::
+
+:::::
+
+
+# Thanks!
+
+* Derek Sollberger
+* Lecturer of Data Science
+* Center for Statistics and Machine Learning
+
+## Resources
+
+* `Closeread` [documentation](https://closeread.dev/) and [better examples](https://closeread.dev/gallery/)
+* [Data Scrollytelling Contest](https://www.causeweb.org/cause/contests/data-scrollytelling)
+
+    - for students
+    - deadline: December 20, 2025

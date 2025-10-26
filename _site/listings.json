@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/ice_cream/ice_cream.html",
       "/posts/DRIPBL_dashboards/quarto_dashboards.html",
       "/posts/typst_syllabus/typst_syllabus.html",
       "/posts/RLR_quarto_dashboards/quarto_dashboards.html",
