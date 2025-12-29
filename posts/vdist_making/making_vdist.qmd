@@ -1,0 +1,100 @@
+---
+title: "Making vdist"
+author: "Derek Sollberger"
+date: "2025-12-01"
+format:
+  html:
+    toc: true
+---
+
+# Goal
+
+Here, I hope to document the process(es) to make the `vdist` R package.  This package will make `ggplot2` wrappers to ease instruction of elementary probability distributions.
+
+We are motivated by the December 2025 LinkedIn posts by [Dr Athanasia Monika Mowinckel](https://www.linkedin.com/in/drmowinckels/). She is guiding us readers in R package development over the course of a [25-day journey](https://www.linkedin.com/feed/update/urn:li:activity:7400837138604290048/)
+
+
+## Day 1: usethis
+
+For [Day 1](https://www.linkedin.com/feed/update/urn:li:activity:7401213859547652096/), Dr Monwinckel advises us to enjoy the ease of using the [usethis](https://usethis.r-lib.org/) package.  For my `vdist` package, I am placing the files (within a Windows operating system) into the `Documents\R` folder.
+
+```{r}
+#| eval: false
+
+# create space for new package
+# (opens new instance of RStudio)
+usethis::create_package("vdist")
+
+# set usage license
+usethis::use_mit_license()
+
+# create README as R markdown document
+# (opens new .rmd file)
+usethis::use_readme_rmd()
+
+# setup GitHub infrastructure with "standard" workflow
+usethis::use_github_action("check-standard")
+
+# setup testthat infrastructure ("3" will be explained later?)
+usethis::use_testthat(3)
+
+# setup package-down infrastructure 
+# (opens new .yml file)
+usethis::use_pkgdown()
+```
+
+Furthermore, we were advised to edit our RProfile page with
+
+```{r}
+#| eval: false
+
+usethis::edit_r_profile()
+```
+
+and then adding to the RProfile file
+
+```
+options(usethis.full_name = "Derek Sollberger")
+options(usethis.protocol = "ssh")
+```
+
+
+
+
+
+
+
+
+
+
+
+::: {.callout-note collapse="true"}
+## Session Info
+
+```{r}
+sessionInfo()
+```
+:::
+
+
+:::: {.columns}
+
+::: {.column width="45%"}
+	
+:::
+
+::: {.column width="10%"}
+	
+:::
+
+::: {.column width="45%"}
+
+:::
+
+::::
+
+::::: {.panel-tabset}
+
+
+
+:::::

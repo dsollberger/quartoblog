@@ -1,0 +1,15 @@
+{
+  "hash": "ef2a769411e8b9162428d617ccad812a",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Four Color Theorem\"\nauthor: \"Derek Sollberger\"\ndate: \"2025-12-01\"\nformat:\n  html:\n    toc: true\n---\n\n\n\n# Goal\n\nHere, I hope to learn about the reasonably understand the proof(s) of the **Four-Color Theorem**.  I myself have a master's degree in applied mathematics, but it has been many years since I have taken Abstract Algebra.  Also, I never got far into topology.\n\nNow, I am hoping to use artificial intelligence tools to help me \n\n* state the Four-Color Theorem\n* summarize the history of its solving\n* outline a study plan to approach the materials (proofs and lemmas)\n* form examples to understand the abstract algebra concepts\n\n\n::: {.callout-note collapse=\"true\"}\n## Session Info\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nsessionInfo()\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\nR version 4.5.1 (2025-06-13 ucrt)\nPlatform: x86_64-w64-mingw32/x64\nRunning under: Windows 10 x64 (build 19045)\n\nMatrix products: default\n  LAPACK version 3.12.1\n\nlocale:\n[1] LC_COLLATE=English_United States.utf8 \n[2] LC_CTYPE=English_United States.utf8   \n[3] LC_MONETARY=English_United States.utf8\n[4] LC_NUMERIC=C                          \n[5] LC_TIME=English_United States.utf8    \n\ntime zone: America/New_York\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nloaded via a namespace (and not attached):\n [1] htmlwidgets_1.6.4 compiler_4.5.1    fastmap_1.2.0     cli_3.6.5        \n [5] tools_4.5.1       htmltools_0.5.8.1 rstudioapi_0.17.1 yaml_2.3.10      \n [9] rmarkdown_2.29    knitr_1.50        jsonlite_2.0.0    xfun_0.52        \n[13] digest_0.6.37     rlang_1.1.6       evaluate_1.0.4   \n```\n\n\n:::\n:::\n\n\n:::\n\n\n:::: {.columns}\n\n::: {.column width=\"45%\"}\n\t\n:::\n\n::: {.column width=\"10%\"}\n\t\n:::\n\n::: {.column width=\"45%\"}\n\n:::\n\n::::\n\n::::: {.panel-tabset}\n\n\n\n:::::",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

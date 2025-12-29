@@ -2,6 +2,9 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/Frasier_data/frasier_data.html",
+      "/posts/four_color/four_color.html",
+      "/posts/vdist_making/making_vdist.html",
       "/posts/ice_cream/ice_cream.html",
       "/posts/DRIPBL_dashboards/quarto_dashboards.html",
       "/posts/typst_syllabus/typst_syllabus.html",

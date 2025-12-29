@@ -1,0 +1,123 @@
+---
+title: "Frasier Data"
+author: "Derek Sollberger"
+date: "2025-12-28"
+format:
+  html:
+    toc: true
+---
+
+# Frasier
+
+Frasier was a TV show back in the 1990s.  Sometimes my friends and I rewatch the show out of nostalgia.  In the past few years, [Sulabh Bista](https://www.kaggle.com/datasets/sulabhbista/frasier-dialogs) parsed the episode scripts that were compiled by [KACL.net](https://www.kacl780.net/), and that allows us hobbyist data analysts to seek insights.
+
+```{r}
+#| message: false
+#| warning: false
+
+library("dplyr")
+library("ggplot2")
+library("stringr")
+
+df <- readr::read_csv("script.csv")
+```
+
+
+# Prompt 1
+
+A friend asked
+
+> You should create a graph to show the frequency of references to Frederick in Frasier. I feel it falls to near zero after the first half of the first season
+
+Let's go!
+
+```{r}
+df_Frederick <- df |>
+  mutate(dialog = stringr::str_to_lower(dialog)) |>
+  mutate(mentioned_Frederick = stringr::str_count(dialog, "frederick"),
+         mentioned_Freddie = stringr::str_count(dialog, "freddie")) |>
+  group_by(Season, Episode) |>
+  mutate(n_Frederick = sum(mentioned_Frederick, na.rm = TRUE) + 
+           sum(mentioned_Freddie, na.rm = TRUE)) |>
+  ungroup() |>
+  select(Season, Episode, n_Frederick) |>
+  distinct()
+```
+
+```{r}
+# https://r-charts.com/correlation/heat-map-ggplot2/
+df_Frederick |>
+  ggplot(aes(x = Episode, y = reorder(Season, desc(Season)), 
+             fill = n_Frederick)) +
+  geom_tile(color = "#cccccc",
+            lwd = 1.5, linetype = 1) +
+  geom_text(aes(label = n_Frederick), color = "black", size = 3) +
+  coord_fixed() +
+  labs(title = "How often do we hear about Frederick?",
+       subtitle = "Frasier TV show (1990s)",
+       caption = "Derek Sollberger\nSource: KACL.net",
+       x = "episode number", y = "season") +
+  scale_fill_gradient(low = "white", high = "#08872B") +
+  theme_minimal()
+```
+
+Perhaps a log transformation would get more contrast.
+
+```{r}
+df_Frederick |>
+  mutate(log_Frederick = log(n_Frederick + 1)) |>
+  ggplot(aes(x = Episode, y = reorder(Season, desc(Season)), 
+             fill = log_Frederick)) +
+  geom_tile(color = "#cccccc",
+            lwd = 1.5, linetype = 1) +
+  geom_text(aes(label = n_Frederick), color = "black", size = 3) +
+  coord_fixed() +
+  labs(title = "How often do we hear about Frederick?",
+       subtitle = "Frasier TV show (1990s)",
+       caption = "Derek Sollberger\nSource: KACL.net",
+       x = "episode number", y = "season") +
+  scale_fill_gradient(low = "white", high = "#08872B") +
+  theme_minimal()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+::: {.callout-note collapse="true"}
+## Session Info
+
+```{r}
+sessionInfo()
+```
+:::
+
+
+:::: {.columns}
+
+::: {.column width="45%"}
+	
+:::
+
+::: {.column width="10%"}
+	
+:::
+
+::: {.column width="45%"}
+
+:::
+
+::::
+
+::::: {.panel-tabset}
+
+
+
+:::::
