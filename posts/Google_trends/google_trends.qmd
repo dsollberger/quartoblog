@@ -1,0 +1,199 @@
+---
+title: "Google Trends"
+author: "Derek Sollberger"
+date: "2025-12-29"
+format:
+  html:
+    toc: true
+---
+
+# Goal
+
+I haven't looked at Google Trends in a while.  First, let's see if the API still works (for R programmers), and then try to replicate Angsar Wolsing's infographic about what was trending in 2025.
+
+# Package
+
+The `gtrendsR` package was created by Philippe Massicotte
+
+```{r}
+#| message: false
+#| warning: false
+# install.packages("gtrendsR")
+library("ggridges")
+library("gtrendsR")
+library("tidyverse")
+```
+
+
+# Topics
+
+For lack of a better idea at the moment, we manually check what were the most "rising" topics monthly directly on the [Google Trends](https://trends.google.com/trends/explore?geo=US&hl=en) website, and note them here.  That is, I simply changed the window in "Custom Time Range" for a month at a time. (I also took liberties to avoid some politics.)
+
+1. LA fires
+2. Michelle Trachtenberg
+3. March Madness
+4. quantum superposition
+5. Pacers vs Knicks
+6. Anne Burrell
+7. Coldplay
+8. Hurricane Erin
+9. Jimmy Kimmel
+10. Blue Jays vs Dodgers
+11. Ohio State vs Michigan
+12. Rob Reiner
+
+# Extraction
+
+Now, we can use the `gtrends` function to get the data about each of those topics.
+
+```{r}
+#| echo: true
+#| eval: false
+jan_topic <- gtrends("la fires")
+feb_topic <- gtrends("michelle trachtenberg")
+mar_topic <- gtrends("march madness")
+apr_topic <- gtrends("quantum superposition")
+may_topic <- gtrends("pacers vs knicks")
+jun_topic <- gtrends("anne burrell")
+jul_topic <- gtrends("coldplay")
+aug_topic <- gtrends("hurricane erin")
+sep_topic <- gtrends("jimmy kimmel")
+oct_topic <- gtrends("blue jays vs dodgers")
+nov_topic <- gtrends("ohio state vs michigan")
+dec_topic <- gtrends("rob reiner")
+```
+
+This took a couple of minutes, so let's try not to ask for the scraping again.
+
+```{r}
+#| echo: true
+#| eval: false
+df_raw <- rbind(jan_topic$interest_over_time,
+                feb_topic$interest_over_time,
+                mar_topic$interest_over_time,
+                apr_topic$interest_over_time,
+                may_topic$interest_over_time,
+                jun_topic$interest_over_time,
+                jul_topic$interest_over_time,
+                aug_topic$interest_over_time,
+                sep_topic$interest_over_time,
+                oct_topic$interest_over_time,
+                nov_topic$interest_over_time,
+                dec_topic$interest_over_time)
+
+saveRDS(df_raw, "df_raw.rds")
+```
+
+```{r}
+df_raw <- readRDS("df_raw.rds")
+```
+
+
+# Wrangling
+
+I want to focus on the year 2025, and I will eventually use "week number" as the horizontal axis (since it was weekly data).
+
+```{r}
+df <- df_raw |>
+  separate(date, sep = "-", into = c("year", "month", "day")) |>
+  filter(year == 2025) |>
+  select(month, day, hits, keyword)
+  # arrange(month, day)
+
+df$week <- rep(1:52, 12)
+```
+
+The data says "< 1" when virtually no data was collected.  Let's impute that to zero (for numerical calculations).
+
+```{r}
+df$hits[df$hits == "<1"] <- 0
+df$hits <- as.numeric(df$hits)
+```
+
+Also, we can use a factor variable to put the topics in chronological order (rather than alphabetical order)
+
+```{r}
+df$keyword <- factor(df$keyword,
+                     levels = rev(c("la fires", "michelle trachtenberg",
+                                "march madness", "quantum superposition",
+                                "pacers vs knicks", "anne burrell",
+                                "coldplay", "hurricane erin",
+                                "jimmy kimmel", "blue jays vs dodgers",
+                                "ohio state vs michigan", "rob reiner")))
+```
+
+
+# Ridges
+
+```{r}
+df |>
+  ggplot(aes(x = week, y = keyword, 
+             fill = keyword, height = hits)) +
+  ggridges::geom_density_ridges(stat = "identity") +
+  labs(title = "Year 2025 in Trends",
+       subtitle = "Monthly Hot Topics",
+       caption = "Derek Sollberger\nSource: Google Trends") +
+  scale_x_continuous(name = "week", limits = c(1,52)) +
+  scale_y_discrete(labels = rev(c("LA fires", "Michelle Trachtenberg",
+                                "March Madness", "Quantum superposition",
+                                "Pacers vs Knicks", "Anne Burell",
+                                "Coldplay", "Hurricane Erin",
+                                "Jimmy Kimmel", "Blue Jays vs Dodgers",
+                                "Ohio State vs Michigan", "Rob Reiner"))) +
+  theme_minimal() +
+  theme(axis.title.y = element_blank(),
+        legend.position = "none")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+::: {.callout-note collapse="true"}
+## Session Info
+
+```{r}
+sessionInfo()
+```
+:::
+
+
+:::: {.columns}
+
+::: {.column width="45%"}
+	
+:::
+
+::: {.column width="10%"}
+	
+:::
+
+::: {.column width="45%"}
+
+:::
+
+::::
+
+::::: {.panel-tabset}
+
+
+
+:::::

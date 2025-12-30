@@ -35,10 +35,12 @@ Let's go!
 df_Frederick <- df |>
   mutate(dialog = stringr::str_to_lower(dialog)) |>
   mutate(mentioned_Frederick = stringr::str_count(dialog, "frederick"),
-         mentioned_Freddie = stringr::str_count(dialog, "freddie")) |>
+         mentioned_Freddie = stringr::str_count(dialog, "freddie"),
+         mentioned_Freddy = stringr::str_count(dialog, "freddy")) |>
   group_by(Season, Episode) |>
   mutate(n_Frederick = sum(mentioned_Frederick, na.rm = TRUE) + 
-           sum(mentioned_Freddie, na.rm = TRUE)) |>
+           sum(mentioned_Freddie, na.rm = TRUE) +
+           sum(mentioned_Freddy, na.rm = TRUE)) |>
   ungroup() |>
   select(Season, Episode, n_Frederick) |>
   distinct()

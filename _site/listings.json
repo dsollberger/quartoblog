@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/Google_trends/google_trends.html",
       "/posts/Frasier_data/frasier_data.html",
       "/posts/four_color/four_color.html",
       "/posts/vdist_making/making_vdist.html",
