@@ -1,0 +1,641 @@
+---
+title: "Grant Witness"
+author: "Derek Sollberger"
+date: "2026-01-12"
+format:
+  html:
+    toc: true
+---
+
+# Goal
+
+Today, I wanted to explore the data sets assembled by [Grant Witness](https://grant-witness.us/) (Noam Ross, et al).  This data is about terminations of research grants in the USA in the year 2025.
+
+The data can be downloaded as 3 CSV files
+
+1. `epa_terminations.csv`
+2. `nih_terminations.csv`
+3. `nsf_terminations.csv`
+
+which refer to the EPA (Environmental Protection Agency), NIH (National Institutes of Health), and NSF (National Science Foundation) respectively.
+
+```{r}
+#| message: false
+#| warning: false
+library("gt")
+library("gtExtras")
+library("sf")
+library("tidytext")
+library("tidyverse")
+
+stop_words <- tidytext::get_stopwords()
+```
+
+```{r}
+#| message: false
+#| warning: false
+
+banned_words <- readLines("data/banned_words.txt")
+EPA_raw <- readr::read_csv("data/epa_terminations.csv")
+NIH_raw <- readr::read_csv("data/nih_terminations.csv")
+NSF_raw <- readr::read_csv("data/nsf_terminations.csv")
+states_shp <- readr::read_rds("data/us_states_shp.rds")
+```
+
+## Data Wrangling
+
+::::: {.panel-tabset}
+
+### EPA
+
+```{r}
+colnames(EPA_raw)
+```
+
+### NIH
+
+```{r}
+colnames(NIH_raw)
+```
+
+### NSF
+
+```{r}
+colnames(NSF_raw)
+```
+
+### Banned
+
+[https://grantwritingandfunding.com/banned-and-trigger-words-in-federal-grant-writing-in-the-trump-administration-2-0/](https://grantwritingandfunding.com/banned-and-trigger-words-in-federal-grant-writing-in-the-trump-administration-2-0/)
+
+```{r}
+banned_words_df <- as.data.frame(banned_words)
+banned_words_df <- banned_words_df |>
+  mutate(banned_words = stringr::str_trim(banned_words),
+         n_char = nchar(banned_words)) |>
+  filter(n_char > 0) |>
+  mutate(banned_words = stringr::str_to_lower(banned_words))
+
+banned_words <- banned_words_df |>
+  pull(banned_words)
+```
+
+```{r}
+print(banned_words_df$banned_words)
+```
+
+:::::
+
+```{r}
+intersect(colnames(NIH_raw), colnames(NSF_raw))
+```
+
+For now, I am going to focus on the NIH and NSF data since their tables are more similar.  It appears that the column names are not uniform, so let's search for columns of interest.
+
+## Subset
+
+I then looked at the spreadsheets directly.
+
+```{r}
+intersect_columns <- intersect(colnames(NIH_raw), colnames(NSF_raw))
+
+df_NIH <- NIH_raw |>
+  select(all_of(intersect_columns), abstract_text, total_award, dept_type)
+
+df_NSF <- NSF_raw |>
+  select(all_of(intersect_columns), abstract, nsf_total_budget, nsf_program_name)
+
+common_columns <- c("status", "termination_date", "reinstatement_ind", "project_title", "org_name", "org_state", "org_city", "usaspending_url", "record_sha1", "abstract", "budget", "subdivsion")
+colnames(df_NIH) <- common_columns
+colnames(df_NSF) <- common_columns
+
+df_NIH <- df_NIH |> mutate(agency = "NIH")
+df_NSF <- df_NSF |> mutate(agency = "NSF")
+
+df <- rbind(df_NIH, df_NSF) |>
+  mutate(org_name = stringr::str_to_title(org_name))
+```
+
+
+# Princeton Impact
+
+My audience will want to know about the grants that directly relate to Princeton University.  Here, I simply look at the `org_name` variable (i.e. this approach may miss grants with collaborators across multiple universities).
+
+```{r}
+df_Princeton <- df |>
+  filter(stringr::str_detect(org_name, "Princeton")) |>
+  tidyr::fill(termination_date, .direction = "down")
+```
+
+## Table
+
+```{r}
+df_Princeton |>
+  select(agency, org_city, termination_date, budget, project_title) |>
+  arrange(termination_date) |>
+  gt() |>
+  cols_align(align = "center") |>
+  fmt_currency(columns = "budget", currency = "USD") |>
+  tab_footnote(footnote = "Source: Grant Witness") |>
+  tab_header(
+    title = "Terminated Grants at Princeton University",
+    subtitle = "NIH and NSF Grants"
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels()
+  ) |>
+  tab_style(
+    style = list(cell_fill(color = "#E77500"),
+                 cell_text(color = "#121212",
+                           weight = "bold")),
+    locations = cells_body(columns = "org_city")
+  )
+```
+
+
+# Other Affected Universities
+
+Here, we perform some **segmentation** and **pivoting** to find the top 10 organizations that were affected by the terminated grants (for both NIH and NSF grants)
+
+## NIH
+
+```{r}
+df |>
+  filter(agency == "NIH") |>
+  group_by(org_name) |>
+  mutate(num_grants = n()) |>
+  ungroup() |>
+  select(agency, org_name, num_grants) |>
+  distinct() |>
+  slice_max(n = 10, order_by = num_grants) |>
+  gt() |>
+  cols_align(align = "center") |>
+  tab_footnote(footnote = "Source: Grant Witness") |>
+  tab_header(
+    title = "Terminated Grants at Universities",
+    subtitle = "NIH Grants, top 10 organizations affected"
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels()
+  ) |>
+  tab_style(
+    style = list(cell_fill(color = "springgreen"),
+                 cell_text(color = "#121212",
+                           weight = "bold")),
+    locations = cells_body(columns = "org_name")
+  )
+```
+
+## NSF
+
+```{r}
+df |>
+  filter(agency == "NSF") |>
+  group_by(org_name) |>
+  mutate(num_grants = n()) |>
+  ungroup() |>
+  select(agency, org_name, num_grants) |>
+  distinct() |>
+  slice_max(n = 10, order_by = num_grants) |>
+  gt() |>
+  cols_align(align = "center") |>
+  tab_footnote(footnote = "Source: Grant Witness") |>
+  tab_header(
+    title = "Terminated Grants at Universities",
+    subtitle = "NSF Grants, top 10 organizations affected"
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels()
+  ) |>
+  tab_style(
+    style = list(cell_fill(color = "cadetblue1"),
+                 cell_text(color = "#121212",
+                           weight = "bold")),
+    locations = cells_body(columns = "org_name")
+  )
+```
+
+
+# Geospatial
+
+```{r}
+df_state_group <- df |>
+  group_by(agency, org_state) |>
+  mutate(num_grants = n()) |>
+  ungroup() |>
+  select(agency, org_state, num_grants) |>
+  distinct()
+
+df_state_group$num_grants <- as.numeric(df_state_group$num_grants)
+
+shp_and_df <- states_shp |>
+  left_join(df_state_group, by = join_by(STUSPS == org_state))
+```
+
+## Magnitude
+
+### NIH
+
+```{r}
+shp_and_df |>
+  filter(agency == "NIH") |>
+  ggplot() +
+  geom_sf(aes(fill = log(num_grants))) +
+  labs(title = "Terminated Grants at Universities",
+       subtitle = "NIH Grants",
+       caption = "Source: Grant Witness") +
+  scale_fill_gradient(low = "red", high = "blue") +
+  theme_minimal()
+```
+
+### NSF
+
+```{r}
+shp_and_df |>
+  filter(agency == "NSF") |>
+  ggplot() +
+  geom_sf(aes(fill = log(num_grants))) +
+  labs(title = "Terminated Grants at Universities",
+       subtitle = "NSF Grants",
+       caption = "Source: Grant Witness") +
+  scale_fill_gradient(low = "red", high = "blue") +
+  theme_minimal()
+```
+
+
+# Words
+
+## Titles
+
+### NIH
+
+```{r}
+NIH_title_words <- df |>
+  filter(agency == "NIH") |>
+  select(project_title) |>
+  tidytext::unnest_tokens(word, project_title) |>
+  count(word) |>
+  anti_join(stop_words, by = "word")
+```
+
+```{r}
+tab1 <- NIH_title_words |>
+  arrange(desc(n)) |>
+  slice(1:10) |>
+  gt() |>
+  cols_align(align = "center") |>
+  tab_footnote(footnote = "Source: Grant Witness") |>
+  tab_header(
+    title = "Terminated NIH Grants",
+    subtitle = "Most Frequent Words in Titles"
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels()
+  ) |>
+  tab_style(
+    style = list(cell_fill(color = "springgreen"),
+                 cell_text(color = "#121212",
+                           weight = "bold")),
+    locations = cells_body(columns = "word")
+  )
+```
+
+```{r}
+tab2 <- NIH_title_words |>
+  arrange(desc(n)) |>
+  slice(11:20) |>
+  gt() |>
+  cols_align(align = "center") |>
+  tab_footnote(footnote = "Source: Grant Witness") |>
+  tab_header(
+    title = "Terminated NIH Grants",
+    subtitle = "Most Frequent Words in Titles"
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels()
+  ) |>
+  tab_style(
+    style = list(cell_fill(color = "springgreen"),
+                 cell_text(color = "#121212",
+                           weight = "bold")),
+    locations = cells_body(columns = "word")
+  )
+```
+
+```{r}
+list(tab1, tab2) |> 
+  gtExtras::gt_two_column_layout()
+```
+
+### NSF
+
+```{r}
+NSF_title_words <- df |>
+  filter(agency == "NSF") |>
+  select(project_title) |>
+  tidytext::unnest_tokens(word, project_title) |>
+  count(word) |>
+  anti_join(stop_words, by = "word")
+```
+
+```{r}
+tab1 <- NSF_title_words |>
+  arrange(desc(n)) |>
+  slice(1:10) |>
+  gt() |>
+  cols_align(align = "center") |>
+  tab_footnote(footnote = "Source: Grant Witness") |>
+  tab_header(
+    title = "Terminated NSF Grants",
+    subtitle = "Most Frequent Words in Titles"
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels()
+  ) |>
+  tab_style(
+    style = list(cell_fill(color = "springgreen"),
+                 cell_text(color = "#121212",
+                           weight = "bold")),
+    locations = cells_body(columns = "word")
+  )
+```
+
+```{r}
+tab2 <- NSF_title_words |>
+  arrange(desc(n)) |>
+  slice(11:20) |>
+  gt() |>
+  cols_align(align = "center") |>
+  tab_footnote(footnote = "Source: Grant Witness") |>
+  tab_header(
+    title = "Terminated NSF Grants",
+    subtitle = "Most Frequent Words in Titles"
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels()
+  ) |>
+  tab_style(
+    style = list(cell_fill(color = "springgreen"),
+                 cell_text(color = "#121212",
+                           weight = "bold")),
+    locations = cells_body(columns = "word")
+  )
+```
+
+```{r}
+list(tab1, tab2) |> 
+  gtExtras::gt_two_column_layout()
+```
+
+## Abstracts
+
+### NIH
+
+```{r}
+NIH_abstract_words <- df |>
+  filter(agency == "NIH") |>
+  select(abstract) |>
+  tidytext::unnest_tokens(word, abstract) |>
+  count(word) |>
+  anti_join(stop_words, by = "word")
+```
+
+```{r}
+tab1 <- NIH_abstract_words |>
+  arrange(desc(n)) |>
+  slice(1:10) |>
+  gt() |>
+  cols_align(align = "center") |>
+  tab_footnote(footnote = "Source: Grant Witness") |>
+  tab_header(
+    title = "Terminated NIH Grants",
+    subtitle = "Most Frequent Words in Abstracts"
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels()
+  ) |>
+  tab_style(
+    style = list(cell_fill(color = "springgreen"),
+                 cell_text(color = "#121212",
+                           weight = "bold")),
+    locations = cells_body(columns = "word")
+  )
+```
+
+```{r}
+tab2 <- NIH_abstract_words |>
+  arrange(desc(n)) |>
+  slice(11:20) |>
+  gt() |>
+  cols_align(align = "center") |>
+  tab_footnote(footnote = "Source: Grant Witness") |>
+  tab_header(
+    title = "Terminated NIH Grants",
+    subtitle = "Most Frequent Words in Abstracts"
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels()
+  ) |>
+  tab_style(
+    style = list(cell_fill(color = "springgreen"),
+                 cell_text(color = "#121212",
+                           weight = "bold")),
+    locations = cells_body(columns = "word")
+  )
+```
+
+```{r}
+list(tab1, tab2) |> 
+  gtExtras::gt_two_column_layout()
+```
+
+### NSF
+
+```{r}
+NSF_abstract_words <- df |>
+  filter(agency == "NSF") |>
+  select(abstract) |>
+  tidytext::unnest_tokens(word, abstract) |>
+  count(word) |>
+  anti_join(stop_words, by = "word")
+```
+
+```{r}
+tab1 <- NSF_abstract_words |>
+  arrange(desc(n)) |>
+  slice(1:10) |>
+  gt() |>
+  cols_align(align = "center") |>
+  tab_footnote(footnote = "Source: Grant Witness") |>
+  tab_header(
+    title = "Terminated NSF Grants",
+    subtitle = "Most Frequent Words in Abstracts"
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels()
+  ) |>
+  tab_style(
+    style = list(cell_fill(color = "springgreen"),
+                 cell_text(color = "#121212",
+                           weight = "bold")),
+    locations = cells_body(columns = "word")
+  )
+```
+
+```{r}
+tab2 <- NSF_abstract_words |>
+  arrange(desc(n)) |>
+  slice(11:20) |>
+  gt() |>
+  cols_align(align = "center") |>
+  tab_footnote(footnote = "Source: Grant Witness") |>
+  tab_header(
+    title = "Terminated NSF Grants",
+    subtitle = "Most Frequent Words in Abstracts"
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels()
+  ) |>
+  tab_style(
+    style = list(cell_fill(color = "springgreen"),
+                 cell_text(color = "#121212",
+                           weight = "bold")),
+    locations = cells_body(columns = "word")
+  )
+```
+
+```{r}
+list(tab1, tab2) |> 
+  gtExtras::gt_two_column_layout()
+```
+
+## Word Clouds
+
+While there are programmatic ways to make word clouds, I like the functionality of the [WordClouds.com](https://www.wordclouds.com/) website. To use that third-party software, make a CSV file whose columns are: `weight`, `word`, `color`, `url`.
+
+### NIH
+
+```{r}
+NIH_wordcloud_df <- NIH_abstract_words |>
+  mutate(weight = n, .before = "word") |>
+  select(weight, word) |>
+  arrange(desc(weight)) |>
+  slice(1:100) |>
+  mutate(color = ifelse(word %in% banned_words, "#ff0000", ""),
+         url = "")
+readr::write_csv(NIH_wordcloud_df, "NIH_for_wordcloud.csv")
+```
+
+![NIH Abstracts](nih_wordcloud.png)
+
+### NSF
+
+```{r}
+NSF_wordcloud_df <- NSF_abstract_words |>
+  mutate(weight = n, .before = "word") |>
+  select(weight, word) |>
+  arrange(desc(weight)) |>
+  slice(1:100) |>
+  mutate(color = ifelse(word %in% banned_words, "#ff0000", ""),
+         url = "")
+readr::write_csv(NSF_wordcloud_df, "NSF_for_wordcloud.csv")
+```
+
+![NSF Abstracts](nsf_wordcloud.png)
+
+
+# Reinstatement
+
+Finally, I am curious if some states performed better than others in getting those research grants reinstated.  We will seek out the proportion of grants that were reinstated for each state.
+
+## Proportion
+
+```{r}
+df_state_group <- df |>
+  group_by(agency, org_state) |>
+  mutate(num_grants = n()) |>
+  ungroup() |>
+  mutate(reinstated = ifelse(!is.na(reinstatement_ind), FALSE, TRUE)) |>
+  group_by(agency, org_state) |>
+  mutate(num_reinstated = sum(reinstated)) |>
+  ungroup() |>
+  mutate(prop_reinstated = num_reinstated / num_grants) |>
+  select(agency, org_state, prop_reinstated) |>
+  distinct()
+
+shp_and_df <- states_shp |>
+  left_join(df_state_group, by = join_by(STUSPS == org_state))
+```
+
+
+### NIH
+
+```{r}
+shp_and_df |>
+  filter(agency == "NIH") |>
+  ggplot() +
+  geom_sf(aes(fill = prop_reinstated)) +
+  labs(title = "Reinstated Grants at Universities",
+       subtitle = "NIH Grants",
+       caption = "Source: Grant Witness") +
+  scale_fill_gradient(low = "blue", high = "red") +
+  theme_minimal()
+```
+
+### NSF
+
+```{r}
+shp_and_df |>
+  filter(agency == "NSF") |>
+  ggplot() +
+  geom_sf(aes(fill = prop_reinstated)) +
+  labs(title = "Reinstated Grants at Universities",
+       subtitle = "NSF Grants",
+       caption = "Source: Grant Witness") +
+  scale_fill_gradient(low = "blue", high = "red") +
+  theme_minimal()
+```
+
+# Coda
+
+::: {.callout-note collapse="true"}
+## Session Info
+
+```{r}
+sessionInfo()
+```
+:::
+
+
+:::: {.columns}
+
+::: {.column width="45%"}
+	
+:::
+
+::: {.column width="10%"}
+	
+:::
+
+::: {.column width="45%"}
+
+:::
+
+::::
+
+::::: {.panel-tabset}
+
+
+
+:::::

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.42">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -32,15 +32,17 @@ ul.task-list li input[type="checkbox"] {
 <meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-listing/list.min.js"></script>
 <script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-2f6844b3748638c5738d4cf93630e566.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-870b6070356b2f6ba798b4fc2bd491a6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -113,7 +115,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -132,13 +134,15 @@ window.Quarto = {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">The Median Data Scientist</span>
     </a>
@@ -192,7 +196,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(58)</span></div><div class="category" data-category="YmFzZWJhbGw=">baseball <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZXhwbG9yYXRvcnklMjBkYXRhJTIwYW5hbHlzaXM=">exploratory data analysis <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Zm9udHM=">fonts <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cXVhcnRv">quarto <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c3BvcnRz">sports <span class="quarto-category-count">(1)</span></div><div class="category" data-category="dmlzdWFsaXphdGlvbg==">visualization <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(59)</span></div><div class="category" data-category="YmFzZWJhbGw=">baseball <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZXhwbG9yYXRvcnklMjBkYXRhJTIwYW5hbHlzaXM=">exploratory data analysis <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Zm9udHM=">fonts <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cXVhcnRv">quarto <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c3BvcnRz">sports <span class="quarto-category-count">(1)</span></div><div class="category" data-category="dmlzdWFsaXphdGlvbg==">visualization <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -206,22 +210,44 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1766984400000" data-listing-file-modified-sort="1767056359901" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="984">
-<div class="thumbnail">
-<p><a href="./posts/Google_trends/google_trends.html" class="no-external"></a></p><a href="./posts/Google_trends/google_trends.html" class="no-external">
-<p class="card-img-top"><img src="posts\Google_trends\google_trends_files\figure-html\unnamed-chunk-8-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/Google_trends/google_trends.html" class="no-external"></a></p>
+<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1768194000000" data-listing-file-modified-sort="1768621931500" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2433">
+<div class="thumbnail"><a href="./posts/grant_witness/grant_witness.html" class="no-external">
+
+<p class="card-img-top"><img src="posts\grant_witness\grant_witness_files\figure-html\unnamed-chunk-15-1.png"  class="thumbnail-image card-img"/></p>
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/grant_witness/grant_witness.html" class="no-external">Grant Witness</a>
+</h3>
+<div class="delink listing-description"><a href="./posts/grant_witness/grant_witness.html" class="no-external">
+Today, I wanted to explore the data sets assembled by Grant Witness (Noam Ross, et al). This data is about terminations of research grants in the USA in the year 2025.
+</a></div>
 </div>
+<div class="metadata">
+<a href="./posts/grant_witness/grant_witness.html" class="no-external">
+<div class="listing-date">
+Jan 12, 2026
+</div>
+<div class="listing-author">
+Derek Sollberger
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1766984400000" data-listing-file-modified-sort="1767056359901" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="984">
+<div class="thumbnail"><a href="./posts/Google_trends/google_trends.html" class="no-external">
+
+<p class="card-img-top"><img src="posts\Google_trends\google_trends_files\figure-html\unnamed-chunk-8-1.png"  class="thumbnail-image card-img"/></p>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/Google_trends/google_trends.html" class="no-external">Google Trends</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/Google_trends/google_trends.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/Google_trends/google_trends.html" class="no-external">I haven’t looked at Google Trends in a while. First, let’s see if the API still works (for R programmers), and then try to replicate Angsar Wolsing’s infographic about what…</a>
-</div>
+<div class="delink listing-description"><a href="./posts/Google_trends/google_trends.html" class="no-external">
+I haven’t looked at Google Trends in a while. First, let’s see if the API still works (for R programmers), and then try to replicate Angsar Wolsing’s infographic about what…
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/Google_trends/google_trends.html" class="no-external">
@@ -234,22 +260,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1766898000000" data-listing-file-modified-sort="1766983861195" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="445">
-<div class="thumbnail">
-<p><a href="./posts/Frasier_data/frasier_data.html" class="no-external"></a></p><a href="./posts/Frasier_data/frasier_data.html" class="no-external">
+<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1766898000000" data-listing-file-modified-sort="1766983861195" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="445">
+<div class="thumbnail"><a href="./posts/Frasier_data/frasier_data.html" class="no-external">
+
 <p class="card-img-top"><img src="posts\Frasier_data\frasier_data_files\figure-html\unnamed-chunk-3-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/Frasier_data/frasier_data.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/Frasier_data/frasier_data.html" class="no-external">Frasier Data</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/Frasier_data/frasier_data.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/Frasier_data/frasier_data.html" class="no-external">Frasier was a TV show back in the 1990s. Sometimes my friends and I rewatch the show out of nostalgia. In the past few years, Sulabh Bista parsed the episode scripts that…</a>
-</div>
+<div class="delink listing-description"><a href="./posts/Frasier_data/frasier_data.html" class="no-external">
+Frasier was a TV show back in the 1990s. Sometimes my friends and I rewatch the show out of nostalgia. In the past few years, Sulabh Bista parsed the episode scripts that…
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/Frasier_data/frasier_data.html" class="no-external">
@@ -262,22 +285,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1764565200000" data-listing-file-modified-sort="1764543886218" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="98">
-<div class="thumbnail">
-<p><a href="./posts/four_color/four_color.html" class="no-external"></a></p><a href="./posts/four_color/four_color.html" class="no-external">
+<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1764565200000" data-listing-file-modified-sort="1764543886218" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="98">
+<div class="thumbnail"><a href="./posts/four_color/four_color.html" class="no-external">
+
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/four_color/four_color.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/four_color/four_color.html" class="no-external">Four Color Theorem</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/four_color/four_color.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/four_color/four_color.html" class="no-external">Here, I hope to learn about the reasonably understand the proof(s) of the <strong>Four-Color Theorem</strong>. I myself have a master’s degree in applied mathematics, but it has been many…</a>
-</div>
+<div class="delink listing-description"><a href="./posts/four_color/four_color.html" class="no-external">
+Here, I hope to learn about the reasonably understand the proof(s) of the <strong>Four-Color Theorem</strong>. I myself have a master’s degree in applied mathematics, but it has been many…
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/four_color/four_color.html" class="no-external">
@@ -290,22 +310,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1764565200000" data-listing-file-modified-sort="1764635246336" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="174">
-<div class="thumbnail">
-<p><a href="./posts/vdist_making/making_vdist.html" class="no-external"></a></p><a href="./posts/vdist_making/making_vdist.html" class="no-external">
+<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1764565200000" data-listing-file-modified-sort="1764635246336" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="174">
+<div class="thumbnail"><a href="./posts/vdist_making/making_vdist.html" class="no-external">
+
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/vdist_making/making_vdist.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/vdist_making/making_vdist.html" class="no-external">Making vdist</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/vdist_making/making_vdist.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/vdist_making/making_vdist.html" class="no-external">Here, I hope to document the process(es) to make the <code>vdist</code> R package. This package will make <code>ggplot2</code> wrappers to ease instruction of elementary probability distributions.</a>
-</div>
+<div class="delink listing-description"><a href="./posts/vdist_making/making_vdist.html" class="no-external">
+Here, I hope to document the process(es) to make the <code>vdist</code> R package. This package will make <code>ggplot2</code> wrappers to ease instruction of elementary probability distributions.
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/vdist_making/making_vdist.html" class="no-external">
@@ -318,22 +335,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1761537600000" data-listing-file-modified-sort="1761448498833" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="387">
-<div class="thumbnail">
-<p><a href="./posts/ice_cream/ice_cream.html" class="no-external"></a></p><a href="./posts/ice_cream/ice_cream.html" class="no-external">
+<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1761537600000" data-listing-file-modified-sort="1761448498833" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="387">
+<div class="thumbnail"><a href="./posts/ice_cream/ice_cream.html" class="no-external">
+
 <p class="card-img-top"><img src="posts\ice_cream\princeton_ice_cream.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/ice_cream/ice_cream.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/ice_cream/ice_cream.html" class="no-external">Ice Cream in Princeton</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/ice_cream/ice_cream.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/ice_cream/ice_cream.html" class="no-external"><code>Closeread</code> is a custom format for Quarto that enables “scrollytelling” features for HTML documents. This plug-in helps a presenter tell a narrative, quickly annotate visuals…<code></code></a>
-</div>
+<div class="delink listing-description"><a href="./posts/ice_cream/ice_cream.html" class="no-external">
+<code>Closeread</code> is a custom format for Quarto that enables “scrollytelling” features for HTML documents. This plug-in helps a presenter tell a narrative, quickly annotate visuals…<code></code>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/ice_cream/ice_cream.html" class="no-external">
@@ -346,22 +360,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1760760000000" data-listing-file-modified-sort="1760757037887" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-word-count-sort="2771">
-<div class="thumbnail">
-<p><a href="./posts/DRIPBL_dashboards/quarto_dashboards.html" class="no-external"></a></p><a href="./posts/DRIPBL_dashboards/quarto_dashboards.html" class="no-external">
+<div class="quarto-post image-right" data-index="6" data-listing-date-sort="1760760000000" data-listing-file-modified-sort="1760757037887" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-word-count-sort="2771">
+<div class="thumbnail"><a href="./posts/DRIPBL_dashboards/quarto_dashboards.html" class="no-external">
+
 <p class="card-img-top"><img src="posts\DRIPBL_dashboards\Lecturer_Derek.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/DRIPBL_dashboards/quarto_dashboards.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/DRIPBL_dashboards/quarto_dashboards.html" class="no-external">DRIPBL: Quarto Dashboards</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/DRIPBL_dashboards/quarto_dashboards.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/DRIPBL_dashboards/quarto_dashboards.html" class="no-external">In this workshop, we will explore the relatively new technology called Quarto dashboards. In this exploration, I have chosen a different data set per my interest, but much…<code></code></a>
-</div>
+<div class="delink listing-description"><a href="./posts/DRIPBL_dashboards/quarto_dashboards.html" class="no-external">
+In this workshop, we will explore the relatively new technology called Quarto dashboards. In this exploration, I have chosen a different data set per my interest, but much…<code></code>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/DRIPBL_dashboards/quarto_dashboards.html" class="no-external">
@@ -374,22 +385,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-listing-date-sort="1756440000000" data-listing-file-modified-sort="1756517683092" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1636">
-<div class="thumbnail">
-<p><a href="./posts/typst_syllabus/typst_syllabus.html" class="no-external"></a></p><a href="./posts/typst_syllabus/typst_syllabus.html" class="no-external">
+<div class="quarto-post image-right" data-index="7" data-listing-date-sort="1756440000000" data-listing-file-modified-sort="1756517683092" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1636">
+<div class="thumbnail"><a href="./posts/typst_syllabus/typst_syllabus.html" class="no-external">
+
 <p class="card-img-top"><img src="posts\typst_syllabus\1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/typst_syllabus/typst_syllabus.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/typst_syllabus/typst_syllabus.html" class="no-external">Typst Syllabus</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/typst_syllabus/typst_syllabus.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/typst_syllabus/typst_syllabus.html" class="no-external">Ever since Carlos Scheidegger’s talk at <code>posit::conf(2023)</code>, I have wanted to try to use <code>Typst</code> to create a course syllabus. Over the past day, I have been aided by YouTube…</a>
-</div>
+<div class="delink listing-description"><a href="./posts/typst_syllabus/typst_syllabus.html" class="no-external">
+Ever since Carlos Scheidegger’s talk at <code>posit::conf(2023)</code>, I have wanted to try to use <code>Typst</code> to create a course syllabus. Over the past day, I have been aided by YouTube…
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/typst_syllabus/typst_syllabus.html" class="no-external">
@@ -402,22 +410,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="7" data-listing-date-sort="1756008000000" data-listing-file-modified-sort="1755999451593" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2574">
-<div class="thumbnail">
-<p><a href="./posts/RLR_quarto_dashboards/quarto_dashboards.html" class="no-external"></a></p><a href="./posts/RLR_quarto_dashboards/quarto_dashboards.html" class="no-external">
+<div class="quarto-post image-right" data-index="8" data-listing-date-sort="1756008000000" data-listing-file-modified-sort="1755999451593" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2574">
+<div class="thumbnail"><a href="./posts/RLR_quarto_dashboards/quarto_dashboards.html" class="no-external">
+
 <p class="card-img-top"><img src="posts\RLR_quarto_dashboards\bee_news_1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/RLR_quarto_dashboards/quarto_dashboards.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/RLR_quarto_dashboards/quarto_dashboards.html" class="no-external">Interactive Quarto Dashboards</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/RLR_quarto_dashboards/quarto_dashboards.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/RLR_quarto_dashboards/quarto_dashboards.html" class="no-external">In this workshop, we will explore the relatively new technology called Quarto dashboards. In this exploration, I have chosen a different data set per my interest, but much…<code></code></a>
-</div>
+<div class="delink listing-description"><a href="./posts/RLR_quarto_dashboards/quarto_dashboards.html" class="no-external">
+In this workshop, we will explore the relatively new technology called Quarto dashboards. In this exploration, I have chosen a different data set per my interest, but much…<code></code>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/RLR_quarto_dashboards/quarto_dashboards.html" class="no-external">
@@ -430,22 +435,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="8" data-listing-date-sort="1755403200000" data-listing-file-modified-sort="1755471939752" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1921">
-<div class="thumbnail">
-<p><a href="./posts/rna_seq_eda/RNA_Seq_wrapup_EDA.html" class="no-external"></a></p><a href="./posts/rna_seq_eda/RNA_Seq_wrapup_EDA.html" class="no-external">
+<div class="quarto-post image-right" data-index="9" data-listing-date-sort="1755403200000" data-listing-file-modified-sort="1755471939752" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1921">
+<div class="thumbnail"><a href="./posts/rna_seq_eda/RNA_Seq_wrapup_EDA.html" class="no-external">
+
 <p class="card-img-top"><img src="posts\rna_seq_eda\images\dexamethasone.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/rna_seq_eda/RNA_Seq_wrapup_EDA.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/rna_seq_eda/RNA_Seq_wrapup_EDA.html" class="no-external">RNA-Seq Exploratory Data Analysis</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/rna_seq_eda/RNA_Seq_wrapup_EDA.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/rna_seq_eda/RNA_Seq_wrapup_EDA.html" class="no-external">To conclude an online course in RNA-seq analysis, here I hope to review our materials into a concise presentation adorned with <code>closeread</code>. I shall work with the <code>airway</code> data…<strong></strong></a>
-</div>
+<div class="delink listing-description"><a href="./posts/rna_seq_eda/RNA_Seq_wrapup_EDA.html" class="no-external">
+To conclude an online course in RNA-seq analysis, here I hope to review our materials into a concise presentation adorned with <code>closeread</code>. I shall work with the <code>airway</code> data…<strong></strong>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/rna_seq_eda/RNA_Seq_wrapup_EDA.html" class="no-external">
@@ -458,22 +460,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="9" data-listing-date-sort="1753329600000" data-listing-file-modified-sort="1753412371404" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="259">
-<div class="thumbnail">
-<p><a href="./posts/summer_of_ai/summer_of_ai.html" class="no-external"></a></p><a href="./posts/summer_of_ai/summer_of_ai.html" class="no-external">
+<div class="quarto-post image-right" data-index="10" data-listing-date-sort="1753329600000" data-listing-file-modified-sort="1753412371404" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="259">
+<div class="thumbnail"><a href="./posts/summer_of_ai/summer_of_ai.html" class="no-external">
+
 <p class="card-img-top"><img src="posts\summer_of_ai\Lecturer_Derek.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/summer_of_ai/summer_of_ai.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/summer_of_ai/summer_of_ai.html" class="no-external">About Me</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/summer_of_ai/summer_of_ai.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/summer_of_ai/summer_of_ai.html" class="no-external">organize topics from abstracts from</a>
-</div>
+<div class="delink listing-description"><a href="./posts/summer_of_ai/summer_of_ai.html" class="no-external">
+organize topics from abstracts from
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/summer_of_ai/summer_of_ai.html" class="no-external">
@@ -486,22 +485,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="10" data-listing-date-sort="1752638400000" data-listing-file-modified-sort="1755472565006" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="17" data-listing-word-count-sort="3279">
-<div class="thumbnail">
-<p><a href="./posts/retrosheet/retrosheet.html" class="no-external"></a></p><a href="./posts/retrosheet/retrosheet.html" class="no-external">
+<div class="quarto-post image-right" data-index="11" data-listing-date-sort="1752638400000" data-listing-file-modified-sort="1755472565006" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="17" data-listing-word-count-sort="3279">
+<div class="thumbnail"><a href="./posts/retrosheet/retrosheet.html" class="no-external">
+
 <p class="card-img-top"><img src="posts\retrosheet\images\Brad_Lidge_Phillies.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/retrosheet/retrosheet.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/retrosheet/retrosheet.html" class="no-external">Andre Ethier versus Brad Lidge</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/retrosheet/retrosheet.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/retrosheet/retrosheet.html" class="no-external">I am finally reading Analyzing Baseball Data with R, and thankfully there is a book club over at the DSLC Slack channel (Data Science Learning Community). I want to apply…<em></em></a>
-</div>
+<div class="delink listing-description"><a href="./posts/retrosheet/retrosheet.html" class="no-external">
+I am finally reading Analyzing Baseball Data with R, and thankfully there is a book club over at the DSLC Slack channel (Data Science Learning Community). I want to apply…<em></em>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/retrosheet/retrosheet.html" class="no-external">
@@ -514,22 +510,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="11" data-listing-date-sort="1750564800000" data-listing-file-modified-sort="1750648793479" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="288">
-<div class="thumbnail">
-<p><a href="./posts/processor_checks/processor_checks.html" class="no-external"></a></p><a href="./posts/processor_checks/processor_checks.html" class="no-external">
+<div class="quarto-post image-right" data-index="12" data-listing-date-sort="1750564800000" data-listing-file-modified-sort="1750648793479" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="288">
+<div class="thumbnail"><a href="./posts/processor_checks/processor_checks.html" class="no-external">
+
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/processor_checks/processor_checks.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/processor_checks/processor_checks.html" class="no-external">Processor Checks</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/processor_checks/processor_checks.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/processor_checks/processor_checks.html" class="no-external">For my machine learning class (with AI topics), I should survey the students to get a sense of how powerful their computers are. In particular, I want to ask them</a>
-</div>
+<div class="delink listing-description"><a href="./posts/processor_checks/processor_checks.html" class="no-external">
+For my machine learning class (with AI topics), I should survey the students to get a sense of how powerful their computers are. In particular, I want to ask them
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/processor_checks/processor_checks.html" class="no-external">
@@ -542,22 +535,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="12" data-listing-date-sort="1745294400000" data-listing-file-modified-sort="1745367928329" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="559">
-<div class="thumbnail">
-<p><a href="./posts/KL_Likert/KL_Likert.html" class="no-external"></a></p><a href="./posts/KL_Likert/KL_Likert.html" class="no-external">
+<div class="quarto-post image-right" data-index="13" data-listing-date-sort="1745294400000" data-listing-file-modified-sort="1745367928329" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="559">
+<div class="thumbnail"><a href="./posts/KL_Likert/KL_Likert.html" class="no-external">
+
 <p class="card-img-top"><img src="posts\KL_Likert\KL_Likert_files\figure-html\unnamed-chunk-3-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/KL_Likert/KL_Likert.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/KL_Likert/KL_Likert.html" class="no-external">KL Divergence for Likert Data</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/KL_Likert/KL_Likert.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/KL_Likert/KL_Likert.html" class="no-external">Here I argue that we should use KL Divergence as a metric to measure survey data that was collected as Likert scales. In this blog post, I will discuss Likert scales…</a>
-</div>
+<div class="delink listing-description"><a href="./posts/KL_Likert/KL_Likert.html" class="no-external">
+Here I argue that we should use KL Divergence as a metric to measure survey data that was collected as Likert scales. In this blog post, I will discuss Likert scales…
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/KL_Likert/KL_Likert.html" class="no-external">
@@ -570,22 +560,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="13" data-listing-date-sort="1741064400000" data-listing-file-modified-sort="1741128676098" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="68">
-<div class="thumbnail">
-<p><a href="./posts/ExplainPaper/explain_paper.html" class="no-external"></a></p><a href="./posts/ExplainPaper/explain_paper.html" class="no-external">
+<div class="quarto-post image-right" data-index="14" data-listing-date-sort="1741064400000" data-listing-file-modified-sort="1741128676098" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="68">
+<div class="thumbnail"><a href="./posts/ExplainPaper/explain_paper.html" class="no-external">
+
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/ExplainPaper/explain_paper.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/ExplainPaper/explain_paper.html" class="no-external">AI Tools: Explain Paper</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/ExplainPaper/explain_paper.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/ExplainPaper/explain_paper.html" class="no-external">Today I tried out the <strong>Explain Paper</strong> AI tool to aid in research. It may have features that helps summarize papers at various levels of complexity for parts of the papers at a…</a>
-</div>
+<div class="delink listing-description"><a href="./posts/ExplainPaper/explain_paper.html" class="no-external">
+Today I tried out the <strong>Explain Paper</strong> AI tool to aid in research. It may have features that helps summarize papers at various levels of complexity for parts of the papers at a…
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/ExplainPaper/explain_paper.html" class="no-external">
@@ -598,22 +585,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="14" data-listing-date-sort="1740546000000" data-listing-file-modified-sort="1740528418101" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2598">
-<div class="thumbnail">
-<p><a href="./posts/DSLC_quarto_dashboards/quarto_dashboards.html" class="no-external"></a></p><a href="./posts/DSLC_quarto_dashboards/quarto_dashboards.html" class="no-external">
+<div class="quarto-post image-right" data-index="15" data-listing-date-sort="1740546000000" data-listing-file-modified-sort="1740528418101" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2598">
+<div class="thumbnail"><a href="./posts/DSLC_quarto_dashboards/quarto_dashboards.html" class="no-external">
+
 <p class="card-img-top"><img src="posts\DSLC_quarto_dashboards\bee_news_1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/DSLC_quarto_dashboards/quarto_dashboards.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/DSLC_quarto_dashboards/quarto_dashboards.html" class="no-external">Interactive Quarto Dashboards</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/DSLC_quarto_dashboards/quarto_dashboards.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/DSLC_quarto_dashboards/quarto_dashboards.html" class="no-external">In this workshop, we will explore the relatively new technology called Quarto dashboards. In this exploration, I have chosen a different data set per my interest, but much…<code></code></a>
-</div>
+<div class="delink listing-description"><a href="./posts/DSLC_quarto_dashboards/quarto_dashboards.html" class="no-external">
+In this workshop, we will explore the relatively new technology called Quarto dashboards. In this exploration, I have chosen a different data set per my interest, but much…<code></code>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/DSLC_quarto_dashboards/quarto_dashboards.html" class="no-external">
@@ -626,22 +610,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="15" data-listing-date-sort="1737003600000" data-listing-file-modified-sort="1737081860147" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2084">
-<div class="thumbnail">
-<p><a href="./posts/quarto_dashboards/quarto_dashboards.html" class="no-external"></a></p><a href="./posts/quarto_dashboards/quarto_dashboards.html" class="no-external">
+<div class="quarto-post image-right" data-index="16" data-listing-date-sort="1737003600000" data-listing-file-modified-sort="1737081860147" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2084">
+<div class="thumbnail"><a href="./posts/quarto_dashboards/quarto_dashboards.html" class="no-external">
+
 <p class="card-img-top"><img src="posts\quarto_dashboards\bee_news_1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/quarto_dashboards/quarto_dashboards.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/quarto_dashboards/quarto_dashboards.html" class="no-external">Interactive Dashboards</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/quarto_dashboards/quarto_dashboards.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/quarto_dashboards/quarto_dashboards.html" class="no-external">In this blog post, I want to outline my upcoming Princeton Wintersession workshop <em>Interactive Dashboards for Collaborative Communication</em>. In this workshop, we will explore…</a>
-</div>
+<div class="delink listing-description"><a href="./posts/quarto_dashboards/quarto_dashboards.html" class="no-external">
+In this blog post, I want to outline my upcoming Princeton Wintersession workshop <em>Interactive Dashboards for Collaborative Communication</em>. In this workshop, we will explore…
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/quarto_dashboards/quarto_dashboards.html" class="no-external">
@@ -654,22 +635,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="16" data-listing-date-sort="1736571600000" data-listing-file-modified-sort="1736627757581" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="31">
-<div class="thumbnail">
-<p><a href="./posts/historical_investments/historical_investments.html" class="no-external"></a></p><a href="./posts/historical_investments/historical_investments.html" class="no-external">
+<div class="quarto-post image-right" data-index="17" data-listing-date-sort="1736571600000" data-listing-file-modified-sort="1736627757581" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="31">
+<div class="thumbnail"><a href="./posts/historical_investments/historical_investments.html" class="no-external">
+
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/historical_investments/historical_investments.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/historical_investments/historical_investments.html" class="no-external">Historical Investments</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/historical_investments/historical_investments.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/historical_investments/historical_investments.html" class="no-external">Sometimes I wonder what I would do if I had to redo my whole life.</a>
-</div>
+<div class="delink listing-description"><a href="./posts/historical_investments/historical_investments.html" class="no-external">
+Sometimes I wonder what I would do if I had to redo my whole life.
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/historical_investments/historical_investments.html" class="no-external">
@@ -682,22 +660,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="17" data-listing-date-sort="1725076800000" data-listing-file-modified-sort="1725153792457" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="234">
-<div class="thumbnail">
-<p><a href="./posts/many_graphs/many_graphs.html" class="no-external"></a></p><a href="./posts/many_graphs/many_graphs.html" class="no-external">
+<div class="quarto-post image-right" data-index="18" data-listing-date-sort="1725076800000" data-listing-file-modified-sort="1725153792457" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="234">
+<div class="thumbnail"><a href="./posts/many_graphs/many_graphs.html" class="no-external">
+
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/many_graphs/many_graphs.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/many_graphs/many_graphs.html" class="no-external">Filtering in Shiny apps</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/many_graphs/many_graphs.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/many_graphs/many_graphs.html" class="no-external">For my data science lectures, I want to be able to run small Shiny apps (e.g.&nbsp;to demonstrate <code>dplyr</code> concepts). With my current knowledge of Shiny code, I am rather sure that…<em></em></a>
-</div>
+<div class="delink listing-description"><a href="./posts/many_graphs/many_graphs.html" class="no-external">
+For my data science lectures, I want to be able to run small Shiny apps (e.g.&nbsp;to demonstrate <code>dplyr</code> concepts). With my current knowledge of Shiny code, I am rather sure that…<em></em>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/many_graphs/many_graphs.html" class="no-external">
@@ -710,22 +685,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="18" data-listing-date-sort="1724385600000" data-listing-file-modified-sort="1724460678224" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="251">
-<div class="thumbnail">
-<p><a href="./posts/shinylive/shinylive.html" class="no-external"></a></p><a href="./posts/shinylive/shinylive.html" class="no-external">
+<div class="quarto-post image-right" data-index="19" data-listing-date-sort="1724385600000" data-listing-file-modified-sort="1724460678224" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="251">
+<div class="thumbnail"><a href="./posts/shinylive/shinylive.html" class="no-external">
+
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/shinylive/shinylive.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/shinylive/shinylive.html" class="no-external">Shiny Apps in a Quarto Blog Post</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/shinylive/shinylive.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/shinylive/shinylive.html" class="no-external">I have long wanted to include simple <code>Shiny</code> apps in my lecture notes so that I can show data science concepts to my students quickly. Today, I want to see if <code>shinylive</code> helps…</a>
-</div>
+<div class="delink listing-description"><a href="./posts/shinylive/shinylive.html" class="no-external">
+I have long wanted to include simple <code>Shiny</code> apps in my lecture notes so that I can show data science concepts to my students quickly. Today, I want to see if <code>shinylive</code> helps…
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/shinylive/shinylive.html" class="no-external">
@@ -738,22 +710,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="19" data-listing-date-sort="1724212800000" data-listing-file-modified-sort="1724280998940" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="69">
-<div class="thumbnail">
-<p><a href="./posts/webR/webR.html" class="no-external"></a></p><a href="./posts/webR/webR.html" class="no-external">
+<div class="quarto-post image-right" data-index="20" data-listing-date-sort="1724212800000" data-listing-file-modified-sort="1724280998940" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="69">
+<div class="thumbnail"><a href="./posts/webR/webR.html" class="no-external">
+
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/webR/webR.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/webR/webR.html" class="no-external">webR in a Quarto Blog Post</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/webR/webR.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/webR/webR.html" class="no-external"><code>webR</code> is a Quarto extension made by The Coatless Professor that allows users to type code right there in a webpage.</a>
-</div>
+<div class="delink listing-description"><a href="./posts/webR/webR.html" class="no-external">
+<code>webR</code> is a Quarto extension made by The Coatless Professor that allows users to type code right there in a webpage.
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/webR/webR.html" class="no-external">
@@ -766,22 +735,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="20" data-listing-date-sort="1719979200000" data-listing-file-modified-sort="1720055796777" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="366">
-<div class="thumbnail">
-<p><a href="./posts/office_sentiment/office_sentiment.html" class="no-external"></a></p><a href="./posts/office_sentiment/office_sentiment.html" class="no-external">
+<div class="quarto-post image-right" data-index="21" data-listing-date-sort="1719979200000" data-listing-file-modified-sort="1720055796777" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="366">
+<div class="thumbnail"><a href="./posts/office_sentiment/office_sentiment.html" class="no-external">
+
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/office_sentiment/office_sentiment.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/office_sentiment/office_sentiment.html" class="no-external">Sentiment Analysis of The Office</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/office_sentiment/office_sentiment.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/office_sentiment/office_sentiment.html" class="no-external">This summer, I am mentoring some high school students through their data science projects. For a data set, I am suggesting the repository of scripts from the TV show The…<code></code></a>
-</div>
+<div class="delink listing-description"><a href="./posts/office_sentiment/office_sentiment.html" class="no-external">
+This summer, I am mentoring some high school students through their data science projects. For a data set, I am suggesting the repository of scripts from the TV show The…<code></code>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/office_sentiment/office_sentiment.html" class="no-external">
@@ -794,22 +760,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="21" data-listing-date-sort="1716004800000" data-listing-file-modified-sort="1716082074754" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="250">
-<div class="thumbnail">
-<p><a href="./posts/ggflowchart/ggflowchart.html" class="no-external"></a></p><a href="./posts/ggflowchart/ggflowchart.html" class="no-external">
+<div class="quarto-post image-right" data-index="22" data-listing-date-sort="1716004800000" data-listing-file-modified-sort="1716082074754" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="250">
+<div class="thumbnail"><a href="./posts/ggflowchart/ggflowchart.html" class="no-external">
+
 <p class="card-img-top"><img src="posts\ggflowchart\ggflowchart_files\figure-html\unnamed-chunk-5-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/ggflowchart/ggflowchart.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/ggflowchart/ggflowchart.html" class="no-external">ggflowchart</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/ggflowchart/ggflowchart.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/ggflowchart/ggflowchart.html" class="no-external">Today I explore the <code>ggflowchart</code> package (made by Dr Nicola Rennie). For some data, the scenario comes from The Planet Crafter video game. Later in the game (minor spoiler)…<em></em><em></em><em></em></a>
-</div>
+<div class="delink listing-description"><a href="./posts/ggflowchart/ggflowchart.html" class="no-external">
+Today I explore the <code>ggflowchart</code> package (made by Dr Nicola Rennie). For some data, the scenario comes from The Planet Crafter video game. Later in the game (minor spoiler)…<em></em><em></em><em></em>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/ggflowchart/ggflowchart.html" class="no-external">
@@ -822,22 +785,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="22" data-listing-date-sort="1715832000000" data-listing-file-modified-sort="1715906665028" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="28">
-<div class="thumbnail">
-<p><a href="./posts/baseballr/baseballr.html" class="no-external"></a></p><a href="./posts/baseballr/baseballr.html" class="no-external">
+<div class="quarto-post image-right" data-index="23" data-listing-date-sort="1715832000000" data-listing-file-modified-sort="1715906665028" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="28">
+<div class="thumbnail"><a href="./posts/baseballr/baseballr.html" class="no-external">
+
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/baseballr/baseballr.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/baseballr/baseballr.html" class="no-external">baseballr package</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/baseballr/baseballr.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/baseballr/baseballr.html" class="no-external">I want to get back into exploring sports statistics. This semester, some of my students pointed out that there is a <code>baseballr</code> package to ease data acquisition.</a>
-</div>
+<div class="delink listing-description"><a href="./posts/baseballr/baseballr.html" class="no-external">
+I want to get back into exploring sports statistics. This semester, some of my students pointed out that there is a <code>baseballr</code> package to ease data acquisition.
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/baseballr/baseballr.html" class="no-external">
@@ -850,22 +810,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="23" data-listing-date-sort="1710648000000" data-listing-file-modified-sort="1711922690856" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="517">
-<div class="thumbnail">
-<p><a href="./posts/BNN/bnn.html" class="no-external"></a></p><a href="./posts/BNN/bnn.html" class="no-external">
+<div class="quarto-post image-right" data-index="24" data-listing-date-sort="1710648000000" data-listing-file-modified-sort="1711922690856" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="517">
+<div class="thumbnail"><a href="./posts/BNN/bnn.html" class="no-external">
+
 <p class="card-img-top"><img src="posts\BNN\bnn_files\figure-html\unnamed-chunk-3-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/BNN/bnn.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/BNN/bnn.html" class="no-external">Bayesian Neural Networks</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/BNN/bnn.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/BNN/bnn.html" class="no-external">Over the next few weeks, I want to learn more about <strong>Bayesian Neural Networks</strong>. Here in this blog post, I will gather resources and examples.</a>
-</div>
+<div class="delink listing-description"><a href="./posts/BNN/bnn.html" class="no-external">
+Over the next few weeks, I want to learn more about <strong>Bayesian Neural Networks</strong>. Here in this blog post, I will gather resources and examples.
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/BNN/bnn.html" class="no-external">
@@ -878,22 +835,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="24" data-listing-date-sort="1708837200000" data-listing-file-modified-sort="1710441915753" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2305">
-<div class="thumbnail">
-<p><a href="./posts/Settlement_Survival/Settlement_Survival.html" class="no-external"></a></p><a href="./posts/Settlement_Survival/Settlement_Survival.html" class="no-external">
-<p class="card-img-top"><img src="posts\Settlement_Survival\Palo_Verde_settings.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/Settlement_Survival/Settlement_Survival.html" class="no-external"></a></p>
-</div>
+<div class="quarto-post image-right" data-index="25" data-listing-date-sort="1708837200000" data-listing-file-modified-sort="1710441915753" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2305">
+<div class="thumbnail"><a href="./posts/Settlement_Survival/Settlement_Survival.html" class="no-external">
+
+<p class="card-img-top"><img data-src="posts\Settlement_Survival\Palo_Verde_settings.png"  class="thumbnail-image card-img"/></p>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/Settlement_Survival/Settlement_Survival.html" class="no-external">Settlement Survival</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/Settlement_Survival/Settlement_Survival.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/Settlement_Survival/Settlement_Survival.html" class="no-external">One of my silly side-projects is to organize the dependency chart in the Settlement Survival video game into a <code>mermaid</code> diagram (or a similar flow chart).</a>
-</div>
+<div class="delink listing-description"><a href="./posts/Settlement_Survival/Settlement_Survival.html" class="no-external">
+One of my silly side-projects is to organize the dependency chart in the Settlement Survival video game into a <code>mermaid</code> diagram (or a similar flow chart).
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/Settlement_Survival/Settlement_Survival.html" class="no-external">
@@ -906,22 +860,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="25" data-listing-date-sort="1708491600000" data-listing-file-modified-sort="1708483001890" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="175">
-<div class="thumbnail">
-<p><a href="./posts/highcharter/highcharter.html" class="no-external"></a></p><a href="./posts/highcharter/highcharter.html" class="no-external">
+<div class="quarto-post image-right" data-index="26" data-listing-date-sort="1708491600000" data-listing-file-modified-sort="1708483001890" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="175">
+<div class="thumbnail"><a href="./posts/highcharter/highcharter.html" class="no-external">
+
 <p class="card-img-top"><img data-src="posts\highcharter\highcharter_files\figure-html\unnamed-chunk-2-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/highcharter/highcharter.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/highcharter/highcharter.html" class="no-external">Highcharter</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/highcharter/highcharter.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/highcharter/highcharter.html" class="no-external">Recently, a colleague told us about the <code>highcharter</code> data visualization package. It seems to have wrappers for Javascript functionality, so we could aim for pop-up…<code></code><code></code><code></code><code></code></a>
-</div>
+<div class="delink listing-description"><a href="./posts/highcharter/highcharter.html" class="no-external">
+Recently, a colleague told us about the <code>highcharter</code> data visualization package. It seems to have wrappers for Javascript functionality, so we could aim for pop-up…<code></code><code></code><code></code><code></code>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/highcharter/highcharter.html" class="no-external">
@@ -934,22 +885,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="26" data-listing-date-sort="1706331600000" data-listing-file-modified-sort="1706404734067" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="224">
-<div class="thumbnail">
-<p><a href="./posts/Ghibli_palettes/Ghibli_palettes.html" class="no-external"></a></p><a href="./posts/Ghibli_palettes/Ghibli_palettes.html" class="no-external">
+<div class="quarto-post image-right" data-index="27" data-listing-date-sort="1706331600000" data-listing-file-modified-sort="1706404734067" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="224">
+<div class="thumbnail"><a href="./posts/Ghibli_palettes/Ghibli_palettes.html" class="no-external">
+
 <p class="card-img-top"><img data-src="posts\Ghibli_palettes\Ghibli_palettes_files\figure-html\unnamed-chunk-3-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/Ghibli_palettes/Ghibli_palettes.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/Ghibli_palettes/Ghibli_palettes.html" class="no-external">Ghibli Palettes</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/Ghibli_palettes/Ghibli_palettes.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/Ghibli_palettes/Ghibli_palettes.html" class="no-external">Today, inspired by this article, I want to try out the <code>ghibli</code> package of color palettes inspired by some of the famous Studio Ghibli animated movies.</a>
-</div>
+<div class="delink listing-description"><a href="./posts/Ghibli_palettes/Ghibli_palettes.html" class="no-external">
+Today, inspired by this article, I want to try out the <code>ghibli</code> package of color palettes inspired by some of the famous Studio Ghibli animated movies.
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/Ghibli_palettes/Ghibli_palettes.html" class="no-external">
@@ -962,22 +910,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="27" data-listing-date-sort="1699938000000" data-listing-file-modified-sort="1699927453017" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1516">
-<div class="thumbnail">
-<p><a href="./posts/AI_rubrics/ai_rubrics.html" class="no-external"></a></p><a href="./posts/AI_rubrics/ai_rubrics.html" class="no-external">
+<div class="quarto-post image-right" data-index="28" data-listing-date-sort="1699938000000" data-listing-file-modified-sort="1699927453017" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1516">
+<div class="thumbnail"><a href="./posts/AI_rubrics/ai_rubrics.html" class="no-external">
+
 <p class="card-img-top"><img data-src="posts\AI_rubrics\rubric_draft_1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/AI_rubrics/ai_rubrics.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/AI_rubrics/ai_rubrics.html" class="no-external">AI Tools: Rubrics</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/AI_rubrics/ai_rubrics.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/AI_rubrics/ai_rubrics.html" class="no-external">Today we will talk about grading rubrics in a couple of ways</a>
-</div>
+<div class="delink listing-description"><a href="./posts/AI_rubrics/ai_rubrics.html" class="no-external">
+Today we will talk about grading rubrics in a couple of ways
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/AI_rubrics/ai_rubrics.html" class="no-external">
@@ -990,22 +935,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="28" data-listing-date-sort="1699765200000" data-listing-file-modified-sort="1699825074253" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="16" data-listing-word-count-sort="3035">
-<div class="thumbnail">
-<p><a href="./posts/2023_map_challenge/2023_map_challenge.html" class="no-external"></a></p><a href="./posts/2023_map_challenge/2023_map_challenge.html" class="no-external">
+<div class="quarto-post image-right" data-index="29" data-listing-date-sort="1699765200000" data-listing-file-modified-sort="1699825074253" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="16" data-listing-word-count-sort="3035">
+<div class="thumbnail"><a href="./posts/2023_map_challenge/2023_map_challenge.html" class="no-external">
+
 <p class="card-img-top"><img data-src="posts\2023_map_challenge\30dmc-2023.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/2023_map_challenge/2023_map_challenge.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2023_map_challenge/2023_map_challenge.html" class="no-external">30 Day Map Challenge</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2023_map_challenge/2023_map_challenge.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/2023_map_challenge/2023_map_challenge.html" class="no-external">Even though I have done the 30 Day Map Challenge each of the past two years, since data visualization is just a hobby for me, I feel like I start from scratch each time.…</a>
-</div>
+<div class="delink listing-description"><a href="./posts/2023_map_challenge/2023_map_challenge.html" class="no-external">
+Even though I have done the 30 Day Map Challenge each of the past two years, since data visualization is just a hobby for me, I feel like I start from scratch each time.…
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2023_map_challenge/2023_map_challenge.html" class="no-external">
@@ -1018,21 +960,18 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="29" data-listing-date-sort="1694923200000" data-listing-file-modified-sort="1695007048793" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="77">
-<div class="thumbnail">
-<p><a href="./posts/baseball_gt/baseball_gt.html" class="no-external"></a></p><a href="./posts/baseball_gt/baseball_gt.html" class="no-external">
+<div class="quarto-post image-right" data-index="30" data-listing-date-sort="1694923200000" data-listing-file-modified-sort="1695007048793" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="77">
+<div class="thumbnail"><a href="./posts/baseball_gt/baseball_gt.html" class="no-external">
+
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/baseball_gt/baseball_gt.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/baseball_gt/baseball_gt.html" class="no-external">Some Quick Baseball Stats</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/baseball_gt/baseball_gt.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/baseball_gt/baseball_gt.html" class="no-external">
+<div class="delink listing-description"><a href="./posts/baseball_gt/baseball_gt.html" class="no-external">
+
 
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu">library</span>(<span class="st">"gt"</span>)</span>
@@ -1044,8 +983,8 @@ Derek Sollberger
 <span id="cb2-2">  <span class="fu">filter</span>(yearID <span class="sc">&gt;=</span> <span class="dv">2004</span>) <span class="co">#focusing on the past 18 season</span></span></code></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">readr<span class="sc">::</span><span class="fu">write_csv</span>(df, <span class="st">"baseball_2004_2022.c…</span></span></code></pre></div></div><div class="cell"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu"></span></span></code></pre></div><div class="cell-output cell-output-stdout"><pre><code></code></pre></div></div><div class="cell"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="sc"></span></span><span id="cb6-2"><span class="fu"></span><span class="sc"></span><span class="co"></span></span><span id="cb6-3"><span class="fu"></span><span class="at"></span><span class="dv"></span><span class="sc"></span><span class="co"></span></span><span id="cb6-4"><span class="fu"></span><span class="co"></span></span></code></pre></div><div class="cell-output-display"><div id="awqpdbitwl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><style></style><table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><thead><tr class="header gt_col_headings"><th id="yearID" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col"></th><th id="franchID" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"></th><th id="HR" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col"></th></tr></thead><tbody class="gt_table_body"><tr class="odd"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="HR"></td></tr><tr class="even"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="HR"></td></tr><tr class="odd"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="HR"></td></tr><tr class="even"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="HR"></td></tr><tr class="odd"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="HR"></td></tr><tr class="even"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="HR"></td></tr><tr class="odd"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="HR"></td></tr><tr class="even"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="HR"></td></tr><tr class="odd"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="HR"></td></tr><tr class="even"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="HR"></td></tr></tbody></table></div></div></div><div class="cell"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="sc"></span></span><span id="cb7-2"><span class="fu"></span><span class="sc"></span><span class="co"></span></span><span id="cb7-3"><span class="fu"></span><span class="at"></span><span class="dv"></span><span class="sc"></span><span class="co"></span></span><span id="cb7-4"><span class="fu"></span><span class="co"></span></span></code></pre></div><div class="cell-output-display"><div id="vxhdnxqjhs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><style></style><table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><thead><tr class="header gt_col_headings"><th id="yearID" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col"></th><th id="franchID" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"></th><th id="ERA" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col"></th></tr></thead><tbody class="gt_table_body"><tr class="odd"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="ERA"></td></tr><tr class="even"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="ERA"></td></tr><tr class="odd"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="ERA"></td></tr><tr class="even"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="ERA"></td></tr><tr class="odd"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="ERA"></td></tr><tr class="even"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="ERA"></td></tr><tr class="odd"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="ERA"></td></tr><tr class="even"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="ERA"></td></tr><tr class="odd"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="ERA"></td></tr><tr class="even"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="ERA"></td></tr></tbody></table></div></div></div></a>
-</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">readr<span class="sc">::</span><span class="fu">write_csv</span>(df, <span class="st">"baseball_2004_2022.c…</span></span></code></pre></div></div><div class="cell"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu"></span></span></code></pre></div><div class="cell-output cell-output-stdout"><pre><code></code></pre></div></div><div class="cell"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="sc"></span></span><span id="cb6-2"><span class="fu"></span><span class="sc"></span><span class="co"></span></span><span id="cb6-3"><span class="fu"></span><span class="at"></span><span class="dv"></span><span class="sc"></span><span class="co"></span></span><span id="cb6-4"><span class="fu"></span><span class="co"></span></span></code></pre></div><div class="cell-output-display"><div id="awqpdbitwl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><style></style><table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><thead><tr class="header gt_col_headings"><th id="yearID" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col"></th><th id="franchID" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"></th><th id="HR" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col"></th></tr></thead><tbody class="gt_table_body"><tr class="odd"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="HR"></td></tr><tr class="even"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="HR"></td></tr><tr class="odd"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="HR"></td></tr><tr class="even"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="HR"></td></tr><tr class="odd"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="HR"></td></tr><tr class="even"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="HR"></td></tr><tr class="odd"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="HR"></td></tr><tr class="even"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="HR"></td></tr><tr class="odd"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="HR"></td></tr><tr class="even"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="HR"></td></tr></tbody></table></div></div></div><div class="cell"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="sc"></span></span><span id="cb7-2"><span class="fu"></span><span class="sc"></span><span class="co"></span></span><span id="cb7-3"><span class="fu"></span><span class="at"></span><span class="dv"></span><span class="sc"></span><span class="co"></span></span><span id="cb7-4"><span class="fu"></span><span class="co"></span></span></code></pre></div><div class="cell-output-display"><div id="vxhdnxqjhs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><style></style><table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><thead><tr class="header gt_col_headings"><th id="yearID" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col"></th><th id="franchID" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"></th><th id="ERA" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col"></th></tr></thead><tbody class="gt_table_body"><tr class="odd"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="ERA"></td></tr><tr class="even"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="ERA"></td></tr><tr class="odd"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="ERA"></td></tr><tr class="even"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="ERA"></td></tr><tr class="odd"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="ERA"></td></tr><tr class="even"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="ERA"></td></tr><tr class="odd"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="ERA"></td></tr><tr class="even"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="ERA"></td></tr><tr class="odd"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="ERA"></td></tr><tr class="even"><td class="gt_row gt_right" headers="yearID"></td><td class="gt_row gt_center" headers="franchID"></td><td class="gt_row gt_right" headers="ERA"></td></tr></tbody></table></div></div></div>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/baseball_gt/baseball_gt.html" class="no-external">
@@ -1058,22 +997,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="30" data-listing-date-sort="1693886400000" data-listing-file-modified-sort="1693882148879" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="550">
-<div class="thumbnail">
-<p><a href="./posts/AI_working_group/ai_working_group.html" class="no-external"></a></p><a href="./posts/AI_working_group/ai_working_group.html" class="no-external">
+<div class="quarto-post image-right" data-index="31" data-listing-date-sort="1693886400000" data-listing-file-modified-sort="1693882148879" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="550">
+<div class="thumbnail"><a href="./posts/AI_working_group/ai_working_group.html" class="no-external">
+
 <p class="card-img-top"><img data-src="posts\AI_working_group\Calvin_and_Hobbes_slide_rule.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/AI_working_group/ai_working_group.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/AI_working_group/ai_working_group.html" class="no-external">AI Tools Fall Working Group</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/AI_working_group/ai_working_group.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/AI_working_group/ai_working_group.html" class="no-external">This group of biology instructors will explore the new artificial intelligence technologies and ponder the ramifications on pedagogical environments. We will foster ideas…</a>
-</div>
+<div class="delink listing-description"><a href="./posts/AI_working_group/ai_working_group.html" class="no-external">
+This group of biology instructors will explore the new artificial intelligence technologies and ponder the ramifications on pedagogical environments. We will foster ideas…
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/AI_working_group/ai_working_group.html" class="no-external">
@@ -1086,22 +1022,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="31" data-listing-date-sort="1692763200000" data-listing-file-modified-sort="1692761968772" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1610">
-<div class="thumbnail">
-<p><a href="./posts/lin_reg_demo/lin_reg_demo.html" class="no-external"></a></p><a href="./posts/lin_reg_demo/lin_reg_demo.html" class="no-external">
+<div class="quarto-post image-right" data-index="32" data-listing-date-sort="1692763200000" data-listing-file-modified-sort="1692761968772" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1610">
+<div class="thumbnail"><a href="./posts/lin_reg_demo/lin_reg_demo.html" class="no-external">
+
 <p class="card-img-top"><img data-src="posts\lin_reg_demo\traxolline.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/lin_reg_demo/lin_reg_demo.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/lin_reg_demo/lin_reg_demo.html" class="no-external">Linear Regression Demonstration</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/lin_reg_demo/lin_reg_demo.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/lin_reg_demo/lin_reg_demo.html" class="no-external">Predict how much moxillation takes place at 70 traxolline.</a>
-</div>
+<div class="delink listing-description"><a href="./posts/lin_reg_demo/lin_reg_demo.html" class="no-external">
+Predict how much moxillation takes place at 70 traxolline.
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/lin_reg_demo/lin_reg_demo.html" class="no-external">
@@ -1114,22 +1047,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="32" data-listing-date-sort="1690776000000" data-listing-file-modified-sort="1693711032133" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="214">
-<div class="thumbnail">
-<p><a href="./posts/AI_resources/ai_resources.html" class="no-external"></a></p><a href="./posts/AI_resources/ai_resources.html" class="no-external">
+<div class="quarto-post image-right" data-index="33" data-listing-date-sort="1690776000000" data-listing-file-modified-sort="1693711032133" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="214">
+<div class="thumbnail"><a href="./posts/AI_resources/ai_resources.html" class="no-external">
+
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/AI_resources/ai_resources.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/AI_resources/ai_resources.html" class="no-external">Resources about Artificial Intelligence Tools</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/AI_resources/ai_resources.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/AI_resources/ai_resources.html" class="no-external">(I wanted web space where I can organize various links I have encountered about artificial intelligence tools.</a>
-</div>
+<div class="delink listing-description"><a href="./posts/AI_resources/ai_resources.html" class="no-external">
+(I wanted web space where I can organize various links I have encountered about artificial intelligence tools.
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/AI_resources/ai_resources.html" class="no-external">
@@ -1142,22 +1072,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="33" data-listing-date-sort="1689220800000" data-listing-file-modified-sort="1691784023991" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="125">
-<div class="thumbnail">
-<p><a href="./posts/nbgitpuller/nbgitpuller.html" class="no-external"></a></p><a href="./posts/nbgitpuller/nbgitpuller.html" class="no-external">
+<div class="quarto-post image-right" data-index="34" data-listing-date-sort="1689220800000" data-listing-file-modified-sort="1691784023991" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="125">
+<div class="thumbnail"><a href="./posts/nbgitpuller/nbgitpuller.html" class="no-external">
+
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/nbgitpuller/nbgitpuller.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/nbgitpuller/nbgitpuller.html" class="no-external">Using nbgitpuller</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/nbgitpuller/nbgitpuller.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/nbgitpuller/nbgitpuller.html" class="no-external">Each admin user (“instructor”) can verify the presence of <code>nbgitpuller</code> on their hub presence</a>
-</div>
+<div class="delink listing-description"><a href="./posts/nbgitpuller/nbgitpuller.html" class="no-external">
+Each admin user (“instructor”) can verify the presence of <code>nbgitpuller</code> on their hub presence
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/nbgitpuller/nbgitpuller.html" class="no-external">
@@ -1170,22 +1097,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="34" data-listing-date-sort="1689134400000" data-listing-file-modified-sort="1691784023991" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1900">
-<div class="thumbnail">
-<p><a href="./posts/exploreUDL/workshop_script.html" class="no-external"></a></p><a href="./posts/exploreUDL/workshop_script.html" class="no-external">
+<div class="quarto-post image-right" data-index="35" data-listing-date-sort="1689134400000" data-listing-file-modified-sort="1691784023991" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1900">
+<div class="thumbnail"><a href="./posts/exploreUDL/workshop_script.html" class="no-external">
+
 <p class="card-img-top"><img data-src="posts\exploreUDL\workshop_script_files\figure-html\unnamed-chunk-1-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/exploreUDL/workshop_script.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/exploreUDL/workshop_script.html" class="no-external">Hands-On Exploration of UDL Modalities</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/exploreUDL/workshop_script.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/exploreUDL/workshop_script.html" class="no-external">If you are planning on attending this workshop and participate live, I advise you to read only the pre-reading in advance.</a>
-</div>
+<div class="delink listing-description"><a href="./posts/exploreUDL/workshop_script.html" class="no-external">
+If you are planning on attending this workshop and participate live, I advise you to read only the pre-reading in advance.
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/exploreUDL/workshop_script.html" class="no-external">
@@ -1198,22 +1122,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="35" data-listing-date-sort="1688184000000" data-listing-file-modified-sort="1688207580829" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="116">
-<div class="thumbnail">
-<p><a href="./posts/fonts/fonts.html" class="no-external"></a></p><a href="./posts/fonts/fonts.html" class="no-external">
+<div class="quarto-post image-right" data-index="36" data-listing-date-sort="1688184000000" data-listing-file-modified-sort="1688207580829" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="116">
+<div class="thumbnail"><a href="./posts/fonts/fonts.html" class="no-external">
+
 <p class="card-img-top"><img data-src="posts\fonts\youre_gonna_carry_that_weight.jpg"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/fonts/fonts.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/fonts/fonts.html" class="no-external">Fonts</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/fonts/fonts.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/fonts/fonts.html" class="no-external">Even though I am not planning on making lecture slides in the upcoming semester, I have been meaning to learn how to find and use fonts in my visuals.</a>
-</div>
+<div class="delink listing-description"><a href="./posts/fonts/fonts.html" class="no-external">
+Even though I am not planning on making lecture slides in the upcoming semester, I have been meaning to learn how to find and use fonts in my visuals.
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/fonts/fonts.html" class="no-external">
@@ -1226,22 +1147,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="36" data-listing-date-sort="1685764800000" data-listing-file-modified-sort="1685922623898" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="33">
-<div class="thumbnail">
-<p><a href="./posts/quarto/quarto_resources.html" class="no-external"></a></p><a href="./posts/quarto/quarto_resources.html" class="no-external">
+<div class="quarto-post image-right" data-index="37" data-listing-date-sort="1685764800000" data-listing-file-modified-sort="1685922623898" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="33">
+<div class="thumbnail"><a href="./posts/quarto/quarto_resources.html" class="no-external">
+
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/quarto/quarto_resources.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/quarto/quarto_resources.html" class="no-external">Quarto Resources</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/quarto/quarto_resources.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/quarto/quarto_resources.html" class="no-external">making myself a space to save/archive resources for learning/using <code>Quarto</code></a>
-</div>
+<div class="delink listing-description"><a href="./posts/quarto/quarto_resources.html" class="no-external">
+making myself a space to save/archive resources for learning/using <code>Quarto</code>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/quarto/quarto_resources.html" class="no-external">
@@ -1254,22 +1172,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="37" data-listing-date-sort="1685592000000" data-listing-file-modified-sort="1685813268926" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1635">
-<div class="thumbnail">
-<p><a href="./posts/inequalities/inequalities.html" class="no-external"></a></p><a href="./posts/inequalities/inequalities.html" class="no-external">
+<div class="quarto-post image-right" data-index="38" data-listing-date-sort="1685592000000" data-listing-file-modified-sort="1685813268926" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1635">
+<div class="thumbnail"><a href="./posts/inequalities/inequalities.html" class="no-external">
+
 <p class="card-img-top"><img data-src="posts\inequalities\inequalities_files\figure-html\unnamed-chunk-4-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/inequalities/inequalities.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/inequalities/inequalities.html" class="no-external">Inequalities</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/inequalities/inequalities.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/inequalities/inequalities.html" class="no-external">There are probably several ways to graph mathematical inequalities in <code>R</code>. Here, I will simply try a brute force method of literally plotting many dots.</a>
-</div>
+<div class="delink listing-description"><a href="./posts/inequalities/inequalities.html" class="no-external">
+There are probably several ways to graph mathematical inequalities in <code>R</code>. Here, I will simply try a brute force method of literally plotting many dots.
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/inequalities/inequalities.html" class="no-external">
@@ -1282,22 +1197,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="38" data-listing-date-sort="1684123200000" data-listing-file-modified-sort="1684189662748" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="127">
-<div class="thumbnail">
-<p><a href="./posts/TidyModels_trees/Tidymodels_Trees.html" class="no-external"></a></p><a href="./posts/TidyModels_trees/Tidymodels_Trees.html" class="no-external">
+<div class="quarto-post image-right" data-index="39" data-listing-date-sort="1684123200000" data-listing-file-modified-sort="1684189662748" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="127">
+<div class="thumbnail"><a href="./posts/TidyModels_trees/Tidymodels_Trees.html" class="no-external">
+
 <p class="card-img-top"><img data-src="posts\TidyModels_trees\Tidymodels_Trees_files\figure-html\unnamed-chunk-6-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/TidyModels_trees/Tidymodels_Trees.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/TidyModels_trees/Tidymodels_Trees.html" class="no-external">TidyModels Trees</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/TidyModels_trees/Tidymodels_Trees.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/TidyModels_trees/Tidymodels_Trees.html" class="no-external">Years ago, I would use the <code>caret</code> package to perform a random forest search and plot an example of a decision tree. Can we do that now in the <code>TidyModels</code> module?</a>
-</div>
+<div class="delink listing-description"><a href="./posts/TidyModels_trees/Tidymodels_Trees.html" class="no-external">
+Years ago, I would use the <code>caret</code> package to perform a random forest search and plot an example of a decision tree. Can we do that now in the <code>TidyModels</code> module?
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/TidyModels_trees/Tidymodels_Trees.html" class="no-external">
@@ -1310,22 +1222,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="39" data-listing-date-sort="1683518400000" data-listing-file-modified-sort="1683575338619" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="152">
-<div class="thumbnail">
-<p><a href="./posts/graphviz/graphviz.html" class="no-external"></a></p><a href="./posts/graphviz/graphviz.html" class="no-external">
+<div class="quarto-post image-right" data-index="40" data-listing-date-sort="1683518400000" data-listing-file-modified-sort="1683575338619" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="152">
+<div class="thumbnail"><a href="./posts/graphviz/graphviz.html" class="no-external">
+
 <p class="card-img-top"><img data-src="posts\graphviz\complete_breakfast.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/graphviz/graphviz.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/graphviz/graphviz.html" class="no-external">graphviz</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/graphviz/graphviz.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/graphviz/graphviz.html" class="no-external">For years, I have been searching for the ability to make color-coded flowcharts, and I have found “graphviz online!”. We can use apps such as this one.</a>
-</div>
+<div class="delink listing-description"><a href="./posts/graphviz/graphviz.html" class="no-external">
+For years, I have been searching for the ability to make color-coded flowcharts, and I have found “graphviz online!”. We can use apps such as this one.
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/graphviz/graphviz.html" class="no-external">
@@ -1338,22 +1247,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="40" data-listing-date-sort="1682654400000" data-listing-file-modified-sort="1682655682414" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1447">
-<div class="thumbnail">
-<p><a href="./posts/sex_bio_context/sex_in_a_biological_context.html" class="no-external"></a></p><a href="./posts/sex_bio_context/sex_in_a_biological_context.html" class="no-external">
+<div class="quarto-post image-right" data-index="41" data-listing-date-sort="1682654400000" data-listing-file-modified-sort="1682655682414" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1447">
+<div class="thumbnail"><a href="./posts/sex_bio_context/sex_in_a_biological_context.html" class="no-external">
+
 <p class="card-img-top"><img data-src="posts\sex_bio_context\Joan_Roughgarden.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/sex_bio_context/sex_in_a_biological_context.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/sex_bio_context/sex_in_a_biological_context.html" class="no-external">Sex in a Biological Context</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/sex_bio_context/sex_in_a_biological_context.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/sex_bio_context/sex_in_a_biological_context.html" class="no-external">Goal</a>
-</div>
+<div class="delink listing-description"><a href="./posts/sex_bio_context/sex_in_a_biological_context.html" class="no-external">
+Goal
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/sex_bio_context/sex_in_a_biological_context.html" class="no-external">
@@ -1366,22 +1272,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="41" data-listing-date-sort="1680494400000" data-listing-file-modified-sort="1680493341891" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="23" data-listing-word-count-sort="4552">
-<div class="thumbnail">
-<p><a href="./posts/xDBER/Sollberger_X_DBER_slides.html" class="no-external"></a></p><a href="./posts/xDBER/Sollberger_X_DBER_slides.html" class="no-external">
+<div class="quarto-post image-right" data-index="42" data-listing-date-sort="1680494400000" data-listing-file-modified-sort="1680493341891" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="23" data-listing-word-count-sort="4552">
+<div class="thumbnail"><a href="./posts/xDBER/Sollberger_X_DBER_slides.html" class="no-external">
+
 <p class="card-img-top"><img data-src="posts\xDBER\intro_image.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/xDBER/Sollberger_X_DBER_slides.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/xDBER/Sollberger_X_DBER_slides.html" class="no-external">Math Biology Video Project</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/xDBER/Sollberger_X_DBER_slides.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/xDBER/Sollberger_X_DBER_slides.html" class="no-external">Derek Sollberger</a>
-</div>
+<div class="delink listing-description"><a href="./posts/xDBER/Sollberger_X_DBER_slides.html" class="no-external">
+Derek Sollberger
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/xDBER/Sollberger_X_DBER_slides.html" class="no-external">
@@ -1394,22 +1297,19 @@ Derek Sollberger, Emily Weigel
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="42" data-listing-date-sort="1678338000000" data-listing-file-modified-sort="1684188783455" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="9">
-<div class="thumbnail">
-<p><a href="./posts/Dartmouth_Atlas_data/Dartmouth_Atlas_data.html" class="no-external"></a></p><a href="./posts/Dartmouth_Atlas_data/Dartmouth_Atlas_data.html" class="no-external">
+<div class="quarto-post image-right" data-index="43" data-listing-date-sort="1678338000000" data-listing-file-modified-sort="1684188783455" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="9">
+<div class="thumbnail"><a href="./posts/Dartmouth_Atlas_data/Dartmouth_Atlas_data.html" class="no-external">
+
 <p class="card-img-top"><img data-src="posts\Dartmouth_Atlas_data\Dartmouth_Atlas_data_files\figure-html\unnamed-chunk-2-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/Dartmouth_Atlas_data/Dartmouth_Atlas_data.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/Dartmouth_Atlas_data/Dartmouth_Atlas_data.html" class="no-external">hospital_data</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/Dartmouth_Atlas_data/Dartmouth_Atlas_data.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/Dartmouth_Atlas_data/Dartmouth_Atlas_data.html" class="no-external">https://data.dartmouthatlas.org/</a>
-</div>
+<div class="delink listing-description"><a href="./posts/Dartmouth_Atlas_data/Dartmouth_Atlas_data.html" class="no-external">
+https://data.dartmouthatlas.org/
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/Dartmouth_Atlas_data/Dartmouth_Atlas_data.html" class="no-external">
@@ -1422,22 +1322,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="43" data-listing-date-sort="1678078800000" data-listing-file-modified-sort="1678082065306" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="983">
-<div class="thumbnail">
-<p><a href="./posts/JupyterHub_showcase/JupyterHub_showcase.html" class="no-external"></a></p><a href="./posts/JupyterHub_showcase/JupyterHub_showcase.html" class="no-external">
+<div class="quarto-post image-right" data-index="44" data-listing-date-sort="1678078800000" data-listing-file-modified-sort="1678082065306" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="983">
+<div class="thumbnail"><a href="./posts/JupyterHub_showcase/JupyterHub_showcase.html" class="no-external">
+
 <p class="card-img-top"><img data-src="posts\JupyterHub_showcase\upon_login.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/JupyterHub_showcase/JupyterHub_showcase.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/JupyterHub_showcase/JupyterHub_showcase.html" class="no-external">JupyterHub Showcase</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/JupyterHub_showcase/JupyterHub_showcase.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/JupyterHub_showcase/JupyterHub_showcase.html" class="no-external">The following is a quick presentation for my share of the <code>JupyterHub</code> pilot showcase at UC Merced. We met with the <code>2i2c</code> hosting service along with campus partners to explore…</a>
-</div>
+<div class="delink listing-description"><a href="./posts/JupyterHub_showcase/JupyterHub_showcase.html" class="no-external">
+The following is a quick presentation for my share of the <code>JupyterHub</code> pilot showcase at UC Merced. We met with the <code>2i2c</code> hosting service along with campus partners to explore…
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/JupyterHub_showcase/JupyterHub_showcase.html" class="no-external">
@@ -1450,22 +1347,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="44" data-listing-date-sort="1674622800000" data-listing-file-modified-sort="1688207832198" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="386">
-<div class="thumbnail">
-<p><a href="./posts/California_weather/California_weather.html" class="no-external"></a></p><a href="./posts/California_weather/California_weather.html" class="no-external">
+<div class="quarto-post image-right" data-index="45" data-listing-date-sort="1674622800000" data-listing-file-modified-sort="1688207832198" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="386">
+<div class="thumbnail"><a href="./posts/California_weather/California_weather.html" class="no-external">
+
 <p class="card-img-top"><img data-src="posts\California_weather\California_weather_files\figure-html\unnamed-chunk-7-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/California_weather/California_weather.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/California_weather/California_weather.html" class="no-external">California Weather</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/California_weather/California_weather.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/California_weather/California_weather.html" class="no-external">I want to create and visualize a simple data set for my Data Science courses (that I teach in California).</a>
-</div>
+<div class="delink listing-description"><a href="./posts/California_weather/California_weather.html" class="no-external">
+I want to create and visualize a simple data set for my Data Science courses (that I teach in California).
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/California_weather/California_weather.html" class="no-external">
@@ -1478,22 +1372,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="45" data-listing-date-sort="1673758800000" data-listing-file-modified-sort="1673838867183" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="163">
-<div class="thumbnail">
-<p><a href="./posts/curly_operator/curly_operator.html" class="no-external"></a></p><a href="./posts/curly_operator/curly_operator.html" class="no-external">
+<div class="quarto-post image-right" data-index="46" data-listing-date-sort="1673758800000" data-listing-file-modified-sort="1673838867183" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="163">
+<div class="thumbnail"><a href="./posts/curly_operator/curly_operator.html" class="no-external">
+
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/curly_operator/curly_operator.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/curly_operator/curly_operator.html" class="no-external">curly operator</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/curly_operator/curly_operator.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/curly_operator/curly_operator.html" class="no-external">The “curly operator” was added in <code>rlang</code> a few years ago, and I have yet to really use it much. It came in handy during a data analyst consulting gig I had during the summer…</a>
-</div>
+<div class="delink listing-description"><a href="./posts/curly_operator/curly_operator.html" class="no-external">
+The “curly operator” was added in <code>rlang</code> a few years ago, and I have yet to really use it much. It came in handy during a data analyst consulting gig I had during the summer…
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/curly_operator/curly_operator.html" class="no-external">
@@ -1506,22 +1397,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="46" data-listing-date-sort="1673586000000" data-listing-file-modified-sort="1673673484628" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="282">
-<div class="thumbnail">
-<p><a href="./posts/greenhouse/greenhouse.html" class="no-external"></a></p><a href="./posts/greenhouse/greenhouse.html" class="no-external">
+<div class="quarto-post image-right" data-index="47" data-listing-date-sort="1673586000000" data-listing-file-modified-sort="1673673484628" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="282">
+<div class="thumbnail"><a href="./posts/greenhouse/greenhouse.html" class="no-external">
+
 <p class="card-img-top"><img data-src="posts\greenhouse\greenhouse_files\figure-html\unnamed-chunk-4-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/greenhouse/greenhouse.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/greenhouse/greenhouse.html" class="no-external">Stardew Valley Crops</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/greenhouse/greenhouse.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/greenhouse/greenhouse.html" class="no-external">Here is some quick code to help me plan a crop layout in Stardew Valley.</a>
-</div>
+<div class="delink listing-description"><a href="./posts/greenhouse/greenhouse.html" class="no-external">
+Here is some quick code to help me plan a crop layout in Stardew Valley.
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/greenhouse/greenhouse.html" class="no-external">
@@ -1534,22 +1422,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="47" data-listing-date-sort="1673413200000" data-listing-file-modified-sort="1673472922429" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="300">
-<div class="thumbnail">
-<p><a href="./posts/Canvas_Roster/Canvas_Roster.html" class="no-external"></a></p><a href="./posts/Canvas_Roster/Canvas_Roster.html" class="no-external">
+<div class="quarto-post image-right" data-index="48" data-listing-date-sort="1673413200000" data-listing-file-modified-sort="1673472922429" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="300">
+<div class="thumbnail"><a href="./posts/Canvas_Roster/Canvas_Roster.html" class="no-external">
+
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/Canvas_Roster/Canvas_Roster.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/Canvas_Roster/Canvas_Roster.html" class="no-external">Canvas_Roster</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/Canvas_Roster/Canvas_Roster.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/Canvas_Roster/Canvas_Roster.html" class="no-external">With the goal of learning my students’ names faster, I wrote an R script that will convert a roster (“People” in a Canvas course) to a <code>gt</code> table for later offline use.</a>
-</div>
+<div class="delink listing-description"><a href="./posts/Canvas_Roster/Canvas_Roster.html" class="no-external">
+With the goal of learning my students’ names faster, I wrote an R script that will convert a roster (“People” in a Canvas course) to a <code>gt</code> table for later offline use.
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/Canvas_Roster/Canvas_Roster.html" class="no-external">
@@ -1562,22 +1447,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="48" data-listing-date-sort="1671685200000" data-listing-file-modified-sort="1671855472285" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="343">
-<div class="thumbnail">
-<p><a href="./posts/Christmas_plots/Christmas_plots.html" class="no-external"></a></p><a href="./posts/Christmas_plots/Christmas_plots.html" class="no-external">
+<div class="quarto-post image-right" data-index="49" data-listing-date-sort="1671685200000" data-listing-file-modified-sort="1671855472285" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="343">
+<div class="thumbnail"><a href="./posts/Christmas_plots/Christmas_plots.html" class="no-external">
+
 <p class="card-img-top"><img data-src="posts\Christmas_plots\Christmas_plots_files\figure-html\unnamed-chunk-2-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/Christmas_plots/Christmas_plots.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/Christmas_plots/Christmas_plots.html" class="no-external">Seasons Greetings by Riinu Pius</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/Christmas_plots/Christmas_plots.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/Christmas_plots/Christmas_plots.html" class="no-external">a place to collect nerdy holiday plots</a>
-</div>
+<div class="delink listing-description"><a href="./posts/Christmas_plots/Christmas_plots.html" class="no-external">
+a place to collect nerdy holiday plots
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/Christmas_plots/Christmas_plots.html" class="no-external">
@@ -1590,22 +1472,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="49" data-listing-date-sort="1664424000000" data-listing-file-modified-sort="1664523162114" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2129">
-<div class="thumbnail">
-<p><a href="./posts/wonderwall/wonderwall.html" class="no-external"></a></p><a href="./posts/wonderwall/wonderwall.html" class="no-external">
+<div class="quarto-post image-right" data-index="50" data-listing-date-sort="1664424000000" data-listing-file-modified-sort="1664523162114" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2129">
+<div class="thumbnail"><a href="./posts/wonderwall/wonderwall.html" class="no-external">
+
 <p class="card-img-top"><img data-src="posts\wonderwall\wonderwall_files\figure-html\unnamed-chunk-2-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/wonderwall/wonderwall.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/wonderwall/wonderwall.html" class="no-external">Anyway Heres Wonderwall</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/wonderwall/wonderwall.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/wonderwall/wonderwall.html" class="no-external">A few days ago, data scientist Tanya Shapiro posted a neat image of guitar chords—that is, the diagrams were made using <code>ggplot</code> (I presume). Today, I am going to try to…</a>
-</div>
+<div class="delink listing-description"><a href="./posts/wonderwall/wonderwall.html" class="no-external">
+A few days ago, data scientist Tanya Shapiro posted a neat image of guitar chords—that is, the diagrams were made using <code>ggplot</code> (I presume). Today, I am going to try to…
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/wonderwall/wonderwall.html" class="no-external">
@@ -1618,22 +1497,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="50" data-listing-date-sort="1664251200000" data-listing-file-modified-sort="1664523127599" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="577">
-<div class="thumbnail">
-<p><a href="./posts/patchwork/patchwork.html" class="no-external"></a></p><a href="./posts/patchwork/patchwork.html" class="no-external">
+<div class="quarto-post image-right" data-index="51" data-listing-date-sort="1664251200000" data-listing-file-modified-sort="1664523127599" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="577">
+<div class="thumbnail"><a href="./posts/patchwork/patchwork.html" class="no-external">
+
 <p class="card-img-top"><img data-src="posts\patchwork\patchwork_files\figure-html\unnamed-chunk-7-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/patchwork/patchwork.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/patchwork/patchwork.html" class="no-external">Patchwork</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/patchwork/patchwork.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/patchwork/patchwork.html" class="no-external">In today’s entry, I am simply trying to remember how <code>patchwork</code> handles titles of each graph and an overall graph.</a>
-</div>
+<div class="delink listing-description"><a href="./posts/patchwork/patchwork.html" class="no-external">
+In today’s entry, I am simply trying to remember how <code>patchwork</code> handles titles of each graph and an overall graph.
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/patchwork/patchwork.html" class="no-external">
@@ -1646,22 +1522,19 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="51" data-listing-date-sort="1662091200000" data-listing-file-modified-sort="1662166046032" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1054">
-<div class="thumbnail">
-<p><a href="./posts/cofficient_of_variation/coefficient_of_variation.html" class="no-external"></a></p><a href="./posts/cofficient_of_variation/coefficient_of_variation.html" class="no-external">
+<div class="quarto-post image-right" data-index="52" data-listing-date-sort="1662091200000" data-listing-file-modified-sort="1662166046032" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1054">
+<div class="thumbnail"><a href="./posts/cofficient_of_variation/coefficient_of_variation.html" class="no-external">
+
 <p class="card-img-top"><img data-src="posts\cofficient_of_variation\coefficient_of_variation_files\figure-html\unnamed-chunk-16-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/cofficient_of_variation/coefficient_of_variation.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/cofficient_of_variation/coefficient_of_variation.html" class="no-external">Coefficient of Variation</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/cofficient_of_variation/coefficient_of_variation.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/cofficient_of_variation/coefficient_of_variation.html" class="no-external">For a future lecture in my <em>Sports Analytics</em> course, I want an example of a baseball statistic where the averages for two players are similar, but their variances in that…</a>
-</div>
+<div class="delink listing-description"><a href="./posts/cofficient_of_variation/coefficient_of_variation.html" class="no-external">
+For a future lecture in my <em>Sports Analytics</em> course, I want an example of a baseball statistic where the averages for two players are similar, but their variances in that…
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/cofficient_of_variation/coefficient_of_variation.html" class="no-external">
@@ -1674,27 +1547,24 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="52" data-categories="YmFzZWJhbGw=" data-listing-date-sort="1661486400000" data-listing-file-modified-sort="1661583174914" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1426">
-<div class="thumbnail">
-<p><a href="./posts/intentional_walks/ibb.html" class="no-external"></a></p><a href="./posts/intentional_walks/ibb.html" class="no-external">
+<div class="quarto-post image-right" data-index="53" data-categories="YmFzZWJhbGw=" data-listing-date-sort="1661486400000" data-listing-file-modified-sort="1661583174914" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1426">
+<div class="thumbnail"><a href="./posts/intentional_walks/ibb.html" class="no-external">
+
 <p class="card-img-top"><img data-src="posts\intentional_walks\ibb_files\figure-html\unnamed-chunk-6-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/intentional_walks/ibb.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/intentional_walks/ibb.html" class="no-external">Intentional Walks</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/intentional_walks/ibb.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('YmFzZWJhbGw='); return false;">
-baseball
+
+<div class="listing-category" onclick="window.quartoListingCategory('YmFzZWJhbGw='); return false;">baseball</div>
+
 </div>
-</div>
-<div class="listing-description">
-<a href="./posts/intentional_walks/ibb.html" class="no-external">Today’s exploration and visualization practive was inspired by this tweet:</a>
-</div>
+<div class="delink listing-description"><a href="./posts/intentional_walks/ibb.html" class="no-external">
+Today’s exploration and visualization practive was inspired by this tweet:
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/intentional_walks/ibb.html" class="no-external">
@@ -1707,27 +1577,24 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="53" data-categories="Zm9udHM=" data-listing-date-sort="1660536000000" data-listing-file-modified-sort="1660631458178" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="302">
-<div class="thumbnail">
-<p><a href="./posts/oblicubes/oblicubes.html" class="no-external"></a></p><a href="./posts/oblicubes/oblicubes.html" class="no-external">
+<div class="quarto-post image-right" data-index="54" data-categories="Zm9udHM=" data-listing-date-sort="1660536000000" data-listing-file-modified-sort="1660631458178" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="302">
+<div class="thumbnail"><a href="./posts/oblicubes/oblicubes.html" class="no-external">
+
 <p class="card-img-top"><img data-src="posts\oblicubes\oblicubes_files\figure-html\unnamed-chunk-2-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/oblicubes/oblicubes.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/oblicubes/oblicubes.html" class="no-external">Oblicubes</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/oblicubes/oblicubes.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Zm9udHM='); return false;">
-fonts
+
+<div class="listing-category" onclick="window.quartoListingCategory('Zm9udHM='); return false;">fonts</div>
+
 </div>
-</div>
-<div class="listing-description">
-<a href="./posts/oblicubes/oblicubes.html" class="no-external">I always like to have something silly for the <code>course image</code> in the <code>Canvas</code> LMS for each of the classes that I teach. Today, I want to see if the <code>oblicubes</code> package by trevorld…</a>
-</div>
+<div class="delink listing-description"><a href="./posts/oblicubes/oblicubes.html" class="no-external">
+I always like to have something silly for the <code>course image</code> in the <code>Canvas</code> LMS for each of the classes that I teach. Today, I want to see if the <code>oblicubes</code> package by trevorld…
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/oblicubes/oblicubes.html" class="no-external">
@@ -1740,27 +1607,24 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="54" data-categories="dmlzdWFsaXphdGlvbg==" data-listing-date-sort="1660449600000" data-listing-file-modified-sort="1660541506833" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="303">
-<div class="thumbnail">
-<p><a href="./posts/typewriter/typewriter.html" class="no-external"></a></p><a href="./posts/typewriter/typewriter.html" class="no-external">
+<div class="quarto-post image-right" data-index="55" data-categories="dmlzdWFsaXphdGlvbg==" data-listing-date-sort="1660449600000" data-listing-file-modified-sort="1660541506833" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="303">
+<div class="thumbnail"><a href="./posts/typewriter/typewriter.html" class="no-external">
+
 <p class="card-img-top"><img data-src="posts\typewriter\schedule.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/typewriter/typewriter.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/typewriter/typewriter.html" class="no-external">Typewriter</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/typewriter/typewriter.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('dmlzdWFsaXphdGlvbg=='); return false;">
-visualization
+
+<div class="listing-category" onclick="window.quartoListingCategory('dmlzdWFsaXphdGlvbg=='); return false;">visualization</div>
+
 </div>
-</div>
-<div class="listing-description">
-<a href="./posts/typewriter/typewriter.html" class="no-external">Well, I was nerd sniped. Ryan Timpe tweeted an image that made it (at first glance) appear that the gtExtras package allowed users to display a <code>gt</code> table as if it was made by…</a>
-</div>
+<div class="delink listing-description"><a href="./posts/typewriter/typewriter.html" class="no-external">
+Well, I was nerd sniped. Ryan Timpe tweeted an image that made it (at first glance) appear that the gtExtras package allowed users to display a <code>gt</code> table as if it was made by…
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/typewriter/typewriter.html" class="no-external">
@@ -1773,27 +1637,24 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="55" data-categories="c3BvcnRz" data-listing-date-sort="1660276800000" data-listing-file-modified-sort="1660359381603" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="322">
-<div class="thumbnail">
-<p><a href="./posts/bump/bump.html" class="no-external"></a></p><a href="./posts/bump/bump.html" class="no-external">
+<div class="quarto-post image-right" data-index="56" data-categories="c3BvcnRz" data-listing-date-sort="1660276800000" data-listing-file-modified-sort="1660359381603" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="322">
+<div class="thumbnail"><a href="./posts/bump/bump.html" class="no-external">
+
 <p class="card-img-top"><img data-src="posts\bump\bump_files\figure-html\unnamed-chunk-6-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/bump/bump.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/bump/bump.html" class="no-external">Bump</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/bump/bump.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('c3BvcnRz'); return false;">
-sports
+
+<div class="listing-category" onclick="window.quartoListingCategory('c3BvcnRz'); return false;">sports</div>
+
 </div>
-</div>
-<div class="listing-description">
-<a href="./posts/bump/bump.html" class="no-external">Today I want to try to make a <code>bump</code> plot while practicing with sports data. The <code>Lahman</code> data set has a lot of historical data about Major League Baseball. Data scientists have…</a>
-</div>
+<div class="delink listing-description"><a href="./posts/bump/bump.html" class="no-external">
+Today I want to try to make a <code>bump</code> plot while practicing with sports data. The <code>Lahman</code> data set has a lot of historical data about Major League Baseball. Data scientists have…
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/bump/bump.html" class="no-external">
@@ -1806,27 +1667,24 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="56" data-categories="ZXhwbG9yYXRvcnklMjBkYXRhJTIwYW5hbHlzaXM=" data-listing-date-sort="1660276800000" data-listing-file-modified-sort="1660459519064" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="39">
-<div class="thumbnail">
-<p><a href="./posts/overviewR/overviewR.html" class="no-external"></a></p><a href="./posts/overviewR/overviewR.html" class="no-external">
+<div class="quarto-post image-right" data-index="57" data-categories="ZXhwbG9yYXRvcnklMjBkYXRhJTIwYW5hbHlzaXM=" data-listing-date-sort="1660276800000" data-listing-file-modified-sort="1660459519064" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="39">
+<div class="thumbnail"><a href="./posts/overviewR/overviewR.html" class="no-external">
+
 <p class="card-img-top"><img data-src="posts\overviewR\overviewR_files\figure-html\unnamed-chunk-2-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/overviewR/overviewR.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/overviewR/overviewR.html" class="no-external">overviewR</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/overviewR/overviewR.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('ZXhwbG9yYXRvcnklMjBkYXRhJTIwYW5hbHlzaXM='); return false;">
-exploratory data analysis
+
+<div class="listing-category" onclick="window.quartoListingCategory('ZXhwbG9yYXRvcnklMjBkYXRhJTIwYW5hbHlzaXM='); return false;">exploratory data analysis</div>
+
 </div>
-</div>
-<div class="listing-description">
-<a href="./posts/overviewR/overviewR.html" class="no-external">Today I wanted to try out the <code>overviewR</code> package.</a>
-</div>
+<div class="delink listing-description"><a href="./posts/overviewR/overviewR.html" class="no-external">
+Today I wanted to try out the <code>overviewR</code> package.
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/overviewR/overviewR.html" class="no-external">
@@ -1839,27 +1697,24 @@ Derek Sollberger
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="57" data-categories="cXVhcnRv" data-listing-date-sort="1660276800000" data-listing-file-modified-sort="1660459131317" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="99">
-<div class="thumbnail">
-<p><a href="./posts/welcome/index.html" class="no-external"></a></p><a href="./posts/welcome/index.html" class="no-external">
+<div class="quarto-post image-right" data-index="58" data-categories="cXVhcnRv" data-listing-date-sort="1660276800000" data-listing-file-modified-sort="1660459131317" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="99">
+<div class="thumbnail"><a href="./posts/welcome/index.html" class="no-external">
+
 <p class="card-img-top"><img data-src="posts\welcome\thumbnail.jpg"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/welcome/index.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/welcome/index.html" class="no-external">Welcome To My Blog</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/welcome/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cXVhcnRv'); return false;">
-quarto
+
+<div class="listing-category" onclick="window.quartoListingCategory('cXVhcnRv'); return false;">quarto</div>
+
 </div>
-</div>
-<div class="listing-description">
-<a href="./posts/welcome/index.html" class="no-external">This is the first post in a Quarto blog. Welcome!</a>
-</div>
+<div class="delink listing-description"><a href="./posts/welcome/index.html" class="no-external">
+This is the first post in a Quarto blog. Welcome!
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/welcome/index.html" class="no-external">
@@ -1873,244 +1728,249 @@ Derek Sollberger
 </div>
 </div>
 </div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
+<div class="listing-no-matching d-none">No matching items</div>
 <nav id="listing-pagination" class="listing-pagination" aria-label="Page Navigation">
   <ul class="pagination"></ul>
 </nav>
 </div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
         }
       }
       return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
     });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
     }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
-        return container.innerHTML
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -2118,185 +1978,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 </div> <!-- /content -->
 
 

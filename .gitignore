@@ -5,3 +5,4 @@
 
 /.quarto/
 /posts/hidden_data/
+**/*.quarto_ipynb

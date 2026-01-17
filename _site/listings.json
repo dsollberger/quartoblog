@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/grant_witness/grant_witness.html",
       "/posts/Google_trends/google_trends.html",
       "/posts/Frasier_data/frasier_data.html",
       "/posts/four_color/four_color.html",
