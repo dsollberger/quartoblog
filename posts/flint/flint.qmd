@@ -1,0 +1,169 @@
+ ---
+title: "Flint Water Crisis"
+author: "Derek Sollberger"
+date: "2026-01-24"
+format:
+  html:
+    toc: true
+---
+
+# Tidy Tuesday
+
+The TidyTuesday [data set](https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-11-04/readme.md) for November 4, 2025, was about the Flint water crisis. I want to summarize some of the findings for my data science course.
+
+```{r}
+#| message: false
+#| warning: false
+
+library("tidyverse")
+
+# load data (as shown)
+flint_mdeq <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-11-04/flint_mdeq.csv')
+flint_vt <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-11-04/flint_vt.csv')
+```
+
+# Summary statistics
+
+## All MDEQ Samples
+
+```{r}
+summary(flint_mdeq$lead)
+```
+
+## Outliers Removed
+
+```{r}
+summary(flint_mdeq$lead2)
+```
+
+## Independent Test
+
+```{r}
+summary(flint_vt$lead)
+```
+
+```{r}
+mu1_mdeq <- mean(flint_mdeq$lead, na.rm = TRUE)
+mu2_mdeq <- mean(flint_mdeq$lead2, na.rm = TRUE)
+mu_vt <- mean(flint_vt$lead, na.rm = TRUE)
+
+top10_1_mdeq <- quantile(flint_mdeq$lead, 0.90, na.rm = TRUE)
+top10_2_mdeq <- quantile(flint_mdeq$lead2, 0.90, na.rm = TRUE)
+top10_vt <- quantile(flint_vt$lead, 0.90, na.rm = TRUE)
+```
+
+
+# Histograms
+
+## All MDEQ Samples
+\
+```{r}
+flint_mdeq |>
+  ggplot() +
+  geom_histogram(aes(x = lead),
+                 binwidth = 5, color = "black", fill = "gray75") +
+  geom_vline(xintercept = mu1_mdeq, color = "blue", 
+             linetype = 2, linewidth = 2) +
+  geom_vline(xintercept = top10_1_mdeq, color = "red", 
+             linetype = 2, linewidth = 2) +
+  labs(title = "Flint Water Samples in 2015",
+       subtitle = "MDEQ measurements (average in blue, top 10 percentile in red)",
+       caption = "Source: Jen Richmond",
+       x = "lead (ppb)", y = "number of samples") +
+  theme_minimal()
+```
+
+## Outliers Removed
+
+```{r}
+flint_mdeq |>
+  ggplot() +
+  geom_histogram(aes(x = lead2),
+                 binwidth = 5, color = "black", fill = "gray75") +
+  geom_vline(xintercept = mu1_mdeq, color = "blue", 
+             linetype = 2, linewidth = 2) +
+  geom_vline(xintercept = top10_2_mdeq, color = "red", 
+             linetype = 2, linewidth = 2) +
+  labs(title = "Flint Water Samples in 2015",
+       subtitle = "MDEQ measurements, two samples missing (average in blue, top 10 percentile in red)",
+       caption = "Source: Jen Richmond",
+       x = "lead (ppb)", y = "number of samples") +
+  theme_minimal()
+```
+
+## Independent Test
+
+```{r}
+flint_vt |>
+  ggplot() +
+  geom_histogram(aes(x = lead),
+                 binwidth = 5, color = "black", fill = "gray75") +
+  geom_vline(xintercept = mu1_mdeq, color = "blue", 
+             linetype = 2, linewidth = 2) +
+  geom_vline(xintercept = top10_vt, color = "red", 
+             linetype = 2, linewidth = 2) +
+  labs(title = "Flint Water Samples in 2015",
+       subtitle = "VT measurements (average in blue, top 10 percentile in red)",
+       caption = "Source: Jen Richmond",
+       x = "lead (ppb)", y = "number of samples") +
+  theme_minimal()
+```
+
+# Diagnoses
+
+"the Lead and Copper Rule (LCR) of 1991 is 15 parts per billion (ppb). If this is exceeded in more than 10% of homes tested (or if the 90th percentile value of the total sample is above 15 ppb), action is required." --- [Significance, Vol 14, Issue 2](https://academic.oup.com/jrssig/article/14/2/16/7029247?login=false)
+
+## All MDEQ Samples
+
+```{r}
+ifelse(quantile(flint_mdeq$lead, 0.90, na.rm = TRUE) > 15,
+       "action required", "safe water")
+```
+
+## Outliers Removed
+
+```{r}
+ifelse(quantile(flint_mdeq$lead2, 0.90, na.rm = TRUE) > 15,
+       "action required", "safe water")
+```
+
+## Independent Test
+
+```{r}
+ifelse(quantile(flint_vt$lead, 0.90, na.rm = TRUE) > 15,
+       "action required", "safe water")
+```
+
+
+# Coda
+
+::: {.callout-note collapse="true"}
+## Session Info
+
+```{r}
+sessionInfo()
+```
+:::
+
+
+:::: {.columns}
+
+::: {.column width="45%"}
+	
+:::
+
+::: {.column width="10%"}
+	
+:::
+
+::: {.column width="45%"}
+
+:::
+
+::::
+
+::::: {.panel-tabset}
+
+
+
+:::::
