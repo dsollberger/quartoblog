@@ -1,0 +1,15 @@
+Here’s a tight 5-slide flow for your lightning talk—crisp, story-driven, and perfect for time:
+Slide 1: The Paper Problem
+Start with a messy desk: scanned forms, invoices, old manuscripts. “We’re drowning in documents. OCR helps—but it’s not enough.” 📄💥
+Slide 2: From Pixels to Text (PyTesseract)
+Show an image → text output. “Basic OCR reads characters. Great for clean scans. But it doesn’t understand layout, tables, or context.” 🖼️→🔤
+Slide 3: Smarter Parsing (PaddleOCR)
+Display a complex doc with tables, seals, multilingual text. “PaddleOCR sees structure—tables, forms, even handwriting. Now we get structured data.” 🧩📊
+Slide 4: The Agent Arrives (Agentic OCR)
+Flowchart: document → extract → validate → post to ERP/approve/route. “It doesn’t just read—it acts. Auto-files invoices, flags contracts, updates records.” 🤖⚡
+Slide 5: Why It Matters (Humanities Angle)
+Image of a manuscript → metadata, citations, searchable archive. “For us, it’s not just efficiency. It’s unlocking research—turning pages into knowledge, faster.” 📚✨
+Want me to draft speaker notes or tweak the flow? You’ve got this! 💪
+Copy
+Add reaction
+More options

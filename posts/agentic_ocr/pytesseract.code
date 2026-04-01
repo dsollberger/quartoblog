@@ -1,0 +1,686 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "gpuType": "T4"
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    },
+    "accelerator": "GPU"
+  },
+  "cells": [
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "f3v7_fjpdauq",
+        "outputId": "3c800f85-6a45-479c-d000-1890878a3792"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Collecting pytesseract\n",
+            "  Downloading pytesseract-0.3.13-py3-none-any.whl.metadata (11 kB)\n",
+            "Requirement already satisfied: pillow in /usr/local/lib/python3.12/dist-packages (11.3.0)\n",
+            "Requirement already satisfied: packaging>=21.3 in /usr/local/lib/python3.12/dist-packages (from pytesseract) (26.0)\n",
+            "Downloading pytesseract-0.3.13-py3-none-any.whl (14 kB)\n",
+            "Installing collected packages: pytesseract\n",
+            "Successfully installed pytesseract-0.3.13\n"
+          ]
+        }
+      ],
+      "source": [
+        "!pip install pytesseract pillow -q"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import ast\n",
+        "import cv2\n",
+        "import numpy as np\n",
+        "import pytesseract\n",
+        "from PIL import Image"
+      ],
+      "metadata": {
+        "id": "u7A3eVT6eE0g"
+      },
+      "execution_count": 94,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# PyTesseract"
+      ],
+      "metadata": {
+        "id": "pnqQcPHyme9o"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "recipe_1_file = \"recipe_1.png\"\n",
+        "recipe_1_image = Image.open(recipe_1_file)"
+      ],
+      "metadata": {
+        "id": "P6REAJqHeLe3"
+      },
+      "execution_count": 3,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "recipe_1_text = pytesseract.image_to_string(recipe_1_image)"
+      ],
+      "metadata": {
+        "id": "Wi_y0CFAeehA"
+      },
+      "execution_count": 4,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(recipe_1_text)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "iDhfVbBkefDT",
+        "outputId": "2e63fc5b-f3da-4a25-b41e-331fc24b4c2b"
+      },
+      "execution_count": 5,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "ee\n",
+            "\n",
+            "DINNER F.OR 5.0.0\n",
+            "\n",
+            "Roast chicken Bread\n",
+            "Stuffed cabbage ' Coffee\n",
+            "Pilaf Pie\n",
+            "\n",
+            "Salad Ice Cream\n",
+            "\n",
+            "what to order:\n",
+            "\n",
+            "75 heads of cabbage\n",
+            "\n",
+            "35 # onions\n",
+            "\n",
+            "175 chickens, cut in halves\n",
+            "\n",
+            "weighing approximately 500 to 530 lbs.\n",
+            "\n",
+            "Plus 1/2 of the legs and necks from chickens\n",
+            "30 # rice - Uncle Bens\n",
+            "\n",
+            "75 # ground pork\n",
+            "15 # ground beef\n",
+            "8 # pork hocks 65 Apple pies\n",
+            "6 # picnic ham 500 slices ice cream\n",
+            "2 cases lettuce\n",
+            "2 baskets tomatoes\n",
+            "\n",
+            "12 bunches celery\n",
+            "h bunches parsley\n",
+            "\n",
+            "3 # lard\n",
+            "\n",
+            "1 gal. vinegar\n",
+            "2 qts. salad oil or Wishbone dressing\n",
+            "\n",
+            "15 cucumbers\n",
+            "\n",
+            "3 carrots\n",
+            "5 # salt\n",
+            "\n",
+            "3 # butter\n",
+            "5 # sugar\n",
+            "8 to 10 # coffee\n",
+            "\n",
+            "5 loaves bread\n",
+            "\n",
+            "cans sauerkraut\n",
+            "\n",
+            "2 baskets pepper - 1/2 green - 1/2 pimento\n",
+            "\n",
+            "pepper, paprika, garlic salt\n",
+            "\n",
+            "Process:\n",
+            "\n",
+            "Approximately 1 to 2 weeks prior to the dinner, de-\n",
+            "pending on whether it is cold or warm out, the cab-\n",
+            "bage must be put to sour. Clean outer leaves and\n",
+            "core heads of cabbage. Place several at a time in\n",
+            "large pot of boiling water and allow to boll about\n",
+            "10 min. or until limp. Remove leaves, thin off\n",
+            "heayy white vein on each leaf and pile them into\n",
+            "piles of ten leaves. Salt each pile thoroughly,\n",
+            "place in a 15 ~ 20 qt. crock or in several smaller\n",
+            "ones, place dill and summer savory in each eraeks\n",
+            "cover with salted water and weight down the ee\n",
+            "bage by placing a plate over it and on top of pla\n",
+            "place a rock or a bottle filled with water, Cover\n",
+            "\n",
+            "SSE ie SE es\n",
+            "L41\n",
+            "\f\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "with open(\"recipe_1_tesseract.txt\", \"w\") as output_file:\n",
+        "    output_file.write(recipe_1_text)"
+      ],
+      "metadata": {
+        "id": "_Kn9vo-8elar"
+      },
+      "execution_count": 6,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "recipe_2_file = \"recipe_2.png\"\n",
+        "recipe_2_image = Image.open(recipe_2_file)\n",
+        "recipe_2_text = pytesseract.image_to_string(recipe_2_image)\n",
+        "with open(\"recipe_2_tesseract.txt\", \"w\") as output_file:\n",
+        "    output_file.write(recipe_2_text)"
+      ],
+      "metadata": {
+        "id": "JSb_MTYOe02m"
+      },
+      "execution_count": 7,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "recipe_3_file = \"recipe_3.png\"\n",
+        "recipe_3_image = Image.open(recipe_3_file)\n",
+        "recipe_3_text = pytesseract.image_to_string(recipe_3_image)\n",
+        "with open(\"recipe_3_tesseract.txt\", \"w\") as output_file:\n",
+        "    output_file.write(recipe_3_text)"
+      ],
+      "metadata": {
+        "id": "wQsWLIEqfFzk"
+      },
+      "execution_count": 8,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "sample_table_file = \"sample_table.png\"\n",
+        "sample_table_image = Image.open(sample_table_file)\n",
+        "sample_table_text = pytesseract.image_to_string(sample_table_image)\n",
+        "with open(\"sample_table_tesseract.txt\", \"w\") as output_file:\n",
+        "    output_file.write(sample_table_text)"
+      ],
+      "metadata": {
+        "id": "LhKQSPO6fLAL"
+      },
+      "execution_count": 9,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# PaddleOCR"
+      ],
+      "metadata": {
+        "id": "Fn7J360ambhw"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#!python -m pip install langchain==0.1.20\n",
+        "#!python -m pip install langchain-core==0.1.52\n",
+        "#!python -m pip install paddleocr==3.3.2\n",
+        "#!python -m pip install paddlepaddle==3.0.0\n",
+        "#!python -m pip install paddlex==3.3.12"
+      ],
+      "metadata": {
+        "id": "rZl4gYocnGk7"
+      },
+      "execution_count": 10,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#!wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.0g-2ubuntu4_amd64.deb\n",
+        "#!sudo dpkg -i libssl1.1_1.1.0g-2ubuntu4_amd64.deb"
+      ],
+      "metadata": {
+        "id": "admYcoZbwpWR"
+      },
+      "execution_count": 11,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#from paddleocr import PaddleOCR\n",
+        "#pipeline = PaddleOCR()\n"
+      ],
+      "metadata": {
+        "id": "t0zLoLKGuHrh"
+      },
+      "execution_count": 12,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#from paddleocr import PaddleOCRVL\n",
+        "#pipeline = PaddleOCRVL(pipeline_version=\"v1\")\n"
+      ],
+      "metadata": {
+        "id": "6dN7gSIHmaOg"
+      },
+      "execution_count": 13,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#recipe_1_paddle = pipeline.predict(\"recipe_1.png\")\n",
+        "#for res in recipe_1_paddle:\n",
+        "#    res.print()\n",
+        "#    res.save_to_json(save_path=\"recipe_1\")\n",
+        "#    res.save_to_markdown(save_path=\"recipe_1\")"
+      ],
+      "metadata": {
+        "id": "4_G8Pbl-rmw3"
+      },
+      "execution_count": 14,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#!pip install paddleocr -q"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "nFPAdtYVctJF",
+        "outputId": "93ba12bc-0554-4876-c3bb-79541b4c9883"
+      },
+      "execution_count": 80,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Collecting paddleocr\n",
+            "  Downloading paddleocr-3.4.0-py3-none-any.whl.metadata (55 kB)\n",
+            "\u001b[?25l     \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m0.0/55.2 kB\u001b[0m \u001b[31m?\u001b[0m eta \u001b[36m-:--:--\u001b[0m\r\u001b[2K     \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m55.2/55.2 kB\u001b[0m \u001b[31m6.2 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hCollecting paddlex<3.5.0,>=3.4.0 (from paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr)\n",
+            "  Downloading paddlex-3.4.3-py3-none-any.whl.metadata (80 kB)\n",
+            "\u001b[2K     \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m80.5/80.5 kB\u001b[0m \u001b[31m9.7 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hRequirement already satisfied: PyYAML>=6 in /usr/local/lib/python3.12/dist-packages (from paddleocr) (6.0.3)\n",
+            "Requirement already satisfied: requests in /usr/local/lib/python3.12/dist-packages (from paddleocr) (2.32.4)\n",
+            "Requirement already satisfied: typing-extensions>=4.12 in /usr/local/lib/python3.12/dist-packages (from paddleocr) (4.15.0)\n",
+            "Collecting aistudio-sdk>=0.3.5 (from paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr)\n",
+            "  Downloading aistudio_sdk-0.3.8-py3-none-any.whl.metadata (1.1 kB)\n",
+            "Requirement already satisfied: chardet in /usr/local/lib/python3.12/dist-packages (from paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (5.2.0)\n",
+            "Collecting colorlog (from paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr)\n",
+            "  Downloading colorlog-6.10.1-py3-none-any.whl.metadata (11 kB)\n",
+            "Requirement already satisfied: filelock in /usr/local/lib/python3.12/dist-packages (from paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (3.25.2)\n",
+            "Requirement already satisfied: huggingface-hub in /usr/local/lib/python3.12/dist-packages (from paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (1.7.1)\n",
+            "Collecting modelscope>=1.28.0 (from paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr)\n",
+            "  Downloading modelscope-1.35.3-py3-none-any.whl.metadata (43 kB)\n",
+            "\u001b[2K     \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m43.5/43.5 kB\u001b[0m \u001b[31m5.5 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hRequirement already satisfied: numpy>=1.24 in /usr/local/lib/python3.12/dist-packages (from paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (2.0.2)\n",
+            "Requirement already satisfied: packaging in /usr/local/lib/python3.12/dist-packages (from paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (26.0)\n",
+            "Requirement already satisfied: pandas>=1.3 in /usr/local/lib/python3.12/dist-packages (from paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (2.2.2)\n",
+            "Requirement already satisfied: pillow in /usr/local/lib/python3.12/dist-packages (from paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (11.3.0)\n",
+            "Requirement already satisfied: prettytable in /usr/local/lib/python3.12/dist-packages (from paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (3.17.0)\n",
+            "Requirement already satisfied: py-cpuinfo in /usr/local/lib/python3.12/dist-packages (from paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (9.0.0)\n",
+            "Requirement already satisfied: pydantic>=2 in /usr/local/lib/python3.12/dist-packages (from paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (2.12.3)\n",
+            "Collecting PyYAML>=6 (from paddleocr)\n",
+            "  Downloading PyYAML-6.0.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.1 kB)\n",
+            "Collecting ruamel.yaml (from paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr)\n",
+            "  Downloading ruamel_yaml-0.19.1-py3-none-any.whl.metadata (16 kB)\n",
+            "Collecting ujson (from paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr)\n",
+            "  Downloading ujson-5.12.0-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (9.6 kB)\n",
+            "Requirement already satisfied: imagesize in /usr/local/lib/python3.12/dist-packages (from paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (2.0.0)\n",
+            "Collecting opencv-contrib-python==4.10.0.84 (from paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr)\n",
+            "  Downloading opencv_contrib_python-4.10.0.84-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (20 kB)\n",
+            "Collecting pyclipper (from paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr)\n",
+            "  Downloading pyclipper-1.4.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (8.6 kB)\n",
+            "Collecting pypdfium2>=4 (from paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr)\n",
+            "  Downloading pypdfium2-5.6.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (68 kB)\n",
+            "\u001b[2K     \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m68.1/68.1 kB\u001b[0m \u001b[31m8.2 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hCollecting python-bidi (from paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr)\n",
+            "  Downloading python_bidi-0.6.7-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)\n",
+            "Requirement already satisfied: shapely in /usr/local/lib/python3.12/dist-packages (from paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (2.1.2)\n",
+            "Requirement already satisfied: charset_normalizer<4,>=2 in /usr/local/lib/python3.12/dist-packages (from requests->paddleocr) (3.4.6)\n",
+            "Requirement already satisfied: idna<4,>=2.5 in /usr/local/lib/python3.12/dist-packages (from requests->paddleocr) (3.11)\n",
+            "Requirement already satisfied: urllib3<3,>=1.21.1 in /usr/local/lib/python3.12/dist-packages (from requests->paddleocr) (2.5.0)\n",
+            "Requirement already satisfied: certifi>=2017.4.17 in /usr/local/lib/python3.12/dist-packages (from requests->paddleocr) (2026.2.25)\n",
+            "Requirement already satisfied: psutil in /usr/local/lib/python3.12/dist-packages (from aistudio-sdk>=0.3.5->paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (5.9.5)\n",
+            "Requirement already satisfied: tqdm in /usr/local/lib/python3.12/dist-packages (from aistudio-sdk>=0.3.5->paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (4.67.3)\n",
+            "Collecting bce-python-sdk (from aistudio-sdk>=0.3.5->paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr)\n",
+            "  Downloading bce_python_sdk-0.9.68-py3-none-any.whl.metadata (449 bytes)\n",
+            "Requirement already satisfied: click in /usr/local/lib/python3.12/dist-packages (from aistudio-sdk>=0.3.5->paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (8.3.1)\n",
+            "Requirement already satisfied: setuptools in /usr/local/lib/python3.12/dist-packages (from modelscope>=1.28.0->paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (75.2.0)\n",
+            "Requirement already satisfied: python-dateutil>=2.8.2 in /usr/local/lib/python3.12/dist-packages (from pandas>=1.3->paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (2.9.0.post0)\n",
+            "Requirement already satisfied: pytz>=2020.1 in /usr/local/lib/python3.12/dist-packages (from pandas>=1.3->paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (2025.2)\n",
+            "Requirement already satisfied: tzdata>=2022.7 in /usr/local/lib/python3.12/dist-packages (from pandas>=1.3->paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (2025.3)\n",
+            "Requirement already satisfied: annotated-types>=0.6.0 in /usr/local/lib/python3.12/dist-packages (from pydantic>=2->paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (0.7.0)\n",
+            "Requirement already satisfied: pydantic-core==2.41.4 in /usr/local/lib/python3.12/dist-packages (from pydantic>=2->paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (2.41.4)\n",
+            "Requirement already satisfied: typing-inspection>=0.4.2 in /usr/local/lib/python3.12/dist-packages (from pydantic>=2->paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (0.4.2)\n",
+            "Requirement already satisfied: fsspec>=2023.5.0 in /usr/local/lib/python3.12/dist-packages (from huggingface-hub->paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (2025.3.0)\n",
+            "Requirement already satisfied: hf-xet<2.0.0,>=1.4.2 in /usr/local/lib/python3.12/dist-packages (from huggingface-hub->paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (1.4.2)\n",
+            "Requirement already satisfied: httpx<1,>=0.23.0 in /usr/local/lib/python3.12/dist-packages (from huggingface-hub->paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (0.28.1)\n",
+            "Requirement already satisfied: typer in /usr/local/lib/python3.12/dist-packages (from huggingface-hub->paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (0.24.1)\n",
+            "Requirement already satisfied: wcwidth in /usr/local/lib/python3.12/dist-packages (from prettytable->paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (0.6.0)\n",
+            "Requirement already satisfied: anyio in /usr/local/lib/python3.12/dist-packages (from httpx<1,>=0.23.0->huggingface-hub->paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (4.12.1)\n",
+            "Requirement already satisfied: httpcore==1.* in /usr/local/lib/python3.12/dist-packages (from httpx<1,>=0.23.0->huggingface-hub->paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (1.0.9)\n",
+            "Requirement already satisfied: h11>=0.16 in /usr/local/lib/python3.12/dist-packages (from httpcore==1.*->httpx<1,>=0.23.0->huggingface-hub->paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (0.16.0)\n",
+            "Requirement already satisfied: six>=1.5 in /usr/local/lib/python3.12/dist-packages (from python-dateutil>=2.8.2->pandas>=1.3->paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (1.17.0)\n",
+            "Collecting pycryptodome>=3.8.0 (from bce-python-sdk->aistudio-sdk>=0.3.5->paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr)\n",
+            "  Downloading pycryptodome-3.23.0-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (3.4 kB)\n",
+            "Requirement already satisfied: future>=0.6.0 in /usr/local/lib/python3.12/dist-packages (from bce-python-sdk->aistudio-sdk>=0.3.5->paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (1.0.0)\n",
+            "Collecting crc32c>=2.2.post0 (from bce-python-sdk->aistudio-sdk>=0.3.5->paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr)\n",
+            "  Downloading crc32c-2.8-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (7.8 kB)\n",
+            "Requirement already satisfied: shellingham>=1.3.0 in /usr/local/lib/python3.12/dist-packages (from typer->huggingface-hub->paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (1.5.4)\n",
+            "Requirement already satisfied: rich>=12.3.0 in /usr/local/lib/python3.12/dist-packages (from typer->huggingface-hub->paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (13.9.4)\n",
+            "Requirement already satisfied: annotated-doc>=0.0.2 in /usr/local/lib/python3.12/dist-packages (from typer->huggingface-hub->paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (0.0.4)\n",
+            "Requirement already satisfied: markdown-it-py>=2.2.0 in /usr/local/lib/python3.12/dist-packages (from rich>=12.3.0->typer->huggingface-hub->paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (4.0.0)\n",
+            "Requirement already satisfied: pygments<3.0.0,>=2.13.0 in /usr/local/lib/python3.12/dist-packages (from rich>=12.3.0->typer->huggingface-hub->paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (2.19.2)\n",
+            "Requirement already satisfied: mdurl~=0.1 in /usr/local/lib/python3.12/dist-packages (from markdown-it-py>=2.2.0->rich>=12.3.0->typer->huggingface-hub->paddlex<3.5.0,>=3.4.0->paddlex[ocr-core]<3.5.0,>=3.4.0->paddleocr) (0.1.2)\n",
+            "Downloading paddleocr-3.4.0-py3-none-any.whl (87 kB)\n",
+            "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m87.8/87.8 kB\u001b[0m \u001b[31m12.1 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hDownloading paddlex-3.4.3-py3-none-any.whl (2.0 MB)\n",
+            "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m2.0/2.0 MB\u001b[0m \u001b[31m83.4 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hDownloading PyYAML-6.0.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (767 kB)\n",
+            "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m767.5/767.5 kB\u001b[0m \u001b[31m65.0 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hDownloading opencv_contrib_python-4.10.0.84-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (68.7 MB)\n",
+            "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m68.7/68.7 MB\u001b[0m \u001b[31m12.5 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hDownloading aistudio_sdk-0.3.8-py3-none-any.whl (62 kB)\n",
+            "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m63.0/63.0 kB\u001b[0m \u001b[31m7.6 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hDownloading modelscope-1.35.3-py3-none-any.whl (6.1 MB)\n",
+            "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m6.1/6.1 MB\u001b[0m \u001b[31m105.6 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hDownloading pypdfium2-5.6.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.6 MB)\n",
+            "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m3.6/3.6 MB\u001b[0m \u001b[31m111.6 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hDownloading colorlog-6.10.1-py3-none-any.whl (11 kB)\n",
+            "Downloading pyclipper-1.4.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (978 kB)\n",
+            "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m978.2/978.2 kB\u001b[0m \u001b[31m82.6 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hDownloading python_bidi-0.6.7-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (300 kB)\n",
+            "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m300.6/300.6 kB\u001b[0m \u001b[31m27.1 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hDownloading ruamel_yaml-0.19.1-py3-none-any.whl (118 kB)\n",
+            "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m118.1/118.1 kB\u001b[0m \u001b[31m15.9 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hDownloading ujson-5.12.0-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (57 kB)\n",
+            "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m57.5/57.5 kB\u001b[0m \u001b[31m7.5 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hDownloading bce_python_sdk-0.9.68-py3-none-any.whl (411 kB)\n",
+            "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m411.9/411.9 kB\u001b[0m \u001b[31m42.8 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hDownloading crc32c-2.8-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (80 kB)\n",
+            "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m80.0/80.0 kB\u001b[0m \u001b[31m7.9 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hDownloading pycryptodome-3.23.0-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.3 MB)\n",
+            "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m2.3/2.3 MB\u001b[0m \u001b[31m113.9 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hInstalling collected packages: python-bidi, ujson, ruamel.yaml, PyYAML, pypdfium2, pycryptodome, pyclipper, opencv-contrib-python, crc32c, colorlog, modelscope, bce-python-sdk, aistudio-sdk, paddlex, paddleocr\n",
+            "  Attempting uninstall: PyYAML\n",
+            "    Found existing installation: PyYAML 6.0.3\n",
+            "    Uninstalling PyYAML-6.0.3:\n",
+            "      Successfully uninstalled PyYAML-6.0.3\n",
+            "  Attempting uninstall: opencv-contrib-python\n",
+            "    Found existing installation: opencv-contrib-python 4.13.0.92\n",
+            "    Uninstalling opencv-contrib-python-4.13.0.92:\n",
+            "      Successfully uninstalled opencv-contrib-python-4.13.0.92\n",
+            "Successfully installed PyYAML-6.0.2 aistudio-sdk-0.3.8 bce-python-sdk-0.9.68 colorlog-6.10.1 crc32c-2.8 modelscope-1.35.3 opencv-contrib-python-4.10.0.84 paddleocr-3.4.0 paddlex-3.4.3 pyclipper-1.4.0 pycryptodome-3.23.0 pypdfium2-5.6.0 python-bidi-0.6.7 ruamel.yaml-0.19.1 ujson-5.12.0\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#from paddleocr.tools.infer.utility import draw_ocr"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 322
+        },
+        "id": "tGJ6GEZTcvZf",
+        "outputId": "e9265db9-16cd-4f88-bdf6-2ebafa8c453b"
+      },
+      "execution_count": 83,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "ModuleNotFoundError",
+          "evalue": "No module named 'paddleocr.tools'",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mModuleNotFoundError\u001b[0m                       Traceback (most recent call last)",
+            "\u001b[0;32m/tmp/ipykernel_676/238827089.py\u001b[0m in \u001b[0;36m<cell line: 0>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0;32mfrom\u001b[0m \u001b[0mpaddleocr\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mtools\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0minfer\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mutility\u001b[0m \u001b[0;32mimport\u001b[0m \u001b[0mdraw_ocr\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m",
+            "\u001b[0;31mModuleNotFoundError\u001b[0m: No module named 'paddleocr.tools'",
+            "",
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0;32m\nNOTE: If your import is failing due to a missing package, you can\nmanually install dependencies using either !pip or !apt.\n\nTo view examples of installing some common dependencies, click the\n\"Open Examples\" button below.\n\u001b[0;31m---------------------------------------------------------------------------\u001b[0m\n"
+          ],
+          "errorDetails": {
+            "actions": [
+              {
+                "action": "open_url",
+                "actionText": "Open Examples",
+                "url": "/notebooks/snippets/importing_libraries.ipynb"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# http://gitlab.infoepoch.com/wanggs/paddleocr-2.8.1/blob/master/doc/doc_en/quickstart_en.md\n",
+        "image_path = \"recipe_1.png\"\n",
+        "result_path = \"recipe_1_paddle.txt\"\n",
+        "boxed_image_path = \"recipe_1_boxes.png\"\n",
+        "\n",
+        "#with open(result_path, \"r\") as file:\n",
+        "#    result = file.readlines()\n",
+        "with open(result_path, \"r\") as file:\n",
+        "    result = [line.strip() for line in file]\n",
+        "#print(result)\n",
+        "n = len(result)\n",
+        "#print(result[0])\n",
+        "#print(ast.literal_eval(result[0])[0])\n",
+        "#print([ast.literal_eval(result[line])[1][0] for line in range(n)])\n",
+        "#result = result_path\n",
+        "#image = Image.open(image_path).convert('RGB')\n",
+        "boxes = [ast.literal_eval(result[line])[0] for line in range(n)]\n",
+        "txts = [ast.literal_eval(result[line])[1][0] for line in range(n)]\n",
+        "scores = [ast.literal_eval(result[line])[1][1] for line in range(n)]\n",
+        "#print(boxes[0])\n",
+        "#print(txts)\n",
+        "#print(scores)\n",
+        "#im_show = draw_ocr(image, boxes, txts, scores, font_path='./fonts/simfang.ttf')\n",
+        "#im_show = Image.fromarray(im_show)\n",
+        "\n",
+        "img = cv2.imread(image_path)\n",
+        "for coords in boxes:\n",
+        "    # Draw closed polygon, green color (0, 255, 0), thickness of 2 px\n",
+        "    cv2.polylines(img, pts = [np.array(coords, np.int32)], isClosed = True, color = (0, 255, 0), thickness = 2)\n",
+        "cv2.imwrite(boxed_image_path, img)\n",
+        "\n",
+        "#im_show.save(boxed_image_path)\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "xrbNRS1sT_Bl",
+        "outputId": "510f99eb-08d0-4cef-b983-c16cc3794762"
+      },
+      "execution_count": 103,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "True"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 103
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "image_path = \"recipe_2.png\"\n",
+        "result_path = \"recipe_2_paddle.txt\"\n",
+        "boxed_image_path = \"recipe_2_boxes.png\"\n",
+        "\n",
+        "with open(result_path, \"r\") as file:\n",
+        "    result = [line.strip() for line in file]\n",
+        "n = len(result)\n",
+        "\n",
+        "boxes = [ast.literal_eval(result[line])[0] for line in range(n)]\n",
+        "txts = [ast.literal_eval(result[line])[1][0] for line in range(n)]\n",
+        "scores = [ast.literal_eval(result[line])[1][1] for line in range(n)]\n",
+        "\n",
+        "img = cv2.imread(image_path)\n",
+        "for coords in boxes:\n",
+        "    # Draw closed polygon, green color (0, 255, 0), thickness of 2 px\n",
+        "    cv2.polylines(img, pts = [np.array(coords, np.int32)], isClosed = True, color = (0, 255, 0), thickness = 2)\n",
+        "cv2.imwrite(boxed_image_path, img)\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "cQjsJzH_mxLd",
+        "outputId": "ab4c80e4-fbda-4868-ed57-220902eb8dea"
+      },
+      "execution_count": 104,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "True"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 104
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "image_path = \"recipe_3.png\"\n",
+        "result_path = \"recipe_3_paddle.txt\"\n",
+        "boxed_image_path = \"recipe_3_boxes.png\"\n",
+        "\n",
+        "with open(result_path, \"r\") as file:\n",
+        "    result = [line.strip() for line in file]\n",
+        "n = len(result)\n",
+        "\n",
+        "boxes = [ast.literal_eval(result[line])[0] for line in range(n)]\n",
+        "txts = [ast.literal_eval(result[line])[1][0] for line in range(n)]\n",
+        "scores = [ast.literal_eval(result[line])[1][1] for line in range(n)]\n",
+        "\n",
+        "img = cv2.imread(image_path)\n",
+        "for coords in boxes:\n",
+        "    # Draw closed polygon, green color (0, 255, 0), thickness of 2 px\n",
+        "    cv2.polylines(img, pts = [np.array(coords, np.int32)], isClosed = True, color = (0, 255, 0), thickness = 2)\n",
+        "cv2.imwrite(boxed_image_path, img)\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "sjGnWcPpnfQS",
+        "outputId": "9eb10558-619b-4b7a-c215-838ca6ec332d"
+      },
+      "execution_count": 105,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "True"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 105
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "image_path = \"sample_table.png\"\n",
+        "result_path = \"sample_table_paddle.txt\"\n",
+        "boxed_image_path = \"sample_table_boxes.png\"\n",
+        "\n",
+        "with open(result_path, \"r\") as file:\n",
+        "    result = [line.strip() for line in file]\n",
+        "n = len(result)\n",
+        "\n",
+        "boxes = [ast.literal_eval(result[line])[0] for line in range(n)]\n",
+        "txts = [ast.literal_eval(result[line])[1][0] for line in range(n)]\n",
+        "scores = [ast.literal_eval(result[line])[1][1] for line in range(n)]\n",
+        "\n",
+        "img = cv2.imread(image_path)\n",
+        "for coords in boxes:\n",
+        "    # Draw closed polygon, green color (0, 255, 0), thickness of 2 px\n",
+        "    cv2.polylines(img, pts = [np.array(coords, np.int32)], isClosed = True, color = (0, 255, 0), thickness = 2)\n",
+        "cv2.imwrite(boxed_image_path, img)\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "XKvmzu-3nifp",
+        "outputId": "081c56ca-f9da-4a54-a20c-929a083dae90"
+      },
+      "execution_count": 106,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "True"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 106
+        }
+      ]
+    }
+  ]
+}
