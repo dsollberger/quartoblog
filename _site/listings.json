@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/Case_Closed/case_closed.html",
       "/posts/agentic_ocr/agentic_ocr.html",
       "/posts/NIST_FALCON/nist_falcon_ai.html",
       "/posts/flint/flint.html",

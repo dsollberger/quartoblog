@@ -1,0 +1,144 @@
+---
+title: "Case Closed Episode List"
+author: "Derek Sollberger"
+date: "2026-05-21"
+format:
+  html:
+    toc: true
+---
+
+# Characters
+
+I have been binge watching the Detective Conan anime series (called Case Closed in USA). Fans like me use episode lists that are online, but with the popularity of the TV show, the websites sometimes crash.  Then, I found out that there is a volunteer copy on [Kaggle](https://www.kaggle.com/datasets/fahadhoaidi/detective-conan-case-closed-full-guide) (made and uploaded by Fahad Hoadi).
+
+# Gadgets
+
+```{r}
+#| warning: false
+library("ggtext")
+library("tidyverse")
+
+# fill colors
+color_CE <- "#002590"
+color_DB <- "#1A6450"
+color_BO <- "#000000"
+
+# outline colors
+color_CE2 <- "#E40000"
+color_DB2 <- "#CD9F1F"
+color_BO2 <- "#FBE7A1"
+```
+
+# Evidence
+
+It is a deliminated data file, but not a comma-separated value setup.  We instead use `read_delim` to be able to recognize that the separator is a semicolon.
+
+```{r}
+#| warning: false
+DC_raw <- readr::read_delim("case_closed.csv", delim = ";")
+```
+
+# Clues
+
+```{r}
+head(DC_raw)
+```
+
+# Links
+
+```{r}
+DC_eps <- DC_raw |>
+  janitor::clean_names() |>
+  filter(!is.na(episode)) |>
+  rename(type = kay) |>
+  mutate(type = stringr::str_to_title(type)) |>
+  mutate(season = (episode %/% 100) + 1) |>
+  mutate(season = factor(season))
+```
+
+
+# One Truth Always Prevails
+
+```{r}
+string_title <- "<span style='color:#888888'>Detective Conan Has Had More</span>
+<span style='color:#1A6450'><b>Filler Episodes</b></span>
+<br>
+<span style='color:#888888'>than</span>
+<span style='color:#000000'><b>Main Plot</b></span>
+<span style='color:#888888'>or</span>
+<span style='color:#002590'><b>Manga Canon</b></span>
+<span style='color:#888888'>Episodes Recently</span>"
+
+string_subtitle <- "<span style='color:#1A6450'>(Seasons are in hundreds of episodes)</span>"
+
+string_caption <- "<span style='color:#888888'>Source: Kaggle</span>"
+
+string_x_label <- "<span style='color:#000000'>season</span>"
+
+string_y_label <- "<span style='color:#002590'>proportion</span>"
+```
+
+
+```{r}
+DC_eps |>
+  ggplot(aes(x = season, fill = type)) +
+  # ggplot(aes(x = season, color = type, fill = type)) +
+  geom_bar(stat = "count", position = "fill") +
+  labs(title = string_title,
+       subtitle = string_subtitle,
+       caption = string_caption,
+       x = string_x_label,
+       y = string_y_label) +
+  # scale_color_manual(values = c(color_DB2, color_BO2, color_CE2)) +
+  scale_fill_manual(values = c(color_DB, color_BO, color_CE)) +
+  theme_minimal() +
+  theme(axis.text.x = element_markdown(size = 16),
+        axis.text.y = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.ticks.y = element_blank(),
+        axis.title.x = element_markdown(size = 12),
+        axis.title.y = element_markdown(size = 10),
+        legend.position = "none",
+        plot.title = element_markdown(size = 18),
+        plot.subtitle = element_markdown(size = 14),
+        plot.caption = element_markdown(size = 10))
+```
+
+
+
+
+
+
+
+
+
+::: {.callout-note collapse="true"}
+# Session Info
+
+```{r}
+sessionInfo()
+```
+:::
+
+
+:::: {.columns}
+
+::: {.column width="45%"}
+	
+:::
+
+::: {.column width="10%"}
+	
+:::
+
+::: {.column width="45%"}
+
+:::
+
+::::
+
+::::: {.panel-tabset}
+
+
+
+:::::
