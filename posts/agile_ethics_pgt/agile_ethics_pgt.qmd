@@ -318,10 +318,10 @@ Materials can be found in our [QUBES resource page](https://qubeshub.org/publica
 ::: {.callout-note}
 ## Breakout Rooms
 
-* **Breakout Room 1**: [PGT_CEO](PGT_CEO.png)
-* **Breakout Room 2**: [PGT_DRA](PGT_DRA.png)
-* **Breakout Room 3**: [PGT_PH](PGT_PH.png)
-* **Breakout Room 4**: [PGT_Patient](PGT_Patient.png)
+* **Breakout Room 1**: [PGT_CEO](PGT_CEO.pdf)
+* **Breakout Room 2**: [PGT_DRA](PGT_DRA.pdf)
+* **Breakout Room 3**: [PGT_PH](PGT_PH.pdf)
+* **Breakout Room 4**: [PGT_Patient](PGT_Patient.pdf)
 
 :::
 
