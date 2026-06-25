@@ -2,11 +2,10 @@
   {
     "listing": "/blog.html",
     "items": [
-      "/posts/agile_ethics_ivf/debate_talking_points_maker.html",
-      "/posts/text_generation/text_generation.html",
+      "/posts/agile_ethics_pgt/agile_ethics_pgt.html",
       "/posts/Settlement_Survival_2026/Settlement_Survival.html",
-      "/posts/DSLCDLPch14/dslcdlpch14.html",
       "/posts/Case_Closed/case_closed.html",
+      "/posts/nonograms/nonograms.html",
       "/posts/agentic_ocr/agentic_ocr.html",
       "/posts/NIST_FALCON/nist_falcon_ai.html",
       "/posts/flint/flint.html",
