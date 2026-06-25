@@ -354,6 +354,29 @@ In the Slido poll, type a talking point from another group that you found intere
 ## Let's create a grading rubric (15 minutes)
 :::
 
+# Future Directions
+
+:::: {.columns}
+
+::: {.column width="45%"}
+![Sway](heterodox_academy_sway.png)
+:::
+
+::: {.column width="10%"}
+	
+:::
+
+::: {.column width="45%"}
+## Sway
+
+* AI-aided debate software
+
+> Instructors across over 80 universities are using the HxA-supported AI-guided app [Sway](https://www.swaybeta.ai/) to give thousands of students structured practice in constructive disagreement on contentious issues. Data from student conversations show significant shifts in openness and understanding after using the tool, demonstrating how Sway can strengthen open inquiry and viewpoint diversity in classrooms of any size — and on any topic.
+
+:::
+
+::::
+
 
 # Thanks!
 
