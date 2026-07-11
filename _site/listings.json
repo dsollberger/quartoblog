@@ -2,8 +2,9 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/nonograms/solver.html",
+      "/posts/typst_15/typst_15.html",
       "/posts/agile_ethics_pgt/agile_ethics_pgt.html",
-      "/posts/Settlement_Survival_2026/Settlement_Survival.html",
       "/posts/Case_Closed/case_closed.html",
       "/posts/nonograms/nonograms.html",
       "/posts/agentic_ocr/agentic_ocr.html",
