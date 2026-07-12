@@ -775,25 +775,181 @@ native support for equations with MathML
 :::
 
 
-
-
-
-
-
-
-
-
 # Works in Progress
 
 ## Flash Cards
 
+::::: {.panel-tabset}
+
+### code
+
+:::: {.columns}
+
+::: {.column width="45%"}
+```
+#set text(
+  font: "New Computer Modern",
+  size: 36pt
+)
+#set page(paper: "us-letter", 
+          margin: (x: 1cm, y: 1cm), )
+#set align(center+horizon)
+
+#grid(
+  columns: (1fr, 1fr, 1fr),
+  rows: (1fr, 1fr, 1fr),
+  [Dwight \ Schrute],
+  [Creed \ Bratton],
+  [Angela \ Kinsey],
+  [Meredith \ Palmer],
+  [Jim \ Halpert],
+  [Kevin \ Malone],
+  [Stanley \ Hudson],
+  [Phyllis \ Vance],
+  [Pam \ Beesley],
+)
+```
+:::
+
+::: {.column width="10%"}
+	
+:::
+
+::: {.column width="45%"}
+```
+#set align(center+horizon)
+#grid(
+  columns: (1fr, 1fr, 1fr),
+  rows: (1fr, 1fr, 1fr),
+  gutter: 5pt,
+  [#image("angela_kinsey.png")],
+  [#image("creed_bratton.png")],
+  [#image("dwight_schrute.png")],
+  [#image("kevin_malone.png")],
+  [#image("jim_halpert.png")],
+  [#image("meredith_palmer.png")],
+  [#image("pam_beesley.png")],
+  [#image("phyllis_vance.png")],
+  [#image("stanley_hudson.png")],
+)
+```
+:::
+
+::::
+
+### names
+
+!["student" names](flash_cards_1.png)
+
+### pictures
+
+!["student" pictures](flash_cards_2.png)
+
+:::::
+
 ## MCQ Organizer
+
+::::: {.panel-tabset}
+
+### Typst
+
+:::: {.columns}
+
+::: {.column width="45%"}
+```
+#set enum(numbering: "1).A)")
+
++ Which employee is known for his chili?
+  + Kevin Malone
+  + Creed Bratton
+  + Ryan Howard
+  + Andy Bernard
+  + Darryl Philbin
+
++ Which employee is known for his "thoughts" blog?
+  + Creed Bratton
+  + Kevin Malone
+  + Ryan Malone
+  + Andy Bernard
+  + Darryl Philbin
+  
+#let mcq_example = csv("mcq_example.csv")
+
+#show table.cell.where(y: 0): set text(weight: "bold")
+
+#rotate(
+  -90deg,
+  reflow: true,
+table(
+  align: center,
+  columns: 6,
+  //table.header[Question][Correct][Alt2][Alt3][Alt4][Alt5],
+  ..for(.., Question, Correct, alt2, alt3, alt4, alt5) in mcq_example{
+    (Question, Correct, alt2, alt3, alt4, alt5)
+  },
+  fill: (rgb("f58025"), rgb("f58025"), none, none , none, none),
+)
+)
+```
+:::
+
+::: {.column width="10%"}
+	
+:::
+
+::: {.column width="45%"}
+![MCQ structured](mcq_example_table.png)
+:::
+
+::::
+
+### Workflow
+
+![workflow](mcq_workflow.png)
+
+:::::
 
 ## Music Notes
 
-## DAGs
+::::: {.panel-tabset}
 
-## Evidence of Attention
+### staves
+
+![staves](staves.png)
+
+### tabs
+
+![guitar tabs](arpeggios.png)
+
+### chordx
+
+![arrangement](finite_simple_group.png)
+
+:::::
+
+## Causal Graphs
+
+Using the `autograph` package in Typst
+
+::::: {.panel-tabset}
+
+### Case Study
+
+![directed acyclic graph](dag_1.png)
+
+### Chain
+
+![chain](dag_2.png)
+
+### Confounder
+
+![confounder](dag_3.png)
+
+### Collider
+
+![collider](dag_4.png)
+
+:::::
 
 
 # Coda

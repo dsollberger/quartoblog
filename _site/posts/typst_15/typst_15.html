@@ -203,8 +203,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#flash-cards" id="toc-flash-cards" class="nav-link" data-scroll-target="#flash-cards">Flash Cards</a></li>
   <li><a href="#mcq-organizer" id="toc-mcq-organizer" class="nav-link" data-scroll-target="#mcq-organizer">MCQ Organizer</a></li>
   <li><a href="#music-notes" id="toc-music-notes" class="nav-link" data-scroll-target="#music-notes">Music Notes</a></li>
-  <li><a href="#dags" id="toc-dags" class="nav-link" data-scroll-target="#dags">DAGs</a></li>
-  <li><a href="#evidence-of-attention" id="toc-evidence-of-attention" class="nav-link" data-scroll-target="#evidence-of-attention">Evidence of Attention</a></li>
+  <li><a href="#causal-graphs" id="toc-causal-graphs" class="nav-link" data-scroll-target="#causal-graphs">Causal Graphs</a></li>
   </ul></li>
   <li><a href="#coda" id="toc-coda" class="nav-link" data-scroll-target="#coda">Coda</a></li>
   </ul>
@@ -978,18 +977,209 @@ $ mat(..#range(1, 17).chunks(4)) $
 <h1>Works in Progress</h1>
 <section id="flash-cards" class="level2">
 <h2 class="anchored" data-anchor-id="flash-cards">Flash Cards</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href="">code</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href="">names</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-3" role="tab" aria-controls="tabset-5-3" aria-selected="false" href="">pictures</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<div class="columns">
+<div class="column" style="width:45%;">
+<pre><code>#set text(
+  font: "New Computer Modern",
+  size: 36pt
+)
+#set page(paper: "us-letter", 
+          margin: (x: 1cm, y: 1cm), )
+#set align(center+horizon)
+
+#grid(
+  columns: (1fr, 1fr, 1fr),
+  rows: (1fr, 1fr, 1fr),
+  [Dwight \ Schrute],
+  [Creed \ Bratton],
+  [Angela \ Kinsey],
+  [Meredith \ Palmer],
+  [Jim \ Halpert],
+  [Kevin \ Malone],
+  [Stanley \ Hudson],
+  [Phyllis \ Vance],
+  [Pam \ Beesley],
+)</code></pre>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:45%;">
+<pre><code>#set align(center+horizon)
+#grid(
+  columns: (1fr, 1fr, 1fr),
+  rows: (1fr, 1fr, 1fr),
+  gutter: 5pt,
+  [#image("angela_kinsey.png")],
+  [#image("creed_bratton.png")],
+  [#image("dwight_schrute.png")],
+  [#image("kevin_malone.png")],
+  [#image("jim_halpert.png")],
+  [#image("meredith_palmer.png")],
+  [#image("pam_beesley.png")],
+  [#image("phyllis_vance.png")],
+  [#image("stanley_hudson.png")],
+)</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="flash_cards_1.png" class="img-fluid figure-img"></p>
+<figcaption>“student” names</figcaption>
+</figure>
+</div>
+</div>
+<div id="tabset-5-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-3-tab">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="flash_cards_2.png" class="img-fluid figure-img"></p>
+<figcaption>“student” pictures</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="mcq-organizer" class="level2">
 <h2 class="anchored" data-anchor-id="mcq-organizer">MCQ Organizer</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true" href="">Typst</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false" href="">Workflow</a></li></ul>
+<div class="tab-content">
+<div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
+<div class="columns">
+<div class="column" style="width:45%;">
+<pre><code>#set enum(numbering: "1).A)")
+
++ Which employee is known for his chili?
+  + Kevin Malone
+  + Creed Bratton
+  + Ryan Howard
+  + Andy Bernard
+  + Darryl Philbin
+
++ Which employee is known for his "thoughts" blog?
+  + Creed Bratton
+  + Kevin Malone
+  + Ryan Malone
+  + Andy Bernard
+  + Darryl Philbin
+  
+#let mcq_example = csv("mcq_example.csv")
+
+#show table.cell.where(y: 0): set text(weight: "bold")
+
+#rotate(
+  -90deg,
+  reflow: true,
+table(
+  align: center,
+  columns: 6,
+  //table.header[Question][Correct][Alt2][Alt3][Alt4][Alt5],
+  ..for(.., Question, Correct, alt2, alt3, alt4, alt5) in mcq_example{
+    (Question, Correct, alt2, alt3, alt4, alt5)
+  },
+  fill: (rgb("f58025"), rgb("f58025"), none, none , none, none),
+)
+)</code></pre>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:45%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="mcq_example_table.png" class="img-fluid figure-img"></p>
+<figcaption>MCQ structured</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="mcq_workflow.png" class="img-fluid figure-img"></p>
+<figcaption>workflow</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="music-notes" class="level2">
 <h2 class="anchored" data-anchor-id="music-notes">Music Notes</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true" href="">staves</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false" href="">tabs</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-3" role="tab" aria-controls="tabset-7-3" aria-selected="false" href="">chordx</a></li></ul>
+<div class="tab-content">
+<div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="staves.png" class="img-fluid figure-img"></p>
+<figcaption>staves</figcaption>
+</figure>
+</div>
+</div>
+<div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="arpeggios.png" class="img-fluid figure-img"></p>
+<figcaption>guitar tabs</figcaption>
+</figure>
+</div>
+</div>
+<div id="tabset-7-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-3-tab">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="finite_simple_group.png" class="img-fluid figure-img"></p>
+<figcaption>arrangement</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
 </section>
-<section id="dags" class="level2">
-<h2 class="anchored" data-anchor-id="dags">DAGs</h2>
-</section>
-<section id="evidence-of-attention" class="level2">
-<h2 class="anchored" data-anchor-id="evidence-of-attention">Evidence of Attention</h2>
+<section id="causal-graphs" class="level2">
+<h2 class="anchored" data-anchor-id="causal-graphs">Causal Graphs</h2>
+<p>Using the <code>autograph</code> package in Typst</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true" href="">Case Study</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false" href="">Chain</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-3" role="tab" aria-controls="tabset-8-3" aria-selected="false" href="">Confounder</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-4" role="tab" aria-controls="tabset-8-4" aria-selected="false" href="">Collider</a></li></ul>
+<div class="tab-content">
+<div id="tabset-8-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-8-1-tab">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dag_1.png" class="img-fluid figure-img"></p>
+<figcaption>directed acyclic graph</figcaption>
+</figure>
+</div>
+</div>
+<div id="tabset-8-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-2-tab">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dag_2.png" class="img-fluid figure-img"></p>
+<figcaption>chain</figcaption>
+</figure>
+</div>
+</div>
+<div id="tabset-8-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-3-tab">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dag_3.png" class="img-fluid figure-img"></p>
+<figcaption>confounder</figcaption>
+</figure>
+</div>
+</div>
+<div id="tabset-8-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-4-tab">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dag_4.png" class="img-fluid figure-img"></p>
+<figcaption>collider</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="coda" class="level1">
@@ -1007,7 +1197,7 @@ $ mat(..#range(1, 17).chunks(4)) $
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.6.1 (2026-06-24 ucrt)
 Platform: x86_64-w64-mingw32/x64

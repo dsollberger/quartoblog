@@ -3574,28 +3574,28 @@
     "href": "posts/typst_15/typst_15.html#flash-cards",
     "title": "Typst in 2026",
     "section": "Flash Cards",
-    "text": "Flash Cards"
+    "text": "Flash Cards\n\ncodenamespictures\n\n\n\n\n#set text(\n  font: \"New Computer Modern\",\n  size: 36pt\n)\n#set page(paper: \"us-letter\", \n          margin: (x: 1cm, y: 1cm), )\n#set align(center+horizon)\n\n#grid(\n  columns: (1fr, 1fr, 1fr),\n  rows: (1fr, 1fr, 1fr),\n  [Dwight \\ Schrute],\n  [Creed \\ Bratton],\n  [Angela \\ Kinsey],\n  [Meredith \\ Palmer],\n  [Jim \\ Halpert],\n  [Kevin \\ Malone],\n  [Stanley \\ Hudson],\n  [Phyllis \\ Vance],\n  [Pam \\ Beesley],\n)\n\n\n\n#set align(center+horizon)\n#grid(\n  columns: (1fr, 1fr, 1fr),\n  rows: (1fr, 1fr, 1fr),\n  gutter: 5pt,\n  [#image(\"angela_kinsey.png\")],\n  [#image(\"creed_bratton.png\")],\n  [#image(\"dwight_schrute.png\")],\n  [#image(\"kevin_malone.png\")],\n  [#image(\"jim_halpert.png\")],\n  [#image(\"meredith_palmer.png\")],\n  [#image(\"pam_beesley.png\")],\n  [#image(\"phyllis_vance.png\")],\n  [#image(\"stanley_hudson.png\")],\n)\n\n\n\n\n\n\n\n“student” names\n\n\n\n\n\n\n\n“student” pictures"
   },
   {
     "objectID": "posts/typst_15/typst_15.html#mcq-organizer",
     "href": "posts/typst_15/typst_15.html#mcq-organizer",
     "title": "Typst in 2026",
     "section": "MCQ Organizer",
-    "text": "MCQ Organizer"
+    "text": "MCQ Organizer\n\nTypstWorkflow\n\n\n\n\n#set enum(numbering: \"1).A)\")\n\n+ Which employee is known for his chili?\n  + Kevin Malone\n  + Creed Bratton\n  + Ryan Howard\n  + Andy Bernard\n  + Darryl Philbin\n\n+ Which employee is known for his \"thoughts\" blog?\n  + Creed Bratton\n  + Kevin Malone\n  + Ryan Malone\n  + Andy Bernard\n  + Darryl Philbin\n  \n#let mcq_example = csv(\"mcq_example.csv\")\n\n#show table.cell.where(y: 0): set text(weight: \"bold\")\n\n#rotate(\n  -90deg,\n  reflow: true,\ntable(\n  align: center,\n  columns: 6,\n  //table.header[Question][Correct][Alt2][Alt3][Alt4][Alt5],\n  ..for(.., Question, Correct, alt2, alt3, alt4, alt5) in mcq_example{\n    (Question, Correct, alt2, alt3, alt4, alt5)\n  },\n  fill: (rgb(\"f58025\"), rgb(\"f58025\"), none, none , none, none),\n)\n)\n\n\n\n\n\n\nMCQ structured\n\n\n\n\n\n\n\n\n\nworkflow"
   },
   {
     "objectID": "posts/typst_15/typst_15.html#music-notes",
     "href": "posts/typst_15/typst_15.html#music-notes",
     "title": "Typst in 2026",
     "section": "Music Notes",
-    "text": "Music Notes"
+    "text": "Music Notes\n\nstavestabschordx\n\n\n\n\n\nstaves\n\n\n\n\n\n\n\nguitar tabs\n\n\n\n\n\n\n\narrangement"
   },
   {
     "objectID": "posts/typst_15/typst_15.html#dags",
     "href": "posts/typst_15/typst_15.html#dags",
     "title": "Typst in 2026",
     "section": "DAGs",
-    "text": "DAGs"
+    "text": "DAGs\nUsing the autograph package in Typst\n\nDAGChainConfounderCollider\n\n\n\n\n\ndirected acyclic graph\n\n\n\n\n\n\n\nchain\n\n\n\n\n\n\n\nconfounder\n\n\n\n\n\n\n\ncollider"
   },
   {
     "objectID": "posts/typst_15/typst_15.html#evidence-of-attention",
@@ -3603,5 +3603,19 @@
     "title": "Typst in 2026",
     "section": "Evidence of Attention",
     "text": "Evidence of Attention"
+  },
+  {
+    "objectID": "posts/typst_15/typst_15.html#causal-graph",
+    "href": "posts/typst_15/typst_15.html#causal-graph",
+    "title": "Typst in 2026",
+    "section": "Causal Graph",
+    "text": "Causal Graph\nUsing the autograph package in Typst\n\nCase StudyChainConfounderCollider\n\n\n\n\n\ndirected acyclic graph\n\n\n\n\n\n\n\nchain\n\n\n\n\n\n\n\nconfounder\n\n\n\n\n\n\n\ncollider"
+  },
+  {
+    "objectID": "posts/typst_15/typst_15.html#causal-graphs",
+    "href": "posts/typst_15/typst_15.html#causal-graphs",
+    "title": "Typst in 2026",
+    "section": "Causal Graphs",
+    "text": "Causal Graphs\nUsing the autograph package in Typst\n\nCase StudyChainConfounderCollider\n\n\n\n\n\ndirected acyclic graph\n\n\n\n\n\n\n\nchain\n\n\n\n\n\n\n\nconfounder\n\n\n\n\n\n\n\ncollider"
   }
 ]
