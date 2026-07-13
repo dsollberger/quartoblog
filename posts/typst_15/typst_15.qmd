@@ -8,6 +8,8 @@ format:
 
 # Typst in 2026
 
+![Typst!](July_2026_Meetup_Card.png)
+
 ::::: {.panel-tabset}
 
 ## Learning Objectives
@@ -653,10 +655,10 @@ Also, `footnote()` is still as convenient as its LaTeX counterpart.
 #figure(
   image(
     "world_cup_semis.pdf",
-    alt: "Semi final bracket for World Cup 2026: France, Spain, Norway, Argentina"
+    alt: "Semi final bracket for World Cup 2026: France, Spain, England, Argentina"
   ),
   caption: [
-    Semi-final bracket for World Cup 2026: France, Spain, Norway, Argentina
+    Semi-final bracket for World Cup 2026: France, Spain, England, Argentina
   ],
 )
 ```
@@ -909,6 +911,24 @@ table(
 
 :::::
 
+## Interactive Machine Learning
+
+### Ridge Regression
+
+![tidymodels](ridge_example.png)
+
+* $\lambda = 0.1:$
+
+$$\hat{y} = 7.550 - 0.292X_{1} - 0.678X_{2} - 0.274X_{3}$$
+
+* $\lambda = 1.0:$
+
+$$\hat{y} = 7.840 - 0.085X_{1} + 0.132X_{2} - 0.135X_{3}$$
+
+* **Typst** and *Marimo*?
+
+
+
 ## Music Notes
 
 ::::: {.panel-tabset}
@@ -952,9 +972,47 @@ Using the `autograph` package in Typst
 :::::
 
 
+## Evidence of Attention
+
+::::: {.panel-tabset}
+
+### Attention
+
+![attention example](attention_example.png)
+
+### Typst
+
+```
+#set text(fill: rgb("#AAAAAA"),
+weight: 400)
+
+In #text(fill: red.lighten(50%), size: 1.5em, weight: 500)[machine learning], #text(fill: red, size: 2.0em, weight: 700)[attention] is a method that determines the #text(fill: red.lighten(60%), size: 1.5em, weight: 550)[importance] of each component in a #text(fill: red.lighten(70%), size: 1.75em, weight: 600)[sequence] relative to the other components in that #text(fill: red.lighten(70%), size: 1.75em, weight: 600)[sequence]. In #text(fill: red.lighten(85%), size: 1.9em, weight: 650)[natural language processing], #text(fill: red.lighten(60%), size: 1.5em, weight: 550)[importance] is represented by "soft" weights assigned to each word in a sentence. More generally, #text(fill: red, size: 2.0em, weight: 700)[attention] encodes vectors called token embeddings across a fixed-width #text(fill: red.lighten(70%), size: 1.75em, weight: 600)[sequence] that can range from tens to millions of tokens in size.
+
+---Wikipedia
+```
+
+:::::
+
+* color gradients
+* variable fonts
+* scripting language
+* in interactive production?
+
 # Coda
 
+::::: {.panel-tabset}
 
+## Improvement
+
+![Donald Knuth on TeX](Knuth_on_TeX.png)
+
+* quote source: [Y Combinator](https://news.ycombinator.com/item?id=15733381)
+
+## Thanks
+
+![thanks!](July_2026_Meetup_Card.png)
+
+:::::
 
 ::: {.callout-note collapse="true"}
 ## Session Info
