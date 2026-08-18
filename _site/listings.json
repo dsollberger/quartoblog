@@ -2,6 +2,8 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/typst_aug/typst_aug.html",
+      "/posts/Settlement_Survival_2026/Settlement_Survival.html",
       "/posts/typst_15/typst_15.html",
       "/posts/agile_ethics_pgt/agile_ethics_pgt.html",
       "/posts/Case_Closed/case_closed.html",
